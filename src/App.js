@@ -4,7 +4,6 @@ import Home from './Screen/Home';
 import About from './Screen/About';
 import Contact from './Screen/Contact';
 import { Route, Routes } from 'react-router-dom';
-import Navbar from './Components/Navbar';
 import HomePage from './Screen/website/HomePage';
 
 function App() {

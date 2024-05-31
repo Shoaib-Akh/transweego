@@ -1,1 +1,44 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js");
+
+body {
+   
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+
+img,
+svg {
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+ul,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    overflow: auto;
+}
+
+li {
+    list-style-type: none;
+}
+
+
