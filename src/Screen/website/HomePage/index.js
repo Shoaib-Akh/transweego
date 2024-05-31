@@ -12,6 +12,9 @@ import mobile from "../../../assets/images/mobile.png";
 import appstore from "../../../assets/images/appstore.png";
 import google from "../../../assets/images/google.png";
 import office from "../../../assets/images/office.png";
+import componyLogo from "../../../assets/images/componyLogo.png";
+import truck1 from "../../../assets/images/truck1.png";
+
 import Star from "../../../assets/images/Star.png";
 
 const HomePage = () => {
@@ -210,7 +213,7 @@ const HomePage = () => {
               backgroundColor: " #0C3227",
               padding: "40px  30px",
               borderRadius: 33,
-              marginLeft:"-60px"
+              marginLeft: "-60px",
             }}
           >
             <p style={{ color: "#F8F8F8", fontSize: "26px" }}>
@@ -223,12 +226,63 @@ const HomePage = () => {
             <img src={Star} width="30" height="30" alt="car" className="mx-1" />
             <img src={Star} width="30" height="30" alt="car" className="mx-1" />
             <img src={Star} width="30" height="30" alt="car" className="mx-1" />
-            <p style={{fontSize:"26px",color: "#F8F8F8", marginTop:10 ,marginBottom:10}}>James John</p>
-           
-            <p style={{fontSize:"26px" ,color: "#FF8600", marginTop:5}}>Co Founder</p>
+            <p
+              style={{
+                fontSize: "26px",
+                color: "#F8F8F8",
+                marginTop: 10,
+                marginBottom: 10,
+              }}
+            >
+              James John
+            </p>
+
+            <p style={{ fontSize: "26px", color: "#FF8600", marginTop: 5 }}>
+              Co Founder
+            </p>
           </div>
         </div>
       </div>
+      <div className="d-flex  flex-column align-items-center my-5 ">
+        <h5>Premium partners</h5>
+        <h2>Lorem Ipsum is simply dummy text </h2>
+        <div>
+          <button className="btn orange">Transportation Companies</button>
+          <button className="btn offwhite">Vehicle Dealerships</button>
+          <button className="btn offwhite">Insurance</button>
+        </div>
+      </div>
+      <div
+        style={{ overflowX: "scroll", display: "flex", scrollbarWidth: "none" }}
+        className="my-5"
+      >
+        <img src={componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={componyLogo} height="214" alt="car" className="mx-1" />
+      </div>
+      <div className="section-6">
+        <div className="d-flex align-items-center">
+          <img src={truck1} height="500" alt="car" className="mx-1" />
+          <div className=" mx-5" style={{backgroundColor:"red",}}>
+            <h2 style={{color:"#ffff",fontSize:"56px"}}>
+              Future of Vehicle
+              <br />
+              transportation today!
+            </h2>
+          <button className="btn yellow my-4" style={{color:"black"}}>Get Started Nows</button>
+
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div>
+          <img src={logo} height="67" alt="car" className="mx-3"/>
+        </div>
+      </footer>
     </>
   );
 };
