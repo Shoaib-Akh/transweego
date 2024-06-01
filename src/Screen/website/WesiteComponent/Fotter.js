@@ -12,15 +12,21 @@ const Fotter = () => {
   return (
 <footer className="" style={{ paddingLeft: 30 }}>
 <div className="section-6">
-        <div className="d-md-flex align-items-center">
-          <img src={truck1} maxHeight="500" alt="car" className="mx-1" />
-          <div className=" mx-5" style={{}}>
+        <div className="row align-items-center py-3 ">
+          <div className='col-md-6'>
+
+          <img src={truck1}   alt="car" className="mx-1" />
+          </div>
+          <div className=" col-md-4" style={{}}>
             <h2 style={{ color: "#ffff", fontSize: "56px" }}>
               Future of Vehicle
               <br />
               transportation today!
             </h2>
-            <button className="btn yellow my-4" style={{ color: "black" }}>Get Started Nows</button>
+            <button className="btn yellow my-4" style={{ color: "black" }}><b>
+            Get Started Nows
+              </b>
+              </button>
           </div>
         </div>
       </div>
