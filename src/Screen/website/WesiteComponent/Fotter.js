@@ -10,12 +10,11 @@ import truck1 from "../../../assets/images/truck1.png"
 
 const Fotter = () => {
   return (
-< >
-<div className="section-6">
-        {/* <div className="row align-items-center p-0 ">
+<footer >
+
+        {/* <div className="row  section-6  p-0 ">
           <div className='col-md-6'>
 
-          <img src={truck1}   alt="car" />
           </div>
           <div className=" col-md-4" style={{}}>
             <h2 style={{ color: "#ffff", fontSize: "56px" }}>
@@ -29,6 +28,21 @@ const Fotter = () => {
               </button>
           </div>
         </div> */}
+      {/* </div> */}
+      <div style={{backgroundColor:"#ff8600", display:"flex",alignItems:"center"}} className='py-4'>
+        
+        <img src={truck1}  alt="car" height={400} />
+        <div className=" col-md-4" style={{paddingLeft:30}}>
+            <h2 style={{ color: "#ffff", fontSize: "56px" , whiteSpace:"nowrap"}}>
+              Future of Vehicle
+              <br />
+              transportation today!
+            </h2>
+            <button className="btn yellow my-4" style={{ color: "black" }}><b>
+            Get Started Nows
+              </b>
+              </button>
+          </div>
       </div>
         <div className="row m-0  align-items-center justify-content-end">
 
@@ -94,7 +108,7 @@ const Fotter = () => {
         </div>
         <div className="text-center my-3"><p>© 2024 transWeego All Rights Reserved</p></div>
        
-      </>
+      </footer>
         )
     }
     
