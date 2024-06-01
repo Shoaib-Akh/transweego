@@ -10,12 +10,12 @@ import truck1 from "../../../assets/images/truck1.png"
 
 const Fotter = () => {
   return (
-<footer className="" style={{ paddingLeft: 30 }}>
+< >
 <div className="section-6">
-        <div className="row align-items-center py-3 ">
+        {/* <div className="row align-items-center p-0 ">
           <div className='col-md-6'>
 
-          <img src={truck1}   alt="car" className="mx-1" />
+          <img src={truck1}   alt="car" />
           </div>
           <div className=" col-md-4" style={{}}>
             <h2 style={{ color: "#ffff", fontSize: "56px" }}>
@@ -28,7 +28,7 @@ const Fotter = () => {
               </b>
               </button>
           </div>
-        </div>
+        </div> */}
       </div>
         <div className="row m-0  align-items-center justify-content-end">
 
@@ -94,7 +94,7 @@ const Fotter = () => {
         </div>
         <div className="text-center my-3"><p>© 2024 transWeego All Rights Reserved</p></div>
        
-      </footer>
+      </>
         )
     }
     
