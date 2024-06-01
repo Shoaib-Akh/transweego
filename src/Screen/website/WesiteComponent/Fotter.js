@@ -29,11 +29,11 @@ const Fotter = () => {
           </div>
         </div> */}
       {/* </div> */}
-      <div style={{backgroundColor:"#ff8600", display:"flex",alignItems:"center"}} className='py-4'>
+      <div style={{backgroundColor:"#ff8600", display:"flex",alignItems:"center", flexWrap:"wrap"}} className='py-4'>
         
-        <img src={truck1}  alt="car" height={400} />
+        <img src={truck1}  alt="car"style={{maxHeight:"400px"}} />
         <div className=" col-md-4" style={{paddingLeft:30}}>
-            <h2 style={{ color: "#ffff", fontSize: "56px" , whiteSpace:"nowrap"}}>
+            <h2 className='text-heading-truck'>
               Future of Vehicle
               <br />
               transportation today!
