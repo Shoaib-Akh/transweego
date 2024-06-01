@@ -5,15 +5,17 @@ import About from './Screen/About';
 import Contact from './Screen/Contact';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './Screen/website/HomePage';
+import HowItWork from './Screen/website/HowItWork';
 
 function App() {
   return (
     <div className="App">
       {/* <Navbar/> */}
-    <Routes>
+    <Routes> 
       <Route path='/' element={<HomePage/>} />
-      <Route path='/about' element={<About/>} />
-      <Route path='/contact' element={<Contact/>} />
+      <Route path='HowItWork' element={<HowItWork/>} />
+
+
     </Routes>
   </div>
   );
