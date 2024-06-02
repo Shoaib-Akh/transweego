@@ -1,8 +1,9 @@
 import React from 'react'
 import "../../website/style.scss"
-import logo from "../../../assets/images/logo.png"
-import { Link } from 'react-router-dom'
+import logo from "../../../assets/images/logo.svg"
+import { Link, useNavigate } from 'react-router-dom'
 const Navbar = () => {
+  const navigate=useNavigate()
   return (
     <>
     <nav class="navbar navbar-expand-lg">
@@ -40,8 +41,8 @@ const Navbar = () => {
         </a>
       </div>
       <div class="navbar-nav">
-        <button class="btn orange ">Login</button>
-        <button class="btn yellow ">Sign Up</button>
+        <button class="btn orange " onClick={()=> navigate("/login")}>Login</button>
+        <button class="btn yellow " onClick={()=> navigate("/signUp")}>Sign Up</button>
 
       </div>
     </div>

@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import "../style.scss";
-import logo from "../../../assets/images/logo.png";
 import car from "../../../assets/images/car.png";
 import aeroleft from "../../../assets/images/aeroleft.png";
 import aeroright from "../../../assets/images/aeroright.png";

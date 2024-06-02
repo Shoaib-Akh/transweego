@@ -1,9 +1,9 @@
 
 import React from 'react'
 import "../../website/style.scss"
-import logo from "../../../assets/images/logo.png"
+
 import truck3 from "../../../assets/images/truck3.png"
-import foterLogo from "../../../assets/images/foterLogo.png"
+import mainLogo from "../../../assets/images/mainLogo.png"
 
 import truck1 from "../../../assets/images/truck1.png"
 
@@ -48,7 +48,7 @@ const Fotter = () => {
 
           <div className="col-md-3">
 
-            <img src={foterLogo} height={30} alt="car" className="mx-3" />
+            <img src={mainLogo} height={30} alt="car" className="mx-3" />
         
             <p className="my-3"> Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum is simply dummy text of the printing and
