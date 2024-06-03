@@ -1,25 +1,11 @@
 import React, { useRef } from "react";
 import "../style.scss";
-import car from "../../../assets/images/car.png";
-import aeroleft from "../../../assets/images/aeroleft.png";
-import aeroright from "../../../assets/images/aeroright.png";
-import setting from "../../../assets/images/setting.png";
-// import carimg from "../../../assets/images/carimg.png";
-import carimg from "../../../assets/images/car1.png";
-import truck from "../../../assets/images/truck.png";
-import mobile from "../../../assets/images/mobile.png";
-import appstore from "../../../assets/images/appstore.png";
-import google from "../../../assets/images/google.png";
-import office from "../../../assets/images/office.png";
-import componyLogo from "../../../assets/images/componyLogo.png";
-import truck1 from "../../../assets/images/truck1.png";
 
-import Star from "../../../assets/images/Star.png";
-import truck3 from "../../../assets/images/truck3.png";
+
 import Navbar from "../WesiteComponent/Navbar";
-import footerLogo from "../../../assets/images/footerLogo.svg";
-import Fotter from "../WesiteComponent/Fotter";
 
+import Fotter from "../WesiteComponent/Fotter";
+import { Images } from "../../../utils/images";
 
 
 const HomePage = () => {
@@ -39,9 +25,9 @@ const HomePage = () => {
   return (
     <>
       <div className="mainbg">
-    <Navbar/>
+        <Navbar />
       </div>
-      <div className="container main-div mb-3">
+      <div className="container-box main-div mb-3">
         <div className="row">
           <div className="col-12">
             <div className="text mt-4">
@@ -62,7 +48,7 @@ const HomePage = () => {
             </div>
             <div className="mt-5 d-flex gap-3 align-items-center  justify-content-center">
               <img
-                src={aeroleft}
+                src={Images.aeroleft}
                 width="22"
                 height="42"
                 alt="left arrow"
@@ -78,15 +64,15 @@ const HomePage = () => {
                 }}
                 ref={scrollContainerRef}
               >
-                <img src={car} width="170" height="170" alt="car" />
-                <img src={car} width="170" height="170" alt="car" />
-                <img src={car} width="170" height="170" alt="car" />
-                <img src={car} width="170" height="170" alt="car" />
-                <img src={car} width="170" height="170" alt="car" />
-                <img src={car} width="170" height="170" alt="car" />
+                <img src={Images.car} width="170" height="170" alt="car" />
+                <img src={Images.car} width="170" height="170" alt="car" />
+                <img src={Images.car} width="170" height="170" alt="car" />
+                <img src={Images.car} width="170" height="170" alt="car" />
+                <img src={Images.car} width="170" height="170" alt="car" />
+                <img src={Images.car} width="170" height="170" alt="car" />
               </div>
               <img
-                src={aeroright}
+                src={Images.aeroright}
                 width="22"
                 height="42"
                 alt="right arrow"
@@ -102,7 +88,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="lorem-section">
-        <div className="container">
+        <div className="container-box">
           <div className="row d-flex justify-content-between">
             <div className="col-5 my-5">
               <div className="heading-sec">
@@ -114,35 +100,35 @@ const HomePage = () => {
               </div>
               <div className="d-flex align-items-center gap-5 mt-5">
                 <div className="d-flex align-items-center gap-3 setting">
-                  <img src={setting} width="48" height="48" alt="car" />
+                  <img src={Images.setting} width="48" height="48" alt="car" />
                   <p>Cost Efficiency</p>
                 </div>
                 <div className="d-flex align-items-center gap-3 setting">
-                  <img src={setting} width="48" height="48" alt="car" />
+                  <img src={Images.setting} width="48" height="48" alt="car" />
                   <p>Cost Efficiency</p>
                 </div>
               </div>
               <div className="d-flex align-items-center gap-5 mt-5">
                 <div className="d-flex align-items-center gap-3 setting">
-                  <img src={setting} width="48" height="48" alt="car" />
+                  <img src={Images.setting} width="48" height="48" alt="car" />
                   <p>Cost Efficiency</p>
                 </div>
                 <div className="d-flex align-items-center gap-3 setting">
-                  <img src={setting} width="48" height="48" alt="car" />
+                  <img src={Images.setting} width="48" height="48" alt="car" />
                   <p>Cost Efficiency</p>
                 </div>
               </div>
             </div>
             <div className="col-7 carimg mt-5">
-              <img src={carimg} className="img-fluid w-100 h-100" alt="car" />
+              <img src={Images.carimg} className="img-fluid w-100 h-100" alt="car" />
             </div>
           </div>
         </div>
       </div>
-      <div className="container my-5 video-sec">
+      <div className="container-box my-5 video-sec">
         <div className="row">
           <div className="col-6">
-            <img src={truck} width="500" height="500" alt="truck" />
+            <img src={Images.truck} width="500" height="500" alt="truck" />
           </div>
           <div className="col-6 d-flex flex-column justify-content-center truck-text">
             <h6>About us</h6>
@@ -158,7 +144,7 @@ const HomePage = () => {
         </div>
       </div>
       {/*transweego section  */}
-      <div className="container my-5 transwego-sec ">
+      <div className="container-box my-5 transwego-sec ">
         <div className="row   ">
           <div className="col-1  pl-5    truck-text"></div>
           <div className="col-7 pl-5 d-flex flex-column  justify-content-center  truck-text">
@@ -167,19 +153,19 @@ const HomePage = () => {
               Download and join for free. You'll never pay a membership fee.
             </p>
             <div className="d-flex align-items-center gap-3">
-              <img src={appstore} width="222" height="68px" alt="truck" />
-              <img src={google} width="222" height="68px" alt="truck" />
+              <img src={Images.appstore} width="222" height="68px" alt="truck" />
+              <img src={Images.google} width="222" height="68px" alt="truck" />
             </div>
           </div>
           <div className="col-3">
-            <img src={mobile} width="198" height="386px" alt="truck" />
+            <img src={Images.mobile} width="198" height="386px" alt="truck" />
           </div>
         </div>
       </div>
-      <div className="container  ">
+      <div className="container-box  ">
         <h2>What client says about us</h2>
         <div className="d-flex align-items-center justify-content-center ">
-          <img src={office} height="386px" alt="truck" />
+          <img src={Images.office} height="386px" alt="truck" />
           <div
             style={{
               backgroundColor: " #0C3227",
@@ -193,11 +179,11 @@ const HomePage = () => {
               industry. Lorem Ipsum is simply dummy text of the printing and
               typesetting industry.
             </p>
-            <img src={Star} width="30" height="30" alt="car" className="mx-1" />
-            <img src={Star} width="30" height="30" alt="car" className="mx-1" />
-            <img src={Star} width="30" height="30" alt="car" className="mx-1" />
-            <img src={Star} width="30" height="30" alt="car" className="mx-1" />
-            <img src={Star} width="30" height="30" alt="car" className="mx-1" />
+            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
+            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
+            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
+            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
+            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
             <p
               style={{
                 fontSize: "26px",
@@ -228,18 +214,18 @@ const HomePage = () => {
         style={{ overflowX: "scroll", display: "flex", scrollbarWidth: "none" }}
         className="my-5"
       >
-        <img src={componyLogo} height="214" alt="car" className="mx-1" />
-        <img src={componyLogo} height="214" alt="car" className="mx-1" />
-        <img src={componyLogo} height="214" alt="car" className="mx-1" />
-        <img src={componyLogo} height="214" alt="car" className="mx-1" />
-        <img src={componyLogo} height="214" alt="car" className="mx-1" />
-        <img src={componyLogo} height="214" alt="car" className="mx-1" />
-        <img src={componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={Images.componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={Images.componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={Images.componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={Images.componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={Images.componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={Images.componyLogo} height="214" alt="car" className="mx-1" />
+        <img src={Images.componyLogo} height="214" alt="car" className="mx-1" />
       </div>
 
-     
-<Fotter/>
-      
+
+      <Fotter />
+
     </>
   );
 };

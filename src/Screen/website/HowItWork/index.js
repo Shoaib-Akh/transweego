@@ -1,18 +1,7 @@
 import React from "react";
 import Navbar from "../WesiteComponent/Navbar";
 import aerorotate from "../../../assets/images/Star.png";
-import cost from "../../../assets/images/cost.svg";
-import mobilelogo from "../../../assets/images/mobilelogo.png";
-import mobilegroup from "../../../assets/images/mobilegroup.png";
-import person from "../../../assets/images/person.png";
-import togther from "../../../assets/images/togther.svg";
-import mask from "../../../assets/images/mask.svg";
-import Vector3 from "../../../assets/images/Vector3.svg";
-import Vector4 from "../../../assets/images/Vector4.svg";
-
-
-
-import togher1 from "../../../assets/images/togher1.svg";
+import { Images } from "../../../utils/images";
 import "../style.scss";
 
 
@@ -43,7 +32,7 @@ const HowItWork = () => {
               <div className="bgimg mb-4">
                 <div>
 
-                <img src={cost} width="48" height="48" alt="car" />
+                <img src={Images.cost} width="48" height="48" alt="car" />
                 </div>
                 
               </div>
@@ -54,25 +43,25 @@ const HowItWork = () => {
             </div>
           </div>
           <div className="col-md-1 d-flex  justify-content-center    align-items-end ">
-        <img src={Vector3} alt="car" />
+        <img src={Images.Vector3} alt="car" />
 
         </div>
           <div className="col-2 mt-5 section-2">
             <div className="d-flex flex-column align-items-center">
               <div className="bgimg mb-4">
-                <img src={cost} width="48" height="48" alt="car" />
+                <img src={Images.cost} width="48" height="48" alt="car" />
               </div>
               <p>Earn as you drive</p>
             </div>
           </div>
           <div className="col-md-1 d-flex  justify-content-center    align-items-end " style={{marginTop:"7%"}}>
-        <img src={Vector4} alt="car" />
+        <img src={Images.Vector4} alt="car" />
 
         </div>
           <div className="col-2 mt-5 section-2">
             <div className="d-flex flex-column align-items-start">
               <div className="bgimg mb-4">
-                <img src={cost} width="48" height="48" alt="car" />
+                <img src={Images.cost} width="48" height="48" alt="car" />
               </div>
               <p>Increase Visibility</p>
             </div>
@@ -91,7 +80,7 @@ const HowItWork = () => {
             </p>
           </div>
           <div className="col-md-3">
-          <img src={mask}   alt="car" />
+          <img src={Images.mask}   alt="car" />
           </div>
           <div>
 
@@ -100,7 +89,7 @@ const HowItWork = () => {
           
         <div className="row mt-5">
           <div className="col-6">
-            <img src={mobilelogo} width="204" height="416" alt="car" />
+            <img src={Images.mobilelogo} width="204" height="416" alt="car" />
           </div>
           <div className="col-6 d-flex">
             <div className="innertext">
@@ -117,7 +106,7 @@ const HowItWork = () => {
           </div>
         </div>
         <div  className="text-center">
-        <img src={togther} alt="car" />
+        <img src={Images.togther} alt="car" />
         
         </div>
         <div className="row mt-5">
@@ -135,16 +124,16 @@ const HowItWork = () => {
             </div>
           </div>
           <div className="col-6  d-flex justify-content-end">
-            <img src={mobilegroup} width="422" height="334" alt="car" />
+            <img src={Images.mobilegroup} width="422" height="334" alt="car" />
           </div>
         </div>
        <div  className="text-center">
-       <img src={togher1} alt="car" />
+       <img src={Images.togher1} alt="car" />
 
         </div>
         <div className="row mt-5">
           <div className="col-6">
-            <img src={person} width="351" height="585" alt="car" />
+            <img src={Images.person} width="351" height="585" alt="car" />
           </div>
           <div className="col-6 d-flex">
             <div className="innertext">
@@ -161,7 +150,7 @@ const HowItWork = () => {
           </div>
         </div>
         <div  className="text-center">
-       <img src={togher1} alt="car" />
+       <img src={Images.togher1} alt="car" />
 
         </div>
         <div className="row mt-5">
@@ -180,7 +169,7 @@ const HowItWork = () => {
             </div>
           </div>
           <div className="col-6  d-flex justify-content-end">
-            <img src={dollarvault} width="472" height="470" alt="car" />
+            <img src={Images.dollarvault} width="472" height="470" alt="car" />
           </div>
         </div>
       </div>
