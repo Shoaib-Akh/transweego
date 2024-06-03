@@ -6,6 +6,7 @@ import HomePage from './Screen/website/HomePage';
 import HowItWork from './Screen/website/HowItWork';
 import Login from './Screen/Auth/login';
 import SignUp from './Screen/Auth/signUp';
+import ComponySignUp from './Screen/Auth/signUp/ComponySignUp';
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route path='HowItWork' element={<HowItWork />} />
         <Route path='login' element={<Login />} />
         <Route path='signUp' element={<SignUp />} />
+        <Route path='ComponySignUp' element={<ComponySignUp />} />
+
 
 
 

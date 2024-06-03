@@ -4,8 +4,10 @@ import "../common.scss";
 import InputField from "../../../Componnet/InputField";
 import logo from "../../../assets/images/mainLogo.png";
 import Button from "../../../Componnet/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -29,6 +31,7 @@ const SignUp = () => {
               <img src={logo} height={30} alt="car" />
             </div>
             <Button
+        onClick={() => navigate("/ComponySignUp")}
               label={"Company"}
               style={{ background: "transparent", border: "1px solid black" }}
             />

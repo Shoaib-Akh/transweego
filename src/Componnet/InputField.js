@@ -1,10 +1,10 @@
 import React from "react";
 import "./comonStyle.scss";
-const InputField = ({ type = "text", placeholder, value, onChange,lable }) => {
+const InputField = ({ type = "text", placeholder, value, onChange,lable ,requrid}) => {
   return (
     <div className="maindiv-input">
       <div>
-        <p className="lable">{lable}</p>
+        <p className="lable">{lable} {requrid && "*"}</p>
       </div>
 
       <input

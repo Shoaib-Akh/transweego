@@ -60,7 +60,7 @@ const HomePage = () => {
                 style={{
                   scrollBehavior: "smooth",
                   scrollbarWidth: "none",
-                  maxWidth: "800px",
+                  width: "80%",
                 }}
                 ref={scrollContainerRef}
               >
