@@ -33,12 +33,12 @@ const Navbar = () => {
         </div>
       </nav>
       <div className="container h-75 d-flex align-items-lg-center main-heading">
-        <div className="row">
-          <div className="col-lg-7 col-md-6 col-12">
+        <div className="row mt-md-4">
+          <div className="col-lg-7 col-md-7 col-12">
             <h1>Revolutionize Your Vehicle Transport</h1>
             <p>Drive Smart, Share More, Earn Big, Preserve Nature.</p>
-            <div style={{ marginTop: 40 }} className='text-md-center'>
-              <button className="btn orange mb-md-3">Send</button>
+            <div style={{ marginTop: 40 }} className='d-flex align-items-center gap-sm-3 gap-1'>
+              <button className="btn orange">Send</button>
               <button className="btn yellow">Transparent</button>
             </div>
           </div>

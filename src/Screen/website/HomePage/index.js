@@ -1,12 +1,10 @@
 import React, { useRef } from "react";
 import "../style.scss";
 
-
 import Navbar from "../WesiteComponent/Navbar";
 
 import Fotter from "../WesiteComponent/Fotter";
 import { Images } from "../../../utils/images";
-
 
 const HomePage = () => {
   const scrollContainerRef = useRef(null);
@@ -80,7 +78,7 @@ const HomePage = () => {
                 style={{ cursor: "pointer" }}
               />
             </div>
-            <div className="group-btn mt-5 text-center mb-4">
+            <div className="group-btn mt-5  mb-4">
               <button className="btn orange">Send</button>
               <button className="btn yellow">Transparent</button>
             </div>
@@ -90,7 +88,7 @@ const HomePage = () => {
       <div className="lorem-section">
         <div className="container-box">
           <div className="row d-flex justify-content-between">
-            <div className="col-5 my-5">
+            <div className="col-lg-5 col-md-6 col-12 my-5">
               <div className="heading-sec">
                 <p>Why Choose TransWeGo</p>
                 <h1>
@@ -119,18 +117,22 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-            <div className="col-7 carimg mt-5">
-              <img src={Images.carimg} className="img-fluid w-100 h-100" alt="car" />
+            <div className="col-lg-7 col-md-6 col-12 carimg mt-5">
+              <img
+                src={Images.carimg}
+                className="img-fluid w-100 h-100"
+                alt="car"
+              />
             </div>
           </div>
         </div>
       </div>
       <div className="container-box my-5 video-sec">
         <div className="row">
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-12">
             <img src={Images.truck} width="500" height="500" alt="truck" />
           </div>
-          <div className="col-6 d-flex flex-column justify-content-center truck-text">
+          <div className="col-lg-6 col-md-6 col-12 d-flex flex-column justify-content-center mt-4 mt-md-0 truck-text">
             <h6>About us</h6>
             <h2>
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -145,66 +147,73 @@ const HomePage = () => {
       </div>
       {/*transweego section  */}
       <div className="container-box my-5 transwego-sec ">
-        <div className="row   ">
-          <div className="col-1  pl-5    truck-text"></div>
-          <div className="col-7 pl-5 d-flex flex-column  justify-content-center  truck-text">
+        <div className="row">
+          <div className="col-1   truck-text"></div>
+          <div className="col-lg-7 col-md-7 col-12 pl-5 d-flex flex-column  justify-content-center  truck-text">
             <h2>Get the TransWeego app</h2>
             <p>
               Download and join for free. You'll never pay a membership fee.
             </p>
-            <div className="d-flex align-items-center gap-3">
-              <img src={Images.appstore} width="222" height="68px" alt="truck" />
+            <div className="d-lg-flex align-items-lg-center d-md-flex gap-lg-3 gap-md-3 mt-md-3 flex-md-column d-flex flex-column mt-3 gap-4 mb-sm-2 mb-2 mb-md-0">
+              <img
+                src={Images.appstore}
+                width="222"
+                height="68px"
+                alt="truck"
+              />
               <img src={Images.google} width="222" height="68px" alt="truck" />
             </div>
           </div>
-          <div className="col-3">
-            <img src={Images.mobile} width="198" height="386px" alt="truck" />
+          <div className="col-lg-3 col-md-4 col-12 text-sm-center text-center">
+            <img src={Images.mobile} className="mbl-img" alt="truck" />
           </div>
         </div>
       </div>
-      <div className="container-box  ">
+      {/*what client says  */}
+      <div className="container-box client-sec">
         <h2>What client says about us</h2>
         <div className="d-flex align-items-center justify-content-center ">
-          <img src={Images.office} height="386px" alt="truck" />
-          <div
-            style={{
-              backgroundColor: " #0C3227",
-              padding: "40px  30px",
-              borderRadius: 33,
-              marginLeft: "-60px",
-            }}
-          >
-            <p style={{ color: "#F8F8F8", fontSize: "26px" }}>
+          <div className="img-office">
+            <img src={Images.office} className="img-fluid h-100 w-100"  alt="truck" />
+          </div>
+          <div className="left-sec">
+            <p className="textlorem">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum is simply dummy text of the printing and
               typesetting industry.
             </p>
-            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
-            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
-            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
-            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
-            <img src={Images.Star} width="30" height="30" alt="car" className="mx-1" />
-            <p
-              style={{
-                fontSize: "26px",
-                color: "#F8F8F8",
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            >
-              James John
-            </p>
-
-            <p style={{ fontSize: "26px", color: "#FF8600", marginTop: 5 }}>
-              Co Founder
-            </p>
+            <div className="starimg">
+            <img
+              src={Images.Star}
+              alt="car"
+            />
+            <img
+              src={Images.Star}
+              alt="car"
+            />
+            <img
+              src={Images.Star}
+              alt="car"
+            />
+            <img
+              src={Images.Star}
+              alt="car"
+            />
+            <img
+              src={Images.Star}
+              alt="car"
+            />
+            </div>
+           
+            <p className="john">James John</p>
+            <p className="founder">Co Founder</p>
           </div>
         </div>
       </div>
-      <div className="d-flex  flex-column align-items-center my-5 ">
-        <h5>Premium partners</h5>
-        <h2>Lorem Ipsum is simply dummy text </h2>
-        <div>
+      <div className="d-flex flex-column align-items-center my-5 premium-sec ">
+        <h5 className="text">Premium partners</h5>
+        <h2 className="lorem">Lorem Ipsum is simply dummy text </h2>
+        <div className="button-group">
           <button className="btn orange">Transportation Companies</button>
           <button className="btn offwhite">Vehicle Dealerships</button>
           <button className="btn offwhite">Insurance</button>
@@ -223,9 +232,7 @@ const HomePage = () => {
         <img src={Images.componyLogo} height="214" alt="car" className="mx-1" />
       </div>
 
-
       <Fotter />
-
     </>
   );
 };
