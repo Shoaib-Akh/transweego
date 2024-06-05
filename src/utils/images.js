@@ -20,6 +20,7 @@ import Vector3 from "../assets/images/Vector3.svg";
 import Vector4 from "../assets/images/Vector4.svg";
 import dollarvault from "../assets/images/dollarvault.png";
 import frame from "../assets/images/frame.png";
+// import plus from "../assets/images/plus.png";
 
 
 
@@ -50,4 +51,5 @@ export const Images = {
     mobilelogo,
     mobilegroup,
     frame,
+    // plus,
 }

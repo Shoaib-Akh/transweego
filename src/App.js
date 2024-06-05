@@ -7,6 +7,7 @@ import HowItWork from './Screen/website/HowItWork';
 import Login from './Screen/Auth/login';
 import SignUp from './Screen/Auth/signUp';
 import ComponySignUp from './Screen/Auth/signUp/ComponySignUp';
+import AddDriver from './Screen/Auth/signUp/ComponySignUp/AddDriver';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route path='login' element={<Login />} />
         <Route path='signUp' element={<SignUp />} />
         <Route path='ComponySignUp' element={<ComponySignUp />} />
+        <Route path='AddDriver' element={<AddDriver />} />
+
 
 
 
