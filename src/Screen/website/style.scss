@@ -13,7 +13,7 @@
     width: 100%;
     height: 100vh;
   }
-  
+
   @media (max-width:768px) {
     width: 100%;
     height: 75vh;
@@ -641,4 +641,97 @@
 }
 
 // landing page start
+.landingPage {
+  background-image: url(../../assets/images/landing-bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 
+  .logo {
+    padding-top: 56px;
+
+    h3 {
+      color: #F5851F;
+      text-align: center;
+      font-size: 35px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 32px;
+      margin-top: 67px
+    }
+
+    h1 {
+      color: #FFF;
+      text-align: center;
+      font-size: 70px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    p {
+      color: #FFF;
+      text-align: center;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 44px;
+      margin-top: 31px
+    }
+  }
+
+  .cardlanding {
+    .card {
+      text-align: center;
+      border-radius: 31px;
+      background: #FFF;
+      margin-bottom: 30px;
+
+      .card-body {
+        height: 430px;
+      }
+
+      .card-title {
+        color: #0C3227;
+        text-align: center;
+        font-family: Montserrat;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 36px;
+        margin-bottom: 30px;
+      }
+
+      .card-text {
+        color: #969696;
+        text-align: center;
+        font-family: Montserrat;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        margin-top: 32px;
+      }
+
+      .card-img {
+        width: 114px;
+        height: 153px;
+        object-fit: cover;
+      }
+    }
+
+  }
+
+  .text {
+    p {
+      color: #FFF;
+      text-align: center;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 44px;
+    }
+    .btn-join{
+      margin-bottom: 4rem;
+    }
+  }
+}
