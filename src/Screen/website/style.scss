@@ -84,18 +84,21 @@
       font-size: 40px;
       line-height: 40px;
     }
+
     @media (max-width:768px) {
       font-size: 30px;
       line-height: 35px;
     }
+
     @media (max-width:458px) {
       font-size: 26px;
       line-height: 35px;
     }
-    
+
   }
-  .btn{
-    @media (max-width:458px){
+
+  .btn {
+    @media (max-width:458px) {
       color: #ffffff;
       border: none;
       border-radius: 43px;
@@ -103,7 +106,8 @@
       height: 55px;
       margin-right: 20px;
     }
-    @media (max-width:320px){
+
+    @media (max-width:320px) {
       color: #ffffff;
       border: none;
       border-radius: 43px;
@@ -186,10 +190,12 @@
 
 .group-btn {
   display: inline-block;
+
   @media (max-width:458px) {
     display: flex;
     align-items: center;
-    .btn{
+
+    .btn {
       color: #ffffff;
       border: none;
       border-radius: 43px;
@@ -198,10 +204,12 @@
       margin-right: 20px;
     }
   }
+
   @media (max-width:320px) {
     display: flex;
     align-items: center;
-    .btn{
+
+    .btn {
       color: #ffffff;
       border: none;
       border-radius: 43px;
@@ -230,6 +238,7 @@
       @media (max-width:991px) {
         font-size: 32px;
       }
+
       @media (max-width:768px) {
         font-size: 28px;
       }
@@ -251,6 +260,7 @@
   .carimg {
     // width: 500px;
     height: 500px;
+
     @media (max-width:768px) {
       height: 350px;
     }
@@ -275,6 +285,7 @@
       @media (max-width:991px) {
         font-size: 32px;
       }
+
       @media (max-width:768px) {
         font-size: 26px;
         line-height: 36px;
@@ -298,7 +309,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   padding: 4rem 1rem;
-  @media (max-width:768px){
+
+  @media (max-width:768px) {
     padding: 2rem 1rem;
   }
 
@@ -308,7 +320,8 @@
       font-weight: 600;
       line-height: 46px;
       color: #ffffff;
-      @media (max-width:768px){
+
+      @media (max-width:768px) {
         font-size: 30px;
       }
     }
@@ -318,7 +331,8 @@
       font-weight: 400;
       line-height: 36px;
       color: #ffffff;
-      @media (max-width:768px){
+
+      @media (max-width:768px) {
         font-size: 18px;
       }
     }
@@ -327,7 +341,8 @@
   .mbl-img {
     width: 198px;
     height: 386px;
-      @media (max-width:768px){
+
+    @media (max-width:768px) {
       width: 198px;
       height: 286px;
       object-fit: contain;
@@ -339,14 +354,16 @@
 // client sec
 .client-sec {
   .img-office {
-    @media (max-width:768px){
-       height:202px;
-       width: 737px;
+    @media (max-width:768px) {
+      height: 202px;
+      width: 737px;
     }
-    @media (max-width:458px){
-      height:232px;
+
+    @media (max-width:458px) {
+      height: 232px;
       width: 837px;
-   }
+    }
+
     // height: 502px;
     // width: 737px;
   }
@@ -362,11 +379,13 @@
       border-radius: 33px;
       margin-left: -60px;
     }
+
     @media (max-width:768px) {
       padding: 10px 20px;
       border-radius: 33px;
       margin-left: -30px;
     }
+
     @media (max-width:458px) {
       padding: 10px 20px;
       border-radius: 33px;
@@ -380,6 +399,7 @@
       @media (max-width:992px) {
         font-size: 14px;
       }
+
       @media (max-width:458px) {
         font-size: 12px;
       }
@@ -394,6 +414,7 @@
       @media (max-width:992px) {
         font-size: 16px;
       }
+
       @media (max-width:458px) {
         font-size: 12px;
       }
@@ -406,6 +427,7 @@
       @media (max-width:992px) {
         font-size: 14px;
       }
+
       @media (max-width:458px) {
         font-size: 12px;
       }
@@ -426,34 +448,40 @@
     }
   }
 }
-.premium-sec{
-  .text{
-    @media (max-width:458px){
+
+.premium-sec {
+  .text {
+    @media (max-width:458px) {
       font-size: 16px;
     }
-    @media (max-width:320px){
+
+    @media (max-width:320px) {
       font-size: 14px;
     }
   }
-  .lorem{
-    @media (max-width:458px){
+
+  .lorem {
+    @media (max-width:458px) {
       font-size: 20px;
     }
-    @media (max-width:320px){
+
+    @media (max-width:320px) {
       font-size: 16px;
     }
   }
 }
-.button-group{
-  @media (max-width:320px){
+
+.button-group {
+  @media (max-width:320px) {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     justify-content: center;
   }
-  .btn{
-     @media (max-width:768px){
+
+  .btn {
+    @media (max-width:768px) {
       color: #ffffff;
       border: none;
       border-radius: 43px;
@@ -461,8 +489,9 @@
       height: 55px;
       margin-right: 10px;
       font-size: 12px;
-     }
-     @media (max-width:458px){
+    }
+
+    @media (max-width:458px) {
       color: #ffffff;
       border: none;
       border-radius: 43px;
@@ -470,8 +499,9 @@
       height: 55px;
       margin-right: 10px;
       font-size: 12px;
-     }
-     @media (max-width:320px){
+    }
+
+    @media (max-width:320px) {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -484,7 +514,7 @@
       height: 50px;
       margin-right: 10px;
       font-size: 10px;
-     }
+    }
   }
 }
 
@@ -522,7 +552,7 @@
       font-size: 30px;
       line-height: 40px;
     }
-    
+
     @media (max-width:657px) {
       font-size: 25px;
       line-height: 40px;
@@ -609,3 +639,5 @@
   font-weight: 600;
   line-height: 150%
 }
+
+// input bg company sign up

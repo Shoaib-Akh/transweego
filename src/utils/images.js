@@ -19,6 +19,8 @@ import mask from "../assets/images/mask.svg";
 import Vector3 from "../assets/images/Vector3.svg";
 import Vector4 from "../assets/images/Vector4.svg";
 import dollarvault from "../assets/images/dollarvault.png";
+import frame from "../assets/images/frame.png";
+
 
 
 
@@ -46,5 +48,6 @@ export const Images = {
     componyLogo,
     cost,
     mobilelogo,
-    mobilegroup
+    mobilegroup,
+    frame,
 }

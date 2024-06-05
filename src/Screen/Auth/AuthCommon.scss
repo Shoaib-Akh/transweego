@@ -30,7 +30,6 @@
 
         .Forgotten {
             color: #000;
-
             margin-top: 10px;
             font-size: 12px;
             font-style: normal;
@@ -54,3 +53,50 @@
     
 
 }
+.bg-company {
+margin: 40px 0px;
+  
+
+.maindiv-input {
+  background-color: #EFEFEF;
+
+}
+  
+    .input-bg {
+      background-color: #EFEFEF;
+      padding: 10px 10px;
+      border-radius: 30px;
+  
+      h3 {
+        color: #4A6C62;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 14px;
+      }
+    }
+  
+    .form-check {
+      .form-check-input:checked {
+        background-color: #FF8900 !important;
+      }
+    }
+  
+    h2 {
+      color: #000;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 14px;
+    }
+  
+    .upload-photo {
+      border-radius: 19px;
+      width: 148px;
+      height: 117px;
+      background: #F8F8F8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }

@@ -1,6 +1,6 @@
 // src/Login.js
 import React, { useState } from "react";
-import "../common.scss";
+import "../AuthCommon.scss";
 import InputField from "../../../Componnet/InputField";
 import logo from "../../../assets/images/mainLogo.png";
 import Button from "../../../Componnet/Button";
