@@ -8,6 +8,7 @@ import Login from './Screen/Auth/login';
 import SignUp from './Screen/Auth/signUp';
 import ComponySignUp from './Screen/Auth/signUp/ComponySignUp';
 import AddDriver from './Screen/Auth/signUp/ComponySignUp/AddDriver';
+import LandingPage from './Screen/website/LandingPage';
 
 function App() {
   return (
@@ -20,11 +21,7 @@ function App() {
         <Route path='signUp' element={<SignUp />} />
         <Route path='ComponySignUp' element={<ComponySignUp />} />
         <Route path='AddDriver' element={<AddDriver />} />
-
-
-
-
-
+        <Route path='LandingPage' element={<LandingPage />} />
 
       </Routes>
     </div>
