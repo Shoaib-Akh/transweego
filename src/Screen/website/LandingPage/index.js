@@ -1,8 +1,10 @@
 import React from "react";
 import "../style.scss";
 import { Images } from "../../../utils/images";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="landingPage ">
         <div>
@@ -63,8 +65,15 @@ const LandingPage = () => {
             </p>
           </div>
           <div className="col-12 text-center btn-join">
-            <button className="btn orange mt-5">Join the Waitlist</button>
+            <button className="btn orange mt-5"
+             onClick={() => navigate("/signUp")}
+            >Join the Waitlist</button>
           </div>
+        </div>
+      </div>
+      <div className="card">
+        <div>
+        <p>rewt</p>
         </div>
       </div>
     </div>

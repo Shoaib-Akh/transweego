@@ -5,6 +5,7 @@ import InputField from "../../../../Componnet/InputField";
 import Button from "../../../../Componnet/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { Images } from "../../../../utils/images";
+import DropDown from "../../../../Componnet/DropDown";
 
 const ComponySignUp = () => {
   const navigate = useNavigate();
@@ -40,14 +41,20 @@ const ComponySignUp = () => {
                   lable={"Telefonnummer"}
                   placeholder={"Nummer eingeben"}
                 />
-                  <div class="input-group mb-3">
+                <DropDown
+                  required
+                  lable={"Vorname*"}
+                  placeholder={"MwSt. eingeben"}
+                />
+
+                {/* <div class="input-group mb-3">
                   <select class="form-select" id="inputGroupSelect01">
                     <option selected>Choose...</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
-                </div>
+                </div> */}
                 <InputField
                   required
                   lable={"VAT Number"}
@@ -83,10 +90,22 @@ const ComponySignUp = () => {
                 <h2>Upload firma documents*</h2>
                 <div className="d-flex gap-3">
                   <div className="upload-photo">
-                    <img src={Images.frame} height="52" width="52" alt="car" className="mx-1" />
+                    <img
+                      src={Images.frame}
+                      height="52"
+                      width="52"
+                      alt="car"
+                      className="mx-1"
+                    />
                   </div>
                   <div className="upload-photo">
-                    <img src={Images.frame} height="52" width="52" alt="car" className="mx-1" />
+                    <img
+                      src={Images.frame}
+                      height="52"
+                      width="52"
+                      alt="car"
+                      className="mx-1"
+                    />
                   </div>
                 </div>
                 <hr></hr>
@@ -116,15 +135,34 @@ const ComponySignUp = () => {
                   </div>
                 </div>
 
-                <Button 
-        onClick={() => navigate("/AddDriver")}
-                
-                label={"Sign-in"} />
+                <Button
+                  onClick={() => navigate("/AddDriver")}
+                  label={"Sign-in"}
+                />
+                <div className="card py-2">
+                  <div className="card-inner px-3">
+                    <p>Weiblich</p>
+                    <img src={Images.tick} height="4" width="8" alt="tick"  />
+                  </div>
+                  <div className="card-inner px-3">
+                    <p>Weiblich</p>
+                    <img src={Images.tick} height="4" width="8" alt="tick"  />
+                  </div>
+                  <div className="card-inner px-3">
+                    <p>Weiblich</p>
+                    <img src={Images.tick} height="4" width="8" alt="tick"  />
+                  </div>
+                  <div className="line"></div>
+                  <div className="d-flex justify-content-between align-items-center mx-3 my-1">
+                    <p className="text">ghvhjv</p>
+                    <div className="lineleft"></div>
+                    <p className="text">vvsd</p>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -81,9 +81,8 @@
       background-color: #FF8900 !important;
       border-color: #FF8900 !important;
     }
-    .form-check-input:checked[type=checkbox]{
-      
-    }
+
+    .form-check-input:checked[type=checkbox] {}
   }
 
   h2 {
@@ -104,21 +103,67 @@
     justify-content: center;
   }
 }
-.add-driver{
+
+.add-driver {
   .driver-div {
     // width: 473px;
     background-color: #ffff;
     padding: 50px 30px 20px 30px;
     border-radius: 30px;
-    .frame{
+
+    .frame {
       display: flex;
       justify-content: end;
     }
   }
-  .driver-clr{
+
+  .driver-clr {
     background-color: #EFEFEF;
     padding: 26px 15px;
     border-radius: 30px;
   }
 
+}
+
+// dropdown
+.card {
+  border: none;
+  border-radius: 15px;
+  filter: drop-shadow(0px 0px 14px rgba(0, 0, 0, 0.10));
+  margin-top: 30px;
+  width: 12rem;
+
+  .card-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 27px;
+    }
+
+  }
+
+  .line {
+    border-bottom: 1px solid #CBCBCB;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .lineleft {
+    border-left: 1px solid #CBCBCB;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 10px;
+  }
+
+  .text {
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+  }
 }
