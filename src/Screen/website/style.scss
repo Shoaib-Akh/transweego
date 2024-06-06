@@ -28,8 +28,7 @@
   color: #ffffff;
   border: none;
   border-radius: 43px;
-  width: 200px;
-  height: 55px;
+  padding: 10px 20px;
   margin-right: 20px;
 
   &:hover {
@@ -102,8 +101,7 @@
       color: #ffffff;
       border: none;
       border-radius: 43px;
-      width: 150px;
-      height: 55px;
+      padding: 10px 20px;
       margin-right: 20px;
     }
 
@@ -199,8 +197,7 @@
       color: #ffffff;
       border: none;
       border-radius: 43px;
-      width: 150px;
-      height: 55px;
+      padding: 10px 20px;
       margin-right: 20px;
     }
   }
@@ -213,8 +210,7 @@
       color: #ffffff;
       border: none;
       border-radius: 43px;
-      width: 130px;
-      height: 50px;
+      padding: 10px 20px;
       margin-right: 20px;
     }
   }
@@ -485,8 +481,7 @@
       color: #ffffff;
       border: none;
       border-radius: 43px;
-      width: 150px;
-      height: 55px;
+      padding: 10px 20px;
       margin-right: 10px;
       font-size: 12px;
     }
@@ -495,8 +490,7 @@
       color: #ffffff;
       border: none;
       border-radius: 43px;
-      width: 120px;
-      height: 55px;
+      padding: 10px 20px;
       margin-right: 10px;
       font-size: 12px;
     }
@@ -645,93 +639,207 @@
   background-image: url(../../assets/images/landing-bg.png);
   background-size: cover;
   background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 20px;
 
-  .logo {
-    padding-top: 56px;
+  .btn {
+    background-color: #f5851f;
+    border: none;
+    color: #FFF;
 
-    h3 {
-      color: #F5851F;
-      text-align: center;
-      font-size: 35px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 32px;
-      margin-top: 67px
-    }
 
-    h1 {
-      color: #FFF;
-      text-align: center;
-      font-size: 70px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-    }
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
 
-    p {
-      color: #FFF;
-      text-align: center;
-      font-size: 32px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 44px;
-      margin-top: 31px
+
+    &:hover {
+      background-color: darken(#f5851f, 10%);
     }
   }
 
-  .cardlanding {
-    .card {
-      text-align: center;
-      border-radius: 31px;
-      background: #FFF;
-      margin-bottom: 30px;
+  .logo {
+    padding-top: 56px;
+    text-align: center;
 
-      .card-body {
-        height: 430px;
-      }
-
-      .card-title {
-        color: #0C3227;
-        text-align: center;
-        font-family: Montserrat;
-        font-size: 32px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 36px;
-        margin-bottom: 30px;
-      }
-
-      .card-text {
-        color: #969696;
-        text-align: center;
-        font-family: Montserrat;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%;
-        margin-top: 32px;
-      }
-
-      .card-img {
-        width: 114px;
-        height: 153px;
-        object-fit: cover;
-      }
+    h3 {
+      color: #f5851f;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-top: 67px;
     }
 
+    h1 {
+      color: #fff;
+      font-size: 3.5rem;
+      font-weight: 600;
+    }
+
+    p {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 31px;
+    }
+
+
+  }
+
+  .cardLanding {
+    .card {
+      border-radius: 31px;
+      background: #fff;
+      text-align: center;
+
+      .card-body {
+        height: auto; // make it responsive
+        padding: 1.5rem;
+
+        .card-title {
+          color: #0c3227;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 30px;
+          white-space: nowrap;
+
+          @media (max-width: 768px) {
+            white-space: wrap;
+          }
+        }
+
+        .card-text {
+          color: #969696;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 1rem;
+          font-weight: 600;
+          margin-top: 32px;
+        }
+
+        .card-img {
+
+          text-align: center;
+
+          img {
+            height: 170px;
+            width: 150px;
+
+          }
+        }
+      }
+    }
   }
 
   .text {
     p {
-      color: #FFF;
-      text-align: center;
-      font-size: 32px;
-      font-style: normal;
+      color: #fff;
+      font-size: 1.5rem;
       font-weight: 600;
-      line-height: 44px;
+      text-align: center;
     }
-    .btn-join{
+
+    .btn-join {
       margin-bottom: 4rem;
+
+      .btn {
+        background-color: #f5851f;
+        border: none;
+        color: #fff;
+        padding: 10px 20px;
+
+        &:hover {
+          background-color: darken(#f5851f, 10%);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .cardLanding {
+    .card {
+      .card-body {
+        padding: 1rem;
+      }
+
+      .card-title {
+        font-size: 1.5rem;
+
+      }
+
+      .card-text {
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .text {
+    p {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    padding-top: 20px;
+
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    .btn {
+      padding: 8px 16px;
+    }
+  }
+
+  .cardLanding {
+    .card {
+      .card-body {
+        padding: 0.75rem;
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+
+      }
+
+      .card-text {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  .text {
+    p {
+      font-size: 1rem;
+    }
+
+    .btn-join {
+      .btn {
+        padding: 8px 16px;
+      }
     }
   }
 }
