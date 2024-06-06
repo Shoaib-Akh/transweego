@@ -1,36 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import "./comonStyle.scss";
-
-const InputField = ({ type = "text", placeholder, value, onChange, label, required }) => {
-  const [error, setError] = useState(false);
-
-  const handleInputChange = (e) => {
-    // If the input is required, check if it's empty
-    if (required && e.target.value.trim() === "") {
-      setError(true);
-    } else {
-      setError(false);
-    }
-
-    // Call the parent onChange handler
-    onChange(e);
-  };
-
+const InputField = ({ type = "text", placeholder, value, onChange,lable ,required}) => {
   return (
-    <div className={`maindiv-input ${error ? 'error' : ''}`}>
+    <div className="maindiv-input">
       <div>
-        <p className="label">{label} {required && "*"}</p>
+        <p className="lable">{lable} {required && "*"}</p>
       </div>
       <input
         type={type}
         placeholder={placeholder}
         value={value}
-        onChange={handleInputChange}
-        className={`input ${error ? 'error-border' : ''}`}
+        onChange={onChange}
+        className="input"
         required={required}
+
       />
     </div>
   );
 };
+
+
 
 export default InputField;
