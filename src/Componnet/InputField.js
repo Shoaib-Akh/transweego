@@ -1,35 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import "./comonStyle.scss";
-const InputField = ({ type = "text", placeholder, value, onChange,lable ,required}) => {
-  return (
-    <div className="maindiv-input">
-      <div>
-        <p className="lable">{lable} {required && "*"}</p>
-      </div>
 
+const InputField = ({ type = "text", placeholder, value, onChange, label, required }) => {
+  const [error, setError] = useState(false);
+
+  const handleInputChange = (e) => {
+    // If the input is required, check if it's empty
+    if (required && e.target.value.trim() === "") {
+      setError(true);
+    } else {
+      setError(false);
+    }
+
+    // Call the parent onChange handler
+    onChange(e);
+  };
+
+  return (
+    <div className={`maindiv-input ${error ? 'error' : ''}`}>
+      <div>
+        <p className="label">{label} {required && "*"}</p>
+      </div>
       <input
         type={type}
         placeholder={placeholder}
         value={value}
-        onChange={onChange}
-        className="input"
+        onChange={handleInputChange}
+        className={`input ${error ? 'error-border' : ''}`}
         required={required}
-
       />
     </div>
   );
-};
-
-const styles = {
-  mainInput: {},
-  input: {
-    // padding: '10px',
-    // margin: '5px 0',
-    boxSizing: "border-box",
-    borderRadius: "4px",
-    border: "none",
-    // width: '100%',
-  },
 };
 
 export default InputField;
