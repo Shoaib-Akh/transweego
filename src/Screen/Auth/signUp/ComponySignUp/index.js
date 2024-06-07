@@ -41,11 +41,11 @@ const ComponySignUp = () => {
                   lable={"Telefonnummer"}
                   placeholder={"Nummer eingeben"}
                 />
-                <DropDown
+                {/* <DropDown
                   required
                   label={"Vorname*"}
                   placeholder={"MwSt. eingeben"}
-                />
+                /> */}
 
 {/*                 
                 <InputField
