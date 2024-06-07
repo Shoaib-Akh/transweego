@@ -43,18 +43,11 @@ const ComponySignUp = () => {
                 />
                 <DropDown
                   required
-                  lable={"Vorname*"}
+                  label={"Vorname*"}
                   placeholder={"MwSt. eingeben"}
                 />
 
-                {/* <div class="input-group mb-3">
-                  <select class="form-select" id="inputGroupSelect01">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </div> */}
+{/*                 
                 <InputField
                   required
                   lable={"VAT Number"}
@@ -133,32 +126,13 @@ const ComponySignUp = () => {
                       Nein
                     </label>
                   </div>
-                </div>
+                </div> */}
 
                 <Button
                   onClick={() => navigate("/AddDriver")}
                   label={"Sign-in"}
                 />
-                <div className="card py-2">
-                  <div className="card-inner px-3">
-                    <p>Weiblich</p>
-                    <img src={Images.tick} height="4" width="8" alt="tick"  />
-                  </div>
-                  <div className="card-inner px-3">
-                    <p>Weiblich</p>
-                    <img src={Images.tick} height="4" width="8" alt="tick"  />
-                  </div>
-                  <div className="card-inner px-3">
-                    <p>Weiblich</p>
-                    <img src={Images.tick} height="4" width="8" alt="tick"  />
-                  </div>
-                  <div className="line"></div>
-                  <div className="d-flex justify-content-between align-items-center mx-3 my-1">
-                    <p className="text">ghvhjv</p>
-                    <div className="lineleft"></div>
-                    <p className="text">vvsd</p>
-                  </div>
-                </div>
+                
               </div>
             </form>
           </div>
