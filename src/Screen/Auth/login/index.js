@@ -1,4 +1,3 @@
-// src/Login.js
 import React, { useState } from "react";
 import "../AuthCommon.scss";
 import InputField from "../../../Componnet/InputField";
@@ -7,6 +6,7 @@ import Button from "../../../Componnet/Button";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../api/loginSlice';
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,35 +22,38 @@ const Login = () => {
 
   return (
     <div className="bg-color">
-      <div className="mainBg-img ">
+      <div className="mainBg-img">
         <div className="center-div">
           <form onSubmit={handleSubmit} className="login-div">
             <div className="text-center mb-4">
               <img src={logo} height={30} alt="car" />
             </div>
-
-            <InputField
-              onChange={(e) => setUsername(e.target.value)}
-              lable={"E-Mail/Phone number"}
-              placeholder={"iamamember@gmail.com"}
-            />
+            <div style={{ marginBottom: 20 }}>
+              <InputField
+                onChange={(e) => setUsername(e.target.value)}
+                label="E-Mail/Phone number"
+                placeholder="iamamember@gmail.com"
+                type="text"
+                value={username}
+                validationMessages={{ email: 'Please enter a valid email address' }}
+              />
+            </div>
             <InputField
               onChange={(e) => setPassword(e.target.value)}
-              lable={"Password"}
-              placeholder={"Enter your password"}
+              label="Password"
+              placeholder="Enter your password"
               type="password"
+              value={password}
             />
-
-            <Button label={"Sign-in"} />
+            <Button label="Sign-in" />
+        
             <div className="text-center">
               <h5 className="Forgotten">Forgotten password?</h5>
-              <p className="new-user mt-4">Are you new user? <Link to="/signup" >
+              <p className="new-user mt-4">Are you a new user? <Link to="/signup">
                 <b>Sign up</b>
-              </Link> </p>
+              </Link></p>
             </div>
           </form>
-
-
         </div>
       </div>
     </div>
