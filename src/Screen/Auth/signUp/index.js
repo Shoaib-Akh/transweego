@@ -33,7 +33,7 @@ const SignUp = () => {
             <Button
         onClick={() => navigate("/ComponySignUp")}
               label={"Company"}
-              style={{ background: "transparent", border: "1px solid black" }}
+              style={{ background: "#0C3227", border: "1px solid black", color:"white" }}
             />
             <Button
               label={"Individual transporter"}

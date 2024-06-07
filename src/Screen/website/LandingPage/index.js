@@ -25,7 +25,11 @@ const LandingPage = () => {
           your journeys. Join us today and be the first to experience the
           future of transportation — efficient, economical, and eco-friendly.
         </p>
-        <button className="btn orange mt-5">pre register now</button>
+        <button className="btn orange mt-5"
+             onClick={() => navigate("/signUp")}
+        
+        
+        >pre register now</button>
       </div>
       <div className="cardLanding container mt-5">
         <div className="row">
@@ -71,11 +75,7 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-      <div className="card">
-        <div>
-        <p>rewt</p>
-        </div>
-      </div>
+     
     </div>
     </div>
 

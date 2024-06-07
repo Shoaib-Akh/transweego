@@ -133,9 +133,9 @@ input:focus {
     border: none;
     border-radius: 15px;
     filter: drop-shadow(0px 0px 14px rgba(0, 0, 0, 0.10));
-    margin-top: 30px;
-    width: 12rem;
   
+    width: 12rem;
+  position: absolute;b
     .card-inner {
       display: flex;
       align-items: center;

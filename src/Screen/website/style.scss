@@ -180,7 +180,7 @@
 
 .scrollable-container {
   overflow-x: auto;
-  white-space: nowrap;
+ 
   width: 80%;
   height: 100px;
   scrollbar-width: none;
@@ -702,7 +702,7 @@
           font-size: 2rem;
           font-weight: 700;
           margin-bottom: 30px;
-          white-space: nowrap;
+         
 
           @media (max-width: 768px) {
             white-space: wrap;
