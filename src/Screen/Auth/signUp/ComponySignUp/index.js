@@ -66,7 +66,7 @@ const ComponySignUp = () => {
                   onChange={handleChange}
                   error={errors.companyName}
                 />
-                <InputField
+                {/* <InputField
                   type="password"
                   placeholder="Enter your password"
                   name="password"
@@ -77,7 +77,7 @@ const ComponySignUp = () => {
                   validationRules={{ minLength: /.{8,}/, hasNumber: /\d/ }}
                   validationMessages={{ minLength: 'Password must be at least 8 characters long', hasNumber: 'Password must contain a number' }}
                   error={errors.password}
-                />
+                /> */}
                 <InputField
                   type="email"
                   placeholder="Enter your email"

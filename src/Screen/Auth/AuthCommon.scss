@@ -49,6 +49,12 @@ height: 100vh;
       line-height: 14px;
 
     }
+    @media (max-width: 768px) {
+
+      .login-div{
+        width: 250px;
+      }
+    }
 
   }
 

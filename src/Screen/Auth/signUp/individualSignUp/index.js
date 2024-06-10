@@ -8,7 +8,7 @@ const IndividualSignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     companyName: '',
-    password: '',
+    // password: '',
     email: '',
     phone: ''
   });
@@ -33,7 +33,7 @@ const IndividualSignUp = () => {
     const newErrors = {};
 
     if (!formData.companyName) newErrors.companyName = 'This field is required';
-    if (!formData.password) newErrors.password = 'This field is required';
+    // if (!formData.password) newErrors.password = 'This field is required';
     if (!formData.email) newErrors.email = 'This field is required';
     if (!formData.phone) newErrors.phone = 'This field is required';
 
@@ -65,7 +65,7 @@ const IndividualSignUp = () => {
                   onChange={handleChange}
                   error={errors.companyName}
                 />
-                <InputField
+                {/* <InputField
                   type="password"
                   placeholder="Enter your password"
                   name="password"
@@ -76,7 +76,7 @@ const IndividualSignUp = () => {
                   validationRules={{ minLength: /.{8,}/, hasNumber: /\d/ }}
                   validationMessages={{ minLength: 'Password must be at least 8 characters long', hasNumber: 'Password must contain a number' }}
                   error={errors.password}
-                />
+                /> */}
                 <InputField
                   type="email"
                   placeholder="Enter your email"
@@ -89,10 +89,11 @@ const IndividualSignUp = () => {
                   error={errors.email}
                 />
                 <InputField
-                  type="tel"
+                  type="number"
                   placeholder="Nummer eingeben"
                   name="phone"
                   value={formData.phone}
+                  
                   onChange={handleChange}
                   label="Telefonnummer"
                   required
