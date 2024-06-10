@@ -33,7 +33,7 @@ const LandingPage = () => {
       </div>
       <div className="cardLanding container mt-5">
         <div className="row">
-          <Card
+          {/* <Card
             title="Special title treatment"
             imgSrc={Images.truckyellow}
             text="With TransWeGo, if you're transporting a vehicle over 50km,
@@ -56,7 +56,63 @@ const LandingPage = () => {
             text="Manage all your transport needs through our user-friendly
               app that offers transparency, control, and hassle-free
               coordination of your trips."
-          />
+          /> */}
+
+<div className="col-12 col-sm-6 col-lg-4 mb-4">
+    <div className="card h-100 text-center">
+      <div className="card-body">
+        <div className="text-center">
+
+        <h5 className="card-title">Cost-Effective 
+        Travel Solutions</h5>
+        </div>
+        <div className="card-img">
+
+        <img src={Images.truckyellow}  alt={"Special title treatment"}  className="truckyellow" />
+        </div>
+        <p className="card-text mt-3">With TransWeGo, if you're transporting a vehicle over 50km,
+              you no longer have to pay for the transporter’s return
+              journey. Our platform helps you connect with another user
+              who needs a vehicle transported back from your destination,
+              allowing both parties to share the costs and save money.</p>
+      </div>
+    </div>
+  </div>
+  <div className="col-12 col-sm-6 col-lg-4 mb-4">
+    <div className="card h-100 text-center">
+      <div className="card-body">
+        <div className="text-center">
+
+        <h5 className="card-title">Smart Matching</h5>
+        </div>
+        <div className="card-img">
+
+        <img src={Images.mobilegroup}  alt={"Smart Matching"}  className="mobilegroup"/>
+        </div>
+        <p className="card-text mt-3">Our intuitive system matches you with other users whose
+              transportation needs complement yours. This not only splits
+              your costs but also maximizes the efficiency of each
+              journey.</p>
+      </div>
+    </div>
+  </div>
+  <div className="col-12 col-sm-6 col-lg-4 mb-4">
+    <div className="card h-100 text-center">
+      <div className="card-body">
+        <div className="text-center">
+
+        <h5 className="card-title">Simplified Logistic</h5>
+        </div>
+        <div className="card-img">
+
+        <img src={ Images.mobile2}  alt={"Simplified Logistic"} className="mobile2"/>
+        </div>
+        <p className="card-text mt-3">Manage all your transport needs through our user-friendly
+              app that offers transparency, control, and hassle-free
+              coordination of your trips.</p>
+      </div>
+    </div>
+  </div>
         </div>
       </div>
       <div className="text container mt-5">
