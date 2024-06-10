@@ -639,8 +639,9 @@
   background-image: url(../../assets/images/landing-bg.png);
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 100vh;
-  padding: 20px;
+  background-size: 100% 100%; 
+object-fit: cover;
+height: 100%;
 
   .btn {
     background-color: #f5851f;
@@ -721,7 +722,21 @@
 
           text-align: center;
 
-          img {
+          .truckyellow {
+            width: 114px;
+            height: 153px;
+          
+
+          }
+          .mobilegroup {
+            width: 221px;
+            height: 183px;
+          
+
+          }
+          .mobile2 {
+            width: 117px;
+            height: 200px;
           
 
           }
@@ -756,6 +771,9 @@
 }
 
 @media (max-width: 768px) {
+  .landingPage{
+    padding: 10px;
+  }
   .logo {
     
     h1 {

@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="landingPage ">
-        <div>
+    <div  style={{backgroundColor:"#0C3227",height:"100%"}}>
+        <div  className="landingPage">
 
       <div className="text-center logo">
         <img
