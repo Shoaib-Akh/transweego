@@ -5,6 +5,7 @@ import InputField from "../../../Componnet/InputField";
 import logo from "../../../assets/images/mainLogo.png";
 import Button from "../../../Componnet/Button";
 import { Link, useNavigate } from "react-router-dom";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const SignUp = () => {
   const navigate = useNavigate();
 
@@ -25,6 +26,13 @@ const SignUp = () => {
   return (
     <div className="bg-color">
       <div className="mainBg-img ">
+   
+      <Button
+        onClick={() => navigate(-1)}
+              label={ "back"}
+              style={{ background: "#0C3227", border: "1px solid black", color:"white",width:"150px" , marginLeft:20}}
+              icon={<ArrowBackIcon/>}
+            />
         <div className="center-div">
           <form onSubmit={handleLogin} className="login-div">
             <div className="text-center mb-4">
@@ -59,3 +67,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+;

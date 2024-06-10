@@ -49,7 +49,7 @@ const ComponySignUp = () => {
   return (
     <div className="bg-color">
       <div className="mainBg-img">
-        <div className="center-div" style={{ height: "auto" }}>
+        <div className="center-div" >
           <div className="bg-company">
             
                <form className="login-div" onSubmit={handleSubmit}>

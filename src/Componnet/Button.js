@@ -1,7 +1,7 @@
 import React from 'react';
 import "./comonStyle.scss";
 
-const Button = ({ onClick, label, style, disabled }) => {
+const Button = ({ onClick, label, style, disabled , icon}) => {
   return (
     <button
       onClick={onClick}
@@ -9,7 +9,7 @@ const Button = ({ onClick, label, style, disabled }) => {
       disabled={disabled}
       className="custom-button"
     >
-      {label}
+      { icon} {label}
     </button>
   );
 };

@@ -1,22 +1,26 @@
 .bg-color {
   // background-color:"#0C3227 !important";
   background-color: #0C3227;
-height: 100vh;
+  overflow-y: hidden;
   .mainBg-img {
     background-image: url("../../assets/images/bg-Img.png");
 
     background-repeat: no-repeat;
     background-size: cover;
-
+height: fit-content;
     opacity: 10px;
+height: 100vh;
+
+
+
   }
 
   .center-div {
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 30px;
+ 
 
   }
 
