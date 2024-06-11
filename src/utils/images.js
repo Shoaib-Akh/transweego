@@ -23,6 +23,8 @@ import frame from "../assets/images/frame.png";
 import logolanding from "../assets/images/logolanding.png";
 import mobile2 from "../assets/images/mobile2.png";
 import truckyellow from "../assets/images/truckyellow.png";
+import arrowDown from "../assets/images/aerodown.png";
+
 import tick from "../assets/images/tick.png";
 
 // import plus from "../assets/images/plus.png";
@@ -35,6 +37,7 @@ import tick from "../assets/images/tick.png";
 import togher1 from "../assets/images/togher1.svg";
 export const Images = {
     Star,
+    arrowDown,
     person,
     dollarvault,
     aeroleft,

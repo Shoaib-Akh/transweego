@@ -1,17 +1,16 @@
 // src/Login.js
 import React, { useState } from "react";
 import "../../AuthCommon.scss";
-import InputField from "../../../../Componnet/InputField";
-import Button from "../../../../Componnet/Button";
+import InputField from "../../../../Component/InputField";
+import Button from "../../../../Component/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { Images } from "../../../../utils/images";
-import DropDown from "../../../../Componnet/DropDown";
+import MultiSelectDropdown from "../../../../Component/MultiSelectDropdown";
 import { useDispatch } from "react-redux";
 import {ComponySignUpApi} from "../../../../api/ComponySignUpSlice";
 
-const ComponySignUp = () => {
-  const API_URL = "https://transweego-backend-production.up.railway.app/api/v1/";
-console.log("API_URL",API_URL);
+const CompanySignup = () => {
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     companyName: '',
@@ -72,14 +71,23 @@ console.log("API_URL",API_URL);
           <div className="bg-company">
             
                <form className="login-div" onSubmit={handleSubmit}>
-              <div className="text-center mb-4">
+              <div className="text-center mb-4  heading">
                 <h2>Please Register</h2>
               </div>
               <div className="input-bg">
                 <InputField
                   required
-                  label="Firma/Unternehmen"
-                  placeholder="Unternehmen Name eingeben"
+                  label="Company/enterprise"
+                  placeholder="Enter company name"
+                  name="companyName"
+                  value={formData.companyName}
+                  onChange={handleChange}
+                  error={errors.companyName}
+                />
+                  <InputField
+                  required
+                  label="Contact person"
+                  placeholder="Enter contact person"
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleChange}
@@ -110,20 +118,20 @@ console.log("API_URL",API_URL);
                 />
                 <InputField
                   type="tel"
-                  placeholder="Nummer eingeben"
+                  placeholder="Phone number*"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  label="Telefonnummer"
+                  label="Enter number"
                   required
                   validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
                   error={errors.phone}
                 />
-                {/* <DropDown
-                  required
-                  label={"Vorname*"}
-                  placeholder={"MwSt. eingeben"}
-                /> */}
+                <MultiSelectDropdown
+                
+                  label={"Services*"}
+                 placeholder={"select services"}
+                />
 
 {/*                 
                 <InputField
@@ -220,4 +228,4 @@ console.log("API_URL",API_URL);
   );
 };
 
-export default ComponySignUp;
+export default CompanySignup;

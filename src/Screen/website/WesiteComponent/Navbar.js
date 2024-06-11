@@ -27,7 +27,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-nav">
               <button className="btn orange" onClick={() => navigate("/login")}>Login</button>
-              <button className="btn yellow" onClick={() => navigate("/signUp")}>Sign Up</button>
+              <button className="btn yellow" onClick={() => navigate("/signup")}>Sign Up</button>
             </div>
           </div>
         </div>

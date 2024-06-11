@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../AuthCommon.scss";
-import InputField from "../../../../Componnet/InputField";
-import Button from "../../../../Componnet/Button";
+import InputField from "../../../../Component/InputField";
+import Button from "../../../../Component/Button";
 import { useNavigate } from "react-router-dom";
 
 const IndividualSignUp = () => {

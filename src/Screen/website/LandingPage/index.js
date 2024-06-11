@@ -26,7 +26,7 @@ const LandingPage = () => {
           future of transportation — efficient, economical, and eco-friendly.
         </p>
         <button className="btn orange mt-5"
-             onClick={() => navigate("/signUp")}
+             onClick={() => navigate("/signup")}
         
         
         >pre register now</button>
@@ -126,7 +126,7 @@ const LandingPage = () => {
           </div>
           <div className="col-12 text-center btn-join">
             <button className="btn orange mt-5"
-             onClick={() => navigate("/signUp")}
+             onClick={() => navigate("/signup")}
             >Join the Waitlist</button>
           </div>
         </div>

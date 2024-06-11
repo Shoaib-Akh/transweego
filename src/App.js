@@ -6,8 +6,8 @@ import HomePage from './Screen/website/HomePage';
 import HowItWork from './Screen/website/HowItWork';
 import Login from './Screen/Auth/login';
 import SignUp from './Screen/Auth/signUp';
-import ComponySignUp from './Screen/Auth/signUp/ComponySignUp';
-import AddDriver from './Screen/Auth/signUp/ComponySignUp/AddDriver';
+import CompanySignup from './Screen/Auth/signUp/CompanySignup';
+import AddDriver from './Screen/Auth/signUp/CompanySignup/AddDriver';
 import LandingPage from './Screen/website/LandingPage';
 import IndividualSignUp from './Screen/Auth/signUp/individualSignUp';
 
@@ -23,8 +23,8 @@ function App() {
         <Route path='individualSignUp' element={<IndividualSignUp />} />
 
         <Route path='login' element={<Login />} />
-        <Route path='signUp' element={<SignUp />} />
-        <Route path='ComponySignUp' element={<ComponySignUp />} />
+        <Route path='signup' element={<SignUp />} />
+        <Route path='company_signup' element={<CompanySignup />} />
         <Route path='AddDriver' element={<AddDriver />} />
 
       </Routes>

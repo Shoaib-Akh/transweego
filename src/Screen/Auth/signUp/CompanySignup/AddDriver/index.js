@@ -1,7 +1,7 @@
 // src/Login.js
 import React, { useState } from "react";
 import "../../../AuthCommon.scss";
-import SimpleInput from "../../../../../Componnet/SimpleInput";
+import SimpleInput from "../../../../../Component/SimpleInput";
 import { Images } from "../../../../../utils/images";
 
 

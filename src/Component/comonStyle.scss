@@ -14,11 +14,12 @@
     }
   
     .label {
-      color: #162233;
-      font-size: 12px;
+      
+      font-size: 15px;
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 14px;
+      color: #4A6C62;
     }
   
     .input {
@@ -26,7 +27,7 @@
       margin-top: 5px;
       background-color: transparent;
       font-size: 10px;
-      color: black;
+      color: #4A6C62;
   
       &.error {
         border: 1px solid red;
@@ -107,6 +108,9 @@ input:focus {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    &:hover {
+      background-color: darken(#f5851f, 10%);
+    }
 }
 
 .custom-button:disabled {
@@ -127,12 +131,17 @@ input:focus {
     background-image: url("../assets/images/aerodown.png");
     background-position: 91%;
     background-repeat: no-repeat;
+    cursor: pointer;
+
     .lable {
         color: #162233;
         font-size: 12px;
         font-style: normal;
         font-weight: 600;
         line-height: 14px;
+    }
+    input{
+      width: 93%;
     }
 
     .dropdown {
@@ -152,23 +161,25 @@ input:focus {
     }
 
 }
-.dropdown {
+.dropdown-isOpen {
     border: none;
     border-radius: 15px;
     filter: drop-shadow(0px 0px 14px rgba(0, 0, 0, 0.10));
-  
     width: 12rem;
-  position: absolute;b
+  position: absolute;
     .card-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      cursor: pointer;
   
       p {
         font-size: 10px;
         font-style: normal;
         font-weight: 500;
         line-height: 27px;
+      cursor: pointer;
+
       }
   
     }
@@ -191,5 +202,7 @@ input:focus {
       font-style: normal;
       font-weight: 500;
       line-height: 14px;
+      cursor: pointer;
+
     }
   }

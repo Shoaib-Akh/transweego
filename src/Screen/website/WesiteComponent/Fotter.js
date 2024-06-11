@@ -81,7 +81,7 @@ const Fotter = () => {
             </ul>
           </div>
           <div className="col-md-2">
-            <b> Qucick links</b>
+            <b> Quick links</b>
             <ul>
               <li className="mt-3">Lorem</li>
               <li className="mt-3">Lorem</li>
@@ -90,7 +90,7 @@ const Fotter = () => {
             </ul>
           </div>
           <div className="col-md-1">
-            <b> Qucick links</b>
+            <b> Quick links</b>
             <ul>
               <li className="mt-3">Lorem</li>
               <li className="mt-3">Lorem</li>
@@ -102,7 +102,7 @@ const Fotter = () => {
             <img src={truck3} height="300" alt="car" />
           </div>
         </div>
-        <div className="text-center my-3"><p>© 2024 transWeego All Rights Reserved</p></div>
+        <div className="text-center my-3"><p>© 2024 transWego All Rights Reserved</p></div>
        
       </footer>
         )

@@ -1,9 +1,9 @@
 // src/Login.js
 import React, { useState } from "react";
 import "../AuthCommon.scss";
-import InputField from "../../../Componnet/InputField";
+import InputField from "../../../Component/InputField";
 import logo from "../../../assets/images/mainLogo.png";
-import Button from "../../../Componnet/Button";
+import Button from "../../../Component/Button";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const SignUp = () => {
@@ -39,7 +39,7 @@ const SignUp = () => {
               <img src={logo} height={30} alt="car" />
             </div>
             <Button
-        onClick={() => navigate("/ComponySignUp")}
+        onClick={() => navigate("/company_signup")}
               label={"Company"}
               style={{ background: "#0C3227", border: "1px solid black", color:"white" }}
             />

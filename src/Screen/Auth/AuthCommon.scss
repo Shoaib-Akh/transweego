@@ -27,7 +27,7 @@ height: 100vh;
   .login-div {
     width: 400px;
     background-color: #ffff;
-    padding: 50px 30px 20px 30px;
+    padding: 40px 15px 15px 15px;
     border-radius: 30px;
 
     .Forgotten {
@@ -133,6 +133,12 @@ height: 100vh;
     border-radius: 30px;
   }
 
+}
+.heading{
+  h2{
+    font-size: 28px;
+    font-weight: 700;
+  }
 }
 
 

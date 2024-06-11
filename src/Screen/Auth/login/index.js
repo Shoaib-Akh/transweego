@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../AuthCommon.scss";
-import InputField from "../../../Componnet/InputField";
+import InputField from "../../../Component/InputField";
 import logo from "../../../assets/images/mainLogo.png";
-import Button from "../../../Componnet/Button";
+import Button from "../../../Component/Button";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../api/loginSlice';
