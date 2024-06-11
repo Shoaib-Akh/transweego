@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { xhrPost } from '../utils/XHR';
-const API_URL = process.env.API_URL;
+const API_URL = `https://transweego-backend-production.up.railway.app/api/v1/`
 console.log("API_URL",API_URL);
 export const ComponySignUpApi = createAsyncThunk('user/ComponySignUp', async (credentials, thunkAPI) => {
   const response = await xhrPost(`${API_URL}pre-launch/company`, credentials);
