@@ -180,7 +180,7 @@
 
 .scrollable-container {
   overflow-x: auto;
- 
+
   width: 80%;
   height: 100px;
   scrollbar-width: none;
@@ -639,10 +639,10 @@
   background-image: url(../../assets/images/landing-bg.png);
   background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 100%; 
-object-fit: cover;
-height: 100%;
-
+  background-size: 100% 100%;
+  object-fit: cover;
+  height: 100%;
+  background-color:#0C3227; 
   .btn {
     background-color: #f5851f;
     border: none;
@@ -703,7 +703,7 @@ height: 100%;
           font-size: 2rem;
           font-weight: 700;
           margin-bottom: 30px;
-         
+
 
           @media (max-width: 768px) {
             white-space: wrap;
@@ -725,19 +725,21 @@ height: 100%;
           .truckyellow {
             width: 114px;
             height: 153px;
-          
+
 
           }
+
           .mobilegroup {
             width: 221px;
             height: 183px;
-          
+
 
           }
+
           .mobile2 {
             width: 117px;
             height: 200px;
-          
+
 
           }
         }
@@ -771,11 +773,12 @@ height: 100%;
 }
 
 @media (max-width: 768px) {
-  .landingPage{
+  .landingPage {
     padding: 10px;
   }
+
   .logo {
-    
+
     h1 {
       font-size: 2.5rem;
     }

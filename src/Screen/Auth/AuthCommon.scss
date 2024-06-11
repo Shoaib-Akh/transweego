@@ -4,14 +4,11 @@
   overflow-y: hidden;
   .mainBg-img {
     background-image: url("../../assets/images/bg-Img.png");
-
     background-repeat: no-repeat;
     background-size: cover;
-height: fit-content;
+    height: fit-content;
     opacity: 10px;
-height: 100vh;
-
-
+    height: 100vh;
 
   }
 
@@ -20,8 +17,6 @@ height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
- 
-
   }
 
   .login-div {
@@ -41,7 +36,6 @@ height: 100vh;
 
     .new-user {
       color: #000;
-
       margin-top: 50px;
       font-size: 12px;
       font-style: normal;
