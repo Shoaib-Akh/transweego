@@ -28,14 +28,10 @@ const SignUp = () => {
       <div className="mainBg-img ">
         <Button
           onClick={() => navigate(-1)}
-          label={"back"}
           style={{
-            background: "#0C3227",
-            border: "1px solid black",
-            color: "white",
-            width: "150px",
-            marginLeft: 20,
+            
           }}
+          className="backbtn"
           icon={<ArrowBackIcon />}
         />
         <div className="center-div">
@@ -46,16 +42,10 @@ const SignUp = () => {
             <Button
               onClick={() => navigate("/company_signup")}
               label={"Company"}
-              // style={{
-              //   background: "#0C3227",
-              //   border: "1px solid black",
-              //   color: "white",
-              // }}
               className="green"
             />
             <Button
               label={"Individual transporter"}
-              style={{ background: "" }}
               className="orange"
             />
             <Button
@@ -63,7 +53,6 @@ const SignUp = () => {
     
              onClick={() => navigate("/individual_signUp")}
               label={"individual"}
-              style={{ }}
               className="yellow"
             />
             <div className="text-center">

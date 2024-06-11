@@ -132,11 +132,29 @@ input:focus {
       background-color: darken(#FF8600, 10%);
     }
   }
-  .yellow{
-    background:  #FFD100;
+
+  .yellow {
+    background: #FFD100;
 
     &:hover {
       background-color: darken(#deb915, 10%);
+    }
+  }
+
+  .backbtn {
+    background: linear-gradient(to right, #2a6d5aa3, #2a6d5aa3);
+    border: 1px solid #2a6d5aa3;
+    color: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-left: 20px; 
+    transition: background-position 0.5s ease; /* Adding transition for smooth change */
+    background-size: 200% 100%;
+    background-position: left bottom;
+    &:hover {
+      background: linear-gradient(to right, #2a6d5aa3, #c0c0c0);
+      background-position: right bottom;
     }
   }
 }
