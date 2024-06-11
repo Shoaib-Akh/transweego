@@ -9,8 +9,9 @@ import SignUp from './Screen/Auth/signUp';
 import CompanySignup from './Screen/Auth/signUp/CompanySignup';
 import AddDriver from './Screen/Auth/signUp/CompanySignup/AddDriver';
 import LandingPage from './Screen/website/LandingPage';
-import IndividualSignUp from './Screen/Auth/signUp/IndividualSignUp';
+
 import IndividualTransporterSignUp from './Screen/Auth/signUp/IndividualTransporterSignUp';
+import IndividualSignUp from './Screen/Auth/signUp/IndividualSignUp';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
       
         <Route path='individual_transporter_SignUp' element={<IndividualTransporterSignUp />} />
         <Route path='HowItWork' element={<HowItWork />} />
-        <Route path='individual_signUp' element={<IndividualSignUp />} />
+        <Route path='individual_signUp' element={<IndividualSignUp/>} />
 
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<SignUp />} />
