@@ -11,7 +11,7 @@ import AddDriver from './Screen/Auth/signUp/CompanySignup/AddDriver';
 import LandingPage from './Screen/website/LandingPage';
 
 import IndividualTransporterSignUp from './Screen/Auth/signUp/IndividualTransporterSignUp';
-import IndividualSignUp from './Screen/Auth/signUp/IndividualSignUp';
+import IndividualSignUp from './Screen/Auth/signUp/individualSignUp';
 
 function App() {
   return (
