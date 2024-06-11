@@ -48,7 +48,7 @@ const SignUp = () => {
               style={{ background: "@FF8600" }}
             />
             <Button
-             onClick={() => navigate("/individualSignUp")}
+             onClick={() => navigate("/individual_signUp")}
             label={"individual"} style={{ background: "#FFD100" }} />
             <div className="text-center">
               <p className="new-user mt-4">

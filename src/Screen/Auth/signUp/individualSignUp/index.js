@@ -1,10 +1,16 @@
+// src/Login.js
 import React, { useState } from "react";
 import "../../AuthCommon.scss";
 import InputField from "../../../../Component/InputField";
 import Button from "../../../../Component/Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Images } from "../../../../utils/images";
+import MultiSelectDropdown from "../../../../Component/MultiSelectDropdown";
+import { useDispatch } from "react-redux";
+import {ComponySignUpApi} from "../../../../api/ComponySignUpSlice";
 
 const IndividualSignUp = () => {
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     companyName: '',
@@ -13,7 +19,7 @@ const IndividualSignUp = () => {
     phone: ''
   });
   const [errors, setErrors] = useState({});
-
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -33,33 +39,55 @@ const IndividualSignUp = () => {
     const newErrors = {};
 
     if (!formData.companyName) newErrors.companyName = 'This field is required';
-    // if (!formData.password) newErrors.password = 'This field is required';
+    // if (!formData.password) newErrors.password = 'This field is required'; 
     if (!formData.email) newErrors.email = 'This field is required';
     if (!formData.phone) newErrors.phone = 'This field is required';
 
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length === 0) {
-      // Form is valid, handle the submission
       console.log('Form submitted with values:', formData);
-      // Perform the navigation or form submission logic here
-    }
-  };
+      e.preventDefault();
+      const data={
+       
+        
 
+       
+        
+      }
+    dispatch(ComponySignUpApi({
+      name:  formData.companyName,
+      email: formData.email,
+      phone:  formData.phone
+    } ));
+
+   
+    }
+
+  };
   return (
     <div className="bg-color">
       <div className="mainBg-img">
-        <div className="center-div">
+        <div className="center-div" >
           <div className="bg-company">
-            <form className="login-div" onSubmit={handleSubmit}>
-              <div className="text-center mb-4">
+            
+               <form className="login-div" onSubmit={handleSubmit}>
+              <div className="text-center mb-4  heading">
                 <h2>Please Register</h2>
               </div>
               <div className="input-bg">
                 <InputField
                   required
-                  label="Firma/Unternehmen"
-                  placeholder="Unternehmen Name eingeben"
+                  label="Company/enterprise"
+                  placeholder="Enter company name"
+                  name="companyName"
+                  value={formData.companyName}
+                  onChange={handleChange}
+                  error={errors.companyName}
+                />
+                  <InputField
+                  required
+                  label="Contact person"
+                  placeholder="Enter contact person"
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleChange}
@@ -89,18 +117,108 @@ const IndividualSignUp = () => {
                   error={errors.email}
                 />
                 <InputField
-                  type="number"
-                  placeholder="Nummer eingeben"
+                  type="tel"
+                  placeholder="Phone number*"
                   name="phone"
                   value={formData.phone}
-                  
                   onChange={handleChange}
-                  label="Telefonnummer"
+                  label="Enter number"
                   required
                   validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
                   error={errors.phone}
                 />
-                <Button type="submit" label="Submit" />
+                <MultiSelectDropdown
+                
+                  label={"Services*"}
+                 placeholder={"select services"}
+                />
+
+{/*                 
+                <InputField
+                  required
+                  lable={"VAT Number"}
+                  placeholder={"MwSt. eingeben"}
+                />
+                <InputField lable={"Firma Website"} placeholder={"Add Link"} />
+                <h3>Sind alle meine Fahrzeuge versichert?</h3>
+                <div className="d-flex align-items-center gap-2">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Ja
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Nein
+                    </label>
+                  </div>
+                </div>
+                <hr></hr>
+                <h2>Upload firma documents*</h2>
+                <div className="d-flex gap-3">
+                  <div className="upload-photo">
+                    <img
+                      src={Images.frame}
+                      height="52"
+                      width="52"
+                      alt="car"
+                      className="mx-1"
+                    />
+                  </div>
+                  <div className="upload-photo">
+                    <img
+                      src={Images.frame}
+                      height="52"
+                      width="52"
+                      alt="car"
+                      className="mx-1"
+                    />
+                  </div>
+                </div>
+                <hr></hr>
+                <h2>Will you like to add your Vehicles?</h2>
+                <div className="d-flex align-items-center gap-2">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Ja
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Nein
+                    </label>
+                  </div>
+                </div> */}
+
+                <Button
+                  // onClick={() => navigate("/AddDriver")}
+                  label={"Submit"}
+                />
+                
               </div>
             </form>
           </div>
