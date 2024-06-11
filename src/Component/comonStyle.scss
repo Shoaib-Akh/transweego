@@ -1,96 +1,99 @@
 .maindiv-input {
-    background: #eee;
-    border-radius: 32.43px;
-    height: 55px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 20px;
-    // margin-bottom: 20px;
-    border: 1px solid transparent;
-  
+  background: #eee;
+  border-radius: 32.43px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 20px;
+  // margin-bottom: 20px;
+  border: 1px solid transparent;
+
+  &.error {
+    border-color: red;
+  }
+
+  .label {
+
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+    color: #4A6C62;
+  }
+
+  .input {
+    border: none;
+    margin-top: 5px;
+    background-color: transparent;
+    font-size: 10px;
+    color: #4A6C62;
+
     &.error {
-      border-color: red;
+      border: 1px solid red;
     }
-  
-    .label {
-      
+
+    ::placeholder {
+      color: rgba(22, 34, 51, 0.5);
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+    }
+  }
+
+
+}
+
+.error-message {
+  color: red;
+  font-size: 10px;
+
+  margin-left: 10px;
+}
+
+.password-strength {
+  color: red;
+  font-size: 10px;
+
+  margin-left: 10px;
+}
+
+.SimpleInput-input {
+  background: #F8F8F8;
+  border-radius: 32.43px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 20px;
+
+  .SimpleInput {
+    border: none;
+    background-color: transparent;
+    color: #4A6C62;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+
+    ::placeholder {
+      color: #4A6C62;
       font-size: 15px;
       font-style: normal;
       font-weight: 500;
       line-height: 14px;
-      color: #4A6C62;
     }
-  
-    .input {
-      border: none;
-      margin-top: 5px;
-      background-color: transparent;
-      font-size: 10px;
-      color: #4A6C62;
-  
-      &.error {
-        border: 1px solid red;
-      }
-  
-      ::placeholder {
-        color: rgba(22, 34, 51, 0.5);
-        font-size: 10px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 14px;
-      }
-    }
-  
-  
   }
-  
-  .error-message {
-    color: red;
-    font-size: 10px;
-    
-    margin-left: 10px;
-  }
-  .password-strength{
-    color: red;
-    font-size: 10px;
-    
-    margin-left: 10px;
-  }
-.SimpleInput-input {
-    background: #F8F8F8;
-    border-radius: 32.43px;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    margin-bottom: 20px;
-
-    .SimpleInput {
-        border: none;
-        background-color: transparent;
-        color: #4A6C62;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 14px;
-
-        ::placeholder {
-            color: #4A6C62;
-            font-size: 15px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 14px;
-        }
-    }
 }
 
 textarea:focus,
 input:focus {
-    outline: none;
+  outline: none;
 }
 
-.custom-button {
+.custom-button-main-div {
+  .custom-button {
     padding: 10px 20px;
     background: linear-gradient(89deg, #FF8600 47.55%, #FFD100 97.61%);
     margin-top: 10px;
@@ -101,108 +104,137 @@ input:focus {
     width: 100%;
     border-radius: 30.521px;
     color: #0C3227;
-
-
     font-family: Montserrat;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+
     &:hover {
-      background-color: darken(#f5851f, 10%);
-    }
-}
-
-.custom-button:disabled {
-    background-color: #c0c0c0;
-    cursor: not-allowed;
-}
-
-
-.maindiv-dropdown{
-    background: #F8F8F8;
-    border-radius: 32.43px;
-    height: 55px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 20px;
-    margin-bottom: 20px;
-    background-image: url("../assets/images/aerodown.png");
-    background-position: 91%;
-    background-repeat: no-repeat;
-    cursor: pointer;
-
-    .lable {
-        color: #162233;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 14px;
-    }
-    input{
-      width: 93%;
+      background: darken(#f5851f, 10%);
     }
 
-    .dropdown {
-        border: none;
-        margin-top: 5px;
-        background-color: transparent;
-        font-size: 10px;
+  }
 
+  .green {
+    background: #0C3227;
+    color: #FFFFFF;
 
-        ::placeholder {
-            color: rgba(22, 34, 51, 0.50);
-            font-size: 10px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 14px;
-        }
-    }
-
-}
-.dropdown-isOpen {
-    border: none;
-    border-radius: 15px;
-    filter: drop-shadow(0px 0px 14px rgba(0, 0, 0, 0.10));
-    width: 12rem;
-  position: absolute;
-    .card-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-  
-      p {
-        font-size: 10px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 27px;
-      cursor: pointer;
-
-      }
-  
-    }
-  
-    .line {
-      border-bottom: 1px solid #CBCBCB;
-      margin-left: 20px;
-      margin-right: 20px;
-    }
-  
-    .lineleft {
-      border-left: 1px solid #CBCBCB;
-      margin-left: 20px;
-      margin-right: 20px;
-      height: 10px;
-    }
-  
-    .text {
-      font-size: 9px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 14px;
-      cursor: pointer;
-
+    &:hover {
+      background-color: darken(#0c3227, 8%);
     }
   }
+
+  .orange {
+    background: #FF8600;
+
+    &:hover {
+      background-color: darken(#FF8600, 10%);
+    }
+  }
+  .yellow{
+    background:  #FFD100;
+
+    &:hover {
+      background-color: darken(#deb915, 10%);
+    }
+  }
+}
+
+
+.custom-button:disabled {
+  background-color: #c0c0c0;
+  cursor: not-allowed;
+}
+
+
+.maindiv-dropdown {
+  background: #F8F8F8;
+  border-radius: 32.43px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  background-image: url("../assets/images/aerodown.png");
+  background-position: 91%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
+  .lable {
+    color: #162233;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 14px;
+  }
+
+  input {
+    width: 93%;
+  }
+
+  .dropdown {
+    border: none;
+    margin-top: 5px;
+    background-color: transparent;
+    font-size: 10px;
+
+
+    ::placeholder {
+      color: rgba(22, 34, 51, 0.50);
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+    }
+  }
+
+}
+
+.dropdown-isOpen {
+  border: none;
+  border-radius: 15px;
+  filter: drop-shadow(0px 0px 14px rgba(0, 0, 0, 0.10));
+  width: 12rem;
+  position: absolute;
+
+  .card-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    p {
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 27px;
+      cursor: pointer;
+
+    }
+
+  }
+
+  .line {
+    border-bottom: 1px solid #CBCBCB;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .lineleft {
+    border-left: 1px solid #CBCBCB;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 10px;
+  }
+
+  .text {
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+    cursor: pointer;
+
+  }
+}

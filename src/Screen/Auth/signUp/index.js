@@ -5,7 +5,7 @@ import InputField from "../../../Component/InputField";
 import logo from "../../../assets/images/mainLogo.png";
 import Button from "../../../Component/Button";
 import { Link, useNavigate } from "react-router-dom";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 const SignUp = () => {
   const navigate = useNavigate();
 
@@ -26,30 +26,44 @@ const SignUp = () => {
   return (
     <div className="bg-color">
       <div className="mainBg-img ">
-   
-      <Button
-        onClick={() => navigate(-1)}
-              label={ "back"}
-              style={{ background: "#0C3227", border: "1px solid black", color:"white",width:"150px" , marginLeft:20}}
-              icon={<ArrowBackIcon/>}
-            />
+        <Button
+          onClick={() => navigate(-1)}
+          label={"back"}
+          style={{
+            background: "#0C3227",
+            border: "1px solid black",
+            color: "white",
+            width: "150px",
+            marginLeft: 20,
+          }}
+          icon={<ArrowBackIcon />}
+        />
         <div className="center-div">
           <form onSubmit={handleLogin} className="login-div">
             <div className="text-center mb-4">
               <img src={logo} height={30} alt="car" />
             </div>
             <Button
-        onClick={() => navigate("/company_signup")}
+              onClick={() => navigate("/company_signup")}
               label={"Company"}
-              style={{ background: "#0C3227", border: "1px solid black", color:"white" }}
+              // style={{
+              //   background: "#0C3227",
+              //   border: "1px solid black",
+              //   color: "white",
+              // }}
+              className="green"
             />
             <Button
               label={"Individual transporter"}
-              style={{ background: "@FF8600" }}
+              style={{ background: "" }}
+              className="orange"
             />
             <Button
-             onClick={() => navigate("/individualSignUp")}
-            label={"individual"} style={{ background: "#FFD100" }} />
+              onClick={() => navigate("/individualSignUp")}
+              label={"individual"}
+              style={{ }}
+              className="yellow"
+            />
             <div className="text-center">
               <p className="new-user mt-4">
                 Are you new user?{" "}
@@ -67,4 +81,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-;
