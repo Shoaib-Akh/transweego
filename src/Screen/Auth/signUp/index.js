@@ -28,11 +28,9 @@ const SignUp = () => {
       <div className="mainBg-img ">
         <Button
           onClick={() => navigate(-1)}
-          style={{
-            
-          }}
+        
           className="backbtn"
-          icon={<ArrowBackIcon />}
+          icon
         />
         <div className="center-div">
           <form onSubmit={handleLogin} className="login-div">

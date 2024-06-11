@@ -68,6 +68,14 @@ const IndividualSignUp = () => {
   return (
     <div className="bg-color">
       <div className="mainBg-img">
+      <Button
+          onClick={() => navigate(-1)}
+          style={{
+            
+          }}
+          className="backbtn"
+          icon
+        />
         <div className="center-div" >
           <div className="bg-company">
             

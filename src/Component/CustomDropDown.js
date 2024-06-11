@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./comonStyle.scss";
 import { Images } from "../utils/images";
 
-const CustomDropDown = ({ label, placeholder, required ,Options}) => {
+const CustomDropDown = ({ label, placeholder, required ,options}) => {
 
   const [selectedGender, setSelectedGender] = useState("");
   const [isGenderOpen, setIsGenderOpen] = useState(false);
@@ -40,7 +40,7 @@ const CustomDropDown = ({ label, placeholder, required ,Options}) => {
               <h5 style={{ fontSize: 15 }}>Genders</h5>
               <img src={Images.arrowDown} alt="arrowDown" />
             </div>
-            {Options.map((gender, index) => (
+            {options.map((gender, index) => (
               <div className="card-inner px-3" key={index} onClick={() => handleGenderClick(gender)}>
                 <p>{gender}</p>
                 {selectedGender === gender && <img src={Images.tick} height="10" width="10" alt="tick" />}

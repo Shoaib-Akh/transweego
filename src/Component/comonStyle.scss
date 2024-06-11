@@ -152,6 +152,7 @@ input:focus {
     transition: background-position 0.5s ease; /* Adding transition for smooth change */
     background-size: 200% 100%;
     background-position: left bottom;
+    position: absolute;
     &:hover {
       background: linear-gradient(to right, #2a6d5aa3, #c0c0c0);
       background-position: right bottom;
