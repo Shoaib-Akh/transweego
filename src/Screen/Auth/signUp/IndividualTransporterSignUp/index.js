@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import {ComponySignUpApi} from "../../../../api/ComponySignUpSlice";
 import CustomDropDown from "../../../../Component/CustomDropDown";
 
-const IndividualSignUp = () => {
+const IndividualTransporterSignUp = () => {
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -65,6 +65,7 @@ const IndividualSignUp = () => {
     }
 
   };
+  const Options = ["Male", "Female", "Trans*Woman", "Trans*Man","Non-binary","Other"];
   return (
     <div className="bg-color">
       <div className="mainBg-img">
@@ -73,10 +74,12 @@ const IndividualSignUp = () => {
             
                <form className="login-div" onSubmit={handleSubmit}>
               <div className="text-center mb-4  heading">
-                <h2>Please Register</h2>
+                <h2>Individual Transporter</h2>
               </div>
               <div className="input-bg">
-              <CustomDropDown/>
+              <CustomDropDown
+              Options = {Options}
+              />
                   <InputField
                   required
                   label="userName"
@@ -217,4 +220,4 @@ const IndividualSignUp = () => {
   );
 };
 
-export default IndividualSignUp;
+export default IndividualTransporterSignUp;

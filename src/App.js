@@ -10,6 +10,7 @@ import CompanySignup from './Screen/Auth/signUp/CompanySignup';
 import AddDriver from './Screen/Auth/signUp/CompanySignup/AddDriver';
 import LandingPage from './Screen/website/LandingPage';
 import IndividualSignUp from './Screen/Auth/signUp/IndividualSignUp';
+import IndividualTransporterSignUp from './Screen/Auth/signUp/IndividualTransporterSignUp';
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
       {/* <Navbar/> */}
       <Routes>
       <Route path='/' element={<LandingPage />} />
-
-        <Route path='home' element={<HomePage />} />
+      
+        <Route path='individual_transporter_SignUp' element={<IndividualTransporterSignUp />} />c
+        IndividualTransporterSignUp
         <Route path='HowItWork' element={<HowItWork />} />
         <Route path='individual_signUp' element={<IndividualSignUp />} />
 

@@ -53,9 +53,11 @@ const SignUp = () => {
               // }}
               className="green"
             />
-            <Button
+            <Button 
               label={"Individual transporter"}
-              style={{ background: "" }}
+      
+              onClick={() => navigate("/individual_transporter_SignUp")}
+
               className="orange"
             />
             <Button
@@ -63,7 +65,7 @@ const SignUp = () => {
     
              onClick={() => navigate("/individual_signUp")}
               label={"individual"}
-              style={{ }}
+              
               className="yellow"
             />
             <div className="text-center">
