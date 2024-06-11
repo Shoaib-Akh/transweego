@@ -6,17 +6,21 @@ import Button from "../../../../Componnet/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { Images } from "../../../../utils/images";
 import DropDown from "../../../../Componnet/DropDown";
+import { useDispatch } from "react-redux";
+import {ComponySignUpApi} from "../../../../api/ComponySignUpSlice";
 
 const ComponySignUp = () => {
+  const API_URL = "https://transweego-backend-production.up.railway.app/api/v1/";
+console.log("API_URL",API_URL);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     companyName: '',
-    password: '',
+    // password: '',
     email: '',
     phone: ''
   });
   const [errors, setErrors] = useState({});
-
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -36,15 +40,30 @@ const ComponySignUp = () => {
     const newErrors = {};
 
     if (!formData.companyName) newErrors.companyName = 'This field is required';
-    if (!formData.password) newErrors.password = 'This field is required';
+    // if (!formData.password) newErrors.password = 'This field is required'; 
     if (!formData.email) newErrors.email = 'This field is required';
     if (!formData.phone) newErrors.phone = 'This field is required';
 
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length === 0) {
       console.log('Form submitted with values:', formData);
+      e.preventDefault();
+      const data={
+       
+        
+
+       
+        
+      }
+    dispatch(ComponySignUpApi({
+      name:  formData.companyName,
+      email: formData.email,
+      phone:  formData.phone
+    } ));
+
+   
     }
+
   };
   return (
     <div className="bg-color">
