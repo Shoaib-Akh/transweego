@@ -19,8 +19,7 @@ function App() {
       <Routes>
       <Route path='/' element={<LandingPage />} />
       
-        <Route path='individual_transporter_SignUp' element={<IndividualTransporterSignUp />} />c
-        IndividualTransporterSignUp
+        <Route path='individual_transporter_SignUp' element={<IndividualTransporterSignUp />} />
         <Route path='HowItWork' element={<HowItWork />} />
         <Route path='individual_signUp' element={<IndividualSignUp />} />
 
