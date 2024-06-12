@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './componentCommonStyle.scss';
 
-// InputField component for handling input fields with validation
 const InputField = ({
   type = 'text',
   placeholder,
@@ -21,12 +20,10 @@ const InputField = ({
 }) => {
   const [localError, setLocalError] = useState(error);
 
-  // Update local error state when the error prop changes
   useEffect(() => {
     setLocalError(error);
   }, [error]);
 
-  // Handle blur event to validate input
   const handleBlur = () => {
     if (required && !value) {
       setLocalError('Dieses Feld ist erforderlich');
@@ -51,7 +48,7 @@ const InputField = ({
     }
 
     if (type === 'tel') {
-      const phoneRegex = /^\d{10}$/; // Example for a 10-digit phone number
+      const phoneRegex = /^\d{10}$/; 
       if (!phoneRegex.test(value)) {
         setLocalError(validationMessages.phone || 'Ungültige Telefonnummer');
         return;
@@ -63,15 +60,13 @@ const InputField = ({
 
   return (
     <>
-      {/* Input field container */}
+     
       <div className={`maindiv-input ${localError ? 'error' : ''}`}>
         <div>
-          {/* Input label */}
           <p className="label">
             {label} {required && '*'}
           </p>
         </div>
-        {/* Input field */}
         <input
           maxLength={maxLength}
           type={type}
@@ -84,7 +79,6 @@ const InputField = ({
           name={name}
         />
       </div>
-      {/* Error message display */}
       {localError && <p className="error-message">{localError}</p>}
     </>
   );

@@ -1,4 +1,3 @@
-// src/Login.js
 import React, { useState } from "react";
 import "../../../AuthCommon.scss";
 import SimpleInput from "../../../../../Component/SimpleInput";

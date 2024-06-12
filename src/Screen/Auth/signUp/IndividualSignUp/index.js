@@ -18,7 +18,7 @@ const IndividualSignUp = () => {
     lastName: '',
     email: '',
     phone: '',
-    gender: '' // Initialize gender as an empty string
+    gender: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -79,7 +79,7 @@ const IndividualSignUp = () => {
         
         if (response.meta.requestStatus === 'fulfilled') {
           console.log('Signup successful:', response.payload);
-          navigate('/'); // Example navigation after successful signup
+          navigate('/');
         } else {
           console.error('Signup failed:', response.error);
           setErrors({ apiError: 'Signup failed. Please try again.' });

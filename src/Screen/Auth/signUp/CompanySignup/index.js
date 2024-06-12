@@ -59,7 +59,6 @@ const CompanySignup = () => {
 
     setErrors(newErrors);
 
-    // If no errors, submit the form
     if (Object.keys(newErrors).length === 0) {
       const data = {
         companyName: formData.companyName,
@@ -70,17 +69,16 @@ const CompanySignup = () => {
       };
 
       try {
-        // Dispatch the API call
+       
         const response = await dispatch(CompanySignupApi(data));
         
         if (response.data.requestStatus === 'fulfilled') {
-          
-          // You can ngitavigate to another page or show a success message here
-          navigate('/'); // Beispiel für Navigation nach erfolgreicher Anmeldung
+          console.log('Signup successful:', response.payload);
+         
+          navigate('/'); 
         } else {
-          ;
-          // Show an error message to the user
-          setErrors({ apiError: 'Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.' });
+          console.error('Signup failed:', response.error);
+          setErrors({ apiError: 'Signup failed. Please try again.' });
         }
       } catch (error) {
    
@@ -169,9 +167,7 @@ const CompanySignup = () => {
                   label={"Einreichen"}
                   type="submit"
                 />
-                {/* {errors.apiError && (
-                  <div className="error-message">{errors.apiError}</div>
-                )} */}
+              
               </div>
             </form>
           </div>
