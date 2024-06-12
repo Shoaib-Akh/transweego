@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./comonStyle.scss";
+import "./componentCommonStyle.scss";
 import { Images } from "../utils/images";
 
 const CustomDropDown = ({ options, value, onChange, error }) => {
@@ -12,13 +12,13 @@ const CustomDropDown = ({ options, value, onChange, error }) => {
 
   const handleGenderClick = (gender) => {
     setSelectedGender(gender.label);
-    onChange(gender.id); // Pass gender id to parent component
+    onChange(gender.id); 
     setIsGenderOpen(false);
   };
 
   return (
     <>
-    <div className="maindiv-dropdown" style={{ position: "relative", marginBottom: 10 }}>
+    <div className="maindiv-dropdown">
       <div onClick={toggleGenderDropdown}>
         <p className="label">
           Gender *
@@ -28,9 +28,9 @@ const CustomDropDown = ({ options, value, onChange, error }) => {
       </div>
 
       {isGenderOpen && (
-        <div className="card dropdown-isOpen py-2" style={{ position: "absolute", right: 0, top: 56 }}>
+        <div className="card dropdown-isOpen py-2">
           <div className="card-inner px-3">
-            <h5 style={{ fontSize: 15 }}>Genders</h5>
+            <h5>Genders</h5>
             <img src={Images.arrowDown} alt="arrowDown" />
           </div>
           {options.map((gender, index) => (

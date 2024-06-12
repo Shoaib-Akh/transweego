@@ -1,9 +1,8 @@
 import React from 'react';
-import './comonStyle.scss'; // Assuming the correct import path
+import './componentCommonStyle.scss'; 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const Button = ({ onClick, label, style, disabled, icon, className }) => {
-  // Combine default class and custom class using template literals
   const combinedClassName = `custom-button ${className}`;
 
   return (
@@ -12,7 +11,7 @@ const Button = ({ onClick, label, style, disabled, icon, className }) => {
       onClick={onClick}
       style={style}
       disabled={disabled}
-      className={combinedClassName} // Apply the combined class name
+      className={combinedClassName} 
     >
       {icon && <ArrowBackIcon/>} {label}
     </button>

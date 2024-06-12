@@ -1,5 +1,5 @@
 import React from "react";
-import "./comonStyle.scss";
+import "./componentCommonStyle.scss";
 const SimpleInput = ({ type = "text", placeholder, value, onChange,lable ,required}) => {
   return (
     <div className="SimpleInput-input">

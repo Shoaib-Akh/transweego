@@ -15,11 +15,10 @@ const LandingPage = () => {
           height="71"
           width="583"
         />
-        <h3>Willkommen bei TransWeGo          </h3>
+        <h3>Willkommen bei TransWeGo </h3>
         <h1>Bereit, fertig, los zum Transport!</h1>
         <p className="w-75 mx-auto">
           Bei TransWego revolutionieren wir den Fahrzeugtransport. Unser neues Kostenteilungs-Feature ermöglicht es dir, Transportkosten zu senken und gleichzeitig die Umwelt zu schonen. Verpasse nicht die Chance, als einer der Ersten dabei zu sein und exklusive Vorteile zu geniessen.
-
         </p>
         <button
           className="btn orange mt-5"
@@ -30,31 +29,6 @@ const LandingPage = () => {
       </div>
       <div className="cardLanding container mt-5">
         <div className="row">
-          {/* <Card
-            title="Special title treatment"
-            imgSrc={Images.truckyellow}
-            text="With TransWeGo, if you're transporting a vehicle over 50km,
-              you no longer have to pay for the transporter’s return
-              journey. Our platform helps you connect with another user
-              who needs a vehicle transported back from your destination,
-              allowing both parties to share the costs and save money."
-          />
-          <Card
-            title="Smart Matching"
-            imgSrc={Images.mobilegroup}
-            text="Our intuitive system matches you with other users whose
-              transportation needs complement yours. This not only splits
-              your costs but also maximizes the efficiency of each
-              journey."
-          />
-          <Card
-            title="Simplified Logistics"
-            imgSrc={Images.mobile2}
-            text="Manage all your transport needs through our user-friendly
-              app that offers transparency, control, and hassle-free
-              coordination of your trips."
-          /> */}
-
           <div className="col-12 col-sm-6 col-lg-4 mb-4">
             <div className="card h-100 text-center">
               <div className="card-body">
@@ -123,10 +97,7 @@ const LandingPage = () => {
         <div className="row">
           <div className="col-12">
             <p>
-
-
               Werde noch heute Teil unserer Gemeinschaft. Registriere dich jetzt, um frühzeitige Vorteile zu nutzen und die Art und Weise, wie du über Fahrzeugtransporte denkst, neu zu definieren.
-
             </p>
           </div>
           <div className="col-12 text-center btn-join">

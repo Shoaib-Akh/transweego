@@ -28,7 +28,7 @@ const Login = () => {
             <div className="text-center mb-4">
               <img src={logo} height={30} alt="car" />
             </div>
-            <div style={{ marginBottom: 20 }}>
+            <div className="sec-input">
               <InputField
                 onChange={(e) => setUsername(e.target.value)}
                 label="E-Mail/Phone number"
