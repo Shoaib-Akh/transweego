@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./comonStyle.scss";
+import "./componentCommonStyle.scss";
 import { Images } from "../utils/images";
 
 const MultiSelectDropdown = ({ label, placeholder, required, options, error, onChange }) => {
@@ -18,7 +18,7 @@ const MultiSelectDropdown = ({ label, placeholder, required, options, error, onC
       newSelectedOptions = [...selectedOptions, option.id];
     }
     setSelectedOptions(newSelectedOptions);
-    onChange(newSelectedOptions); // Call onChange directly here
+    onChange(newSelectedOptions);
   };
 
   const handleContinue = () => {
@@ -28,7 +28,7 @@ const MultiSelectDropdown = ({ label, placeholder, required, options, error, onC
 
   return (
     <>
-    <div className="maindiv-dropdown" style={{ position: "relative" }}>
+    <div className="maindiv-dropdown" style={{}}>
       <div onClick={toggleDropdown}>
         <p className="label">
           {label} {required && "*"}
@@ -42,9 +42,9 @@ const MultiSelectDropdown = ({ label, placeholder, required, options, error, onC
       </div>
 
       {isOpen && (
-        <div className="card dropdown-isOpen py-2" style={{ position: "absolute", right: 0, top: 56 }}>
+        <div className="card dropdown-isOpen py-2">
           <div className="card-inner px-3">
-            <h5 style={{ fontSize: 15 }}>Services</h5>
+            <h5>Services</h5>
             <img src={Images.arrowDown} alt="arrowDown" />
           </div>
           {options.map((option, index) => (

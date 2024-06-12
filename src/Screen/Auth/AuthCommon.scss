@@ -11,6 +11,9 @@
     height: 100vh;
 
   }
+  .sec-input{
+    margin-bottom: 20px;
+  }
 
   .center-div {
     height: 100%;
@@ -24,6 +27,10 @@
     background-color: #ffff;
     padding: 40px 15px 15px 15px;
     border-radius: 30px;
+    @media (max-width:475px){
+      width: 100%;
+      margin-top: 30px;
+    }
 
     .Forgotten {
       color: #000;
@@ -51,8 +58,6 @@
     }
 
   }
-
-
 
 }
 

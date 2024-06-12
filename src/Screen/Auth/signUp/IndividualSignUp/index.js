@@ -114,7 +114,7 @@ const options = serviceTypes.map((item) => ({
           <div className="bg-company">
             <form className="login-div" onSubmit={handleSubmit}>
               <div className="text-center mb-4 heading">
-                <h2>Please Register</h2>
+                <h2>Bitte registrieren</h2>
               </div>
               <div className="input-bg">
                 <CustomDropDown 
@@ -125,8 +125,8 @@ const options = serviceTypes.map((item) => ({
                 />
                 <InputField
                   required
-                  label="First Name"
-                  placeholder="First Name"
+                  label="Vorname"
+                  placeholder="Vorname"
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
@@ -134,8 +134,8 @@ const options = serviceTypes.map((item) => ({
                 />
                 <InputField
                   required
-                  label="Last Name"
-                  placeholder="Last Name"
+                  label="Familienname, Nachname"
+                  placeholder="Familienname, Nachname"
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
@@ -143,28 +143,28 @@ const options = serviceTypes.map((item) => ({
                 />
                 <InputField
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Geben sie ihre E-Mail Adresse ein"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   label="Email"
                   required
-                  validationMessages={{ email: 'Please enter a valid email address' }}
+                  validationMessages={{ email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein' }}
                   error={errors.email}
                 />
                 <InputField
                   type="tel"
-                  placeholder="Phone number*"
+                  placeholder="Telefonnummer*"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  label="Phone"
+                  label="Telefon"
                   maxLength={10}
                   required
-                  validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
+                  validationMessages={{ phone: 'Bitte geben Sie eine gültige 10-stellige Telefonnummer ein' }}
                   error={errors.phone}
                 />
-                <Button label={"Submit"} />
+                <Button label={"Einreichen"} />
               </div>
             </form>
           </div>
