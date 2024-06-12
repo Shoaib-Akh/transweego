@@ -55,9 +55,9 @@ const SignUp = () => {
              onClick={() => navigate("/individual_signUp")}
               label={"individual"}
               
-              className="yellow"
+              className="yellow mb-4"
             />
-            <div className="text-center">
+            {/* <div className="text-center">
               <p className="new-user mt-4">
                 Are you new user?{" "}
                 <Link to={"/login"}>
@@ -65,7 +65,7 @@ const SignUp = () => {
                 </Link>{" "}
                 <b></b>
               </p>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>

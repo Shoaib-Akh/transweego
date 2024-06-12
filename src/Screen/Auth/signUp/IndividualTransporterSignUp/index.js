@@ -1,22 +1,24 @@
-// src/Login.js
 import React, { useState } from "react";
 import "../../AuthCommon.scss";
 import InputField from "../../../../Component/InputField";
 import Button from "../../../../Component/Button";
 import { useNavigate } from "react-router-dom";
+import CustomDropDown from "../../../../Component/CustomDropDown";
 import { useDispatch } from "react-redux";
 import { ComponySignUpApi } from "../../../../api/ComponySignUpSlice";
-import CustomDropDown from "../../../../Component/CustomDropDown";
 
 const IndividualTransporterSignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
-    companyName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: ''
   });
+
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +38,8 @@ const IndividualTransporterSignUp = () => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!formData.companyName) newErrors.companyName = 'This field is required';
+    if (!formData.firstName) newErrors.firstName = 'This field is required';
+    if (!formData.lastName) newErrors.lastName = 'This field is required';
     if (!formData.email) newErrors.email = 'This field is required';
     if (!formData.phone) newErrors.phone = 'This field is required';
 
@@ -44,14 +47,11 @@ const IndividualTransporterSignUp = () => {
     if (Object.keys(newErrors).length === 0) {
       console.log('Form submitted with values:', formData);
       dispatch(ComponySignUpApi({
-        name: formData.companyName,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
         email: formData.email,
         phone: formData.phone
-      })).then(() => {
-        // navigate("/AddDriver");  // Redirect to another page after successful signup
-      }).catch((error) => {
-        console.error('Signup failed', error);
-      });
+      }));
     }
   };
 
@@ -72,15 +72,23 @@ const IndividualTransporterSignUp = () => {
                 <h2>Please Register</h2>
               </div>
               <div className="input-bg">
-                <CustomDropDown options={options} />
                 <InputField
                   required
-                  label="Company Name"
-                  placeholder="Enter your company name"
-                  name="companyName"
-                  value={formData.companyName}
+                  label="First Name"
+                  placeholder="First Name"
+                  name="firstName"
+                  value={formData.firstName}
                   onChange={handleChange}
-                  error={errors.companyName}
+                  error={errors.firstName}
+                />
+                <InputField
+                  required
+                  label="Last Name"
+                  placeholder="Last Name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  error={errors.lastName}
                 />
                 <InputField
                   type="email"
@@ -93,6 +101,7 @@ const IndividualTransporterSignUp = () => {
                   validationMessages={{ email: 'Please enter a valid email address' }}
                   error={errors.email}
                 />
+                <CustomDropDown options={options} />
                 <InputField
                   type="tel"
                   placeholder="Phone number*"
