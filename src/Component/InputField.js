@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './componentCommonStyle.scss';
 
-// InputField component for handling input fields with validation
 const InputField = ({
   type = 'text',
   placeholder,
