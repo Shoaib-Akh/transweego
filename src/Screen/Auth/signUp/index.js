@@ -39,11 +39,11 @@ const SignUp = () => {
             </div>
             <Button
               onClick={() => navigate("/company-signup")}
-              label={"Company"}
+              label={"Unternehmen"}
               className="green"
             />
             <Button 
-              label={"Individual transporter"}
+              label={"Individueller Transporteur"}
       
               onClick={() => navigate("/individual-transporter-signup")}
 
@@ -53,7 +53,7 @@ const SignUp = () => {
              
     
              onClick={() => navigate("/individual-signup")}
-              label={"individual"}
+              label={"Einzelne"}
               
               className="yellow mb-4"
             />
