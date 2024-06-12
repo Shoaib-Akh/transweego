@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../AuthCommon.scss";
 import InputField from "../../../../Component/InputField";
 import Button from "../../../../Component/Button";
 import { useNavigate } from "react-router-dom";
 import MultiSelectDropdown from "../../../../Component/MultiSelectDropdown";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CompanySignupApi } from "../../../../api/ComponySignUpSlice";
+import { getServiceTypes } from "../../../../api/getServicesSlice";
 
 const CompanySignup = () => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const CompanySignup = () => {
 
     // If no errors, submit the form
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted with values:', formData);
+      
 
       const data = {
         companyName: formData.companyName,
@@ -90,13 +91,17 @@ const CompanySignup = () => {
     }
   };
 
-  const options = [
-    { id: 1, label: "Freight transportation" },
-    { id: 2, label: "Towing service" },
-    { id: 3, label: "Vehicle transportation" },
-    { id: 4, label: "Animal transportation" },
-  ];
+ 
+  useEffect(() => {
+   
+    dispatch(getServiceTypes());
+  }, []);
+  const serviceTypes = useSelector((state) => state.serviceTypes.list);
 
+const options = serviceTypes.map((item) => ({
+  id: item.serviceTypeId,
+  label: item.serviceTypeName
+}));
   return (
     <div className="bg-color">
       <div className="mainBg-img">

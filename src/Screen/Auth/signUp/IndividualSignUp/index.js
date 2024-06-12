@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../AuthCommon.scss";
 import InputField from "../../../../Component/InputField";
 import Button from "../../../../Component/Button";
 import { useNavigate } from "react-router-dom";
 import CustomDropDown from "../../../../Component/CustomDropDown";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IndividualSignUpApi } from "../../../../api/IndividualSignUpSlice";
+import { GetGenderType } from "../../../../api/GetGenderSlice";
 
 const IndividualSignUp = () => {
   const navigate = useNavigate();
@@ -90,15 +91,17 @@ const IndividualSignUp = () => {
     }
   };
 
-  const options = [
-    { id: 1, label: "Male" },
-    { id: 2, label: "Female" },
-    { id: 3, label: "Trans*Woman" },
-    { id: 4, label: "Trans*Man" },
-    { id: 5, label: "Non-binary" },
-    { id: 6, label: "Other" }
-  ];
+  
+  useEffect(() => {
+   
+    dispatch(GetGenderType());
+  }, []);
+  const serviceTypes = useSelector((state) => state.GetGender.list);
 
+const options = serviceTypes.map((item) => ({
+  id: item.genderId,
+  label: item.genderName
+}));
   return (
     <div className="bg-color">
       <div className="mainBg-img">

@@ -5,12 +5,13 @@ const xhrRequest = (method, url, data) => {
     const xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
+        let responseData = null;
         try {
-          const response = JSON.parse(xhr.responseText);
-          toast.success('Request succeeded');
-          resolve(response);
+          responseData = JSON.parse(xhr.responseText);
+          resolve(responseData);
         } catch (e) {
           toast.error('Invalid JSON response from server');
           reject({ message: 'Invalid JSON response from server' });
@@ -26,11 +27,13 @@ const xhrRequest = (method, url, data) => {
         }
       }
     };
+
     xhr.onerror = () => {
       const error = { message: 'Network error' };
       toast.error(error.message);
       reject(error);
     };
+
     xhr.send(JSON.stringify(data));
   });
 };
