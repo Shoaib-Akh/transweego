@@ -12,7 +12,8 @@ const InputField = ({
   error = '',
   name,
   validationRules = {},
-  validationMessages = {}
+  validationMessages = {},
+  maxLength,
 }) => {
   const [localError, setLocalError] = useState(error);
 
@@ -68,6 +69,7 @@ const InputField = ({
         </div>
         {/* Input field */}
         <input
+        maxLength={maxLength}
           type={type}
           placeholder={placeholder}
           value={value}

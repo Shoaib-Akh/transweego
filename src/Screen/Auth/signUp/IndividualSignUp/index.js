@@ -5,17 +5,19 @@ import Button from "../../../../Component/Button";
 import { useNavigate } from "react-router-dom";
 import CustomDropDown from "../../../../Component/CustomDropDown";
 import { useDispatch } from "react-redux";
-import { ComponySignUpApi } from "../../../../api/ComponySignUpSlice";
+import { IndividualSignUpApi } from "../../../../api/IndividualSignUpSlice";
 
 const IndividualSignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
+
     firstName: '',
     lastName: '',
     email: '',
-    phone: ''
+    phone: '',
+    gender: '' // Initialize gender as an empty string
   });
 
   const [errors, setErrors] = useState({});
@@ -34,7 +36,20 @@ const IndividualSignUp = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleGenderChange = (gender) => {
+    setFormData({
+      ...formData,
+      gender
+    });
+    if (errors.gender) {
+      setErrors({
+        ...errors,
+        gender: ''
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -42,20 +57,47 @@ const IndividualSignUp = () => {
     if (!formData.lastName) newErrors.lastName = 'This field is required';
     if (!formData.email) newErrors.email = 'This field is required';
     if (!formData.phone) newErrors.phone = 'This field is required';
+    if (!formData.gender) newErrors.gender = 'This field is required';
 
     setErrors(newErrors);
+
     if (Object.keys(newErrors).length === 0) {
       console.log('Form submitted with values:', formData);
-      dispatch(ComponySignUpApi({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+
+      const data = {
+      
+        firstname: formData.firstName,
+        lastname: formData.lastName,
         email: formData.email,
-        phone: formData.phone
-      }));
+        phone: formData.phone,
+        genderId: formData.gender
+      };
+
+      try {
+        const response = await dispatch(IndividualSignUpApi(data));
+        
+        if (response.meta.requestStatus === 'fulfilled') {
+          console.log('Signup successful:', response.payload);
+          navigate('/'); // Example navigation after successful signup
+        } else {
+          console.error('Signup failed:', response.error);
+          setErrors({ apiError: 'Signup failed. Please try again.' });
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+        setErrors({ apiError: 'An unexpected error occurred. Please try again later.' });
+      }
     }
   };
 
-  const options = ["Male", "Female", "Trans*Woman", "Trans*Man", "Non-binary", "Other"];
+  const options = [
+    { id: 1, label: "Male" },
+    { id: 2, label: "Female" },
+    { id: 3, label: "Trans*Woman" },
+    { id: 4, label: "Trans*Man" },
+    { id: 5, label: "Non-binary" },
+    { id: 6, label: "Other" }
+  ];
 
   return (
     <div className="bg-color">
@@ -72,8 +114,12 @@ const IndividualSignUp = () => {
                 <h2>Please Register</h2>
               </div>
               <div className="input-bg">
-              <CustomDropDown options={options} />
-
+                <CustomDropDown 
+                  options={options}
+                  value={formData.gender}
+                  onChange={handleGenderChange}
+                  error={errors.gender}
+                />
                 <InputField
                   required
                   label="First Name"
@@ -109,7 +155,8 @@ const IndividualSignUp = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  label="Enter number"
+                  label="Phone"
+                  maxLength={10}
                   required
                   validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
                   error={errors.phone}

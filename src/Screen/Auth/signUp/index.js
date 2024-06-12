@@ -38,21 +38,21 @@ const SignUp = () => {
               <img src={logo} height={30} alt="car" />
             </div>
             <Button
-              onClick={() => navigate("/company_signup")}
+              onClick={() => navigate("/company-signup")}
               label={"Company"}
               className="green"
             />
             <Button 
               label={"Individual transporter"}
       
-              onClick={() => navigate("/individual_transporter_SignUp")}
+              onClick={() => navigate("/individual-transporter-signup")}
 
               className="orange"
             />
             <Button
              
     
-             onClick={() => navigate("/individual_signUp")}
+             onClick={() => navigate("/individual-signup")}
               label={"individual"}
               
               className="yellow mb-4"

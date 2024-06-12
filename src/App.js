@@ -19,13 +19,13 @@ function App() {
       <Routes>
       <Route path='/' element={<LandingPage />} />
       
-        <Route path='individual_transporter_SignUp' element={<IndividualTransporterSignUp />} />
+        <Route path='individual-transporter-SignUp' element={<IndividualTransporterSignUp />} />
         <Route path='HowItWork' element={<HowItWork />} />
-        <Route path='individual_signUp' element={<IndividualSignUp/>} />
+        <Route path='individual-signUp' element={<IndividualSignUp/>} />
 
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<SignUp />} />
-        <Route path='company_signup' element={<CompanySignup />} />
+        <Route path='company-signup' element={<CompanySignup />} />
         <Route path='AddDriver' element={<AddDriver />} />
 
       </Routes>

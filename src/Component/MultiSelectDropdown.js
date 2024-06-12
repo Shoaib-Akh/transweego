@@ -2,51 +2,55 @@ import React, { useState } from "react";
 import "./comonStyle.scss";
 import { Images } from "../utils/images";
 
-const MultiSelectDropdown = ({ label, placeholder, required }) => {
+const MultiSelectDropdown = ({ label, placeholder, required, options, error, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const options = ["Freight transportation", "Towing service","Vehicle transportation","Animal transportation",];
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const handleOptionClick = (option) => {
-   
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter((item) => item !== option));
+    let newSelectedOptions;
+    if (selectedOptions.includes(option.id)) {
+      newSelectedOptions = selectedOptions.filter((item) => item !== option.id);
     } else {
-      setSelectedOptions([...selectedOptions, option]);
+      newSelectedOptions = [...selectedOptions, option.id];
     }
+    setSelectedOptions(newSelectedOptions);
+    onChange(newSelectedOptions); // Call onChange directly here
   };
 
   const handleContinue = () => {
     console.log("Selected options:", selectedOptions);
-   
     setIsOpen(false);
   };
 
   return (
     <>
-      <div className="maindiv-dropdown" style={{ position: "relative" }}>
-        <div onClick={toggleDropdown} >
-          <p className="label">
-            {label} {required && "*"}
-          </p>
-        <input className="dropdown" placeholder={placeholder} readOnly value={selectedOptions.join(", ")} />
-        </div>
-    
+    <div className="maindiv-dropdown" style={{ position: "relative" }}>
+      <div onClick={toggleDropdown}>
+        <p className="label">
+          {label} {required && "*"}
+        </p>
+        <input
+          className={`dropdown ${error ? 'dropdown-error' : ''}`}
+          placeholder={placeholder}
+          readOnly
+          value={options.filter(option => selectedOptions.includes(option.id)).map(option => option.label).join(", ")}
+        />
+      </div>
 
       {isOpen && (
-        <div className="card dropdown-isOpen py-2" style={{ position: "absolute", right: 0 ,    top: 56,}}>
+        <div className="card dropdown-isOpen py-2" style={{ position: "absolute", right: 0, top: 56 }}>
           <div className="card-inner px-3">
             <h5 style={{ fontSize: 15 }}>Services</h5>
             <img src={Images.arrowDown} alt="arrowDown" />
           </div>
           {options.map((option, index) => (
             <div className="card-inner px-3" key={index} onClick={() => handleOptionClick(option)}>
-              <p>{option}</p>
-              {selectedOptions.includes(option) && <img src={Images.tick} height="10" width="10" alt="tick" />}
+              <p>{option.label}</p>
+              {selectedOptions.includes(option.id) && <img src={Images.tick} height="10" width="10" alt="tick" />}
             </div>
           ))}
           <div className="line"></div>
@@ -57,7 +61,9 @@ const MultiSelectDropdown = ({ label, placeholder, required }) => {
           </div>
         </div>
       )}
+     
     </div>
+    {error && <div className="error-message">{error}</div>}
     </>
   );
 };

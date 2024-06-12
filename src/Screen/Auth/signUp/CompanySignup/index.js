@@ -1,25 +1,24 @@
-// src/Login.js
 import React, { useState } from "react";
 import "../../AuthCommon.scss";
 import InputField from "../../../../Component/InputField";
 import Button from "../../../../Component/Button";
-import { Link, useNavigate } from "react-router-dom";
-import { Images } from "../../../../utils/images";
+import { useNavigate } from "react-router-dom";
 import MultiSelectDropdown from "../../../../Component/MultiSelectDropdown";
 import { useDispatch } from "react-redux";
-import {ComponySignUpApi} from "../../../../api/ComponySignUpSlice";
+import { CompanySignupApi } from "../../../../api/ComponySignUpSlice";
 
 const CompanySignup = () => {
-
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     companyName: '',
-    // password: '',
+    contactPerson: '',
     email: '',
-    phone: ''
+    phone: '',
+    serviceTypeIds: []
   });
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -34,52 +33,83 @@ const CompanySignup = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleServiceTypeChange = (selectedServiceTypes) => {
+    setFormData({
+      ...formData,
+      serviceTypeIds: selectedServiceTypes
+    });
+    if (errors.serviceTypeIds) {
+      setErrors({
+        ...errors,
+        serviceTypeIds: ''
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
     if (!formData.companyName) newErrors.companyName = 'This field is required';
-    // if (!formData.password) newErrors.password = 'This field is required'; 
+    if (!formData.contactPerson) newErrors.contactPerson = 'This field is required';
     if (!formData.email) newErrors.email = 'This field is required';
     if (!formData.phone) newErrors.phone = 'This field is required';
+    if (formData.serviceTypeIds.length === 0) newErrors.serviceTypeIds = 'This field is required';
 
     setErrors(newErrors);
+
+    // If no errors, submit the form
     if (Object.keys(newErrors).length === 0) {
       console.log('Form submitted with values:', formData);
-      e.preventDefault();
-      const data={
-       
-        
 
-       
+      const data = {
+        companyName: formData.companyName,
+        contactPerson: formData.contactPerson,
+        email: formData.email,
+        phone: formData.phone,
+        serviceTypeIds: formData.serviceTypeIds.join(',')
+      };
+
+      try {
+        // Dispatch the API call
+        const response = await dispatch(CompanySignupApi(data));
         
+        if (response.meta.requestStatus === 'fulfilled') {
+          console.log('Signup successful:', response.payload);
+          // You can navigate to another page or show a success message here
+          navigate('/'); // Example navigation after successful signup
+        } else {
+          console.error('Signup failed:', response.error);
+          // Show an error message to the user
+          setErrors({ apiError: 'Signup failed. Please try again.' });
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+        setErrors({ apiError: 'An unexpected error occurred. Please try again later.' });
       }
-    dispatch(ComponySignUpApi({
-      name:  formData.companyName,
-      email: formData.email,
-      phone:  formData.phone
-    } ));
-
-   
     }
-
   };
+
+  const options = [
+    { id: 1, label: "Freight transportation" },
+    { id: 2, label: "Towing service" },
+    { id: 3, label: "Vehicle transportation" },
+    { id: 4, label: "Animal transportation" },
+  ];
+
   return (
     <div className="bg-color">
       <div className="mainBg-img">
-      <Button
+        <Button
           onClick={() => navigate(-1)}
-          style={{
-            
-          }}
+          style={{}}
           className="backbtn"
           icon
         />
-        <div className="center-div" >
+        <div className="center-div">
           <div className="bg-company">
-            
-               <form className="login-div" onSubmit={handleSubmit}>
-              <div className="text-center mb-4  heading">
+            <form className="login-div" onSubmit={handleSubmit}>
+              <div className="text-center mb-4 heading">
                 <h2>Please Register</h2>
               </div>
               <div className="input-bg">
@@ -92,27 +122,15 @@ const CompanySignup = () => {
                   onChange={handleChange}
                   error={errors.companyName}
                 />
-                  <InputField
+                <InputField
                   required
                   label="Contact person"
                   placeholder="Enter contact person"
-                  name="companyName"
-                  value={formData.companyName}
+                  name="contactPerson"
+                  value={formData.contactPerson}
                   onChange={handleChange}
-                  error={errors.companyName}
+                  error={errors.contactPerson}
                 />
-                {/* <InputField
-                  type="password"
-                  placeholder="Enter your password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  label="Password"
-                  required
-                  validationRules={{ minLength: /.{8,}/, hasNumber: /\d/ }}
-                  validationMessages={{ minLength: 'Password must be at least 8 characters long', hasNumber: 'Password must contain a number' }}
-                  error={errors.password}
-                /> */}
                 <InputField
                   type="email"
                   placeholder="Enter your email"
@@ -130,103 +148,26 @@ const CompanySignup = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
+                  maxLength={10}
                   label="Enter number"
                   required
                   validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
                   error={errors.phone}
                 />
                 <MultiSelectDropdown
-                
                   label={"Services*"}
-                 placeholder={"select services"}
+                  placeholder={"Select services"}
+                  options={options}
+                  error={errors.serviceTypeIds}
+                  onChange={handleServiceTypeChange}
                 />
-
-{/*                 
-                <InputField
-                  required
-                  lable={"VAT Number"}
-                  placeholder={"MwSt. eingeben"}
-                />
-                <InputField lable={"Firma Website"} placeholder={"Add Link"} />
-                <h3>Sind alle meine Fahrzeuge versichert?</h3>
-                <div className="d-flex align-items-center gap-2">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Ja
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Nein
-                    </label>
-                  </div>
-                </div>
-                <hr></hr>
-                <h2>Upload firma documents*</h2>
-                <div className="d-flex gap-3">
-                  <div className="upload-photo">
-                    <img
-                      src={Images.frame}
-                      height="52"
-                      width="52"
-                      alt="car"
-                      className="mx-1"
-                    />
-                  </div>
-                  <div className="upload-photo">
-                    <img
-                      src={Images.frame}
-                      height="52"
-                      width="52"
-                      alt="car"
-                      className="mx-1"
-                    />
-                  </div>
-                </div>
-                <hr></hr>
-                <h2>Will you like to add your Vehicles?</h2>
-                <div className="d-flex align-items-center gap-2">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Ja
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Nein
-                    </label>
-                  </div>
-                </div> */}
-
                 <Button
-                  // onClick={() => navigate("/AddDriver")}
                   label={"Submit"}
+                  type="submit"
                 />
-                
+                {/* {errors.apiError && (
+                  <div className="error-message">{errors.apiError}</div>
+                )} */}
               </div>
             </form>
           </div>
