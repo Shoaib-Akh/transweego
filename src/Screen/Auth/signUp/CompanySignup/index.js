@@ -110,13 +110,13 @@ const CompanySignup = () => {
           <div className="bg-company">
             <form className="login-div" onSubmit={handleSubmit}>
               <div className="text-center mb-4 heading">
-                <h2>Please Register</h2>
+                <h2>Bitte Registrieren</h2>
               </div>
               <div className="input-bg">
                 <InputField
                   required
-                  label="Company/enterprise"
-                  placeholder="Enter company name"
+                  label="Firma/Unternehmen"
+                  placeholder="Geben Sie den Firmennamen ein"
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleChange}
@@ -124,8 +124,8 @@ const CompanySignup = () => {
                 />
                 <InputField
                   required
-                  label="Contact person"
-                  placeholder="Enter contact person"
+                  label="Ansprechpartner"
+                  placeholder="Ansprechpartner eintragen"
                   name="contactPerson"
                   value={formData.contactPerson}
                   onChange={handleChange}
@@ -133,7 +133,7 @@ const CompanySignup = () => {
                 />
                 <InputField
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Geben sie ihre E-Mail Adresse ein"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -149,20 +149,20 @@ const CompanySignup = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   maxLength={10}
-                  label="Enter number"
+                  label="Nummer eingeben"
                   required
                   validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
                   error={errors.phone}
                 />
                 <MultiSelectDropdown
-                  label={"Services*"}
-                  placeholder={"Select services"}
+                  label={"Dienstleistungen*"}
+                  placeholder={"Wählen Sie Dienste aus"}
                   options={options}
                   error={errors.serviceTypeIds}
                   onChange={handleServiceTypeChange}
                 />
                 <Button
-                  label={"Submit"}
+                  label={"Einreichen"}
                   type="submit"
                 />
                 {/* {errors.apiError && (

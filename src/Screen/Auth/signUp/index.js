@@ -28,7 +28,6 @@ const SignUp = () => {
       <div className="mainBg-img ">
         <Button
           onClick={() => navigate(-1)}
-        
           className="backbtn"
           icon
         />
@@ -57,15 +56,6 @@ const SignUp = () => {
               
               className="yellow mb-4"
             />
-            {/* <div className="text-center">
-              <p className="new-user mt-4">
-                Are you new user?{" "}
-                <Link to={"/login"}>
-                  <b>Sign in</b>
-                </Link>{" "}
-                <b></b>
-              </p>
-            </div> */}
           </form>
         </div>
       </div>

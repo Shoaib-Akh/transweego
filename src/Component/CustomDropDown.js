@@ -21,16 +21,16 @@ const CustomDropDown = ({ options, value, onChange, error }) => {
     <div className="maindiv-dropdown">
       <div onClick={toggleGenderDropdown}>
         <p className="label">
-          Gender *
+        Geschlecht *
         </p>
-        <input className="dropdown" placeholder="Select gender" readOnly value={selectedGender} />
+        <input className="dropdown" placeholder="Wähle Geschlecht" readOnly value={selectedGender} />
       
       </div>
 
       {isGenderOpen && (
         <div className="card dropdown-isOpen py-2">
           <div className="card-inner px-3">
-            <h5>Genders</h5>
+            <h5>Geschlecht</h5>
             <img src={Images.arrowDown} alt="arrowDown" />
           </div>
           {options.map((gender, index) => (

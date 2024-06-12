@@ -15,7 +15,7 @@ const AddDriver = () => {
                         <form className="driver-div">
 
                             <div className="text-center mb-4">
-                                <h2>Please register</h2>
+                                <h2>Bitte registrieren</h2>
                             </div>
                             <div className="driver-clr">
                                 <div className="d-flex align-items-center gap-2">
