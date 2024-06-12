@@ -72,6 +72,8 @@ const IndividualTransporterSignUp = () => {
                 <h2>Please Register</h2>
               </div>
               <div className="input-bg">
+              <CustomDropDown options={options} />
+
                 <InputField
                   required
                   label="First Name"
@@ -101,7 +103,6 @@ const IndividualTransporterSignUp = () => {
                   validationMessages={{ email: 'Please enter a valid email address' }}
                   error={errors.email}
                 />
-                <CustomDropDown options={options} />
                 <InputField
                   type="tel"
                   placeholder="Phone number*"
