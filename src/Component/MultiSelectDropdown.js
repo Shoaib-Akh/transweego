@@ -44,7 +44,7 @@ const MultiSelectDropdown = ({ label, placeholder, required, options, error, onC
       {isOpen && (
         <div className="card dropdown-isOpen py-2">
           <div className="card-inner px-3">
-            <h5>Services</h5>
+            <h5>Dienstleistungen</h5>
             <img src={Images.arrowDown} alt="arrowDown" />
           </div>
           {options.map((option, index) => (
@@ -55,9 +55,9 @@ const MultiSelectDropdown = ({ label, placeholder, required, options, error, onC
           ))}
           <div className="line"></div>
           <div className="d-flex justify-content-between align-items-center mx-3 my-1">
-            <p className="text" onClick={() => setIsOpen(false)}>cancel</p>
+            <p className="text" onClick={() => setIsOpen(false)}>stornieren</p>
             <div className="lineleft"></div>
-            <p className="text" style={{ color: "#FF8900" }} onClick={handleContinue}>continue</p>
+            <p className="text" style={{ color: "#FF8900" }} onClick={handleContinue}>weitermachen</p>
           </div>
         </div>
       )}

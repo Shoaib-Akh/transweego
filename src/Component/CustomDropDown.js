@@ -41,9 +41,9 @@ const CustomDropDown = ({ options, value, onChange, error }) => {
           ))}
           <div className="line"></div>
           <div className="d-flex justify-content-between align-items-center mx-3 my-1">
-            <p className="text" onClick={() => setIsGenderOpen(false)}>cancel</p>
+            <p className="text" onClick={() => setIsGenderOpen(false)}>stornieren</p>
             <div className="lineleft"></div>
-            <p className="text" style={{ color: "#FF8900" }} onClick={() => setIsGenderOpen(false)}>continue</p>
+            <p className="text" style={{ color: "#FF8900" }} onClick={() => setIsGenderOpen(false)}>weitermachen</p>
           </div>
         </div>
       )}

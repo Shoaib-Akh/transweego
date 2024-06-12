@@ -12,7 +12,11 @@ const InputField = ({
   error = '',
   name,
   validationRules = {},
-  validationMessages = {},
+  validationMessages = {
+    email: 'Ungültiges E-Mail-Format',
+    phone: 'Ungültige Telefonnummer',
+    // Add more as needed
+  },
   maxLength,
 }) => {
   const [localError, setLocalError] = useState(error);
@@ -25,14 +29,14 @@ const InputField = ({
   // Handle blur event to validate input
   const handleBlur = () => {
     if (required && !value) {
-      setLocalError('This field is required');
+      setLocalError('Dieses Feld ist erforderlich');
       return;
     }
 
     if (type === 'email') {
       const emailRegex = /\S+@\S+\.\S+/;
       if (!emailRegex.test(value)) {
-        setLocalError(validationMessages.email || 'Invalid email format');
+        setLocalError(validationMessages.email || 'Ungültiges E-Mail-Format');
         return;
       }
     }
@@ -40,7 +44,7 @@ const InputField = ({
     if (type === 'password') {
       for (const rule in validationRules) {
         if (!validationRules[rule].test(value)) {
-          setLocalError(validationMessages[rule] || 'Invalid value');
+          setLocalError(validationMessages[rule] || 'Ungültiger Wert');
           return;
         }
       }
@@ -49,7 +53,7 @@ const InputField = ({
     if (type === 'tel') {
       const phoneRegex = /^\d{10}$/; // Example for a 10-digit phone number
       if (!phoneRegex.test(value)) {
-        setLocalError(validationMessages.phone || 'Invalid phone number');
+        setLocalError(validationMessages.phone || 'Ungültige Telefonnummer');
         return;
       }
     }
@@ -69,7 +73,7 @@ const InputField = ({
         </div>
         {/* Input field */}
         <input
-        maxLength={maxLength}
+          maxLength={maxLength}
           type={type}
           placeholder={placeholder}
           value={value}

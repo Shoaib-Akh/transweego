@@ -54,16 +54,16 @@ const IndividualTransporterSignUp = () => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!formData.firstName) newErrors.firstName = 'This field is required';
-    if (!formData.lastName) newErrors.lastName = 'This field is required';
-    if (!formData.email) newErrors.email = 'This field is required';
-    if (!formData.phone) newErrors.phone = 'This field is required';
-    if (!formData.gender) newErrors.gender = 'This field is required';
+    if (!formData.firstName) newErrors.firstName = 'Dieses Feld ist erforderlich';
+    if (!formData.lastName) newErrors.lastName = 'Dieses Feld ist erforderlich';
+    if (!formData.email) newErrors.email = 'Dieses Feld ist erforderlich';
+    if (!formData.phone) newErrors.phone = 'Dieses Feld ist erforderlich';
+    if (!formData.gender) newErrors.gender = 'Dieses Feld ist erforderlich';
 
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted with values:', formData);
+      
 
       const data = {
       

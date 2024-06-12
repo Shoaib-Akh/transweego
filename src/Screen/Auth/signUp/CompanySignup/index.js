@@ -51,18 +51,16 @@ const CompanySignup = () => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!formData.companyName) newErrors.companyName = 'This field is required';
-    if (!formData.contactPerson) newErrors.contactPerson = 'This field is required';
-    if (!formData.email) newErrors.email = 'This field is required';
-    if (!formData.phone) newErrors.phone = 'This field is required';
-    if (formData.serviceTypeIds.length === 0) newErrors.serviceTypeIds = 'This field is required';
+    if (!formData.companyName) newErrors.companyName = 'Dieses Feld wird benötigt';
+    if (!formData.contactPerson) newErrors.contactPerson = 'Dieses Feld wird benötigt';
+    if (!formData.email) newErrors.email = 'Dieses Feld wird benötigt';
+    if (!formData.phone) newErrors.phone = 'Dieses Feld wird benötigt';
+    if (formData.serviceTypeIds.length === 0) newErrors.serviceTypeIds = 'Dieses Feld wird benötigt';
 
     setErrors(newErrors);
 
     // If no errors, submit the form
     if (Object.keys(newErrors).length === 0) {
-      
-
       const data = {
         companyName: formData.companyName,
         contactPerson: formData.contactPerson,
@@ -75,33 +73,33 @@ const CompanySignup = () => {
         // Dispatch the API call
         const response = await dispatch(CompanySignupApi(data));
         
-        if (response.meta.requestStatus === 'fulfilled') {
-          console.log('Signup successful:', response.payload);
-          // You can navigate to another page or show a success message here
-          navigate('/'); // Example navigation after successful signup
+        if (response.data.requestStatus === 'fulfilled') {
+          
+          // You can ngitavigate to another page or show a success message here
+          navigate('/'); // Beispiel für Navigation nach erfolgreicher Anmeldung
         } else {
-          console.error('Signup failed:', response.error);
+          ;
           // Show an error message to the user
-          setErrors({ apiError: 'Signup failed. Please try again.' });
+          setErrors({ apiError: 'Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.' });
         }
       } catch (error) {
-        console.error('An error occurred:', error);
-        setErrors({ apiError: 'An unexpected error occurred. Please try again later.' });
+   
+        setErrors({ apiError: 'Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.' });
       }
     }
   };
 
- 
   useEffect(() => {
-   
     dispatch(getServiceTypes());
   }, []);
+
   const serviceTypes = useSelector((state) => state.serviceTypes.list);
 
-const options = serviceTypes.map((item) => ({
-  id: item.serviceTypeId,
-  label: item.serviceTypeName
-}));
+  const options = serviceTypes.map((item) => ({
+    id: item.serviceTypeId,
+    label: item.serviceTypeName
+  }));
+
   return (
     <div className="bg-color">
       <div className="mainBg-img">
@@ -144,28 +142,29 @@ const options = serviceTypes.map((item) => ({
                   onChange={handleChange}
                   label="Email"
                   required
-                  validationMessages={{ email: 'Please enter a valid email address' }}
+                  validationMessages={{ email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein' }}
                   error={errors.email}
                 />
-                <InputField
-                  type="tel"
-                  placeholder="Phone number*"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  maxLength={10}
-                  label="Nummer eingeben"
-                  required
-                  validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
-                  error={errors.phone}
-                />
-                <MultiSelectDropdown
+                 <MultiSelectDropdown
                   label={"Dienstleistungen*"}
                   placeholder={"Wählen Sie Dienste aus"}
                   options={options}
                   error={errors.serviceTypeIds}
                   onChange={handleServiceTypeChange}
                 />
+                <InputField
+                  type="tel"
+                  placeholder="Telefonnummer*"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  maxLength={10}
+                  label="Nummer eingeben"
+                  required
+                  validationMessages={{ phone: 'Bitte geben Sie eine gültige 10-stellige Telefonnummer ein' }}
+                  error={errors.phone}
+                />
+               
                 <Button
                   label={"Einreichen"}
                   type="submit"
