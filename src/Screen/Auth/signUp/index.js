@@ -1,4 +1,3 @@
-// src/Login.js
 import React, { useState } from "react";
 import "../AuthCommon.scss";
 import InputField from "../../../Component/InputField";
@@ -15,7 +14,6 @@ const SignUp = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Mock login logic
     if (username === "user" && password === "password") {
       alert("Login successful!");
     } else {

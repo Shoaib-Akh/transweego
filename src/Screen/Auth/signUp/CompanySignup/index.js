@@ -58,7 +58,6 @@ const CompanySignup = () => {
 
     setErrors(newErrors);
 
-    // If no errors, submit the form
     if (Object.keys(newErrors).length === 0) {
       console.log('Form submitted with values:', formData);
 
@@ -71,16 +70,15 @@ const CompanySignup = () => {
       };
 
       try {
-        // Dispatch the API call
+       
         const response = await dispatch(CompanySignupApi(data));
         
         if (response.meta.requestStatus === 'fulfilled') {
           console.log('Signup successful:', response.payload);
-          // You can navigate to another page or show a success message here
-          navigate('/'); // Example navigation after successful signup
+         
+          navigate('/'); 
         } else {
           console.error('Signup failed:', response.error);
-          // Show an error message to the user
           setErrors({ apiError: 'Signup failed. Please try again.' });
         }
       } catch (error) {
@@ -165,9 +163,7 @@ const CompanySignup = () => {
                   label={"Einreichen"}
                   type="submit"
                 />
-                {/* {errors.apiError && (
-                  <div className="error-message">{errors.apiError}</div>
-                )} */}
+              
               </div>
             </form>
           </div>
