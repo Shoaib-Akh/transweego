@@ -65,6 +65,7 @@ const IndividualSignUp = () => {
     }
 
   };
+  const options = ["Male", "Female", "Trans*Woman", "Trans*Man", "Non-binary", "Other"];
   return (
     <div className="bg-color">
       <div className="mainBg-img">
@@ -84,7 +85,7 @@ const IndividualSignUp = () => {
                 <h2>Please Register</h2>
               </div>
               <div className="input-bg">
-              <CustomDropDown/>
+              <CustomDropDown options={options} />
                   <InputField
                   required
                   label="userName"
