@@ -7,6 +7,7 @@ import MultiSelectDropdown from "../../../../Component/MultiSelectDropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { CompanySignupApi } from "../../../../api/ComponySignUpSlice";
 import { getServiceTypes } from "../../../../api/getServicesSlice";
+import { toast } from "react-toastify";
 
 const CompanySignup = () => {
   const navigate = useNavigate();
@@ -74,7 +75,7 @@ const CompanySignup = () => {
         
         if (response.data.requestStatus === 'fulfilled') {
           console.log('Signup successful:', response.payload);
-         
+          toast.success('Registrierung erfolgreich');
           navigate('/'); 
         } else {
           console.error('Signup failed:', response.error);

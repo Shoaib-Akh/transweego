@@ -7,6 +7,7 @@ import CustomDropDown from "../../../../Component/CustomDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { IndividualTransporterSignUpApi } from "../../../../api/IndividualTransporterSignUpSlice";
 import { GetGenderType } from "../../../../api/GetGenderSlice";
+import { toast } from "react-toastify";
 
 const IndividualTransporterSignUp = () => {
   const navigate = useNavigate();
@@ -78,7 +79,7 @@ const IndividualTransporterSignUp = () => {
         const response = await dispatch(IndividualTransporterSignUpApi(data));
         
         if (response.meta.requestStatus === 'fulfilled') {
-          console.log('Signup successful:', response.payload);
+          toast.success('Registrierung erfolgreich');
           navigate('/');
         } else {
           console.error('Signup failed:', response.error);
@@ -163,7 +164,9 @@ const options = GetGender.map((item) => ({
                   validationMessages={{ phone: 'Bitte geben Sie eine gültige 10-stellige Telefonnummer ein' }}
                   error={errors.phone}
                 />
-                <Button label={"Einreichen"} />
+                <Button label={"Einreichen"}
+             
+                />
               </div>
             </form>
           </div>
