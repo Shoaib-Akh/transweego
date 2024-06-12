@@ -9,7 +9,7 @@ import SignUp from './Screen/Auth/signUp';
 import CompanySignup from './Screen/Auth/signUp/CompanySignup';
 import AddDriver from './Screen/Auth/signUp/CompanySignup/AddDriver';
 import LandingPage from './Screen/website/LandingPage';
-import IndividualSignUp from './Screen/Auth/signUp/individualSignUp';
+import IndividualSignUp from './Screen/Auth/signUp/IndividualSignUp';
 
 function App() {
   return (
