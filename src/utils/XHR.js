@@ -9,6 +9,7 @@ const xhrRequest = (method, url, data) => {
       if (xhr.status >= 200 && xhr.status < 300) {
         try {
           const response = JSON.parse(xhr.responseText);
+          toast.success('Request succeeded');
           resolve(response);
         } catch (e) {
           toast.error('Invalid JSON response from server');

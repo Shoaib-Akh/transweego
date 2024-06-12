@@ -5,7 +5,7 @@ import { Images } from "../utils/images";
 const MultiSelectDropdown = ({ label, placeholder, required }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const options = ["Freight transportation", "Towing service", "Other service","Vehicle transportation","Animal transportation","General Transportation"];
+  const options = ["Freight transportation", "Towing service","Vehicle transportation","Animal transportation",];
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

@@ -17,10 +17,10 @@ function App() {
       {/* <Navbar/> */}
       <Routes>
       <Route path='/' element={<LandingPage />} />
-
-        <Route path='home' element={<HomePage />} />
+      
+        <Route path='individual_transporter_SignUp' element={<IndividualTransporterSignUp />} />
         <Route path='HowItWork' element={<HowItWork />} />
-        <Route path='individualSignUp' element={<IndividualSignUp />} />
+        <Route path='individual_signUp' element={<IndividualSignUp/>} />
 
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<SignUp />} />
