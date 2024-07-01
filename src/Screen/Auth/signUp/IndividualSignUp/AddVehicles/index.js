@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import CustomDropDown from "../../../../../Component/CustomDropDown";
 import VerificationModal from "../../../../../Component/Modal/VerificationModal";
 
-const AddDriver = () => {
+const AddVehicles = () => {
   const navigate = useNavigate();
   const [Verification, setVerification] = useState(false);
   const VerificationHandleOpen = () => setVerification(true);
@@ -108,7 +108,7 @@ const AddDriver = () => {
       checkedAddVehicles,
     };
     console.log("Form data to be sent:", data);
-    // navigate or submit the data
+  
   };
 
   const addDriver = () => {
@@ -148,13 +148,7 @@ const AddDriver = () => {
     });
   };
 
-  const removeDriver = (index) => {
-    const updatedDrivers = formData.drivers.filter((_, i) => i !== index);
-    setFormData({
-      ...formData,
-      drivers: updatedDrivers,
-    });
-  };
+
   const removeVehicle = (index) => {
     const updatedVehicles = formData.vehicles.filter((_, i) => i !== index);
     setFormData({
@@ -168,20 +162,7 @@ const AddDriver = () => {
     { id: 3, label: "Animal transporter" },
   ];
   const optionsTrailerType = [
-    // {id:1,
-    // label:" Low loader"
-    // Uploader 
-    // Dump trailer
-    // Motorcycle transporter
-    // Vehicle transporter
-    // Livestock trailer
-    // Boat trailer
-    // Folding trailer
-    // Tree machinery transporter
-    // Special trailer 
-    // Suitcase tag"
-
-    // }
+  
     { id: 1, label: "Low loader" },
     { id: 2, label: "Uploader" },
     { id: 3, label: "Dump trailer" }, 
@@ -203,79 +184,8 @@ const AddDriver = () => {
       <div className="center-div">
         <div className="bg-company">
           <form className="login-div" onSubmit={handleSubmit}>
-            <div className="text-center mb-4 heading">
-              <h2>Add Driver</h2>
-            </div>
+            
             <div className="input-bg">
-              {formData.drivers.map((driver, index) => (
-                <div key={index}>
-                  <div className="d-flex align-items-center gap-2 mb-3 add-item">
-                    <div className="add-icon" onClick={() => removeDriver(index)}>-</div>
-                    <p className="add-text">Add Driver</p>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <SimpleInput
-                        placeholder="First Name"
-                        name="firstName"
-                        value={driver.firstName}
-                        onChange={(e) => handleInputChange(e, index, "drivers")}
-                      />
-                    </div>
-                    <div className="col-md-6">
-                      <SimpleInput
-                        placeholder="Last Name"
-                        name="lastName"
-                        value={driver.lastName}
-                        onChange={(e) => handleInputChange(e, index, "drivers")}
-                      />
-                    </div>
-                  </div>
-                  <SimpleInput
-                    placeholder="Email Address"
-                    name="email"
-                    value={driver.email}
-                    onChange={(e) => handleInputChange(e, index, "drivers")}
-                  />
-                  <SimpleInput
-                    placeholder="Phone Number"
-                    name="phone"
-                    value={driver.phone}
-                    onChange={(e) => handleInputChange(e, index, "drivers")}
-                  />
-                  <div className="d-flex justify-content-end">
-                    <UploadItem
-                      frameImage={Images.frame}
-                      label="Driver Documents"
-                      onImageUpload={handleImageUpload}
-                      onImageRemove={handleImageRemove}
-                    />
-                  </div>
-                
-                </div>
-              ))}
-               <div className="d-flex align-items-center gap-2 mb-3 add-item">
-                      <div className="add-icon" onClick={addDriver}>
-                        +
-                      </div>
-                      <p className="add-text">  { formData.drivers.length?"Add More Drivers":"Add Drivers"}</p>
-                    </div>
-              <hr />
-
-              <p className="label">Would you like to add your Vehicles?</p>
-              <div className="checkbox_div">
-                <CustomCheckbox
-                  checked={checkedAddVehicles}
-                  onChange={() => handleCheckboxChange("addVehicles")}
-                  label="Yes"
-                />
-                <CustomCheckbox
-                  checked={!checkedAddVehicles}
-                  onChange={() => handleCheckboxChange("addVehicles")}
-                  label="No"
-                />
-              </div>
-
               {formData.vehicles.map((vehicle, index) => (
                 <div key={index}>
                   <div className="d-flex align-items-center gap-2 mb-3 add-item" onClick={() => removeVehicle(index)}>
@@ -400,4 +310,4 @@ const AddDriver = () => {
   );
 };
 
-export default AddDriver;
+export default AddVehicles;

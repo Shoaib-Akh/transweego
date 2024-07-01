@@ -4,9 +4,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
-import userReducer from './api/loginSlice';
-import serviceTypesReducer from './api/getServicesSlice';
-import GetGenderReducer from './api/GetGenderSlice';
+import userReducer from '../slice/IndividualSignUpSlice'
+import serviceTypesReducer from '../../store/slice/getServicesSlice';
+import GetGenderReducer from '../../store/slice/GetGenderSlice';
 
 const persistConfig = {
   key: 'root',

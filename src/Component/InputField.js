@@ -10,6 +10,8 @@ const InputField = ({
   required = false,
   error = '',
   name,
+  min,
+  max,
   validationRules = {},
   validationMessages = {
     email: 'Ungültiges E-Mail-Format',
@@ -77,6 +79,9 @@ const InputField = ({
           className="input"
           required={required}
           name={name}
+          min={min}
+          max={max}
+
         />
       </div>
       {localError && <p className="error-message">{localError}</p>}

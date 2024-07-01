@@ -1,96 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../AuthCommon.scss";
 import InputField from "../../../../Component/InputField";
 import Button from "../../../../Component/Button";
 import { useNavigate } from "react-router-dom";
 import MultiSelectDropdown from "../../../../Component/MultiSelectDropdown";
 import { useDispatch, useSelector } from "react-redux";
-import { CompanySignupApi } from "../../../../api/ComponySignUpSlice";
-import { getServiceTypes } from "../../../../api/getServicesSlice";
-import { toast } from "react-toastify";
+import { getServiceTypes } from "../../../../store/slice/getServicesSlice";
+import AuthLayout from "../../../../layout/AuthLayout";
+import CustomCheckbox from '../../../../Component/CustomCheckbox';
+import { Images } from "../../../../utils/images";
+import UploadItem from "../../../../Component/UploadItem";
 
 const CompanySignup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     companyName: '',
     contactPerson: '',
     email: '',
     phone: '',
-    serviceTypeIds: []
+    serviceTypeIds: [],
+    vatNumber: ''
   });
-  const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: ''
-      });
-    }
-  };
-
-  const handleServiceTypeChange = (selectedServiceTypes) => {
-    setFormData({
-      ...formData,
-      serviceTypeIds: selectedServiceTypes
-    });
-    if (errors.serviceTypeIds) {
-      setErrors({
-        ...errors,
-        serviceTypeIds: ''
-      });
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const newErrors = {};
-
-    if (!formData.companyName) newErrors.companyName = 'Dieses Feld wird benötigt';
-    if (!formData.contactPerson) newErrors.contactPerson = 'Dieses Feld wird benötigt';
-    if (!formData.email) newErrors.email = 'Dieses Feld wird benötigt';
-    if (!formData.phone) newErrors.phone = 'Dieses Feld wird benötigt';
-    if (formData.serviceTypeIds.length === 0) newErrors.serviceTypeIds = 'Dieses Feld wird benötigt';
-
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length === 0) {
-      const data = {
-        companyName: formData.companyName,
-        contactPerson: formData.contactPerson,
-        email: formData.email,
-        phone: formData.phone,
-        serviceTypeIds: formData.serviceTypeIds.join(',')
-      };
-
-      try {
-       
-        const response = await dispatch(CompanySignupApi(data));
-        
-        if (response.data.requestStatus === 'fulfilled') {
-          console.log('Signup successful:', response.payload);
-          toast.success('Registrierung erfolgreich');
-          navigate('/'); 
-        } else {
-          console.error('Signup failed:', response.error);
-          setErrors({ apiError: 'Signup failed. Please try again.' });
-        }
-      } catch (error) {
-   
-        setErrors({ apiError: 'Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.' });
-      }
-    }
-  };
+  const [checkedInsured, setCheckedInsured] = useState(false); // State for "Are all my vehicles insured?"
+  const [checkedAddVehicles, setCheckedAddVehicles] = useState(false); // State for "Would you like to add your vehicles?"
+  const [companyLogo, setCompanyLogo] = useState(null);
+  const [companyDocuments, setCompanyDocuments] = useState(null);
 
   useEffect(() => {
     dispatch(getServiceTypes());
-  }, []);
+  }, [dispatch]);
 
   const serviceTypes = useSelector((state) => state.serviceTypes.list);
 
@@ -99,82 +40,169 @@ const CompanySignup = () => {
     label: item.serviceTypeName
   }));
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleServiceTypeChange = (selectedServiceTypes) => {
+    setFormData({
+      ...formData,
+      serviceTypeIds: selectedServiceTypes
+    });
+  };
+
+  const handleCheckboxChange = (name) => {
+    if (name === 'insured') {
+      setCheckedInsured(!checkedInsured);
+    } else if (name === 'addVehicles') {
+      setCheckedAddVehicles(!checkedAddVehicles);
+    }
+  };
+
+  const handleImageUpload = (label, image) => {
+    if (label === "Company Logo") {
+      setCompanyLogo(image);
+    } else if (label === "Company Documents") {
+      setCompanyDocuments(image);
+    }
+    console.log(`${label} uploaded:`, image);
+  };
+
+  const handleImageRemove = (label) => {
+    if (label === "Company Logo") {
+      setCompanyLogo(null);
+    } else if (label === "Company Documents") {
+      setCompanyDocuments(null);
+    }
+    console.log(`${label} removed`);
+  };
+
+  const handleNext = () => {
+    const data = {
+      ...formData,
+      checkedInsured,
+      checkedAddVehicles,
+      companyLogo,
+      companyDocuments
+    };
+    console.log('Form data to be sent to next screen:', data);
+    navigate("/add-driver", { state: { data } });
+  };
+
   return (
-    <div className="bg-color">
-      <div className="mainBg-img">
-        <Button
-          onClick={() => navigate(-1)}
-          style={{}}
-          className="backbtn"
-          icon
-        />
-        <div className="center-div">
-          <div className="bg-company">
-            <form className="login-div" onSubmit={handleSubmit}>
-              <div className="text-center mb-4 heading">
-                <h2>Bitte Registrieren</h2>
+    <AuthLayout>
+      <div className="center-div">
+        <div className="bg-company">
+          <div className="login-div">
+            <div className="text-center mb-4 heading">
+              <h2>Company Register</h2>
+            </div>
+            <div className="input-bg">
+              <InputField
+                label="Company Name"
+                placeholder="Enter company name"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleChange}
+              />
+              <InputField
+                label="Contact Person"
+                placeholder="Enter contact person"
+                name="contactPerson"
+                value={formData.contactPerson}
+                onChange={handleChange}
+              />
+              <InputField
+                type="email"
+                placeholder="Enter your email address"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                label="Email"
+              />
+              <MultiSelectDropdown
+                label="Services"
+                placeholder="Select services"
+                options={options}
+                onChange={handleServiceTypeChange}
+              />
+              <InputField
+                type="tel"
+                placeholder="Phone number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                maxLength={10}
+                label="Enter number"
+              />
+              <InputField
+                type="text"
+                placeholder="Enter your VAT number"
+                name="vatNumber"
+                value={formData.vatNumber}
+                onChange={handleChange}
+                label="VAT Number"
+              />
+              <div className="upload-file-div">
+                <p className="label">Are all my vehicles insured?</p>
+                <div className="checkbox_div">
+                  <CustomCheckbox
+                    checked={checkedInsured}
+                    onChange={() => handleCheckboxChange('insured')}
+                    label="Yes"
+                  />
+                  <CustomCheckbox
+                    checked={!checkedInsured}
+                    onChange={() => handleCheckboxChange('insured')}
+                    label="No"
+                  />
+                </div>
+                <hr />
+                <div className="upload-container">
+                  <p>Upload company documents</p>
+                </div>
+                <div className="upload-items">
+                  <UploadItem
+                    frameImage={Images.frame}
+                    label="Company Logo"
+                    onImageUpload={(image) => handleImageUpload("Company Logo", image)}
+                    onImageRemove={() => handleImageRemove("Company Logo")}
+                  />
+                  <UploadItem
+                    frameImage={Images.frame}
+                    label="Company Documents"
+                    onImageUpload={(image) => handleImageUpload("Company Documents", image)}
+                    onImageRemove={() => handleImageRemove("Company Documents")}
+                  />
+                </div>
+                <hr />
+                <p className="label">Would you like to add your vehicles?</p>
+                <div className="checkbox_div">
+                  <CustomCheckbox
+                    checked={checkedAddVehicles}
+                    onChange={() => handleCheckboxChange('addVehicles')}
+                    label="Yes"
+                  />
+                  <CustomCheckbox
+                    checked={!checkedAddVehicles}
+                    onChange={() => handleCheckboxChange('addVehicles')}
+                    label="No"
+                  />
+                </div>
               </div>
-              <div className="input-bg">
-                <InputField
-                  required
-                  label="Firma/Unternehmen"
-                  placeholder="Geben Sie den Firmennamen ein"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                  error={errors.companyName}
-                />
-                <InputField
-                  required
-                  label="Ansprechpartner"
-                  placeholder="Ansprechpartner eintragen"
-                  name="contactPerson"
-                  value={formData.contactPerson}
-                  onChange={handleChange}
-                  error={errors.contactPerson}
-                />
-                <InputField
-                  type="email"
-                  placeholder="Geben sie ihre E-Mail Adresse ein"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  label="Email"
-                  required
-                  validationMessages={{ email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein' }}
-                  error={errors.email}
-                />
-                 <MultiSelectDropdown
-                  label={"Dienstleistungen*"}
-                  placeholder={"Wählen Sie Dienste aus"}
-                  options={options}
-                  error={errors.serviceTypeIds}
-                  onChange={handleServiceTypeChange}
-                />
-                <InputField
-                  type="tel"
-                  placeholder="Telefonnummer*"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  maxLength={10}
-                  label="Nummer eingeben"
-                  required
-                  validationMessages={{ phone: 'Bitte geben Sie eine gültige 10-stellige Telefonnummer ein' }}
-                  error={errors.phone}
-                />
-               
-                <Button
-                  label={"Einreichen"}
-                  type="submit"
-                />
-              
-              </div>
-            </form>
+              <Button
+                label="Next"
+                onClick={handleNext}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </AuthLayout>
   );
 };
 

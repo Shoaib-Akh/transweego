@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { xhrPost } from '../utils/XHR';
-const API_URL = process.env.REACT_APP_API_URL;
-export const login = createAsyncThunk('user/login', async (credentials, thunkAPI) => {
-  const response = await xhrPost(`${API_URL}/posts`, credentials);
+import { xhrPost } from '../../utils/XHR'; 
+const API_URL = `https://transweego-backend-production.up.railway.app/api/v1/`
+
+export const IndividualTransporterSignUpApi = createAsyncThunk('user/CompanySignUp', async (credentials, thunkAPI) => {
+  const response = await xhrPost(`${API_URL}pre-launch/individual-transporter`, credentials);
   return response.data;
 });
 
@@ -21,14 +22,14 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state) => {
+      .addCase(IndividualTransporterSignUpApi.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(IndividualTransporterSignUpApi.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.user = action.payload;
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(IndividualTransporterSignUpApi.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

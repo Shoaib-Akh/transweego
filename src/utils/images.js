@@ -8,7 +8,7 @@ import mobile from "../assets/images/mobile.png";
 import appstore from "../assets/images/appstore.png";
 import google from "../assets/images/google.png";
 import office from "../assets/images/office.png";
-import componyLogo from "../assets/images/componyLogo.png";
+import CompanyLogo from "../assets/images/CompanyLogo.png";
 import Star from "../assets/images/Star.png";
 import cost from "../assets/images/cost.svg";
 import mobilelogo from "../assets/images/mobilelogo.png";
@@ -24,29 +24,37 @@ import logolanding from "../assets/images/logolanding.png";
 import mobile2 from "../assets/images/mobile2.png";
 import truckyellow from "../assets/images/truckyellow.png";
 import arrowDown from "../assets/images/aerodown.png";
-
+import mainLogo from "../assets/images/mainLogo.png";
 import tick from "../assets/images/tick.png";
-
+import hand from "../assets/images/hand.svg";
+import spring from "../assets/images/spring.svg";
 // import plus from "../assets/images/plus.png";
+import together1 from "../assets/images/together1.svg";
+import email_img from "../assets/images/email_img.svg";
+import Hexagon from "../assets/images/Hexagon.png";
 
 
 
 
-
-
-import togher1 from "../assets/images/togher1.svg";
 export const Images = {
     Star,
+    Hexagon,
+    mainLogo,
+    // logo,
     arrowDown,
     person,
+    hand,
+    spring,
     dollarvault,
     aeroleft,
     togther,
+    together1,
     car,
     aeroright,
     Vector3,
     Vector4,
     mask,
+    email_img,
     setting,
     carimg,
     truck,
@@ -54,7 +62,7 @@ export const Images = {
     appstore,
     google,
     office,
-    componyLogo,
+    CompanyLogo,
     cost,
     mobilelogo,
     mobilegroup,

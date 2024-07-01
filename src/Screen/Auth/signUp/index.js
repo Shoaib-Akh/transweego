@@ -5,42 +5,28 @@ import logo from "../../../assets/images/mainLogo.png";
 import Button from "../../../Component/Button";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import AuthLayout from "../../../layout/AuthLayout";
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (username === "user" && password === "password") {
-      alert("Login successful!");
-    } else {
-      setError("Invalid username or password");
-    }
-  };
+  
 
   return (
-    <div className="bg-color">
-      <div className="mainBg-img ">
-        <Button
-          onClick={() => navigate(-1)}
-          className="backbtn"
-          icon
-        />
+<AuthLayout>
+
+
         <div className="center-div">
-          <form onSubmit={handleLogin} className="login-div">
+          <div className="login-div">
             <div className="text-center mb-4">
               <img src={logo} height={30} alt="car" />
             </div>
             <Button
               onClick={() => navigate("/company-signup")}
-              label={"Unternehmen"}
+              label={"Company"}
               className="green"
             />
             <Button 
-              label={"Individueller Transporteur"}
+              label={"Individual transporter"}
       
               onClick={() => navigate("/individual-transporter-signup")}
 
@@ -50,14 +36,14 @@ const SignUp = () => {
              
     
              onClick={() => navigate("/individual-signup")}
-              label={"Einzelne"}
+              label={"individual"}
               
               className="yellow mb-4"
             />
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
+        </AuthLayout>
+
   );
 };
 

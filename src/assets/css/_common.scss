@@ -50,13 +50,13 @@
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #1200f9;
+    background: #0C3227;
     border-radius: 5px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #1200f9;
+    background: #0C3227;
   }
   
   //   scrollbar styling end
@@ -147,6 +147,9 @@
     h2 {
       font-size: 1.5rem;
     }
+  }
+  hr{
+    color: rgba(0, 0, 0, 0.11);
   }
   
  

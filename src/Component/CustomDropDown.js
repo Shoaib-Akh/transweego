@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./componentCommonStyle.scss";
 import { Images } from "../utils/images";
 
-const CustomDropDown = ({ options, value, onChange, error }) => {
+const CustomDropDown = ({ options, value, onChange, error ,label,placeholder,heading,yes,no}) => {
   const [selectedGender, setSelectedGender] = useState(value);
   const [isGenderOpen, setIsGenderOpen] = useState(false);
 
@@ -18,19 +18,19 @@ const CustomDropDown = ({ options, value, onChange, error }) => {
 
   return (
     <>
-    <div className="maindiv-dropdown">
+    <div className="maindiv-dropdown mt-2">
       <div onClick={toggleGenderDropdown}>
         <p className="label">
-        Geschlecht *
+        {label}
         </p>
-        <input className="dropdown" placeholder="Wähle Geschlecht" readOnly value={selectedGender} />
+        <input className="dropdown" placeholder={placeholder} readOnly value={selectedGender} />
       
       </div>
 
       {isGenderOpen && (
         <div className="card dropdown-isOpen py-2">
           <div className="card-inner px-3">
-            <h5>Geschlecht</h5>
+            <h5>{heading}</h5>
             <img src={Images.arrowDown} alt="arrowDown" />
           </div>
           {options.map((gender, index) => (
@@ -41,9 +41,9 @@ const CustomDropDown = ({ options, value, onChange, error }) => {
           ))}
           <div className="line"></div>
           <div className="d-flex justify-content-between align-items-center mx-3 my-1">
-            <p className="text" onClick={() => setIsGenderOpen(false)}>stornieren</p>
+            <p className="text" onClick={() => setIsGenderOpen(false)}>Cancel</p>
             <div className="lineleft"></div>
-            <p className="text" style={{ color: "#FF8900" }} onClick={() => setIsGenderOpen(false)}>weitermachen</p>
+            <p className="text" style={{ color: "#FF8900" }} onClick={() => setIsGenderOpen(false)}>Continue</p>
           </div>
         </div>
       )}

@@ -22,7 +22,7 @@ const LandingPage = () => {
         </p>
         <button
           className="btn orange mt-5"
-          onClick={() => navigate("/signup")}
+          onClick={() => navigate("/home-page")}
         >
           Vorabregistrieren
         </button>
@@ -103,7 +103,7 @@ const LandingPage = () => {
           <div className="col-12 text-center btn-join">
             <button
               className="btn orange mt-5"
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/home-page")}
             >
               Vorabregistrieren
             </button>

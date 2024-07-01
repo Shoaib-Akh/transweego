@@ -1,15 +1,15 @@
 
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { xhrGet } from '../utils/XHR';
+import { xhrGet } from '../../utils/XHR';
 
 const API_URL = `https://transweego-backend-production.up.railway.app/api/v1/`;
 
-export const GetGenderType = createAsyncThunk(
+export const getServiceTypes = createAsyncThunk(
   'serviceTypes/getServiceTypes',
   async (_, thunkAPI) => {
     try {
-      const response = await xhrGet(`${API_URL}pre-launch/genders`);
+      const response = await xhrGet(`${API_URL}pre-launch/service-types`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -17,8 +17,8 @@ export const GetGenderType = createAsyncThunk(
   }
 );
 
-const GetGenderSlice = createSlice({
-  name: 'GetGenderType',
+const serviceTypesSlice = createSlice({
+  name: 'serviceTypes',
   initialState: {
     list: [],
     status: 'idle',
@@ -27,19 +27,19 @@ const GetGenderSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(GetGenderType.pending, (state) => {
+      .addCase(getServiceTypes.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(GetGenderType.fulfilled, (state, action) => {
+      .addCase(getServiceTypes.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.list = action.payload;
       })
-      .addCase(GetGenderType.rejected, (state, action) => {
+      .addCase(getServiceTypes.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
   },
 });
 
-export default GetGenderSlice.reducer;
+export default serviceTypesSlice.reducer;
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./componentCommonStyle.scss";
 import { Images } from "../utils/images";
 
-const MultiSelectDropdown = ({ label, placeholder, required, options, error, onChange }) => {
+const MultiSelectDropdown = ({ label, placeholder, required, options, error, onChange,Heading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -42,9 +42,9 @@ const MultiSelectDropdown = ({ label, placeholder, required, options, error, onC
       </div>
 
       {isOpen && (
-        <div className="card dropdown-isOpen py-2">
+        <div className="card dropdown-isOpen py-2"  onClick={toggleDropdown}>
           <div className="card-inner px-3">
-            <h5>Dienstleistungen</h5>
+            <h5>{Heading}</h5>
             <img src={Images.arrowDown} alt="arrowDown" />
           </div>
           {options.map((option, index) => (
@@ -55,9 +55,9 @@ const MultiSelectDropdown = ({ label, placeholder, required, options, error, onC
           ))}
           <div className="line"></div>
           <div className="d-flex justify-content-between align-items-center mx-3 my-1">
-            <p className="text" onClick={() => setIsOpen(false)}>stornieren</p>
+            <p className="text" onClick={() => setIsOpen(false)}>Cancel</p>
             <div className="lineleft"></div>
-            <p className="text" style={{ color: "#FF8900" }} onClick={handleContinue}>weitermachen</p>
+            <p className="text" style={{ color: "#FF8900" }} onClick={handleContinue}>Continue</p>
           </div>
         </div>
       )}

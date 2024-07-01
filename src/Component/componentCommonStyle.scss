@@ -65,7 +65,7 @@
   display: flex;
   align-items: center;
   padding: 0 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   .SimpleInput {
     border: none;
@@ -93,7 +93,7 @@ input:focus {
 
 .custom-button-main-div {
   .custom-button {
-    padding: 10px 20px;
+    padding: 20px 20px;
     background: linear-gradient(89deg, #FF8600 47.55%, #FFD100 97.61%);
     margin-top: 10px;
     border: none;
@@ -108,7 +108,12 @@ input:focus {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-
+.yellow{
+  background-color: #FFC400;
+}
+.orange{
+  background-color: #FF8600;
+}
     &:hover {
       background: darken(#f5851f, 10%);
     }
@@ -221,7 +226,7 @@ input:focus {
   position: absolute;
   right: 0;
   top: 56px;
-  
+  z-index: 1;
   .card-inner {
     display: flex;
     align-items: center;
@@ -264,3 +269,94 @@ input:focus {
 
   }
 }
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input {
+  display: none;
+}
+
+.custom-checkbox {
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  transition: all 150ms;
+  margin-right: 8px;
+  border-radius: 4px;
+}
+
+.custom-checkbox.checked {
+  background-color: #FF8900;
+  box-shadow: none;
+}
+
+.label-text {
+  margin-left: 8px;
+}
+.upload-item {
+  position: relative;
+  text-align: center;
+}
+
+.upload-item .image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.upload-item img {
+  max-width: 100%;
+  height: auto;
+}
+
+.upload-item .remove-button {
+  position: absolute;
+  top: -23px;
+  // right: 5px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.upload-item {
+    background: white;
+    cursor: pointer;
+    height: 100px;
+    width: 150px;
+    border-radius: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  
+    img {
+      height: 52px;
+    }
+  
+    p {
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .upload-item input[type="file"] {
+      display:"none"
+    }
+  }
+  // modal
+ 
+
+  .label {
+
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+    color: #4A6C62;
+  }

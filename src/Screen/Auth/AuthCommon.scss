@@ -1,6 +1,7 @@
 .bg-color {
   background-color: #0C3227;
   overflow-y: hidden;
+
   .mainBg-img {
     background-image: url("../../assets/images/bg-Img.png");
     background-repeat: no-repeat;
@@ -10,15 +11,22 @@
     height: 100vh;
 
   }
-  .sec-input{
+
+  .sec-input {
     margin-bottom: 20px;
   }
 
-  .center-div {
+  .AuthLayout_center {
     height: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .center-div {
+    // overflow: auto;
+
   }
 
   .login-div {
@@ -26,7 +34,8 @@
     background-color: #ffff;
     padding: 40px 15px 15px 15px;
     border-radius: 30px;
-    @media (max-width:475px){
+
+    @media (max-width:475px) {
       width: 100%;
       margin-top: 30px;
     }
@@ -38,6 +47,7 @@
       font-style: normal;
       font-weight: 600;
       line-height: 14px;
+      cursor: pointer;
     }
 
     .new-user {
@@ -49,9 +59,10 @@
       line-height: 14px;
 
     }
+
     @media (max-width: 768px) {
 
-      .login-div{
+      .login-div {
         width: 250px;
       }
     }
@@ -67,12 +78,16 @@
     background-color: #F8F8F8;
     margin-bottom: 7px;
 
+
   }
 
   .input-bg {
     background-color: #EFEFEF;
     padding: 10px 10px;
     border-radius: 30px;
+    overflow-y: auto;
+    height: 70vh;
+    overflow-x: hidden;
 
     h3 {
       color: #4A6C62;
@@ -112,30 +127,160 @@
   }
 }
 
-.add-driver {
-  .driver-div {
-    background-color: #ffff;
-    padding: 50px 30px 20px 30px;
-    border-radius: 30px;
 
-    .frame {
-      display: flex;
-      justify-content: end;
-    }
+.driver-div {
+  background-color: #ffff;
+  padding: 50px 30px 20px 30px;
+  border-radius: 30px;
+
+  .frame {
+    display: flex;
+    justify-content: end;
   }
-
-  .driver-clr {
-    background-color: #EFEFEF;
-    padding: 26px 15px;
-    border-radius: 30px;
-  }
-
 }
-.heading{
-  h2{
+
+.driver-clr {
+  background-color: #EFEFEF;
+  padding: 26px 15px;
+  border-radius: 30px;
+}
+
+
+.heading {
+  h2 {
     font-size: 28px;
     font-weight: 700;
   }
 }
 
+.upload-file-div {
+  padding-inline: 10px;
 
+  // .upload-item {
+  //   background: white;
+  //   height: 100px;
+  //   width: 150px;
+  //   border-radius: 19px;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   flex-direction: column;
+
+  //   img {
+  //     height: 52px;
+  //   }
+
+  //   p {
+  //     font-size: 12px;
+  //     font-weight: 500;
+  //   }
+  // }
+
+
+
+
+  .upload-container {
+    color: black;
+    font-weight: 500;
+  }
+
+  .upload-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+  }
+}
+
+.checkbox_div {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.heading-label {
+  color: #0C3227;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.add-item {
+  .add-icon {
+    cursor: pointer;
+    background: linear-gradient(142deg, #FF8600 16.38%, #FC0 113.34%);
+    height: 30px;
+    width: 30px;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 40px;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 14px;
+  }
+
+  .add-text {
+    color: #4A6C62;
+  }
+}
+
+.para {
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.date-div {
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F8F8F8;
+  border-radius: 32px;
+}
+
+.textArea {
+  height: 200px;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  padding: 20px;
+  text-align: left;
+  resize: none;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+
+  .form-control {
+
+    border-radius: 32.43px;
+    height: 55px;
+    border: none;
+    margin-top: 5px;
+    background-color: #F8F8F8;
+    font-size: 10px;
+    color: #4A6C62;
+
+  }
+}
+
+.Acceptable {
+  color: rgba(12, 50, 39, 0.26);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+  margin-bottom: 20px;
+}
