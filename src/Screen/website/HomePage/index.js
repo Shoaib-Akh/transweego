@@ -6,7 +6,13 @@ import Navbar from "../WebsiteComponent/Navbar";
 import Fotter from "../WebsiteComponent/Footer";
 import { Images } from "../../../utils/images";
 import { Box, Button, Modal, Typography } from "@mui/material";
-
+const handleClick = (event) => {
+  // Remove active class from all buttons
+  document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+  
+  // Add active class to the clicked button
+  event.target.classList.add('active');
+};
 
 const HomePage = () => {
   const scrollContainerRef = useRef(null);
@@ -43,15 +49,17 @@ const HomePage = () => {
               </h2>
             </div>
             <div className="scrollable-container">
-              <div className="group-btn d-flex justify-content-center">
-                <button className="btn orange">vehicles</button>
-                <button className="btn offwhite">Transparent</button>
-                <button className="btn offwhite">Send</button>
-                <button className="btn offwhite">Transparent</button>
-                <button className="btn offwhite">Transparent</button>
-                <button className="btn offwhite">Transparent</button>
-              </div>
-            </div>
+    <div className="button-container">
+        <button className="btn offwhite" onClick={handleClick}>Vehicles</button>
+        <button className="btn offwhite" onClick={handleClick}>Furniture</button>
+        <button className="btn offwhite" onClick={handleClick}>Parcels</button>
+        
+        <button className="btn offwhite" onClick={handleClick}>Vehicles</button>
+        <button className="btn offwhite" onClick={handleClick}>Furniture</button>
+        <button className="btn offwhite" onClick={handleClick}>Parcels</button>
+        
+    </div>
+</div>
             <div className="mt-5 d-flex gap-3 align-items-center  justify-content-center">
               <img
                 src={Images.aeroleft}
@@ -313,10 +321,11 @@ const HomePage = () => {
       <div className="d-flex flex-column align-items-center my-5 premium-sec mt-6r mb-5">
         <h5 className="text">Premium partners</h5>
         <h2 className="lorem">Lorem Ipsum is simply dummy text </h2>
-        <div className="button-group">
-          <button className="btn orange">Transportation Companies</button>
-          <button className="btn offwhite">Vehicle Dealerships</button>
-          <button className="btn offwhite">Insurance</button>
+        <div className="text-center">
+
+          <button className="btn offwhite" onClick={handleClick}>Transportation Companies</button>
+          <button className="btn offwhite" onClick={handleClick}>Vehicle Dealerships</button>
+          <button className="btn offwhite"onClick={handleClick}>Insurance</button>
         </div>
       </div>
       <div

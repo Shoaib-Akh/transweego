@@ -54,6 +54,7 @@
 }
 
 .btn {
+  display: inline-block;
   color: #ffffff;
   border: none;
   border-radius: 43px;
@@ -63,15 +64,19 @@
   font-style: normal;
   font-weight: 700;
   line-height: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  
+}
 
-  &:hover {
-    background-color: #f1f1f1;
-    color: #000000;
-  }
+.btn:hover {
+  background-color: #f1f1f1;
+  color: #000000;
 }
 
 .orange {
   background-color: #ff8600;
+  
 }
 
 .yellow {
@@ -81,7 +86,18 @@
 .offwhite {
   background-color: #f1f1f1;
   color: #000000;
+  .offwhite:hover {
+    background-color: #ff8600;
+    color: white;
+  }
+
 }
+.offwhite.active {
+  background-color: #ff8600 !important;
+  color: #ffffff !important;
+}
+
+
 
 .nav-link {
   color: white;
@@ -207,11 +223,22 @@
   }
 }
 
+// .scrollable-container {
+//   overflow-x: auto;
+//   width: 70%;
+//   height: 100px;
+//   scrollbar-width: none;
+// }
 .scrollable-container {
   overflow-x: auto;
   width: 80%;
   height: 100px;
   scrollbar-width: none;
+  white-space: nowrap;
+}
+
+.button-container {
+  display: inline-block;
 }
 
 .img-text {
@@ -235,7 +262,8 @@
 }
 
 .group-btn {
-  display: inline-block;
+width: 100%;
+text-align: center;
 
   @media (max-width:458px) {
     display: flex;
