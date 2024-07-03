@@ -1,7 +1,7 @@
 import React from "react";
 import "./componentCommonStyle.scss";
 
-const SimpleInput = ({ type = "text", placeholder, value, onChange, label, required, name }) => {
+const SimpleInput = ({ type = "text", placeholder, value, onChange, label, required, name ,maxLength}) => {
   return (
     <div className="SimpleInput-input">
       {label && <label>{label}</label>}
@@ -13,6 +13,7 @@ const SimpleInput = ({ type = "text", placeholder, value, onChange, label, requi
         className="SimpleInput"
         required={required}
         name={name}
+        maxLength={maxLength}
       />
     </div>
   );

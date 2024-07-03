@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../AuthCommon.scss";
 import InputField from "../../../../Component/InputField";
 import Button from "../../../../Component/Button";
@@ -10,6 +10,8 @@ import UploadItem from "../../../../Component/UploadItem";
 import { Images } from "../../../../utils/images";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import SimpleInput from "../../../../Component/SimpleInput";
+import DateOfBirthInput from "../../../../Component/DateOfBirthInput";
 
 const IndividualTransporterSignUp = () => {
   const navigate = useNavigate();
@@ -111,7 +113,7 @@ const IndividualTransporterSignUp = () => {
       navigate('/Add-vehicles', { state: { formData } });
     }
   };
- 
+
   const options = [
     { id: '1', label: 'Male' },
     { id: '2', label: 'Female' },
@@ -130,10 +132,12 @@ const IndividualTransporterSignUp = () => {
   const UploadDocumentsOption = [
     { id: '1', label: 'ID' },
     { id: '2', label: 'passport' },
-    { id: '3', label: "Driver's license"}
+    { id: '3', label: "Driver's license" }
   ];
   
-  
+    const [birthDate, setBirthDate] = useState('');
+    console.log("birthDate",birthDate);
+
   return (
     <AuthLayout>
       <div className="center-div">
@@ -224,7 +228,7 @@ const IndividualTransporterSignUp = () => {
                 </div>
               </div>
               <p className="label ps-3 mt-2">Birth Date*</p>
-              <DatePicker
+              {/* <DatePicker
                 selected={formData.birthDate}
                 onChange={handleDateChange}
                 dateFormat="dd/MM/yyyy"
@@ -235,7 +239,15 @@ const IndividualTransporterSignUp = () => {
                 showYearDropdown
                 dropdownMode="select"
                 name="birthDate"
-              />
+              /> */}
+          <DateOfBirthInput
+          setBirthDate={setBirthDate}
+        
+          
+          />
+
+
+
               {errors.birthDate && <p className="error">{errors.birthDate}</p>}
               <CustomDropDown
                 options={optionsNationality}
@@ -246,13 +258,13 @@ const IndividualTransporterSignUp = () => {
                 heading={"Nationality"}
                 placeholder={"Select Nationality"}
               />
-               <UploadItem
+              <UploadItem
                 frameImage={Images.frame}
                 label="Profile Image"
                 onImageUpload={handleImageUpload}
                 onImageRemove={handleImageRemove}
               />
-                <CustomDropDown
+              <CustomDropDown
                 options={UploadDocumentsOption}
                 value={formData.nationality}
                 onChange={(value) => setFormData({ ...formData, nationality: value })}
@@ -262,20 +274,20 @@ const IndividualTransporterSignUp = () => {
                 placeholder={" Upload Documents"}
               />
               <span className="Acceptable">Acceptable  pdf Jpeg, Png</span>
-             <div className="d-flex align-items-center justify-content-between">
-             <UploadItem
-                frameImage={Images.frame}
-                label="Front"
-                onImageUpload={handleImageUpload}
-                onImageRemove={handleImageRemove}
-              />
+              <div className="d-flex align-items-center justify-content-between">
                 <UploadItem
-                frameImage={Images.frame}
-                label="Back"
-                onImageUpload={handleImageUpload}
-                onImageRemove={handleImageRemove}
-              />
-             </div>
+                  frameImage={Images.frame}
+                  label="Front"
+                  onImageUpload={handleImageUpload}
+                  onImageRemove={handleImageRemove}
+                />
+                <UploadItem
+                  frameImage={Images.frame}
+                  label="Back"
+                  onImageUpload={handleImageUpload}
+                  onImageRemove={handleImageRemove}
+                />
+              </div>
 
 
               <Button label={"Continue"} type="submit" onClick={handleSubmit} />
