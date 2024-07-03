@@ -23,7 +23,7 @@ const ChangeLanguage = ({ placeholder }) => {
 
   const handleAuthClick = () => {
     setAuth(!auth);
-    setIsOpen(false); // Close language dropdown when opening auth options
+    setIsOpen(false);
   };
 
   const optionsLanguage = [
@@ -74,11 +74,11 @@ const ChangeLanguage = ({ placeholder }) => {
 
       {/* Auth options */}
       {auth && (
-        <div className="auth-options">
-          <p className='p-2' style={{ backgroundColor: "gray",borderRadius:10,width:100 }} onClick={() => Navigate("/login")}>
+        <div className="auth-options" style={{display:"flex",alignItems:"center", gap:"20px", marginTop:"30px"}}>
+          <p className='p-3' style={{ backgroundColor: "#ff8600",borderRadius:10, }} onClick={() => Navigate("/login")}>
             Login
           </p>
-          <p className='p-2 mt-2' style={{ backgroundColor: "red" }} onClick={() => Navigate("/signup")}>
+          <p className='p-3' style={{ backgroundColor: "#ffcf00",borderRadius:10, }} onClick={() => Navigate("/signup")}>
             Sign Up
           </p>
         </div>
