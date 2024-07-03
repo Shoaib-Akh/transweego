@@ -30,7 +30,7 @@ const ChangeLanguage = ({ placeholder,  }) => {
   ];
 
   return (
-    <div className="custom-dropdown" style={{ position: "absolute", top: "10px" }}>
+    <div className="custom-dropdown" >
       <div className="dropdown-header d-flex align-items-center gap-2" onClick={handleDropdownClick}>
         <div className='change-language' style={{ color: "white" }}>
           {selectedOption}

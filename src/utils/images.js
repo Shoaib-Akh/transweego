@@ -10,7 +10,7 @@ import google from "../assets/images/google.png";
 import office from "../assets/images/office.png";
 import CompanyLogo from "../assets/images/CompanyLogo.png";
 import Star from "../assets/images/Star.png";
-import cost from "../assets/images/cost.svg";
+import cost from "../assets/images/cost.png";
 import mobilelogo from "../assets/images/mobilelogo.png";
 import mobilegroup from "../assets/images/mobilegroup.png";
 import person from "../assets/images/person.png";
@@ -32,12 +32,18 @@ import spring from "../assets/images/spring.svg";
 import together1 from "../assets/images/together1.svg";
 import email_img from "../assets/images/email_img.svg";
 import Hexagon from "../assets/images/Hexagon.png";
+import increase from "../assets/images/increase.png";
+import earn from "../assets/images/earn.png";
+
+
 
 
 
 
 export const Images = {
     Star,
+    earn,
+    increase,
     Hexagon,
     mainLogo,
     // logo,

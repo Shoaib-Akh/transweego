@@ -17,9 +17,12 @@ const Navbar = ({subHeading,heading}) => {
             <img src={logo} width="30" height="30" alt="Logo" />
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+  <span className="navbar-toggler-icon" style={{ color: "#fff", backgroundColor: "#000" }}>
+
+  {/* <i class="fas fa-bars" style={{color:#fff; font-size:28px}}></i> */}
+  </span>
+</button>
+          <div className="collapse navbar-collapse" id="navbarNav" >
             <div className="navbar-nav mx-auto">
               <NavLink to="/" className="nav-link" activeClassName="active">Home</NavLink>
               <NavLink to="/how-it-work" className="nav-link" activeClassName="active">How it works</NavLink>

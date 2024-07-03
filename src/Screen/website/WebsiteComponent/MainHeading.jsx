@@ -7,9 +7,18 @@ const MainHeading = ({heading,subHeading}) => {
         <div className="col-lg-7 col-md-7 col-12">
           <h1>{heading}</h1>
           <p>{subHeading}</p>
-          <div className='d-flex align-items-center gap-sm-3 gap-1 mt-3'>
+          <div className=' gap-sm-3 gap-1 mt-3 row'>
+            <div className='col-md-5'> 
+
+
             <button className="btn orange">Send</button>
+            </div>
+          <div className='col-md-5'> 
+
+
             <button className="btn yellow">Transparent</button>
+            </div>
+           
           </div>
         </div>
       </div>
