@@ -1,45 +1,42 @@
 import React, { useState } from 'react';
-
-const ChangeLanguage = ({ placeholder,  }) => {
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+const ChangeLanguage = ({ placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("en");
+  const [selectedOption, setSelectedOption] = useState({ label: "EN", value: "EN" });
 
   const handleDropdownClick = () => {
     setIsOpen(!isOpen);
   };
 
   const handleOptionClick = (option) => {
-    setSelectedOption(option.value);
+    setSelectedOption(option);
     setIsOpen(false);
     // onChange(option.value);
   };
 
   const options = [
-    {
-      label: "En",
-      value: "En"
-    },
-    {
-      label: "DE",
-      value: "DE"
-    },
-    {
-      label: "EF",
-      value: "EF"
-    },
-    {
-      label: "IT",
-      value: "IT"
-    }
+    { label: "EN", value: "EN" },
+    { label: "DE", value: "DE" },
+    { label: "EF", value: "EF" },
+    { label: "IT", value: "IT" }
   ];
 
   return (
-    <div className="custom-dropdown" >
-      <div className="dropdown-header d-flex align-items-center gap-2" onClick={handleDropdownClick}>
-        <div className='change-language' style={{ color: "white" }}>
-          {selectedOption}
+    <div className="custom-dropdown">
+      <div className='d-flex gap-2'>
+        <div className="dropdown-header d-flex align-items-center gap-2" onClick={handleDropdownClick}>
+          <div className='change-language' style={{ color: "white" }}>
+            {selectedOption.label}
+          </div>
+          <p className='circle' style={{ color: "white" }}>
+            {isOpen ? <KeyboardArrowUpOutlinedIcon/>: <ExpandMoreOutlinedIcon/>}
+          </p>
         </div>
-        <p className='circle' style={{ color: "white" }}> {isOpen ? '▲' : '▼'}</p>
+        <div className='change-language' style={{ color: "white" }}>
+          <PersonOutlineOutlinedIcon />
+        </div>
       </div>
       {isOpen && (
         <ul className="dropdown-list">
