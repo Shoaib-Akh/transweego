@@ -1,10 +1,10 @@
 import React from "react";
 import "./componentCommonStyle.scss";
-const SimpleInput = ({ type = "text", placeholder, value, onChange,lable ,required}) => {
+
+const SimpleInput = ({ type = "text", placeholder, value, onChange, label, required, name }) => {
   return (
     <div className="SimpleInput-input">
-    
-
+      {label && <label>{label}</label>}
       <input
         type={type}
         placeholder={placeholder}
@@ -12,12 +12,10 @@ const SimpleInput = ({ type = "text", placeholder, value, onChange,lable ,requir
         onChange={onChange}
         className="SimpleInput"
         required={required}
-
+        name={name}
       />
     </div>
   );
 };
-
-
 
 export default SimpleInput;

@@ -13,12 +13,9 @@ import VerificationModal from "../../../../../Component/Modal/VerificationModal"
 
 const AddDriver = () => {
   const navigate = useNavigate();
-  const [Verification, setVerification] = useState(false);
-  const VerificationHandleOpen = () => setVerification(true);
-  const VerificationHandleClose = () => setVerification(false);
-
+  const [verificationOpen, setVerificationOpen] = useState(false);
   const [checkedInsured, setCheckedInsured] = useState(false);
-  const [checkedAddVehicles, setCheckedAddVehicles] = useState("addVehicles");
+  const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
   const [formData, setFormData] = useState({
     drivers: [
       {
@@ -28,22 +25,12 @@ const AddDriver = () => {
         phone: "",
       },
     ],
-    vehicles: [
-      {
-        services: [],
-        weight: "",
-        payload: "",
-        netWeight: "",
-        totalLength: "",
-        totalHeight: "",
-        internalLength: "",
-        internalWidth: "",
-        internalHeight: "",
-        loadingHeight: "",
-        additionalInfo: "",
-      },
-    ],
+    vehicles: [],
+    additionalInfo: ""
   });
+
+  const handleVerificationOpen = () => setVerificationOpen(true);
+  const handleVerificationClose = () => setVerificationOpen(false);
 
   const handleImageUpload = (image) => {
     console.log("Image uploaded:", image);
@@ -54,89 +41,56 @@ const AddDriver = () => {
   };
 
   const handleCheckboxChange = (action) => {
-    if (action === "addVehicles") {
-      setCheckedAddVehicles(true);
-   
-    } else if (action === "removeVehicles") {
-      setCheckedAddVehicles(false);
-      setFormData({
-        ...formData,
-        vehicles: [],
-      });
-   
+    setCheckedAddVehicles(action === "addVehicles");
+    if (action === "removeVehicles") {
+      setFormData((prevData) => ({ ...prevData, vehicles: [] }));
     }
   };
 
   const handleInputChange = (e, index, type) => {
+    console.log("e",e.target);
     const { name, value } = e.target;
-    if (type === "drivers") {
-      const updatedDrivers = [...formData.drivers];
-      updatedDrivers[index] = {
-        ...updatedDrivers[index],
-        [name]: value,
-      };
-      setFormData({
-        ...formData,
-        drivers: updatedDrivers,
-      });
-    } else if (type === "vehicles") {
-      const updatedVehicles = [...formData.vehicles];
-      updatedVehicles[index] = {
-        ...updatedVehicles[index],
-        [name]: value,
-      };
-      setFormData({
-        ...formData,
-        vehicles: updatedVehicles,
-      });
-    }
+    setFormData((prevData) => {
+      const updatedType = [...prevData[type]];
+      updatedType[index] = { ...updatedType[index], [name]: value };
+      return { ...prevData, [type]: updatedType };
+    });
   };
 
-  const handleVehicleTypeChange = (SelectVehicleType, index) => {
-    const updatedVehicles = [...formData.vehicles];
-    updatedVehicles[index] = {
-      ...updatedVehicles[index],
-      services: SelectVehicleType,
-    };
-    setFormData({
-      ...formData,
-      vehicles: updatedVehicles,
+  const handleVehicleTypeChange = (selectedOptions, index) => {
+    setFormData((prevData) => {
+      const updatedVehicles = [...prevData.vehicles];
+      updatedVehicles[index].services = selectedOptions;
+      return { ...prevData, vehicles: updatedVehicles };
     });
   };
 
   const handleSubmit = (e) => {
-    VerificationHandleOpen();
     e.preventDefault();
+    handleVerificationOpen();
     const data = {
-      drivers: formData.drivers,
-      vehicles: formData.vehicles,
+      ...formData,
       checkedInsured,
       checkedAddVehicles,
     };
     console.log("Form data to be sent:", data);
-    // navigate or submit the data
   };
 
   const addDriver = () => {
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       drivers: [
-        ...formData.drivers,
-        {
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-        },
+        ...prevData.drivers,
+        { firstName: "", lastName: "", email: "", phone: "" },
       ],
-    });
+    }));
   };
 
   const addVehicle = () => {
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       vehicles: [
-        ...formData.vehicles,
+        ...prevData.vehicles,
         {
           services: [],
           weight: "",
@@ -144,37 +98,42 @@ const AddDriver = () => {
           netWeight: "",
           totalLength: "",
           totalHeight: "",
+          overallLength: "",
           internalLength: "",
+          insideLength: "",
+          totalHeight: "",
           internalWidth: "",
           internalHeight: "",
           loadingHeight: "",
-          additionalInfo: "",
+          sillHeight: "",
+          insideWidth: "",
+          insideHeight: "",
         },
       ],
-    });
+    }));
   };
 
   const removeDriver = (index) => {
-    const updatedDrivers = formData.drivers.filter((_, i) => i !== index);
-    setFormData({
-      ...formData,
-      drivers: updatedDrivers,
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      drivers: prevData.drivers.filter((_, i) => i !== index),
+    }));
   };
+
   const removeVehicle = (index) => {
-    const updatedVehicles = formData.vehicles.filter((_, i) => i !== index);
-    setFormData({
-      ...formData,
-      vehicles: updatedVehicles,
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      vehicles: prevData.vehicles.filter((_, i) => i !== index),
+    }));
   };
+
   const options = [
     { id: 1, label: "Transporter" },
     { id: 2, label: "Trailer" },
     { id: 3, label: "Animal transporter" },
   ];
-  const optionsTrailerType = [
 
+  const optionsTrailerType = [
     { id: 1, label: "Low loader" },
     { id: 2, label: "Heigh Loader" },
     { id: 3, label: "Tipping trailers" },
@@ -182,16 +141,11 @@ const AddDriver = () => {
     { id: 5, label: "Vehicle transporter" },
     { id: 6, label: "Boat trailer" },
     { id: 7, label: "Folding trailer" },
-    { id: 8, label: "Livestoke trailers" },
-    { id: 9, label: "Tree machinery transport " },
+    { id: 8, label: "Livestock trailers" },
+    { id: 9, label: "Tree machinery transport" },
     { id: 10, label: "Special trailers" },
-    { id: 10, label: "Box trailers" },
-
-
-
-
-  ]
-
+    { id: 11, label: "Box trailers" },
+  ];
 
   return (
     <AuthLayout>
@@ -246,31 +200,28 @@ const AddDriver = () => {
                       onImageRemove={handleImageRemove}
                     />
                   </div>
-
                 </div>
               ))}
               <div className="d-flex align-items-center gap-2 mb-3 add-item">
-                <div className="add-icon" onClick={addDriver}>
-                  +
-                </div>
-                <p className="add-text">  {formData.drivers.length ? "Add More Drivers" : "Add Drivers"}</p>
+                <div className="add-icon" onClick={addDriver}>+</div>
+                <p className="add-text">
+                  {formData.drivers.length ? "Add More Drivers" : "Add Drivers"}
+                </p>
               </div>
               <hr />
-
               <p className="label">Would you like to add your Vehicles?</p>
               <div className="checkbox_div">
-              <CustomCheckbox
-        checked={checkedAddVehicles}
-        onChange={() => handleCheckboxChange("addVehicles")}
-        label="Yes"
-      />
-      <CustomCheckbox
-        checked={!checkedAddVehicles} // Use !checkedAddVehicles for "No"
-        onChange={() => handleCheckboxChange("removeVehicles")}
-        label="No"
-      />
+                <CustomCheckbox
+                  checked={checkedAddVehicles}
+                  onChange={() => handleCheckboxChange("addVehicles")}
+                  label="Yes"
+                />
+                <CustomCheckbox
+                  checked={!checkedAddVehicles}
+                  onChange={() => handleCheckboxChange("removeVehicles")}
+                  label="No"
+                />
               </div>
-
               {formData.vehicles.map((vehicle, index) => (
                 <div key={index}>
                   <div className="d-flex align-items-center gap-2 mb-3 add-item" onClick={() => removeVehicle(index)}>
@@ -285,21 +236,17 @@ const AddDriver = () => {
                     placeholder="Select Vehicle type"
                     options={options}
                     yes={"further"}
-                    onChange={(SelectVehicleType) =>
-                      handleVehicleTypeChange(SelectVehicleType, index)
-                    }
+                    onChange={(SelectVehicleType) => handleVehicleTypeChange(SelectVehicleType, index)}
                   />
                   <MultiSelectDropdown
                     label="Trailer type"
                     Heading={"Trailer type"}
                     placeholder="Select Trailer type"
                     options={optionsTrailerType}
-                    onChange={(SelectVehicleType) =>
-                      handleVehicleTypeChange(SelectVehicleType, index)
-                    }
+                    onChange={(SelectVehicleType) => handleVehicleTypeChange(SelectVehicleType, index)}
                   />
                   <SimpleInput
-                    placeholder="Total Weight (Kg)"
+                    placeholder="Total weight in kg"
                     name="weight"
                     value={vehicle.weight}
                     onChange={(e) => handleInputChange(e, index, "vehicles")}
@@ -317,57 +264,67 @@ const AddDriver = () => {
                     onChange={(e) => handleInputChange(e, index, "vehicles")}
                   />
                   <SimpleInput
-                    placeholder="Total Length"
+                    placeholder="Curb weight"
                     name="totalLength"
                     value={vehicle.totalLength}
                     onChange={(e) => handleInputChange(e, index, "vehicles")}
                   />
                   <SimpleInput
-                    placeholder="Total Height"
-                    name="totalHeight"
-                    value={vehicle.totalHeight}
+                    placeholder="Overall length"
+                    name="overallLength"
+                    value={vehicle.overallLength}
                     onChange={(e) => handleInputChange(e, index, "vehicles")}
                   />
                   <SimpleInput
-                    placeholder="Internal Length"
+                    placeholder="Total width"
                     name="internalLength"
                     value={vehicle.internalLength}
                     onChange={(e) => handleInputChange(e, index, "vehicles")}
                   />
                   <SimpleInput
-                    placeholder="Internal Width"
-                    name="internalWidth"
-                    value={vehicle.internalWidth}
+                    placeholder="Total height"
+                    name="totalHeight"
+                    value={vehicle.totalHeight}
                     onChange={(e) => handleInputChange(e, index, "vehicles")}
                   />
                   <SimpleInput
-                    placeholder="Internal Height"
-                    name="internalHeight"
-                    value={vehicle.internalHeight}
+                    placeholder="Loading weight inside length"
+                    name="insideLength"
+                    value={vehicle.insideLength}
                     onChange={(e) => handleInputChange(e, index, "vehicles")}
                   />
                   <SimpleInput
-                    placeholder="Loading Height"
-                    name="loadingHeight"
-                    value={vehicle.loadingHeight}
+                    placeholder="Loading weight inside width"
+                    name="insideWidth"
+                    value={vehicle.insideWidth}
                     onChange={(e) => handleInputChange(e, index, "vehicles")}
                   />
-
+                  <SimpleInput
+                    placeholder="Loading weight inside height"
+                    name="insideHeight"
+                    value={vehicle.insideHeight}
+                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                  />
+                  <SimpleInput
+                    placeholder="Loading sill height"
+                    name="sillHeight"
+                    value={vehicle.sillHeight}
+                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                  />
                 </div>
               ))}
               <div className="d-flex align-items-center gap-2 mb-3 add-item">
-                <div className="add-icon" onClick={addVehicle}>
-                  +
-                </div>
-                <p className="add-text">  {formData.vehicles.length ? "Add More Vehicles" : "Add  Vehicles "}</p>
+                <div className="add-icon" onClick={addVehicle}>+</div>
+                <p className="add-text">
+                  {formData.vehicles.length ? "Add More Vehicles" : "Add Vehicles"}
+                </p>
               </div>
-
               <textarea
                 className="textArea"
                 placeholder="Additional Information"
                 name="additionalInfo"
                 value={formData.additionalInfo}
-                onChange={handleInputChange}
+                onChange={(e) => setFormData({ ...formData, additionalInfo: e.target.value })}
               ></textarea>
               <p className="para">
                 I confirm that all the information provided above is correct and
@@ -375,21 +332,20 @@ const AddDriver = () => {
                 and use of the app.
               </p>
               <CustomCheckbox
-                checked={!checkedAddVehicles}
-                onChange={() => handleCheckboxChange("addVehicles")}
+                checked={checkedInsured}
+                onChange={() => setCheckedInsured(!checkedInsured)}
                 label="I agree to the terms and conditions."
               />
               <Button label="Send" className="yellow" type="submit" />
-              {/* <Button label="Reset" className="orange" type="reset" /> */}
               <Button label="Reset" className="orange" type="reset" />
             </div>
           </form>
         </div>
       </div>
       <VerificationModal
-        open={Verification}
-        handleOpen={VerificationHandleOpen}
-        handleClose={VerificationHandleClose}
+        open={verificationOpen}
+        handleOpen={handleVerificationOpen}
+        handleClose={handleVerificationClose}
       />
     </AuthLayout>
   );

@@ -179,7 +179,7 @@ const CompanySignup = () => {
                     onImageRemove={() => handleImageRemove("Company Documents")}
                   />
                 </div>
-                <hr />
+                {/* <hr />
                 <p className="label">Would you like to add your vehicles?</p>
                 <div className="checkbox_div">
                   <CustomCheckbox
@@ -192,7 +192,7 @@ const CompanySignup = () => {
                     onChange={() => handleCheckboxChange('addVehicles')}
                     label="No"
                   />
-                </div>
+                </div> */}
               </div>
               <Button
                 label="Next"

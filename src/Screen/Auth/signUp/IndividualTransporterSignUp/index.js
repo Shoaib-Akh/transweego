@@ -278,14 +278,8 @@ const IndividualTransporterSignUp = () => {
              </div>
 
 
-              <p className="para">I confirm that all the above information is correct and complete. I agree that this data will be used for registration and use of the app.</p>
-              <CustomCheckbox
-                checked={checkedTerms}
-                onChange={handleCheckboxChange}
-                label={"I agree to the terms and conditions."}
-              />
-              <Button label={"Submit"} type="submit" onClick={handleSubmit} />
-              <Button label={"Reset"} onClick={() => setFormData({
+              <Button label={"Continue"} type="submit" onClick={handleSubmit} />
+              {/* <Button label={"Reset"} onClick={() => setFormData({
                 firstName: '',
                 lastName: '',
                 email: '',
@@ -298,7 +292,7 @@ const IndividualTransporterSignUp = () => {
                 nationality: '',
                 documents: [],
                 parcelsOption: ''
-              })} />
+              })} /> */}
             </div>
           </div>
         </div>
