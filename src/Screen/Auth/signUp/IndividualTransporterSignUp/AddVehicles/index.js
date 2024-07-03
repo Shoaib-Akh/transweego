@@ -162,17 +162,19 @@ const AddVehicles = () => {
     { id: 3, label: "Animal transporter" },
   ];
   const optionsTrailerType = [
-  
+ 
     { id: 1, label: "Low loader" },
-    { id: 2, label: "Uploader" },
-    { id: 3, label: "Dump trailer" }, 
+    { id: 2, label: "Heigh Loader" },
+    { id: 3, label: "Tipping trailers" }, 
     { id: 4, label: "Motorcycle transporter" },
     { id: 5, label: "Vehicle transporter" },
     { id: 6, label: "Boat trailer" },
     { id: 7, label: "Folding trailer" },
-    { id: 8, label: "Special trailer " },
-    { id: 9, label: "Special trailer  " },
-    { id: 10, label: "Suitcase tag " },
+    { id: 8, label: "Livestoke trailers" },
+    { id: 9, label: "Tree machinery transport " },
+    { id: 10, label: "Special trailers" },
+    { id: 10, label: "Box trailers" },
+
 
 
 
@@ -192,7 +194,7 @@ const AddVehicles = () => {
                     <div className="add-icon">-</div>
                     <p className="add-text">Add Vehicle</p>
                   </div>
-                  <h4 className="heading-label">Detecting vehicles</h4>
+                  <h4 className="heading-label">Register vehicles</h4>
                   <CustomDropDown
                     label="Vehicle type"
                     no={"cancel"}

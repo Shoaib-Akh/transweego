@@ -16,16 +16,20 @@ const ChangeLanguage = ({ placeholder,  }) => {
 
   const options = [
     {
-      label: "de",
-      value: "de"
+      label: "En",
+      value: "En"
     },
     {
-      label: "en",
-      value: "en"
+      label: "DE",
+      value: "DE"
     },
     {
-      label: "ch",
-      value: "ch"
+      label: "EF",
+      value: "EF"
+    },
+    {
+      label: "IT",
+      value: "IT"
     }
   ];
 

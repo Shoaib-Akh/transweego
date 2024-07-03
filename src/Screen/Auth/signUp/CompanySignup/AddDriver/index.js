@@ -18,7 +18,7 @@ const AddDriver = () => {
   const VerificationHandleClose = () => setVerification(false);
 
   const [checkedInsured, setCheckedInsured] = useState(false);
-  const [checkedAddVehicles, setCheckedAddVehicles] = useState(false);
+  const [checkedAddVehicles, setCheckedAddVehicles] = useState("addVehicles");
   const [formData, setFormData] = useState({
     drivers: [
       {
@@ -53,11 +53,17 @@ const AddDriver = () => {
     console.log("Image removed");
   };
 
-  const handleCheckboxChange = (name) => {
-    if (name === "insured") {
-      setCheckedInsured(!checkedInsured);
-    } else if (name === "addVehicles") {
-      setCheckedAddVehicles(!checkedAddVehicles);
+  const handleCheckboxChange = (action) => {
+    if (action === "addVehicles") {
+      setCheckedAddVehicles(true);
+   
+    } else if (action === "removeVehicles") {
+      setCheckedAddVehicles(false);
+      setFormData({
+        ...formData,
+        vehicles: [],
+      });
+   
     }
   };
 
@@ -168,30 +174,19 @@ const AddDriver = () => {
     { id: 3, label: "Animal transporter" },
   ];
   const optionsTrailerType = [
-    // {id:1,
-    // label:" Low loader"
-    // Uploader 
-    // Dump trailer
-    // Motorcycle transporter
-    // Vehicle transporter
-    // Livestock trailer
-    // Boat trailer
-    // Folding trailer
-    // Tree machinery transporter
-    // Special trailer 
-    // Suitcase tag"
 
-    // }
     { id: 1, label: "Low loader" },
-    { id: 2, label: "Uploader" },
-    { id: 3, label: "Dump trailer" }, 
+    { id: 2, label: "Heigh Loader" },
+    { id: 3, label: "Tipping trailers" },
     { id: 4, label: "Motorcycle transporter" },
     { id: 5, label: "Vehicle transporter" },
     { id: 6, label: "Boat trailer" },
     { id: 7, label: "Folding trailer" },
-    { id: 8, label: "Special trailer " },
-    { id: 9, label: "Special trailer  " },
-    { id: 10, label: "Suitcase tag " },
+    { id: 8, label: "Livestoke trailers" },
+    { id: 9, label: "Tree machinery transport " },
+    { id: 10, label: "Special trailers" },
+    { id: 10, label: "Box trailers" },
+
 
 
 
@@ -251,29 +246,29 @@ const AddDriver = () => {
                       onImageRemove={handleImageRemove}
                     />
                   </div>
-                
+
                 </div>
               ))}
-               <div className="d-flex align-items-center gap-2 mb-3 add-item">
-                      <div className="add-icon" onClick={addDriver}>
-                        +
-                      </div>
-                      <p className="add-text">  { formData.drivers.length?"Add More Drivers":"Add Drivers"}</p>
-                    </div>
+              <div className="d-flex align-items-center gap-2 mb-3 add-item">
+                <div className="add-icon" onClick={addDriver}>
+                  +
+                </div>
+                <p className="add-text">  {formData.drivers.length ? "Add More Drivers" : "Add Drivers"}</p>
+              </div>
               <hr />
 
               <p className="label">Would you like to add your Vehicles?</p>
               <div className="checkbox_div">
-                <CustomCheckbox
-                  checked={checkedAddVehicles}
-                  onChange={() => handleCheckboxChange("addVehicles")}
-                  label="Yes"
-                />
-                <CustomCheckbox
-                  checked={!checkedAddVehicles}
-                  onChange={() => handleCheckboxChange("addVehicles")}
-                  label="No"
-                />
+              <CustomCheckbox
+        checked={checkedAddVehicles}
+        onChange={() => handleCheckboxChange("addVehicles")}
+        label="Yes"
+      />
+      <CustomCheckbox
+        checked={!checkedAddVehicles} // Use !checkedAddVehicles for "No"
+        onChange={() => handleCheckboxChange("removeVehicles")}
+        label="No"
+      />
               </div>
 
               {formData.vehicles.map((vehicle, index) => (
@@ -282,7 +277,7 @@ const AddDriver = () => {
                     <div className="add-icon">-</div>
                     <p className="add-text">Add Vehicle</p>
                   </div>
-                  <h4 className="heading-label">Detecting vehicles</h4>
+                  <h4 className="heading-label">Register vehicles</h4>
                   <CustomDropDown
                     label="Vehicle type"
                     no={"cancel"}
@@ -357,15 +352,15 @@ const AddDriver = () => {
                     value={vehicle.loadingHeight}
                     onChange={(e) => handleInputChange(e, index, "vehicles")}
                   />
-                  
+
                 </div>
               ))}
-               <div className="d-flex align-items-center gap-2 mb-3 add-item">
-                      <div className="add-icon" onClick={addVehicle}>
-                        +
-                      </div>
-                      <p className="add-text">  { formData.vehicles.length?"Add More Vehicles":"Add  Vehicles "}</p>
-                    </div>
+              <div className="d-flex align-items-center gap-2 mb-3 add-item">
+                <div className="add-icon" onClick={addVehicle}>
+                  +
+                </div>
+                <p className="add-text">  {formData.vehicles.length ? "Add More Vehicles" : "Add  Vehicles "}</p>
+              </div>
 
               <textarea
                 className="textArea"
