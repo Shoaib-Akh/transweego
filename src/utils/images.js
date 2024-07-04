@@ -14,7 +14,7 @@ import cost from "../assets/images/cost.png";
 import mobilelogo from "../assets/images/mobilelogo.png";
 import mobilegroup from "../assets/images/mobilegroup.png";
 import person from "../assets/images/person.png";
-import togther from "../assets/images/togther.svg";
+import together from "../assets/images/together.svg";
 import mask from "../assets/images/mask.svg";
 import Vector3 from "../assets/images/Vector3.svg";
 import Vector4 from "../assets/images/Vector4.svg";
@@ -53,7 +53,7 @@ export const Images = {
     spring,
     dollarvault,
     aeroleft,
-    togther,
+    together: together,
     together1,
     car,
     aeroright,

@@ -1032,6 +1032,7 @@ line-height: 46px;
 .custom-dropdown
 { position: absolute;
    top: 10px;
+   right: 10px;
    
    @media (max-width: 768px) {
     top: 50px !important;
@@ -1061,5 +1062,57 @@ line-height: 46px;
     left: 7px;
     background-color: rgb(0, 0, 0);
     padding: 20px 20px;
+  }
+}
+
+.custom-dropdown {
+  .auth-dropdown-header {
+    cursor: pointer;
+  }
+
+  .dropdown-list {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 8px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dropdown-option {
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  .auth-options {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 8px;
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+
+    .login-option, .signup-option {
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+
+      &:hover {
+        background-color: #FF8600;
+        color: #fff;
+       
+      }
+    }
   }
 }

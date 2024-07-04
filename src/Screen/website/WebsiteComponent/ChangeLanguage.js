@@ -3,17 +3,19 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import { useNavigate } from 'react-router-dom';
+import "../../website/style.scss";
+
 
 const ChangeLanguage = ({ placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [auth, setAuth] = useState(false);
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [selectedOption, setSelectedOption] = useState({ label: "EN", value: "EN" });
 
   const handleDropdownClick = () => {
     setIsOpen(!isOpen);
-    setAuth(false)
+    setAuth(false);
   };
 
   const handleOptionClick = (option) => {
@@ -35,7 +37,7 @@ const ChangeLanguage = ({ placeholder }) => {
 
   return (
     <div className="custom-dropdown">
-      <div className='d-flex gap-2'>
+      <div className='d-flex '>
         {/* Language dropdown */}
         <div className="dropdown-header d-flex align-items-center gap-2" onClick={handleDropdownClick}>
           <div className='change-language' style={{ color: "white" }}>
@@ -47,7 +49,7 @@ const ChangeLanguage = ({ placeholder }) => {
         </div>
 
         {/* Auth dropdown */}
-        <div className="dropdown-header d-flex align-items-center gap-2" onClick={handleAuthClick}>
+        <div className=" auth-dropdown-header d-flex align-items-center gap-2" onClick={handleAuthClick}>
           <div className='change-language' style={{ color: "white" }}>
             <PersonOutlineOutlinedIcon />
           </div>
@@ -59,7 +61,7 @@ const ChangeLanguage = ({ placeholder }) => {
 
       {/* Language dropdown options */}
       {isOpen && (
-        <ul className="dropdown-list">
+        <ul className="dropdown-list-change-language">
           {optionsLanguage.map((option) => (
             <div
               className='change-language dropdown-option mt-2'
@@ -74,11 +76,11 @@ const ChangeLanguage = ({ placeholder }) => {
 
       {/* Auth options */}
       {auth && (
-        <div className="auth-options" style={{display:"flex",alignItems:"center", gap:"20px", marginTop:"30px"}}>
-          <p className='p-3' style={{ backgroundColor: "#ff8600",borderRadius:10, }} onClick={() => Navigate("/login")}>
+        <div className="auth-options">
+          <p className='p-3 login-option' onClick={() => navigate("/login")}>
             Login
           </p>
-          <p className='p-3' style={{ backgroundColor: "#ffcf00",borderRadius:10, }} onClick={() => Navigate("/signup")}>
+          <p className='p-3 signup-option' onClick={() => navigate("/signup")}>
             Sign Up
           </p>
         </div>

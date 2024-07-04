@@ -60,7 +60,7 @@ const HowItWork = () => {
           </div>
         </div>
         <div className="text-center">
-          <img src={Images.togther} alt="car" />
+          <img src={Images.together} alt="car" />
         </div>
         <div className="row">
           <div className="col-lg-6 col-md-12">
@@ -81,7 +81,7 @@ const HowItWork = () => {
           </div>
         </div>
         <div className="text-center">
-          <img src={Images.togther} alt="car" />
+          <img src={Images.together} alt="car" />
         </div>
         <div className="row mt-5">
           <div className="col-lg-6 col-md-12 d-flex">
