@@ -31,7 +31,7 @@ const ChangeLanguage = ({ placeholder }) => {
   const optionsLanguage = [
     { label: "EN", value: "EN" },
     { label: "DE", value: "DE" },
-    { label: "EF", value: "EF" },
+    { label: "FR", value: "FR" },
     { label: "IT", value: "IT" }
   ];
 
