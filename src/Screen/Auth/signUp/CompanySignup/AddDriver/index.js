@@ -10,6 +10,7 @@ import Button from "../../../../../Component/Button";
 import { useNavigate } from "react-router-dom";
 import CustomDropDown from "../../../../../Component/CustomDropDown";
 import VerificationModal from "../../../../../Component/Modal/VerificationModal";
+import VehicleForm from "../../../../../Component/VehicleForm";
 
 const AddDriver = () => {
   const navigate = useNavigate();
@@ -47,22 +48,26 @@ const AddDriver = () => {
     }
   };
 
-  const handleInputChange = (e, index, type) => {
-    console.log("e",e.target);
-    const { name, value } = e.target;
-    setFormData((prevData) => {
-      const updatedType = [...prevData[type]];
-      updatedType[index] = { ...updatedType[index], [name]: value };
-      return { ...prevData, [type]: updatedType };
-    });
-  };
+  // const handleInputChange = (e, index, type) => {
+  //   console.log("e",e.target);
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => {
+  //     const updatedType = [...prevData[type]];
+  //     updatedType[index] = { ...updatedType[index], [name]: value };
+  //     return { ...prevData, [type]: updatedType };
+  //   });
+  // };
+  const [selectVehicle,setSelectVehicle]=useState()
 
-  const handleVehicleTypeChange = (selectedOptions, index) => {
-    setFormData((prevData) => {
-      const updatedVehicles = [...prevData.vehicles];
-      updatedVehicles[index].services = selectedOptions;
-      return { ...prevData, vehicles: updatedVehicles };
-    });
+  const handleVehicleTypeChange = (id, selectedOptions) => {
+    
+    // setFormData((prevData) => {
+    //   const updatedVehicles = [...prevData.vehicles];
+    //   updatedVehicles[index].services = selectedOptions;
+    //   return { ...prevData, vehicles: updatedVehicles };
+    // });
+    setSelectVehicle(selectedOptions)
+
   };
 
   const handleSubmit = (e) => {
@@ -146,7 +151,34 @@ const AddDriver = () => {
     { id: 10, label: "Special trailers" },
     { id: 11, label: "Box trailers" },
   ];
+  const initialVehicle = {
+    numberPlate: '',
+    vehicleType: '',
+    brandAndType: '',
+    chassisNo: '',
+    color: '',
+    totalSeats: '',
+    inFront: '',
+    emptyWeight: '',
+    serialNumber: '',
+    saddleLoad: '',
+    typeApproval: '',
+    totalWeight: '',
+    emissionCode: '',
+    placingOnMarket: ''
+  };
 
+  const [vehicles, setVehicles] = useState([initialVehicle]);
+
+  const handleInputChange = (e, index, key) => {
+    const { name, value } = e.target;
+    const newVehicles = [...vehicles];
+    newVehicles[index] = {
+      ...newVehicles[index],
+      [name]: value,
+    };
+    setVehicles(newVehicles);
+  };
   return (
     <AuthLayout>
       <div className="center-div">
@@ -222,103 +254,115 @@ const AddDriver = () => {
                   label="No"
                 />
               </div>
-              {formData.vehicles.map((vehicle, index) => (
-                <div key={index}>
-                  <div className="d-flex align-items-center gap-2 mb-3 add-item" onClick={() => removeVehicle(index)}>
+              <div className="d-flex align-items-center gap-2 mb-3 add-item" onClick={() => removeVehicle()}>
                     <div className="add-icon">-</div>
                     <p className="add-text">Add Vehicle</p>
                   </div>
-                  <h4 className="heading-label">Register vehicles</h4>
-                  <CustomDropDown
+            { checkedAddVehicles &&<>
+             <CustomDropDown
                     label="Vehicle type"
                     no={"cancel"}
                     heading={"Vehicle type"}
                     placeholder="Select Vehicle type"
                     options={options}
                     yes={"further"}
-                    onChange={(SelectVehicleType) => handleVehicleTypeChange(SelectVehicleType, index)}
+                    onChange={(SelectVehicleType,selectedOptions) => handleVehicleTypeChange(SelectVehicleType,selectedOptions)}
                   />
-                  <MultiSelectDropdown
+                  {selectVehicle !=="Transporter" &&<CustomDropDown
                     label="Trailer type"
                     Heading={"Trailer type"}
                     placeholder="Select Trailer type"
                     options={optionsTrailerType}
-                    onChange={(SelectVehicleType) => handleVehicleTypeChange(SelectVehicleType, index)}
-                  />
-                  <SimpleInput
+                    onChange={(SelectVehicleType) => handleVehicleTypeChange(SelectVehicleType)}
+                  />}
+            </>  }
+                  
+              {selectVehicle =="Transporter"&&
+                <div >
+                  
+                  <h4 className="heading-label">Register vehicles</h4>
+                  {vehicles.map((vehicle, index) => (
+        <VehicleForm
+          key={index}
+          vehicle={vehicle}
+          index={index}
+          handleInputChange={handleInputChange}
+        />
+      ))}
+                  {/* <SimpleInput
                     placeholder="Total weight in kg"
                     name="weight"
-                    value={vehicle.weight}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.weight}
+                    onChange={(e) => handleInputChange(e,  "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Payload"
                     name="payload"
-                    value={vehicle.payload}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.payload}
+                    onChange={(e) => handleInputChange(e, "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Net Weight"
                     name="netWeight"
-                    value={vehicle.netWeight}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.netWeight}
+                    onChange={(e) => handleInputChange(e,  "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Curb weight"
                     name="totalLength"
-                    value={vehicle.totalLength}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.totalLength}
+                    onChange={(e) => handleInputChange(e, "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Overall length"
                     name="overallLength"
-                    value={vehicle.overallLength}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.overallLength}
+                    onChange={(e) => handleInputChange(e,  "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Total width"
                     name="internalLength"
-                    value={vehicle.internalLength}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.internalLength}
+                    onChange={(e) => handleInputChange(e,  "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Total height"
                     name="totalHeight"
-                    value={vehicle.totalHeight}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.totalHeight}
+                    onChange={(e) => handleInputChange(e,  "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Loading weight inside length"
                     name="insideLength"
-                    value={vehicle.insideLength}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.insideLength}
+                    onChange={(e) => handleInputChange(e, "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Loading weight inside width"
                     name="insideWidth"
-                    value={vehicle.insideWidth}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.insideWidth}
+                    onChange={(e) => handleInputChange(e,  "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Loading weight inside height"
                     name="insideHeight"
-                    value={vehicle.insideHeight}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
+                    // value={vehicle.insideHeight}
+                    onChange={(e) => handleInputChange(e,  "vehicles")}
                   />
                   <SimpleInput
                     placeholder="Loading sill height"
                     name="sillHeight"
-                    value={vehicle.sillHeight}
-                    onChange={(e) => handleInputChange(e, index, "vehicles")}
-                  />
+                    // value={vehicle.sillHeight}
+                    onChange={(e) => handleInputChange(e,  "vehicles")}
+                  /> */}
                 </div>
-              ))}
-              <div className="d-flex align-items-center gap-2 mb-3 add-item">
+              }
+              { checkedAddVehicles &&<div className="d-flex align-items-center gap-2 mb-3 add-item">
                 <div className="add-icon" onClick={addVehicle}>+</div>
                 <p className="add-text">
                   {formData.vehicles.length ? "Add More Vehicles" : "Add Vehicles"}
                 </p>
-              </div>
+              </div>}
               <textarea
                 className="textArea"
                 placeholder="Additional Information"
