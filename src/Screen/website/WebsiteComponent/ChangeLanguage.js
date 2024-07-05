@@ -5,7 +5,6 @@ import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import { useNavigate } from 'react-router-dom';
 import "../../website/style.scss";
 
-
 const ChangeLanguage = ({ placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [auth, setAuth] = useState(false);
@@ -35,6 +34,8 @@ const ChangeLanguage = ({ placeholder }) => {
     { label: "IT", value: "IT" }
   ];
 
+  const filteredOptions = optionsLanguage.filter(option => option.value !== selectedOption.value);
+
   return (
     <div className="custom-dropdown">
       <div className='d-flex '>
@@ -62,7 +63,7 @@ const ChangeLanguage = ({ placeholder }) => {
       {/* Language dropdown options */}
       {isOpen && (
         <ul className="dropdown-list-change-language">
-          {optionsLanguage.map((option) => (
+          {filteredOptions.map((option) => (
             <div
               className='change-language dropdown-option mt-2'
               key={option.value}

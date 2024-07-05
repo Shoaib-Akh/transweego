@@ -84,14 +84,6 @@ const AddDriver = () => {
     console.log("Form data to be sent:", data);
   };
 
-
-
-
-
-
-
-
-
   const handleVehicleInputChange = (e, index) => {
     const { name, value } = e.target;
     const newVehicles = [...vehicles];
