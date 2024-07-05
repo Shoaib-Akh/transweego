@@ -1012,18 +1012,25 @@ line-height: 46px;
   justify-content: center;
   border: 1px solid white;
   border-radius: 30px;
-  color: #FFF;
+  
 
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
+  
   p {
     color: #FFF;
 
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
+   
   }
+  &:hover p{
+     
+    color: #000;
+  }
+
 }
 .img_mobileGroup{
   max-width: 600px;
@@ -1086,6 +1093,7 @@ line-height: 46px;
 
     &:hover {
       background-color: #f0f0f0;
+      color: #000;
     }
   }
 
