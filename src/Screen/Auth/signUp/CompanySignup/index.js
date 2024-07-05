@@ -82,15 +82,15 @@ const CompanySignup = () => {
   };
 
   const handleNext = () => {
-    const data = {
+    const CompanySignupData = {
       ...formData,
       checkedInsured,
       checkedAddVehicles,
       companyLogo,
       companyDocuments
     };
-    console.log('Form data to be sent to next screen:', data);
-    navigate("/add-driver", { state: { data } });
+    // console.log('Form data to be sent to next screen:', data);
+    navigate("/add-driver", { state: { CompanySignupData } });
   };
 
   return (

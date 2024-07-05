@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./componentCommonStyle.scss";
 import { Images } from "../utils/images";
 
-const CustomDropDown = ({ options, value, onChange, error, label, placeholder, heading }) => {
+const CustomDropDown = ({ options, value, onChange, error, label, placeholder, heading, index }) => {
   const [selectedOption, setSelectedOption] = useState(value);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -12,7 +12,7 @@ const CustomDropDown = ({ options, value, onChange, error, label, placeholder, h
 
   const handleOptionClick = (option) => {
     setSelectedOption(option.label);
-    onChange(option.id, option.label); 
+    onChange(option.id, option.label, index);
     setIsDropdownOpen(false);
   };
 

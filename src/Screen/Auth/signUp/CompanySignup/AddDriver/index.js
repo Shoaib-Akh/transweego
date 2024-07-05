@@ -5,18 +5,55 @@ import { Images } from "../../../../../utils/images";
 import AuthLayout from "../../../../../layout/AuthLayout";
 import UploadItem from "../../../../../Component/UploadItem";
 import CustomCheckbox from "../../../../../Component/CustomCheckbox";
-import MultiSelectDropdown from "../../../../../Component/MultiSelectDropdown";
 import Button from "../../../../../Component/Button";
-import { useNavigate } from "react-router-dom";
-import CustomDropDown from "../../../../../Component/CustomDropDown";
+import { useLocation, useNavigate } from "react-router-dom";
 import VerificationModal from "../../../../../Component/Modal/VerificationModal";
-import VehicleForm from "../../../../../Component/VehicleForm";
+
+import AddVehicleSection from "../../../../../Component/AddVehicleSection";
+import CompanySignup from '../index';
 
 const AddDriver = () => {
   const navigate = useNavigate();
   const [verificationOpen, setVerificationOpen] = useState(false);
   const [checkedInsured, setCheckedInsured] = useState(false);
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
+  const [selectVehicle, setSelectVehicle] = useState([]);
+  const [selectTrailer, setSelectTrailer] = useState([]);
+
+  const initialVehicleDimensions = {
+    weight: "",
+    payload: "",
+    netWeight: "",
+    totalLength: "",
+    overallLength: "",
+    internalLength: "",
+    totalHeight: "",
+    insideLength: "",
+    insideWidth: "",
+    insideHeight: "",
+    sillHeight: "",
+  };
+
+  const initialVehicle = {
+    numberPlate: "",
+    vehicleType: "",
+    brandAndType: "",
+    chassisNo: "",
+    color: "",
+    totalSeats: "",
+    inFront: "",
+    emptyWeight: "",
+    serialNumber: "",
+    saddleLoad: "",
+    typeApproval: "",
+    totalWeight: "",
+    emissionCode: "",
+    placingOnMarket: "",
+  };
+
+  const [vehicles, setVehicles] = useState([initialVehicle]);
+  const [vehicleDimensions, setVehicleDimensions] = useState([initialVehicleDimensions]);
+
   const [formData, setFormData] = useState({
     drivers: [
       {
@@ -27,7 +64,7 @@ const AddDriver = () => {
       },
     ],
     vehicles: [],
-    additionalInfo: ""
+    additionalInfo: "",
   });
 
   const handleVerificationOpen = () => setVerificationOpen(true);
@@ -45,41 +82,23 @@ const AddDriver = () => {
     setCheckedAddVehicles(action === "addVehicles");
     if (action === "removeVehicles") {
       setFormData((prevData) => ({ ...prevData, vehicles: [] }));
+      setSelectTrailer([]);
     }
   };
 
-  // const handleInputChange = (e, index, type) => {
-  //   console.log("e",e.target);
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => {
-  //     const updatedType = [...prevData[type]];
-  //     updatedType[index] = { ...updatedType[index], [name]: value };
-  //     return { ...prevData, [type]: updatedType };
-  //   });
-  // };
-  const [selectVehicle,setSelectVehicle]=useState()
-
-  const handleVehicleTypeChange = (id, selectedOptions) => {
-    
-    // setFormData((prevData) => {
-    //   const updatedVehicles = [...prevData.vehicles];
-    //   updatedVehicles[index].services = selectedOptions;
-    //   return { ...prevData, vehicles: updatedVehicles };
-    // });
-    setSelectVehicle(selectedOptions)
-
+  const handleVehicleTypeChange = (id, selectedOptions, index) => {
+    const updatedSelectVehicle = [...selectVehicle];
+    updatedSelectVehicle[index] = selectedOptions;
+    setSelectVehicle(updatedSelectVehicle);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleVerificationOpen();
-    const data = {
-      ...formData,
-      checkedInsured,
-      checkedAddVehicles,
-    };
-    console.log("Form data to be sent:", data);
+  const handleTrailerTypeChange = (id, selectedOptions, index) => {
+    const updatedSelectTrailer = [...selectTrailer];
+    updatedSelectTrailer[index] = selectedOptions;
+    setSelectTrailer(updatedSelectTrailer);
   };
+
+  
 
   const addDriver = () => {
     setFormData((prevData) => ({
@@ -91,33 +110,6 @@ const AddDriver = () => {
     }));
   };
 
-  const addVehicle = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      vehicles: [
-        ...prevData.vehicles,
-        {
-          services: [],
-          weight: "",
-          payload: "",
-          netWeight: "",
-          totalLength: "",
-          totalHeight: "",
-          overallLength: "",
-          internalLength: "",
-          insideLength: "",
-          totalHeight: "",
-          internalWidth: "",
-          internalHeight: "",
-          loadingHeight: "",
-          sillHeight: "",
-          insideWidth: "",
-          insideHeight: "",
-        },
-      ],
-    }));
-  };
-
   const removeDriver = (index) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -125,52 +117,19 @@ const AddDriver = () => {
     }));
   };
 
-  const removeVehicle = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      vehicles: prevData.vehicles.filter((_, i) => i !== index),
-    }));
-  };
-
-  const options = [
-    { id: 1, label: "Transporter" },
-    { id: 2, label: "Trailer" },
-    { id: 3, label: "Animal transporter" },
-  ];
-
-  const optionsTrailerType = [
-    { id: 1, label: "Low loader" },
-    { id: 2, label: "Heigh Loader" },
-    { id: 3, label: "Tipping trailers" },
-    { id: 4, label: "Motorcycle transporter" },
-    { id: 5, label: "Vehicle transporter" },
-    { id: 6, label: "Boat trailer" },
-    { id: 7, label: "Folding trailer" },
-    { id: 8, label: "Livestock trailers" },
-    { id: 9, label: "Tree machinery transport" },
-    { id: 10, label: "Special trailers" },
-    { id: 11, label: "Box trailers" },
-  ];
-  const initialVehicle = {
-    numberPlate: '',
-    vehicleType: '',
-    brandAndType: '',
-    chassisNo: '',
-    color: '',
-    totalSeats: '',
-    inFront: '',
-    emptyWeight: '',
-    serialNumber: '',
-    saddleLoad: '',
-    typeApproval: '',
-    totalWeight: '',
-    emissionCode: '',
-    placingOnMarket: ''
-  };
-
-  const [vehicles, setVehicles] = useState([initialVehicle]);
+  
 
   const handleInputChange = (e, index, key) => {
+    const { name, value } = e.target;
+    const newDrivers = [...formData.drivers];
+    newDrivers[index] = {
+      ...newDrivers[index],
+      [name]: value,
+    };
+    setFormData({ ...formData, drivers: newDrivers });
+  };
+
+  const handleVehicleInputChange = (e, index) => {
     const { name, value } = e.target;
     const newVehicles = [...vehicles];
     newVehicles[index] = {
@@ -178,6 +137,58 @@ const AddDriver = () => {
       [name]: value,
     };
     setVehicles(newVehicles);
+  };
+
+  const handleVehicleDimensionsInput = (e, index) => {
+    const { name, value } = e.target;
+    const newVehicleDimensions = [...vehicleDimensions];
+    newVehicleDimensions[index] = {
+      ...newVehicleDimensions[index],
+      [name]: value,
+    };
+    setVehicleDimensions(newVehicleDimensions);
+  };
+
+  const [dropdowns, setDropdowns] = useState([{ id: 1 }]);
+
+  const handleAddDropdown = () => {
+    setDropdowns([...dropdowns, { id: dropdowns.length + 1 }]);
+    setVehicles([...vehicles, initialVehicle]);
+    setVehicleDimensions([...vehicleDimensions, initialVehicleDimensions]);
+  };
+
+  const handleRemoveDropdown = (index) => {
+    setDropdowns(dropdowns.filter((_, i) => i !== index));
+    setSelectTrailer(selectTrailer.filter((_, i) => i !== index));
+    setSelectVehicle(selectVehicle.filter((_, i) => i !== index));
+    setVehicles(vehicles.filter((_, i) => i !== index));
+    setVehicleDimensions(vehicleDimensions.filter((_, i) => i !== index));
+  };
+  const location = useLocation();
+ 
+  
+  const { CompanySignupData } = location.state || {}; // Destructure data from the state or provide a default value
+
+  if (!CompanySignupData) {
+    // If no data is found, navigate back to the signup screen or handle the missing data appropriately
+    navigate("/company-signup");
+    return null;
+  }
+
+  console.log('Data received from CompanySignup:', CompanySignupData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // handleVerificationOpen();
+
+    const data = {
+      ...formData,
+      CompanySignupData,
+      vehicles,
+      vehicleDimensions,
+      checkedInsured,
+      checkedAddVehicles,
+    };
+    console.log("Form data to be sent:", data);
   };
   return (
     <AuthLayout>
@@ -254,115 +265,21 @@ const AddDriver = () => {
                   label="No"
                 />
               </div>
-              <div className="d-flex align-items-center gap-2 mb-3 add-item" onClick={() => removeVehicle()}>
-                    <div className="add-icon">-</div>
-                    <p className="add-text">Add Vehicle</p>
-                  </div>
-            { checkedAddVehicles &&<>
-             <CustomDropDown
-                    label="Vehicle type"
-                    no={"cancel"}
-                    heading={"Vehicle type"}
-                    placeholder="Select Vehicle type"
-                    options={options}
-                    yes={"further"}
-                    onChange={(SelectVehicleType,selectedOptions) => handleVehicleTypeChange(SelectVehicleType,selectedOptions)}
-                  />
-                  {selectVehicle !=="Transporter" &&<CustomDropDown
-                    label="Trailer type"
-                    Heading={"Trailer type"}
-                    placeholder="Select Trailer type"
-                    options={optionsTrailerType}
-                    onChange={(SelectVehicleType) => handleVehicleTypeChange(SelectVehicleType)}
-                  />}
-            </>  }
-                  
-              {selectVehicle =="Transporter"&&
-                <div >
-                  
-                  <h4 className="heading-label">Register vehicles</h4>
-                  {vehicles.map((vehicle, index) => (
-        <VehicleForm
-          key={index}
-          vehicle={vehicle}
-          index={index}
-          handleInputChange={handleInputChange}
-        />
-      ))}
-                  {/* <SimpleInput
-                    placeholder="Total weight in kg"
-                    name="weight"
-                    // value={vehicle.weight}
-                    onChange={(e) => handleInputChange(e,  "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Payload"
-                    name="payload"
-                    // value={vehicle.payload}
-                    onChange={(e) => handleInputChange(e, "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Net Weight"
-                    name="netWeight"
-                    // value={vehicle.netWeight}
-                    onChange={(e) => handleInputChange(e,  "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Curb weight"
-                    name="totalLength"
-                    // value={vehicle.totalLength}
-                    onChange={(e) => handleInputChange(e, "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Overall length"
-                    name="overallLength"
-                    // value={vehicle.overallLength}
-                    onChange={(e) => handleInputChange(e,  "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Total width"
-                    name="internalLength"
-                    // value={vehicle.internalLength}
-                    onChange={(e) => handleInputChange(e,  "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Total height"
-                    name="totalHeight"
-                    // value={vehicle.totalHeight}
-                    onChange={(e) => handleInputChange(e,  "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Loading weight inside length"
-                    name="insideLength"
-                    // value={vehicle.insideLength}
-                    onChange={(e) => handleInputChange(e, "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Loading weight inside width"
-                    name="insideWidth"
-                    // value={vehicle.insideWidth}
-                    onChange={(e) => handleInputChange(e,  "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Loading weight inside height"
-                    name="insideHeight"
-                    // value={vehicle.insideHeight}
-                    onChange={(e) => handleInputChange(e,  "vehicles")}
-                  />
-                  <SimpleInput
-                    placeholder="Loading sill height"
-                    name="sillHeight"
-                    // value={vehicle.sillHeight}
-                    onChange={(e) => handleInputChange(e,  "vehicles")}
-                  /> */}
-                </div>
-              }
-              { checkedAddVehicles &&<div className="d-flex align-items-center gap-2 mb-3 add-item">
-                <div className="add-icon" onClick={addVehicle}>+</div>
-                <p className="add-text">
-                  {formData.vehicles.length ? "Add More Vehicles" : "Add Vehicles"}
-                </p>
-              </div>}
+              <AddVehicleSection
+                checkedAddVehicles={checkedAddVehicles}
+                dropdowns={dropdowns}
+                selectVehicle={selectVehicle}
+                selectTrailer={selectTrailer}
+                vehicles={vehicles}
+                vehicleDimensions={vehicleDimensions}
+                handleRemoveDropdown={handleRemoveDropdown}
+                handleVehicleTypeChange={handleVehicleTypeChange}
+                handleTrailerTypeChange={handleTrailerTypeChange}
+                handleVehicleInputChange={handleVehicleInputChange}
+                handleVehicleDimensionsInput={handleVehicleDimensionsInput}
+              
+                handleAddDropdown={handleAddDropdown}
+              />
               <textarea
                 className="textArea"
                 placeholder="Additional Information"
