@@ -51,7 +51,7 @@ const SignUp = () => {
           {userTypesOption && userTypesOption.map((option) => (
             <Button
               key={option.id}
-              onClick={() => navigate(`${navigationMapping[option.label]}?/id/${option.id}`)}
+              onClick={() => navigate(`${navigationMapping[option.label]}?/id=${option.id}`)}
               label={option.label}
               className={`${colorMapping[option.label]} mb-1`}
             />

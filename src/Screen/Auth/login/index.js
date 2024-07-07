@@ -13,7 +13,7 @@ import AuthorizationCode from "../../../Component/Modal/AuthorizationCode";
 import ForgetEmail from "../../../Component/Modal/ForgetEmail";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -22,7 +22,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ username, password }));
+    dispatch(login({ email, password }));
   };
   const [SendEmail, setSendEmail] = useState(false);
   const EmailHandleOpen = () => setSendEmail(true);
@@ -34,6 +34,8 @@ const Login = () => {
   const [Forget, setForget] = useState(false);
   const ForgetEmailHandleOpen = () => setForget(true);
   const ForgetEmailHandleClose = () => setForget(false);
+
+  
   return (
     <AuthLayout>
      
@@ -45,11 +47,11 @@ const Login = () => {
           </div>
         <div className="sec-input">
           <InputField
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             label="E-Mail/Phone number"
             placeholder="iamamember@gmail.com"
             type="text"
-            value={username}
+            value={email}
             validationMessages={{ email: 'Please enter a valid email address' }}
           />
         </div>

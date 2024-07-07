@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { xhrPost } from '../../utils/XHR';
 import { BASE_URL } from '../../config/app';
 export const login = createAsyncThunk('user/login', async (credentials, thunkAPI) => {
-  const response = await xhrPost(`${BASE_URL}login`, credentials);
+  const response = await xhrPost(`${BASE_URL}signin`, credentials);
   return response.data;
 });
 

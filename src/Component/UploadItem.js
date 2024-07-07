@@ -74,7 +74,7 @@ const UploadItem = ({ defaultImage, frameImage, label, onImageUpload, onImageRem
     reader.onloadend = () => {
       setImage(reader.result);
       if (onImageUpload) {
-        onImageUpload(reader.result);
+        onImageUpload(file);
       }
     };
 

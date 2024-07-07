@@ -1,6 +1,7 @@
 {
   "name": "transweego",
   "version": "0.1.0",
+  "proxy": "http://54.157.229.132:5000",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",

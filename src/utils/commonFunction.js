@@ -25,3 +25,13 @@ export const formatOptions = (items, idKey, labelKey) => {
         label: (item[labelKey])
     }));
 };
+export const getUrlParameter = (url, parameterName) => {
+    const queryString = url.split('?')[1]; // Split at '?' to get the query string part
+    if (!queryString) {
+      return null; // Handle cases where there's no query string
+    }
+    
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get(parameterName); // Return the value of the specified parameter
+  };
+  

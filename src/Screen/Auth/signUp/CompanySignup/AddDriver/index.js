@@ -11,15 +11,20 @@ import VerificationModal from "../../../../../Component/Modal/VerificationModal"
 
 import AddVehicleSection from "../../../../../Component/AddVehicleSection";
 import CompanySignup from '../index';
+import { CompanySignupApi } from "../../../../../store/slice/CompanySignUpSlice";
+import { useDispatch } from "react-redux";
+import { BASE_URL } from "../../../../../config/app";
 
 const AddDriver = () => {
   const navigate = useNavigate();
+const dispatch=useDispatch();
+
   const [verificationOpen, setVerificationOpen] = useState(false);
   const [checkedInsured, setCheckedInsured] = useState(false);
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
   const [selectVehicle, setSelectVehicle] = useState([]);
   const [selectTrailer, setSelectTrailer] = useState([]);
-
+console.log("checkedInsured",checkedInsured);
   const initialVehicleDimensions = {
     weight: "",
     payload: "",
@@ -167,29 +172,49 @@ const AddDriver = () => {
   const location = useLocation();
  
   
-  const { CompanySignupData } = location.state || {}; // Destructure data from the state or provide a default value
+  const { CompanySignupData } = location.state || {}; 
 
   if (!CompanySignupData) {
-    // If no data is found, navigate back to the signup screen or handle the missing data appropriately
     navigate("/company-signup");
     return null;
   }
 
-  console.log('Data received from CompanySignup:', CompanySignupData);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // handleVerificationOpen();
+ 
+const handleSubmit = async (e) => {
+  e.preventDefault(); 
 
-    const data = {
-      ...formData,
-      CompanySignupData,
-      vehicles,
-      vehicleDimensions,
-      checkedInsured,
-      checkedAddVehicles,
-    };
-    console.log("Form data to be sent:", data);
+  const formdata = new FormData();
+  formdata.append("companyName", CompanySignupData.companyName);
+  formdata.append("contactPerson", CompanySignupData.contactPerson);
+  formdata.append("email",CompanySignupData.email);
+  formdata.append("phoneNumber",CompanySignupData.phone);
+  formdata.append("VATNumber", CompanySignupData.vatNumber);
+  formdata.append("password", CompanySignupData.password);
+  formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
+  formdata.append('logo', CompanySignupData.companyLogo); 
+  formdata.append('officialDocument', CompanySignupData.companyDocuments); 
+  formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
+  formdata.append("additionalInformation", formData.additionalInfo);
+  formdata.append("checkedInsured", JSON.stringify(checkedInsured));
+
+  const requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow",
   };
+  try {
+    const response = await fetch(`${BASE_URL}company`, requestOptions);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const result = await response.text();
+
+    console.log(result);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+console.log("formData.drivers",formData.drivers);
   return (
     <AuthLayout>
       <div className="center-div">
@@ -297,7 +322,9 @@ const AddDriver = () => {
                 onChange={() => setCheckedInsured(!checkedInsured)}
                 label="I agree to the terms and conditions."
               />
-              <Button label="Send" className="yellow" type="submit" />
+              <Button 
+              disabled={!checkedInsured}
+              label="Send" className="yellow" type="submit" />
               <Button label="Reset" className="orange" type="reset" />
             </div>
           </form>

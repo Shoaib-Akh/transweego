@@ -10,7 +10,7 @@ import AuthLayout from "../../../../layout/AuthLayout";
 import CustomCheckbox from '../../../../Component/CustomCheckbox';
 import { Images } from "../../../../utils/images";
 import UploadItem from "../../../../Component/UploadItem";
-import fetchData, { FetchData, formatOptions } from "../../../../utils/commonFunction";
+import fetchData, { FetchData, formatOptions, getUrlParameter } from "../../../../utils/commonFunction";
 
 const CompanySignup = () => {
  
@@ -23,14 +23,15 @@ const CompanySignup = () => {
     email: '',
     phone: '',
     serviceTypeIds: [],
-    vatNumber: ''
+    vatNumber: '',
+    password:""
   });
 
   const [checkedInsured, setCheckedInsured] = useState(false); // State for "Are all my vehicles insured?"
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(false); // State for "Would you like to add your vehicles?"
   const [companyLogo, setCompanyLogo] = useState(null);
   const [companyDocuments, setCompanyDocuments] = useState(null);
-
+console.log("companyLogo",companyLogo);
   // useEffect(() => {
   //   dispatch(getServiceTypes());
   // }, [dispatch]);
@@ -56,7 +57,13 @@ const CompanySignup = () => {
       serviceTypeIds: selectedServiceTypes
     });
   };
-
+  const currentUrl = window.location.href;
+const correctedUrl = currentUrl.replace('?/', '?'); // Correct the URL format
+const url = new URL(correctedUrl);
+const queryString = url.search;
+const urlParams = new URLSearchParams(queryString);
+const id = urlParams.get('id');
+ 
   const handleCheckboxChange = (name) => {
     if (name === 'insured') {
       setCheckedInsured(!checkedInsured);
@@ -66,6 +73,7 @@ const CompanySignup = () => {
   };
 
   const handleImageUpload = (label, image) => {
+    // console.log("image",image);
     if (label === "Company Logo") {
       setCompanyLogo(image);
     } else if (label === "Company Documents") {
@@ -89,7 +97,9 @@ const CompanySignup = () => {
       checkedInsured,
       checkedAddVehicles,
       companyLogo,
-      companyDocuments
+      companyDocuments,
+      id
+
     };
     // console.log('Form data to be sent to next screen:', data);
     navigate("/add-driver", { state: { CompanySignupData } });
@@ -103,15 +113,15 @@ const CompanySignup = () => {
   
     return data;
   };
-  console.log("data",data);
+
   const useFetchAndFormatOptions = (url, idKey, nameKey) => {
     const data = useFetchData(url);
     return data ? formatOptions(data.data, idKey, nameKey) : null;
   };
   
-  // Gender options
+  //  options
   const serviceTypeOption = useFetchAndFormatOptions('company/service-types', 'serviceTypeID', 'serviceTypeName');
-  console.log("genderOption",serviceTypeOption);
+  
   return (
     <AuthLayout>
       <div className="center-div">
@@ -133,6 +143,13 @@ const CompanySignup = () => {
                 placeholder="Enter contact person"
                 name="contactPerson"
                 value={formData.contactPerson}
+                onChange={handleChange}
+              />
+              <InputField
+                label="password"
+                placeholder="Enter contact password"
+                name="password"
+                value={formData.password}
                 onChange={handleChange}
               />
               <InputField
