@@ -11,7 +11,7 @@ import VerificationModal from "../../../../../Component/Modal/VerificationModal"
 
 import AddVehicleSection from "../../../../../Component/AddVehicleSection";
 
-const AddVehicles = () => {
+const IndividualAddVehicles = () => {
   const navigate = useNavigate();
   const [verificationOpen, setVerificationOpen] = useState(false);
   const [checkedInsured, setCheckedInsured] = useState(false);
@@ -83,14 +83,6 @@ const AddVehicles = () => {
     };
     console.log("Form data to be sent:", data);
   };
-
-
-
-
-
-
-
-
 
   const handleVehicleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -174,4 +166,4 @@ const AddVehicles = () => {
   );
 };
 
-export default AddVehicles;
+export default IndividualAddVehicles;

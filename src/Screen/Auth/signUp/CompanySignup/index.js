@@ -10,8 +10,10 @@ import AuthLayout from "../../../../layout/AuthLayout";
 import CustomCheckbox from '../../../../Component/CustomCheckbox';
 import { Images } from "../../../../utils/images";
 import UploadItem from "../../../../Component/UploadItem";
+import fetchData, { FetchData, formatOptions } from "../../../../utils/commonFunction";
 
 const CompanySignup = () => {
+ 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,16 +31,16 @@ const CompanySignup = () => {
   const [companyLogo, setCompanyLogo] = useState(null);
   const [companyDocuments, setCompanyDocuments] = useState(null);
 
-  useEffect(() => {
-    dispatch(getServiceTypes());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getServiceTypes());
+  // }, [dispatch]);
 
-  const serviceTypes = useSelector((state) => state.serviceTypes.list);
+  // const serviceTypes = useSelector((state) => state.serviceTypes.list);
 
-  const options = serviceTypes.map((item) => ({
-    id: item.serviceTypeId,
-    label: item.serviceTypeName
-  }));
+  // const options = serviceTypes.map((item) => ({
+  //   id: item.serviceTypeId,
+  //   label: item.serviceTypeName
+  // }));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -92,7 +94,24 @@ const CompanySignup = () => {
     // console.log('Form data to be sent to next screen:', data);
     navigate("/add-driver", { state: { CompanySignupData } });
   };
-
+  const [data, setData] = useState(null);
+  const useFetchData = (url) => {
+  
+    useEffect(() => {
+      FetchData(url, setData);
+    }, [url]);
+  
+    return data;
+  };
+  console.log("data",data);
+  const useFetchAndFormatOptions = (url, idKey, nameKey) => {
+    const data = useFetchData(url);
+    return data ? formatOptions(data.data, idKey, nameKey) : null;
+  };
+  
+  // Gender options
+  const serviceTypeOption = useFetchAndFormatOptions('company/service-types', 'serviceTypeID', 'serviceTypeName');
+  console.log("genderOption",serviceTypeOption);
   return (
     <AuthLayout>
       <div className="center-div">
@@ -124,12 +143,13 @@ const CompanySignup = () => {
                 onChange={handleChange}
                 label="Email"
               />
+             { serviceTypeOption &&
               <MultiSelectDropdown
                 label="Services"
                 placeholder="Select services"
-                options={options}
+                options={serviceTypeOption}
                 onChange={handleServiceTypeChange}
-              />
+              />}
               <InputField
                 type="tel"
                 placeholder="Phone number"

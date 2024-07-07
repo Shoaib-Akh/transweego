@@ -1,1 +1,1 @@
- export const BASE_URL = `https://transweego-backend-production.up.railway.app/api/v1/`;
+ export const BASE_URL = `http://54.157.229.132:5000/api/v1/`;

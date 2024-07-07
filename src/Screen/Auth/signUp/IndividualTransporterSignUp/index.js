@@ -12,6 +12,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SimpleInput from "../../../../Component/SimpleInput";
 import DateOfBirthInput from "../../../../Component/DateOfBirthInput";
+import { FetchData, formatOptions } from "../../../../utils/commonFunction";
 
 const IndividualTransporterSignUp = () => {
   const navigate = useNavigate();
@@ -110,30 +111,33 @@ const IndividualTransporterSignUp = () => {
 
     if (Object.keys(newErrors).length === 0) {
       console.log('Form submitted with values:', formData);
-      navigate('/Add-vehicles', { state: { formData } });
+      navigate('/individual-add-vehicles', { state: { formData } });
     }
   };
 
-  const options = [
-    { id: '1', label: 'Male' },
-    { id: '2', label: 'Female' },
-    { id: '3', label: 'Trans*woman' },
-    { id: '3', label: 'Trans*male' },
-    { id: '3', label: 'Non-binary' },
-    { id: '3', label: 'Other' },
-
-
-  ];
-  const optionsNationality = [
-    { id: '1', label: 'Swiss' },
-    { id: '2', label: 'German' },
-    { id: '3', label: 'Austrian' }
-  ];
-  const UploadDocumentsOption = [
-    { id: '1', label: 'ID' },
-    { id: '2', label: 'passport' },
-    { id: '3', label: "Driver's license" }
-  ];
+  const useFetchData = (url) => {
+    const [data, setData] = useState(null);
+  
+    useEffect(() => {
+      FetchData(url, setData);
+    }, [url]);
+  
+    return data;
+  };
+  
+  const useFetchAndFormatOptions = (url, idKey, nameKey) => {
+    const data = useFetchData(url);
+    return data ? formatOptions(data.data, idKey, nameKey) : null;
+  };
+  
+  // Gender options
+  const genderOption = useFetchAndFormatOptions('genders', 'genderID', 'genderName');
+  
+  // Document types options
+  const documentTypesOption = useFetchAndFormatOptions('document-types', 'documentTypeID', 'documentTypeName');
+  
+  // Nationalities options
+  const nationalityOption = useFetchAndFormatOptions('nationalities', 'nationalityID', 'nationalityName');
   
     const [birthDate, setBirthDate] = useState('');
     console.log("birthDate",birthDate);
@@ -148,7 +152,7 @@ const IndividualTransporterSignUp = () => {
             </div>
             <div className="input-bg">
               <CustomDropDown
-                options={options}
+                options={genderOption}
                 value={formData.gender}
                 onChange={handleGenderChange}
                 error={errors.gender}
@@ -250,7 +254,7 @@ const IndividualTransporterSignUp = () => {
 
               {errors.birthDate && <p className="error">{errors.birthDate}</p>}
               <CustomDropDown
-                options={optionsNationality}
+                options={nationalityOption}
                 value={formData.nationality}
                 onChange={(value) => setFormData({ ...formData, nationality: value })}
                 error={errors.nationality}
@@ -265,7 +269,7 @@ const IndividualTransporterSignUp = () => {
                 onImageRemove={handleImageRemove}
               />
               <CustomDropDown
-                options={UploadDocumentsOption}
+                options={documentTypesOption}
                 value={formData.nationality}
                 onChange={(value) => setFormData({ ...formData, nationality: value })}
                 error={errors.nationality}

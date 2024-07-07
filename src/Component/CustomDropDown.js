@@ -30,7 +30,7 @@ const CustomDropDown = ({ options, value, onChange, error, label, placeholder, h
               <h5>{heading}</h5>
               <img src={Images.arrowDown} alt="arrowDown" />
             </div>
-            {options.map((option, index) => (
+            {options?.map((option, index) => (
               <div className="card-inner px-3" key={index} onClick={() => handleOptionClick(option)}>
                 <p>{option.label}</p>
                 {selectedOption === option.label && <img src={Images.tick} height="10" width="10" alt="tick" />}

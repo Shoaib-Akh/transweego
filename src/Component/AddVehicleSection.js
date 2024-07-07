@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomDropDown from "./CustomDropDown";
 import VehicleForm from "./VehicleForm";
 import VehicleDimensionsForm from "./VehicleDimensionsForm";
+import fetchData, { FetchData, formatOptions } from '../utils/commonFunction';
 
 const AddVehicleSection = ({
   checkedAddVehicles,
@@ -19,25 +20,29 @@ const AddVehicleSection = ({
 
   handleAddDropdown
 }) => {
-    const options = [
-        { id: 1, label: "Transporter" },
-        { id: 2, label: "Trailer" },
-        { id: 3, label: "Animal transporter" },
-      ];
-    
-      const optionsTrailerType = [
-        { id: 1, label: "Low loader" },
-        { id: 2, label: "High Loader" },
-        { id: 3, label: "Tipping trailers" },
-        { id: 4, label: "Motorcycle transporter" },
-        { id: 5, label: "Vehicle transporter" },
-        { id: 6, label: "Boat trailer" },
-        { id: 7, label: "Folding trailer" },
-        { id: 8, label: "Livestock trailers" },
-        { id: 9, label: "Tree machinery transport" },
-        { id: 10, label: "Special trailers" },
-        { id: 11, label: "Box trailers" },
-      ];
+
+  const useFetchData = (url) => {
+    const [data, setData] = useState(null);
+  
+    useEffect(() => {
+      FetchData(url, setData);
+    }, [url]);
+  
+    return data;
+  };
+  
+  const useFetchAndFormatOptions = (url, idKey, nameKey) => {
+    const data = useFetchData(url);
+    return data ? formatOptions(data.data, idKey, nameKey) : null;
+  };
+  
+//  options
+  const trailerTypesOption = useFetchAndFormatOptions('trailer-types', 'trailerTypeID', 'trailerTypeName');
+  const vehicleTypesOption = useFetchAndFormatOptions('vehicle-types', 'vehicleTypeID', 'vehicleTypeName');
+   
+  
+     
+      
   return (
     <div>
       {checkedAddVehicles && dropdowns.map((dropdown, index) => (
@@ -51,7 +56,7 @@ const AddVehicleSection = ({
             no={"cancel"}
             heading={"Vehicle type"}
             placeholder="Select Vehicle type"
-            options={options}
+            options={vehicleTypesOption}
             yes={"further"}
             onChange={(SelectVehicleType, selectedOptions) => handleVehicleTypeChange(SelectVehicleType, selectedOptions, index)}
           />
@@ -60,7 +65,7 @@ const AddVehicleSection = ({
               label="Trailer type"
               Heading={"Trailer type"}
               placeholder="Select Trailer type"
-              options={optionsTrailerType}
+              options={trailerTypesOption}
               onChange={(TrailerType, selectedOptions) => handleTrailerTypeChange(TrailerType, selectedOptions, index)}
             />
           )}

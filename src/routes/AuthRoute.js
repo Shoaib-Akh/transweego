@@ -9,7 +9,8 @@ import IndividualTransporterSignUp from '../Screen/Auth/signUp/IndividualTranspo
 import Login from '../Screen/Auth/login';
 import NoMatch from '../Screen/NoMatch';
 import AddDriver from '../Screen/Auth/signUp/CompanySignup/AddDriver';
-import AddVehicles from '../Screen/Auth/signUp/IndividualSignUp/AddVehicles';
+import IndividualTransportAddVehicles from '../Screen/Auth/signUp/IndividualTransporterSignUp/IndividualTransportAddVehicles';
+import IndividualAddVehicles from '../Screen/Auth/signUp/IndividualSignUp/IndividualAddVehicles';
 
 const AuthRoute = () => {
   return (
@@ -18,10 +19,13 @@ const AuthRoute = () => {
       <Route path='/signup' element={<SignUp />} />
       <Route path='/company-signup' element={<CompanySignup />} />
       <Route path='/individual-signup' element={<IndividualSignUp />} />
+      <Route path='/individual-add-vehicles' element={<IndividualAddVehicles />} />
+
+      
       <Route path='/add-driver' element={<AddDriver />} />
 
       <Route path='/individual-transporter-signup' element={<IndividualTransporterSignUp />} />
-      <Route path='/Add-vehicles' element={<AddVehicles />} />
+      <Route path='/individual-transport-AddVehicles' element={<IndividualTransportAddVehicles />} />
 
       {/* <Route path="*" element={<NoMatch />} /> */}
     </Routes>
