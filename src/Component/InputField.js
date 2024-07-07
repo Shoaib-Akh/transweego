@@ -14,8 +14,8 @@ const InputField = ({
   max,
   validationRules = {},
   validationMessages = {
-    email: 'Ungültiges E-Mail-Format',
-    phone: 'Ungültige Telefonnummer',
+    email: 'Invalid email format',
+    phone: 'Invalid phone number',
     // Add more as needed
   },
   maxLength,
@@ -28,14 +28,14 @@ const InputField = ({
 
   const handleBlur = () => {
     if (required && !value) {
-      setLocalError('Dieses Feld ist erforderlich');
+      setLocalError('This field is required');
       return;
     }
 
     if (type === 'email') {
       const emailRegex = /\S+@\S+\.\S+/;
       if (!emailRegex.test(value)) {
-        setLocalError(validationMessages.email || 'Ungültiges E-Mail-Format');
+        setLocalError(validationMessages.email || 'Invalid email format');
         return;
       }
     }
@@ -43,7 +43,7 @@ const InputField = ({
     if (type === 'password') {
       for (const rule in validationRules) {
         if (!validationRules[rule].test(value)) {
-          setLocalError(validationMessages[rule] || 'Ungültiger Wert');
+          setLocalError(validationMessages[rule] || 'Invalid value');
           return;
         }
       }
@@ -52,7 +52,7 @@ const InputField = ({
     if (type === 'tel') {
       const phoneRegex = /^\d{10}$/; 
       if (!phoneRegex.test(value)) {
-        setLocalError(validationMessages.phone || 'Ungültige Telefonnummer');
+        setLocalError(validationMessages.phone || 'Invalid phone number');
         return;
       }
     }
@@ -62,7 +62,6 @@ const InputField = ({
 
   return (
     <>
-     
       <div className={`maindiv-input ${localError ? 'error' : ''}`}>
         <div>
           <p className="label">
@@ -81,7 +80,6 @@ const InputField = ({
           name={name}
           min={min}
           max={max}
-
         />
       </div>
       {localError && <p className="error-message">{localError}</p>}

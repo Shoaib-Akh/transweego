@@ -1,47 +1,50 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../AuthCommon.scss";
 import InputField from "../../../../Component/InputField";
 import Button from "../../../../Component/Button";
 import { useNavigate } from "react-router-dom";
-import MultiSelectDropdown from "../../../../Component/MultiSelectDropdown";
-import { useDispatch, useSelector } from "react-redux";
-import { getServiceTypes } from "../../../../store/slice/getServicesSlice";
+import CustomDropDown from "../../../../Component/CustomDropDown";
 import AuthLayout from "../../../../layout/AuthLayout";
-import CustomCheckbox from '../../../../Component/CustomCheckbox';
-import { Images } from "../../../../utils/images";
+import CustomCheckbox from "../../../../Component/CustomCheckbox";
 import UploadItem from "../../../../Component/UploadItem";
-import fetchData, { FetchData, formatOptions, getUrlParameter } from "../../../../utils/commonFunction";
+import { Images } from "../../../../utils/images";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import DateOfBirthInput from "../../../../Component/DateOfBirthInput";
+import { FetchData, formatOptions } from "../../../../utils/commonFunction";
 
-const CompanySignup = () => {
- 
+const IndividualTransporterSignUp = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const currentUrl = window.location.href;
+  const correctedUrl = currentUrl.replace('?/', '?'); // Correct the URL format
+  const url = new URL(correctedUrl);
+  const queryString = url.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('id');
 
   const [formData, setFormData] = useState({
-    companyName: '',
-    contactPerson: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
-    serviceTypeIds: [],
-    vatNumber: '',
-    password:""
+    gender: '',
+    website: '',
+    street: '',
+    postalCode: '',
+    birthDate: '',
+    nationality: '',
+    documents: [],
+    parcelsOption: '',
+    password: "",
+    IndividualTransportAddVehiclesId: id,
+    companyLogo:companyLogo,
+    companyDocuments:companyDocuments
   });
 
-  const [checkedInsured, setCheckedInsured] = useState(false); // State for "Are all my vehicles insured?"
-  const [checkedAddVehicles, setCheckedAddVehicles] = useState(false); // State for "Would you like to add your vehicles?"
   const [companyLogo, setCompanyLogo] = useState(null);
-  const [companyDocuments, setCompanyDocuments] = useState(null);
-console.log("companyLogo",companyLogo);
-  // useEffect(() => {
-  //   dispatch(getServiceTypes());
-  // }, [dispatch]);
-
-  // const serviceTypes = useSelector((state) => state.serviceTypes.list);
-
-  // const options = serviceTypes.map((item) => ({
-  //   id: item.serviceTypeId,
-  //   label: item.serviceTypeName
-  // }));
+  const [companyDocuments, setCompanyDocuments] = useState([]);
+  const [errors, setErrors] = useState({});
+  const [checkedTerms, setCheckedTerms] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,68 +52,99 @@ console.log("companyLogo",companyLogo);
       ...formData,
       [name]: value
     });
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ''
+      });
+    }
   };
 
-  const handleServiceTypeChange = (selectedServiceTypes) => {
+  const handleGenderChange = (gender) => {
     setFormData({
       ...formData,
-      serviceTypeIds: selectedServiceTypes
+      gender
     });
-  };
-  const currentUrl = window.location.href;
-const correctedUrl = currentUrl.replace('?/', '?'); // Correct the URL format
-const url = new URL(correctedUrl);
-const queryString = url.search;
-const urlParams = new URLSearchParams(queryString);
-const id = urlParams.get('id');
- 
-  const handleCheckboxChange = (name) => {
-    if (name === 'insured') {
-      setCheckedInsured(!checkedInsured);
-    } else if (name === 'addVehicles') {
-      setCheckedAddVehicles(!checkedAddVehicles);
+    if (errors.gender) {
+      setErrors({
+        ...errors,
+        gender: ''
+      });
     }
+  };
+
+  const handleCheckboxChange = () => {
+    setCheckedTerms(!checkedTerms);
   };
 
   const handleImageUpload = (label, image) => {
-    // console.log("image",image);
     if (label === "Company Logo") {
       setCompanyLogo(image);
     } else if (label === "Company Documents") {
-      setCompanyDocuments(image);
+      setCompanyDocuments([...companyDocuments, image]);
+    } else {
+      setFormData({
+        ...formData,
+        documents: [...formData.documents, image]
+      });
     }
-    console.log(`${label} uploaded:`, image);
   };
 
-  const handleImageRemove = (label) => {
+  const handleImageRemove = (label, image) => {
     if (label === "Company Logo") {
       setCompanyLogo(null);
     } else if (label === "Company Documents") {
-      setCompanyDocuments(null);
+      setCompanyDocuments(companyDocuments.filter(doc => doc !== image));
+    } else {
+      setFormData({
+        ...formData,
+        documents: formData.documents.filter(doc => doc !== image)
+      });
     }
-    console.log(`${label} removed`);
   };
 
-  const handleNext = () => {
-    const CompanySignupData = {
+  const handleDateChange = (date) => {
+    setFormData({
       ...formData,
-      checkedInsured,
-      checkedAddVehicles,
-      companyLogo,
-      companyDocuments,
-      id
-
-    };
-    // console.log('Form data to be sent to next screen:', data);
-    navigate("/add-driver", { state: { CompanySignupData } });
+      birthDate: date
+    });
+    if (errors.birthDate) {
+      setErrors({
+        ...errors,
+        birthDate: ''
+      });
+    }
   };
-  const [data, setData] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = {};
+
+    if (!formData.firstName) newErrors.firstName = 'This field is required';
+    if (!formData.lastName) newErrors.lastName = 'This field is required';
+    if (!formData.email) newErrors.email = 'This field is required';
+    if (!formData.phone) newErrors.phone = 'This field is required';
+    if (!formData.gender) newErrors.gender = 'This field is required';
+
+    if (!formData.birthDate || new Date(formData.birthDate) >= new Date()) {
+      newErrors.birthDate = 'Please enter a valid birth date';
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log('Form submitted with values:', formData);
+      navigate('/individual-transport-AddVehicles', { state: { formData } });
+    }
+  };
+
   const useFetchData = (url) => {
-  
+    const [data, setData] = useState(null);
+
     useEffect(() => {
       FetchData(url, setData);
     }, [url]);
-  
+
     return data;
   };
 
@@ -118,39 +152,53 @@ const id = urlParams.get('id');
     const data = useFetchData(url);
     return data ? formatOptions(data.data, idKey, nameKey) : null;
   };
-  
-  //  options
-  const serviceTypeOption = useFetchAndFormatOptions('company/service-types', 'serviceTypeID', 'serviceTypeName');
-  
+
+  // Gender options
+  const genderOption = useFetchAndFormatOptions('genders', 'genderID', 'genderName');
+
+  // Document types options
+  const documentTypesOption = useFetchAndFormatOptions('document-types', 'documentTypeID', 'documentTypeName');
+
+  // Nationalities options
+  const nationalityOption = useFetchAndFormatOptions('nationalities', 'nationalityID', 'nationalityName');
+
+  console.log("birthDate", formData.birthDate);
+
   return (
     <AuthLayout>
       <div className="center-div">
         <div className="bg-company">
           <div className="login-div">
             <div className="text-center mb-4 heading">
-              <h2>Company Register</h2>
+              <h2>Individual Transporter</h2>
             </div>
             <div className="input-bg">
-              <InputField
-                label="Company Name"
-                placeholder="Enter company name"
-                name="companyName"
-                value={formData.companyName}
-                onChange={handleChange}
+              <CustomDropDown
+                options={genderOption}
+                value={formData.gender}
+                onChange={handleGenderChange}
+                error={errors.gender}
+                label={"Gender"}
+                placeholder={"Gender"}
+                heading={"Gender"}
               />
               <InputField
-                label="Contact Person"
-                placeholder="Enter contact person"
-                name="contactPerson"
-                value={formData.contactPerson}
+                required
+                label="First Name"
+                placeholder="First Name"
+                name="firstName"
+                value={formData.firstName}
                 onChange={handleChange}
+                error={errors.firstName}
               />
               <InputField
-                label="password"
-                placeholder="Enter contact password"
-                name="password"
-                value={formData.password}
+                required
+                label="Last Name"
+                placeholder="Last Name"
+                name="lastName"
+                value={formData.lastName}
                 onChange={handleChange}
+                error={errors.lastName}
               />
               <InputField
                 type="email"
@@ -159,82 +207,125 @@ const id = urlParams.get('id');
                 value={formData.email}
                 onChange={handleChange}
                 label="Email"
+                required
+                validationMessages={{ email: 'Please enter a valid email address' }}
+                error={errors.email}
               />
-             { serviceTypeOption &&
-              <MultiSelectDropdown
-                label="Services"
-                placeholder="Select services"
-                options={serviceTypeOption}
-                onChange={handleServiceTypeChange}
-              />}
               <InputField
-                type="tel"
-                placeholder="Phone number"
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                label="Password"
+                required
+              />
+              <InputField
+                type="number"
+                placeholder="Phone Number*"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
+                label="Phone"
                 maxLength={10}
-                label="Enter number"
+                required
+                validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
+                error={errors.phone}
               />
               <InputField
                 type="text"
-                placeholder="Enter your VAT number"
-                name="vatNumber"
-                value={formData.vatNumber}
+                placeholder="Company Website"
+                name="website"
+                value={formData.website}
                 onChange={handleChange}
-                label="VAT Number"
+                label="Add Link"
               />
-              <div className="upload-file-div">
-                <p className="label">Are all my vehicles insured?</p>
-                <div className="checkbox_div">
-                  <CustomCheckbox
-                    checked={checkedInsured}
-                    onChange={() => handleCheckboxChange('insured')}
-                    label="Yes"
-                  />
-                  <CustomCheckbox
-                    checked={!checkedInsured}
-                    onChange={() => handleCheckboxChange('insured')}
-                    label="No"
+              <div className="row my-2">
+                <div className="col-md-6">
+                  <InputField
+                    type="text"
+                    placeholder="Street / No.*"
+                    name="street"
+                    value={formData.street}
+                    onChange={handleChange}
+                    label="Street / No.*"
                   />
                 </div>
-                <hr />
-                <div className="upload-container">
-                  <p>Upload company documents</p>
-                </div>
-                <div className="upload-items">
-                  <UploadItem
-                    frameImage={Images.frame}
-                    label="Company Logo"
-                    onImageUpload={(image) => handleImageUpload("Company Logo", image)}
-                    onImageRemove={() => handleImageRemove("Company Logo")}
-                  />
-                  <UploadItem
-                    frameImage={Images.frame}
-                    label="Company Documents"
-                    onImageUpload={(image) => handleImageUpload("Company Documents", image)}
-                    onImageRemove={() => handleImageRemove("Company Documents")}
+                <div className="col-md-6">
+                  <InputField
+                    type="text"
+                    placeholder="Postal Code / City*"
+                    name="postalCode"
+                    value={formData.postalCode}
+                    onChange={handleChange}
+                    label="Postal Code"
                   />
                 </div>
-                {/* <hr />
-                <p className="label">Would you like to add your vehicles?</p>
-                <div className="checkbox_div">
-                  <CustomCheckbox
-                    checked={checkedAddVehicles}
-                    onChange={() => handleCheckboxChange('addVehicles')}
-                    label="Yes"
-                  />
-                  <CustomCheckbox
-                    checked={!checkedAddVehicles}
-                    onChange={() => handleCheckboxChange('addVehicles')}
-                    label="No"
-                  />
-                </div> */}
               </div>
-              <Button
-                label="Next"
-                onClick={handleNext}
+              <p className="label ps-3 mt-2">Birth Date*</p>
+              <DateOfBirthInput
+                setBirthDate={handleDateChange}
               />
+              {errors.birthDate && <p className="error">{errors.birthDate}</p>}
+              <CustomDropDown
+                options={nationalityOption}
+                value={formData.nationality}
+                onChange={(value) => setFormData({ ...formData, nationality: value })}
+                error={errors.nationality}
+                label={"Nationality"}
+                heading={"Nationality"}
+                placeholder={"Select Nationality"}
+              />
+              <UploadItem
+                frameImage={Images.frame}
+                label="Profile Image"
+                onImageUpload={(image) => handleImageUpload("Profile Image", image)}
+                onImageRemove={(image) => handleImageRemove("Profile Image", image)}
+              />
+              <UploadItem
+                frameImage={Images.frame}
+                label="Company Logo"
+                onImageUpload={(image) => handleImageUpload("Company Logo", image)}
+                onImageRemove={(image) => handleImageRemove("Company Logo", image)}
+              />
+              <UploadItem
+                frameImage={Images.frame}
+                label="Company Documents"
+                onImageUpload={(image) => handleImageUpload("Company Documents", image)}
+                onImageRemove={(image) => handleImageRemove("Company Documents", image)}
+              />
+              <CustomDropDown
+                options={documentTypesOption}
+                value={formData.documentsType}
+                onChange={(value) => setFormData({ ...formData, documentsType: value })}
+                error={errors.documentsType}
+                label={"Upload Documents"}
+                heading={"Upload Documents"}
+                placeholder={" Upload Documents"}
+              />
+              <span className="Acceptable">Acceptable pdf, jpeg, png</span>
+              <div className="d-flex align-items-center justify-content-between">
+                <UploadItem
+                  frameImage={Images.frame}
+                  label="Front"
+                  onImageUpload={(image) => handleImageUpload("Front", image)}
+                  onImageRemove={(image) => handleImageRemove("Front", image)}
+                />
+                <UploadItem
+                  frameImage={Images.frame}
+                  label="Back"
+                  onImageUpload={(image) => handleImageUpload("Back", image)}
+                  onImageRemove={(image) => handleImageRemove("Back", image)}
+                />
+              </div>
+              <div className="form-check">
+                <CustomCheckbox
+                  checked={checkedTerms}
+                  onChange={handleCheckboxChange}
+                  label="I accept the terms and conditions"
+                />
+              </div>
+              <Button onClick={handleSubmit} className="w-100">Submit</Button>
             </div>
           </div>
         </div>
@@ -243,4 +334,4 @@ const id = urlParams.get('id');
   );
 };
 
-export default CompanySignup;
+export default IndividualTransporterSignUp;
