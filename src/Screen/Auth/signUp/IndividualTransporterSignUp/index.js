@@ -324,7 +324,7 @@ const IndividualTransporterSignUp = () => {
                   label="I accept the terms and conditions"
                 />
               </div>
-              <Button onClick={handleSubmit} className="w-100">Submit</Button>
+              <Button onClick={handleSubmit} className="w-100" label={"Next"}></Button>
             </div>
           </div>
         </div>
