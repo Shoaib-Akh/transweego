@@ -58,12 +58,12 @@ console.log("companyLogo",companyLogo);
     });
   };
   const currentUrl = window.location.href;
-const correctedUrl = currentUrl.replace('?/', '?'); // Correct the URL format
-const url = new URL(correctedUrl);
-const queryString = url.search;
-const urlParams = new URLSearchParams(queryString);
-const id = urlParams.get('id');
- 
+  const correctedUrl = currentUrl.replace('?/', '?'); // Correct the URL format
+  const url = new URL(correctedUrl);
+  const queryString = url.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('id');
+
   const handleCheckboxChange = (name) => {
     if (name === 'insured') {
       setCheckedInsured(!checkedInsured);
@@ -99,7 +99,6 @@ const id = urlParams.get('id');
       companyLogo,
       companyDocuments,
       id
-
     };
     // console.log('Form data to be sent to next screen:', data);
     navigate("/add-driver", { state: { CompanySignupData } });

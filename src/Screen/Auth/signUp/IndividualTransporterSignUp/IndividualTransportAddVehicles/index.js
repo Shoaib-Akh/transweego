@@ -6,19 +6,14 @@ import AuthLayout from "../../../../../layout/AuthLayout";
 import UploadItem from "../../../../../Component/UploadItem";
 import CustomCheckbox from "../../../../../Component/CustomCheckbox";
 import Button from "../../../../../Component/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import VerificationModal from "../../../../../Component/Modal/VerificationModal";
 
 import AddVehicleSection from "../../../../../Component/AddVehicleSection";
+import { BASE_URL } from "../../../../../config/app";
 
 const IndividualTransportAddVehicles = () => {
   const navigate = useNavigate();
-  const [verificationOpen, setVerificationOpen] = useState(false);
-  const [checkedInsured, setCheckedInsured] = useState(false);
-  const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
-  const [selectVehicle, setSelectVehicle] = useState([]);
-  const [selectTrailer, setSelectTrailer] = useState([]);
-
   const initialVehicleDimensions = {
     weight: "",
     payload: "",
@@ -49,9 +44,25 @@ const IndividualTransportAddVehicles = () => {
     emissionCode: "",
     placingOnMarket: "",
   };
-
+  const [verificationOpen, setVerificationOpen] = useState(false);
+  const [checkedInsured, setCheckedInsured] = useState(false);
+  const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
+  const [selectVehicle, setSelectVehicle] = useState([]);
+  const [selectTrailer, setSelectTrailer] = useState([]);
   const [vehicles, setVehicles] = useState([initialVehicle]);
   const [vehicleDimensions, setVehicleDimensions] = useState([initialVehicleDimensions]);
+  const [dropdowns, setDropdowns] = useState([{ id: 1 }]);
+  const location = useLocation();
+  const { formData } = location?.state || {}; 
+
+  if (!formData) {
+    navigate("/individual-transporter-signup");
+    return null;
+  }
+  console.log("IndividualTransportAddVehiclesData",formData);
+  
+
+
 
 
 
@@ -73,16 +84,16 @@ const IndividualTransportAddVehicles = () => {
     setSelectTrailer(updatedSelectTrailer);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleVerificationOpen();
-    const data = {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   handleVerificationOpen();
+  //   const data = {
 
-      checkedInsured,
-      checkedAddVehicles,
-    };
-    console.log("Form data to be sent:", data);
-  };
+  //     checkedInsured,
+  //     checkedAddVehicles,
+  //   };
+  //   console.log("Form data to be sent:", data);
+  // };
 
 
 
@@ -112,7 +123,6 @@ const IndividualTransportAddVehicles = () => {
     setVehicleDimensions(newVehicleDimensions);
   };
 
-  const [dropdowns, setDropdowns] = useState([{ id: 1 }]);
 
   const handleAddDropdown = () => {
     setDropdowns([...dropdowns, { id: dropdowns.length + 1 }]);
@@ -127,7 +137,38 @@ const IndividualTransportAddVehicles = () => {
     setVehicles(vehicles.filter((_, i) => i !== index));
     setVehicleDimensions(vehicleDimensions.filter((_, i) => i !== index));
   };
-
+  
+  
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+    const formdata = new FormData()
+    formdata.append("firstName", formData.firstName);
+    formdata.append("lastName",  formData.lastName);
+    formdata.append("password",  formData.password);
+    formdata.append("email",  formData.email);
+    formdata.append("phoneNumber",  formData.phone);
+    formdata.append("genderID",  formData.gender);
+    formdata.append("userTypeID",  formData.IndividualTransportAddVehiclesId);
+  
+  
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+    try {
+      const response = await fetch(`${BASE_URL}user`, requestOptions);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const result = await response.text();
+  
+      console.log(result);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
   return (
     <AuthLayout>
       <div className="center-div">

@@ -10,12 +10,17 @@ import UploadItem from "../../../../Component/UploadItem";
 import { Images } from "../../../../utils/images";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import SimpleInput from "../../../../Component/SimpleInput";
 import DateOfBirthInput from "../../../../Component/DateOfBirthInput";
 import { FetchData, formatOptions } from "../../../../utils/commonFunction";
 
 const IndividualTransporterSignUp = () => {
   const navigate = useNavigate();
+  const currentUrl = window.location.href;
+  const correctedUrl = currentUrl.replace('?/', '?'); // Correct the URL format
+  const url = new URL(correctedUrl);
+  const queryString = url.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('id');
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -29,9 +34,14 @@ const IndividualTransporterSignUp = () => {
     birthDate: '',
     nationality: '',
     documents: [],
-    parcelsOption: ''
+    parcelsOption: '',
+    password: "",
+    IndividualTransportAddVehiclesId: id,
+    companyLogo:""
   });
 
+  const [companyLogo, setCompanyLogo] = useState(null);
+  const [companyDocuments, setCompanyDocuments] = useState([]);
   const [errors, setErrors] = useState({});
   const [checkedTerms, setCheckedTerms] = useState(false);
 
@@ -66,18 +76,30 @@ const IndividualTransporterSignUp = () => {
     setCheckedTerms(!checkedTerms);
   };
 
-  const handleImageUpload = (image) => {
-    setFormData({
-      ...formData,
-      documents: [...formData.documents, image]
-    });
+  const handleImageUpload = (label, image) => {
+    if (label === "Company Logo") {
+      setCompanyLogo(image);
+    } else if (label === "Company Documents") {
+      setCompanyDocuments([...companyDocuments, image]);
+    } else {
+      setFormData({
+        ...formData,
+        documents: [...formData.documents, image]
+      });
+    }
   };
 
-  const handleImageRemove = (image) => {
-    setFormData({
-      ...formData,
-      documents: formData.documents.filter(doc => doc !== image)
-    });
+  const handleImageRemove = (label, image) => {
+    if (label === "Company Logo") {
+      setCompanyLogo(null);
+    } else if (label === "Company Documents") {
+      setCompanyDocuments(companyDocuments.filter(doc => doc !== image));
+    } else {
+      setFormData({
+        ...formData,
+        documents: formData.documents.filter(doc => doc !== image)
+      });
+    }
   };
 
   const handleDateChange = (date) => {
@@ -111,36 +133,35 @@ const IndividualTransporterSignUp = () => {
 
     if (Object.keys(newErrors).length === 0) {
       console.log('Form submitted with values:', formData);
-      navigate('/individual-add-vehicles', { state: { formData } });
+      navigate('/individual-transport-AddVehicles', { state: { formData } });
     }
   };
 
   const useFetchData = (url) => {
     const [data, setData] = useState(null);
-  
+
     useEffect(() => {
       FetchData(url, setData);
     }, [url]);
-  
+
     return data;
   };
-  
+
   const useFetchAndFormatOptions = (url, idKey, nameKey) => {
     const data = useFetchData(url);
     return data ? formatOptions(data.data, idKey, nameKey) : null;
   };
-  
+
   // Gender options
   const genderOption = useFetchAndFormatOptions('genders', 'genderID', 'genderName');
-  
+
   // Document types options
   const documentTypesOption = useFetchAndFormatOptions('document-types', 'documentTypeID', 'documentTypeName');
-  
+
   // Nationalities options
   const nationalityOption = useFetchAndFormatOptions('nationalities', 'nationalityID', 'nationalityName');
-  
-    const [birthDate, setBirthDate] = useState('');
-    console.log("birthDate",birthDate);
+
+  console.log("birthDate", formData.birthDate);
 
   return (
     <AuthLayout>
@@ -148,7 +169,7 @@ const IndividualTransporterSignUp = () => {
         <div className="bg-company">
           <div className="login-div">
             <div className="text-center mb-4 heading">
-              <h2>Individual Transporter </h2>
+              <h2>Individual Transporter</h2>
             </div>
             <div className="input-bg">
               <CustomDropDown
@@ -188,6 +209,15 @@ const IndividualTransporterSignUp = () => {
                 required
                 validationMessages={{ email: 'Please enter a valid email address' }}
                 error={errors.email}
+              />
+              <InputField
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                label="Password"
+                required
               />
               <InputField
                 type="number"
@@ -232,26 +262,9 @@ const IndividualTransporterSignUp = () => {
                 </div>
               </div>
               <p className="label ps-3 mt-2">Birth Date*</p>
-              {/* <DatePicker
-                selected={formData.birthDate}
-                onChange={handleDateChange}
-                dateFormat="dd/MM/yyyy"
-                maxDate={new Date()}
-                placeholderText="Select your birth date"
-                className="form-control"
-                showMonthDropdown
-                showYearDropdown
-                dropdownMode="select"
-                name="birthDate"
-              /> */}
-          <DateOfBirthInput
-          setBirthDate={setBirthDate}
-        
-          
-          />
-
-
-
+              <DateOfBirthInput
+                setBirthDate={handleDateChange}
+              />
               {errors.birthDate && <p className="error">{errors.birthDate}</p>}
               <CustomDropDown
                 options={nationalityOption}
@@ -265,50 +278,53 @@ const IndividualTransporterSignUp = () => {
               <UploadItem
                 frameImage={Images.frame}
                 label="Profile Image"
-                onImageUpload={handleImageUpload}
-                onImageRemove={handleImageRemove}
+                onImageUpload={(image) => handleImageUpload("Profile Image", image)}
+                onImageRemove={(image) => handleImageRemove("Profile Image", image)}
+              />
+              <UploadItem
+                frameImage={Images.frame}
+                label="Company Logo"
+                onImageUpload={(image) => handleImageUpload("Company Logo", image)}
+                onImageRemove={(image) => handleImageRemove("Company Logo", image)}
+              />
+              <UploadItem
+                frameImage={Images.frame}
+                label="Company Documents"
+                onImageUpload={(image) => handleImageUpload("Company Documents", image)}
+                onImageRemove={(image) => handleImageRemove("Company Documents", image)}
               />
               <CustomDropDown
                 options={documentTypesOption}
-                value={formData.nationality}
-                onChange={(value) => setFormData({ ...formData, nationality: value })}
-                error={errors.nationality}
+                value={formData.documentsType}
+                onChange={(value) => setFormData({ ...formData, documentsType: value })}
+                error={errors.documentsType}
                 label={"Upload Documents"}
                 heading={"Upload Documents"}
                 placeholder={" Upload Documents"}
               />
-              <span className="Acceptable">Acceptable  pdf Jpeg, Png</span>
+              <span className="Acceptable">Acceptable pdf, jpeg, png</span>
               <div className="d-flex align-items-center justify-content-between">
                 <UploadItem
                   frameImage={Images.frame}
                   label="Front"
-                  onImageUpload={handleImageUpload}
-                  onImageRemove={handleImageRemove}
+                  onImageUpload={(image) => handleImageUpload("Front", image)}
+                  onImageRemove={(image) => handleImageRemove("Front", image)}
                 />
                 <UploadItem
                   frameImage={Images.frame}
                   label="Back"
-                  onImageUpload={handleImageUpload}
-                  onImageRemove={handleImageRemove}
+                  onImageUpload={(image) => handleImageUpload("Back", image)}
+                  onImageRemove={(image) => handleImageRemove("Back", image)}
                 />
               </div>
-
-
-              <Button label={"Continue"} type="submit" onClick={handleSubmit} />
-              {/* <Button label={"Reset"} onClick={() => setFormData({
-                firstName: '',
-                lastName: '',
-                email: '',
-                phone: '',
-                gender: '',
-                website: '',
-                street: '',
-                postalCode: '',
-                birthDate: '',
-                nationality: '',
-                documents: [],
-                parcelsOption: ''
-              })} /> */}
+              <div className="form-check">
+                <CustomCheckbox
+                  checked={checkedTerms}
+                  onChange={handleCheckboxChange}
+                  label="I accept the terms and conditions"
+                />
+              </div>
+              <Button onClick={handleSubmit} className="w-100">Submit</Button>
             </div>
           </div>
         </div>
