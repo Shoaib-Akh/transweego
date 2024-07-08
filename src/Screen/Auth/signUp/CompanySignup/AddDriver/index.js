@@ -17,14 +17,14 @@ import { BASE_URL } from "../../../../../config/app";
 
 const AddDriver = () => {
   const navigate = useNavigate();
-const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const [verificationOpen, setVerificationOpen] = useState(false);
   const [checkedInsured, setCheckedInsured] = useState(false);
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
   const [selectVehicle, setSelectVehicle] = useState([]);
   const [selectTrailer, setSelectTrailer] = useState([]);
-console.log("checkedInsured",checkedInsured);
+  console.log("checkedInsured", checkedInsured);
   const initialVehicleDimensions = {
     weight: "",
     payload: "",
@@ -103,7 +103,7 @@ console.log("checkedInsured",checkedInsured);
     setSelectTrailer(updatedSelectTrailer);
   };
 
-  
+
 
   const addDriver = () => {
     setFormData((prevData) => ({
@@ -122,7 +122,7 @@ console.log("checkedInsured",checkedInsured);
     }));
   };
 
-  
+
 
   const handleInputChange = (e, index, key) => {
     const { name, value } = e.target;
@@ -170,51 +170,51 @@ console.log("checkedInsured",checkedInsured);
     setVehicleDimensions(vehicleDimensions.filter((_, i) => i !== index));
   };
   const location = useLocation();
- 
-  
-  const { CompanySignupData } = location.state || {}; 
+
+
+  const { CompanySignupData } = location.state || {};
 
   if (!CompanySignupData) {
     navigate("/company-signup");
     return null;
   }
 
- 
-const handleSubmit = async (e) => {
-  e.preventDefault(); 
 
-  const formdata = new FormData();
-  formdata.append("companyName", CompanySignupData.companyName);
-  formdata.append("contactPerson", CompanySignupData.contactPerson);
-  formdata.append("email",CompanySignupData.email);
-  formdata.append("phoneNumber",CompanySignupData.phone);
-  formdata.append("VATNumber", CompanySignupData.vatNumber);
-  formdata.append("password", CompanySignupData.password);
-  formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
-  formdata.append('logo', CompanySignupData.companyLogo); 
-  formdata.append('officialDocument', CompanySignupData.companyDocuments); 
-  formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
-  formdata.append("additionalInformation", formData.additionalInfo);
-  formdata.append("checkedInsured", JSON.stringify(checkedInsured));
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const requestOptions = {
-    method: "POST",
-    body: formdata,
-    redirect: "follow",
-  };
-  try {
-    const response = await fetch(`${BASE_URL}company`, requestOptions);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+    const formdata = new FormData();
+    formdata.append("companyName", CompanySignupData.companyName);
+    formdata.append("contactPerson", CompanySignupData.contactPerson);
+    formdata.append("email", CompanySignupData.email);
+    formdata.append("phoneNumber", CompanySignupData.phone);
+    formdata.append("VATNumber", CompanySignupData.vatNumber);
+    formdata.append("password", CompanySignupData.password);
+    formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
+    formdata.append('logo', CompanySignupData.companyLogo);
+    formdata.append('officialDocument', CompanySignupData.companyDocuments);
+    formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
+    formdata.append("additionalInformation", formData.additionalInfo);
+    formdata.append("checkedInsured", JSON.stringify(checkedInsured));
+
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+    try {
+      const response = await fetch(`${BASE_URL}company`, requestOptions);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const result = await response.json();
+
+      console.log(result);
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
-    const result = await response.text();
-
-    console.log(result);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
-console.log("formData.drivers",formData.drivers);
+  };
+  console.log("formData.drivers", formData.drivers);
   return (
     <AuthLayout>
       <div className="center-div">
@@ -302,7 +302,7 @@ console.log("formData.drivers",formData.drivers);
                 handleTrailerTypeChange={handleTrailerTypeChange}
                 handleVehicleInputChange={handleVehicleInputChange}
                 handleVehicleDimensionsInput={handleVehicleDimensionsInput}
-              
+
                 handleAddDropdown={handleAddDropdown}
               />
               <textarea
@@ -322,9 +322,9 @@ console.log("formData.drivers",formData.drivers);
                 onChange={() => setCheckedInsured(!checkedInsured)}
                 label="I agree to the terms and conditions."
               />
-              <Button 
-              disabled={!checkedInsured}
-              label="Send" className="yellow" type="submit" />
+              <Button
+                disabled={!checkedInsured}
+                label="Send" className="yellow" type="submit" />
               <Button label="Reset" className="orange" type="reset" />
             </div>
           </form>
