@@ -195,7 +195,7 @@ const AddDriver = () => {
     formdata.append('officialDocument', CompanySignupData.companyDocuments);
     formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
     formdata.append("additionalInformation", formData.additionalInfo);
-    formdata.append("checkedInsured", JSON.stringify(checkedInsured));
+    formdata.append("checkedInsured", checkedInsured);
 
     const requestOptions = {
       method: "POST",
@@ -209,6 +209,32 @@ const AddDriver = () => {
       }
       const result = await response.json();
 
+      const drivers = formData.drivers;
+      if (drivers.length) {
+        for (let index = 0; index < drivers.length; index++) {
+          const driver = drivers[index];
+
+          if (driver.firstName && driver.lastName) {
+            const formData = new FormData();
+
+            formData.append("companyID", result.companyID);
+            formData.append("firstName", driver.firstName);
+            formData.append("lastName", driver.lastName);
+            formData.append("email", driver.email);
+            formData.append("phoneNumber", driver.phone);
+            // formData.append("image", driver.phone);
+
+            const requestOptions = {
+              method: "POST",
+              body: formData,
+              redirect: "follow",
+            };
+
+            await fetch(`${BASE_URL}driver`, requestOptions);
+          }
+
+        }
+      }
       console.log(result);
     } catch (error) {
       console.error('Error fetching data:', error);
