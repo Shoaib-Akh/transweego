@@ -38,8 +38,6 @@ const Login = () => {
   
   return (
     <AuthLayout>
-     
-
       <form onSubmit={handleSubmit} className="login-div">
        
       <div className="text-center mb-4">

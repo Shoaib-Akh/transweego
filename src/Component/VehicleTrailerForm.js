@@ -1,6 +1,5 @@
 import React from 'react';
 import SimpleInput from './SimpleInput'; // Make sure to import your SimpleInput component
-// import "../../../AuthCommon.scss";
 import "../Screen/Auth/AuthCommon.scss";
 
 const VehicleDimensionsForm = ({ vehicle, index, handleInputChange }) => {

@@ -22,7 +22,6 @@ const MultiSelectDropdown = ({ label, placeholder, required, options, error, onC
   };
 
   const handleContinue = () => {
-    console.log("Selected options:", selectedOptions);
     setIsOpen(false);
   };
 

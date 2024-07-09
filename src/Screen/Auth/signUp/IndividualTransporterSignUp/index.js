@@ -141,7 +141,6 @@ const IndividualTransporterSignUp = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted with values:', formData);
       navigate('/individual-transport-AddVehicles', { state: { formData } });
     }
   };

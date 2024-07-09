@@ -18,8 +18,6 @@ const Navbar = ({subHeading,heading}) => {
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
   <span className="navbar-toggler-icon" style={{ color: "#fff", backgroundColor: "#000" }}>
-
-  {/* <i class="fas fa-bars" style={{color:#fff; font-size:28px}}></i> */}
   </span>
 </button>
           <div className="collapse navbar-collapse" id="navbarNav" >
@@ -33,13 +31,7 @@ const Navbar = ({subHeading,heading}) => {
               <NavLink to="/contact" className="nav-link" activeClassName="active">Contact</NavLink>
             </div>
             <div className="navbar-nav">
-              {/* <div className='change-language'> */}
-{/* <p className='circle'>En</p> <ArrowDownward /> */}
-
-              {/* </div> */}
               <ChangeLanguage/>
-              {/* <button className="btn orange" onClick={() => navigate("/login")}>Login</button>
-              <button className="btn yellow" onClick={() => navigate("/signup")}>Sign Up</button> */}
             </div>
           </div>
         </div>
