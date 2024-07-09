@@ -25,8 +25,10 @@ const AddDriver = () => {
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
   const [selectVehicle, setSelectVehicle] = useState([]);
   const [selectTrailer, setSelectTrailer] = useState([]);
-  console.log("checkedInsured", checkedInsured);
-  const initialVehicleDimensions = {
+  console.log("selectVehicle", selectVehicle);
+  console.log("selectTrailer", selectTrailer);
+
+  const initialVehicleTrailer= {
     weight: "",
     payload: "",
     netWeight: "",
@@ -55,10 +57,20 @@ const AddDriver = () => {
     totalWeight: "",
     emissionCode: "",
     placingOnMarket: "",
+    frontSeats:""
   };
 
   const [vehicles, setVehicles] = useState([initialVehicle]);
-  const [vehicleDimensions, setVehicleDimensions] = useState([initialVehicleDimensions]);
+  const [SelectVehicleID, setSelectVehicleID] = useState();
+  const [TrailerTypeID, setTrailerTypeID] = useState();
+
+
+  const [VehicleTrailer, setVehicleTrailer] = useState([initialVehicleTrailer]);
+
+  
+
+  const handleVerificationOpen = () => setVerificationOpen(true);
+  const handleVerificationClose = () => setVerificationOpen(false);
 
   const [formData, setFormData] = useState({
     drivers: [
@@ -67,23 +79,29 @@ const AddDriver = () => {
         lastName: "",
         email: "",
         phone: "",
+        image: null
       },
     ],
     vehicles: [],
     additionalInfo: "",
   });
-
-  const handleVerificationOpen = () => setVerificationOpen(true);
-  const handleVerificationClose = () => setVerificationOpen(false);
-
-  const handleImageUpload = (image) => {
-    console.log("Image uploaded:", image);
+  
+  const handleImageUpload = (image, index) => {
+    setFormData((prevState) => {
+      const updatedDrivers = [...prevState.drivers];
+      updatedDrivers[index].image = image;
+      return { ...prevState, drivers: updatedDrivers };
+    });
   };
-
-  const handleImageRemove = () => {
-    console.log("Image removed");
+  
+  const handleImageRemove = (index) => {
+    console.log(`Image removed for driver at index ${index}`);
+    setFormData((prevState) => {
+      const updatedDrivers = [...prevState.drivers];
+      updatedDrivers[index].image = null;
+      return { ...prevState, drivers: updatedDrivers };
+    });
   };
-
   const handleCheckboxChange = (action) => {
     setCheckedAddVehicles(action === "addVehicles");
     if (action === "removeVehicles") {
@@ -96,12 +114,18 @@ const AddDriver = () => {
     const updatedSelectVehicle = [...selectVehicle];
     updatedSelectVehicle[index] = selectedOptions;
     setSelectVehicle(updatedSelectVehicle);
+    setSelectVehicleID(id)
+   
   };
 
   const handleTrailerTypeChange = (id, selectedOptions, index) => {
     const updatedSelectTrailer = [...selectTrailer];
     updatedSelectTrailer[index] = selectedOptions;
     setSelectTrailer(updatedSelectTrailer);
+    setTrailerTypeID(id)
+
+    console.log("id",id);
+
   };
 
 
@@ -145,22 +169,24 @@ const AddDriver = () => {
     setVehicles(newVehicles);
   };
 
-  const handleVehicleDimensionsInput = (e, index) => {
+  const handleVehicleTrailerInput = (e, index) => {
     const { name, value } = e.target;
-    const newVehicleDimensions = [...vehicleDimensions];
-    newVehicleDimensions[index] = {
-      ...newVehicleDimensions[index],
+    const newVehicleTrailer = [...VehicleTrailer];
+    newVehicleTrailer[index] = {
+      ...newVehicleTrailer[index],
       [name]: value,
     };
-    setVehicleDimensions(newVehicleDimensions);
+    setVehicleTrailer(newVehicleTrailer);
   };
 
   const [dropdowns, setDropdowns] = useState([{ id: 1 }]);
+  const [loading, setLoading] = useState(false);
+
 
   const handleAddDropdown = () => {
     setDropdowns([...dropdowns, { id: dropdowns.length + 1 }]);
     setVehicles([...vehicles, initialVehicle]);
-    setVehicleDimensions([...vehicleDimensions, initialVehicleDimensions]);
+    setVehicleTrailer([...VehicleTrailer, initialVehicleTrailer]);
   };
   console.log("dropdowns", dropdowns);
   const handleRemoveDropdown = (index) => {
@@ -168,7 +194,7 @@ const AddDriver = () => {
     setSelectTrailer(selectTrailer.filter((_, i) => i !== index));
     setSelectVehicle(selectVehicle.filter((_, i) => i !== index));
     setVehicles(vehicles.filter((_, i) => i !== index));
-    setVehicleDimensions(vehicleDimensions.filter((_, i) => i !== index));
+    setVehicleTrailer(VehicleTrailer.filter((_, i) => i !== index));
   };
   const location = useLocation();
 
@@ -181,141 +207,161 @@ const AddDriver = () => {
   }
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    const formdata = new FormData();
-    formdata.append("companyName", CompanySignupData.companyName);
-    formdata.append("contactPerson", CompanySignupData.contactPerson);
-    formdata.append("email", CompanySignupData.email);
-    formdata.append("phoneNumber", CompanySignupData.phone);
-    formdata.append("VATNumber", CompanySignupData.vatNumber);
-    formdata.append("password", CompanySignupData.password);
-    formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
-    formdata.append('logo', CompanySignupData.companyLogo);
-    formdata.append('officialDocument', CompanySignupData.companyDocuments);
-    formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
-    formdata.append("additionalInformation", formData.additionalInfo);
-    formdata.append("checkedInsured", checkedInsured);
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
-    try {
-      const response = await fetch(`${BASE_URL}company`, requestOptions);
-      if (!response.ok) {
-        toast.error('Something went wrong. Please try again');
+  setLoading(true); // Start loading
 
-      }
-      const result = await response.json();
+  const formdata = new FormData();
+  formdata.append("companyName", CompanySignupData.companyName);
+  formdata.append("contactPerson", CompanySignupData.contactPerson);
+  formdata.append("email", CompanySignupData.email);
+  formdata.append("phoneNumber", CompanySignupData.phone);
+  formdata.append("VATNumber", CompanySignupData.vatNumber);
+  formdata.append("password", CompanySignupData.password);
+  formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
+  formdata.append('logo', CompanySignupData.companyLogo);
+  formdata.append('officialDocument', CompanySignupData.companyDocuments);
+  formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
+  formdata.append("additionalInformation", formData.additionalInfo);
+  formdata.append("checkedInsured", checkedInsured);
 
-      const drivers = formData.drivers;
-      if (drivers.length) {
-        for (let index = 0; index < drivers.length; index++) {
-          const driver = drivers[index];
-
-          if (driver.firstName && driver.lastName) {
-            const formData = new FormData();
-
-            formData.append("companyID", result.companyID);
-            formData.append("firstName", driver.firstName);
-            formData.append("lastName", driver.lastName);
-            formData.append("email", driver.email);
-            formData.append("phoneNumber", driver.phone);
-            // formData.append("image", driver.image);
-
-            const requestOptions = {
-              method: "POST",
-              body: formData,
-              redirect: "follow",
-            };
-
-            await fetch(`${BASE_URL}driver`, requestOptions);
-          }
-
-        }
-      }
-
-      if (vehicles.length) {
-        for (let index = 0; index < vehicles.length; index++) {
-          const vehicle = vehicles[index];
-
-          // Add vehicleTypeID in the if check
-          if (vehicle.numberPlate) {
-            // This the data you can append to create vehicle
-            // const data = {
-            //   vehicleTypeID: 1,
-            //   numberPlate: "mpx-124 numberPlate",
-            //   vehicleType: "Transporter vehicleType",
-            //   brandAndType: "brandAndType",
-            //   chassisNumber: "chassisNumber",
-            //   color: "color",
-            //   totalSeats: 10,
-            //   frontSeats: 6,
-            //   emptyWeight: 200,
-            //   inFront: "inFront",
-            //   serialNumber: "serialNumber",
-            //   saddleLoad: "saddleLoad",
-            //   typeApproval: "typeApproval",
-            //   totalWeight: 500,
-            //   emissionsCode: "emissionsCode",
-            //   placingInTheMarket: "placingInTheMarket",
-            //   companyID: result.companyID
-            // }
-
-            // const requestOptions = {
-            //   method: "POST",
-            //   body: data,
-            //   redirect: "follow",
-            // };
-
-            // await fetch(`${BASE_URL}vehicle`, requestOptions);
-          }
-        }
-      }
-      if (vehicleDimensions.length) {
-        for (let index = 0; index < vehicleDimensions.length; index++) {
-          const dimension = vehicleDimensions[index];
-
-          if (dimension.weight) {
-            // This the data you can append to create trailer
-            // const data = {
-            //   trailerTypeID: 1,
-            //   companyID: result.companyID,
-            //   totalWeight: 750,
-            //   payload: 210,
-            //   netWeight: 650,
-            //   curbWeight: 200,
-            //   overallLength: 1050,
-            //   totalWidth: 1000,
-            //   totalHeight: 600,
-            //   loadingWeightLength: 2000,
-            //   loadingWeightWidth: 3000,
-            //   loadingWeightHeight: 550,
-            //   loadingSillHeight: 300
-            // }
-
-
-            // const requestOptions = {
-            //   method: "POST",
-            //   body: data,
-            //   redirect: "follow",
-            // };
-
-            // Updated route to match trailer api
-            // await fetch(`${BASE_URL}trailer`, requestOptions);
-          }
-        }
-      }
-
-      console.log(result);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+  const requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow",
   };
-  console.log("formData.drivers", formData.drivers);
+
+  try {
+    const response = await fetch(`${BASE_URL}company`, requestOptions);
+    if (!response.ok) {
+      throw new Error('Error creating company. Please try again.');
+    }
+    const result = await response.json();
+    const companyId=await result.data.companyID
+    if (!result.data.companyID) {
+      throw new Error('Company ID not found in response.');
+    }
+    const drivers = formData.drivers;
+
+    if (drivers.length) {
+      for (let index = 0; index < drivers.length; index++) {
+        const driver = drivers[index];
+
+        if (driver.firstName && driver.lastName) {
+          const driverFormData = new FormData();
+          driverFormData.append("companyID", companyId);
+          driverFormData.append("firstName", driver.firstName);
+          driverFormData.append("lastName", driver.lastName);
+          driverFormData.append("email", driver.email);
+          driverFormData.append("phoneNumber", driver.phone);
+          driverFormData.append("image", driver.image);
+
+          const driverRequestOptions = {
+            method: "POST",
+            body: driverFormData,
+            redirect: "follow",
+          };
+
+          const driverResponse = await fetch(`${BASE_URL}driver`, driverRequestOptions);
+          if (!driverResponse.ok) {
+            throw new Error('Error adding driver. Please try again.');
+          }
+        }
+      }
+    }
+    // Add vehicles
+    if (vehicles.length) {
+      for (let index = 0; index < vehicles.length; index++) {
+        const vehicle = vehicles[index];
+
+        if (vehicle.numberPlate &&  vehicle.frontSeats ) {
+          const data = {
+            vehicleTypeID: SelectVehicleID,
+            numberPlate: vehicle.numberPlate,
+            vehicleType: vehicle.vehicleType,
+            brandAndType: vehicle.brandAndType,
+            chassisNumber: vehicle.chassisNo,
+            color: vehicle.color,
+            totalSeats: vehicle.totalSeats,
+            frontSeats: vehicle.frontSeats,
+            emptyWeight: 200,
+            inFront: vehicle.inFront,
+            serialNumber: vehicle.serialNumber,
+            saddleLoad: vehicle.saddleLoad,
+            typeApproval: vehicle.typeApproval,
+            totalWeight: vehicle.totalWeight,
+            emissionsCode: vehicle.emissionCode,
+            placingInTheMarket: vehicle.placingOnMarket,
+            companyID:companyId
+          }
+
+          const vehicleRequestOptions = {
+            method: "POST",
+            body: JSON.stringify(data), // Convert data to JSON string
+            headers: {
+              'Content-Type': 'application/json', // Set Content-Type header
+            },
+            redirect: "follow",
+          };
+
+          const vehicleResponse = await fetch(`${BASE_URL}vehicle`, vehicleRequestOptions);
+          if (!vehicleResponse.ok) {
+            throw new Error('Error adding vehicle. Please try again.');
+          }
+        }
+      }
+    }
+
+    // Add trailers
+    if (VehicleTrailer.length ) {
+      for (let index = 0; index < VehicleTrailer.length; index++) {
+        const vehicleTrailer = VehicleTrailer[index];
+
+        if (vehicleTrailer.weight ) {
+          const data = {
+            trailerTypeID: TrailerTypeID,
+            companyID: companyId,
+            totalWeight: vehicleTrailer.weight,
+            payload: vehicleTrailer.payload,
+            netWeight: vehicleTrailer.netWeight,
+            curbWeight: vehicleTrailer.curbWeight,
+            overallLength: vehicleTrailer.totalLength,
+            totalWidth: vehicleTrailer.totalWidth,
+            totalHeight: vehicleTrailer.totalHeight,
+            loadingWeightLength: vehicleTrailer.insideLength,
+            loadingWeightWidth: vehicleTrailer.insideWidth,
+            loadingWeightHeight: vehicleTrailer.insideHeight,
+            loadingSillHeight: vehicleTrailer.sillHeight
+          }
+
+          const trailerRequestOptions = {
+            method: "POST",
+            body: JSON.stringify(data), // Convert data to JSON string
+            headers: {
+              'Content-Type': 'application/json', // Set Content-Type header
+            },
+            redirect: "follow",
+          };
+
+          const trailerResponse = await fetch(`${BASE_URL}trailer`, trailerRequestOptions);
+          if (!trailerResponse.ok) {
+            throw new Error('Error adding trailer. Please try again.');
+          }
+        }
+      }
+    }
+
+    toast.success('Company registered successfully!');
+  } catch (error) {
+    toast.error(error.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
+  console.log("VehicleTrailer", VehicleTrailer);
   return (
     <AuthLayout>
       <div className="center-div">
@@ -362,12 +408,12 @@ const AddDriver = () => {
                     onChange={(e) => handleInputChange(e, index, "drivers")}
                   />
                   <div className="d-flex justify-content-end">
-                    <UploadItem
-                      frameImage={Images.frame}
-                      label="Driver Documents"
-                      onImageUpload={handleImageUpload}
-                      onImageRemove={handleImageRemove}
-                    />
+                  <UploadItem
+        frameImage={Images.frame}
+        label="Driver Documents"
+        onImageUpload={(image) => handleImageUpload(image, index)}
+        onImageRemove={() => handleImageRemove(index)}
+      />
                   </div>
                 </div>
               ))}
@@ -397,12 +443,12 @@ const AddDriver = () => {
                 selectVehicle={selectVehicle}
                 selectTrailer={selectTrailer}
                 vehicles={vehicles}
-                vehicleDimensions={vehicleDimensions}
+                VehicleTrailer={VehicleTrailer}
                 handleRemoveDropdown={handleRemoveDropdown}
                 handleVehicleTypeChange={handleVehicleTypeChange}
                 handleTrailerTypeChange={handleTrailerTypeChange}
                 handleVehicleInputChange={handleVehicleInputChange}
-                handleVehicleDimensionsInput={handleVehicleDimensionsInput}
+                handleVehicleTrailerInput={handleVehicleTrailerInput}
 
                 handleAddDropdown={handleAddDropdown}
               />
@@ -424,6 +470,7 @@ const AddDriver = () => {
                 label="I agree to the terms and conditions."
               />
               <Button
+              loading={loading}
                 disabled={!checkedInsured}
                 label="Send" className="yellow" type="submit" />
               <Button label="Reset" className="orange" type="reset" />

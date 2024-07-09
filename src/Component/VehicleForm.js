@@ -60,9 +60,9 @@ const VehicleForm = ({ vehicle, index, handleInputChange }) => {
         onChange={(e) => handleInputChange(e, index, "vehicles")}
       />
       <SimpleInput
-        placeholder="in front"
-        name="inFront"
-        value={vehicle.inFront}
+        placeholder="front Seats"
+        name="frontSeats"
+        value={vehicle.frontSeats}
         onChange={(e) => handleInputChange(e, index, "vehicles")}
       />
       <div className="row">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CustomDropDown from "./CustomDropDown";
 import VehicleForm from "./VehicleForm";
-import VehicleDimensionsForm from "./VehicleDimensionsForm";
+import VehicleTrailerForm from "./VehicleTrailerForm";
 import fetchData, { FetchData, formatOptions } from '../utils/commonFunction';
 
 const AddVehicleSection = ({
@@ -10,12 +10,12 @@ const AddVehicleSection = ({
   selectVehicle,
   selectTrailer,
   vehicles,
-  vehicleDimensions,
+  VehicleTrailer,
   handleRemoveDropdown,
   handleVehicleTypeChange,
   handleTrailerTypeChange,
   handleVehicleInputChange,
-  handleVehicleDimensionsInput,
+  handleVehicleTrailerInput,
  
 
   handleAddDropdown
@@ -86,13 +86,13 @@ const AddVehicleSection = ({
             </div>
           )}
           {selectTrailer[index]?.length > 0 &&
-            vehicleDimensions.map((vehicleDimension, vdIndex) => (
+            VehicleTrailer.map((vehicleDimension, vdIndex) => (
               index === vdIndex && (
-                <VehicleDimensionsForm
+                <VehicleTrailerForm
                   key={vdIndex}
                   vehicle={vehicleDimension}
                   index={vdIndex}
-                  handleInputChange={handleVehicleDimensionsInput}
+                  handleInputChange={handleVehicleTrailerInput}
                 />
               )
             ))

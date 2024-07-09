@@ -87,7 +87,6 @@ console.log("companyLogo",companyLogo);
     } else if (label === "Company Documents") {
       setCompanyDocuments(null);
     }
-    console.log(`${label} removed`);
   };
 
   const handleNext = () => {
