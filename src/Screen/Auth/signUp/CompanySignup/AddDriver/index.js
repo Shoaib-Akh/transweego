@@ -352,8 +352,8 @@ const handleSubmit = async (e) => {
         }
       }
     }
-    navigate('/')
-
+    // navigate('/')
+    handleVerificationOpen()
     toast.success('Company registered successfully!');
   } catch (error) {
     toast.error(error.message);
@@ -474,12 +474,15 @@ const handleSubmit = async (e) => {
               loading={loading}
                 disabled={!checkedInsured}
                 label="Send" className="yellow" type="submit" />
-              <Button label="Reset" className="orange" type="reset" />
+              <Button label="Reset" className="orange"  
+              onClick={()=>handleVerificationOpen()}
+              />
             </div>
           </form>
         </div>
       </div>
       <VerificationModal
+      email={CompanySignupData.email}
         open={verificationOpen}
         handleOpen={handleVerificationOpen}
         handleClose={handleVerificationClose}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-
 import "../../../AuthCommon.scss";
 import AuthLayout from "../../../../../layout/AuthLayout";
 import Button from "../../../../../Component/Button";
@@ -112,7 +111,7 @@ const IndividualAddVehicles = () => {
 
 
   const handleSubmit = async (e) => {
-    setLoading(true); // Start loading
+    setLoading(true); 
     e.preventDefault();
     const data = new FormData();
     data.append("firstName", formData.firstName);
@@ -266,13 +265,17 @@ const IndividualAddVehicles = () => {
                 />
               </div>
 
-              <Button label="Send" className="yellow" type="submit" />
+              <Button label="Send" className="yellow" type="submit" 
+              
+              loading={loading}
+              />
               <Button label="Reset" className="orange" type="reset" />
             </div>
           </form>
         </div>
       </div>
       <VerificationModal
+      email={formData.email}
         open={verificationOpen}
         handleOpen={handleVerificationOpen}
         handleClose={handleVerificationClose}

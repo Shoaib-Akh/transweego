@@ -11,7 +11,8 @@ import NoMatch from '../Screen/NoMatch';
 import AddDriver from '../Screen/Auth/signUp/CompanySignup/AddDriver';
 import IndividualTransportAddVehicles from '../Screen/Auth/signUp/IndividualTransporterSignUp/IndividualTransportAddVehicles';
 import IndividualAddVehicles from '../Screen/Auth/signUp/IndividualSignUp/IndividualAddVehicles';
-
+import AuthorizationCodeModal from ".././Component/Modal/AuthorizationCode"
+import VerifyEmail from '../Screen/Auth/VerifyEmail';
 const AuthRoute = () => {
   return (
     <Routes>
@@ -20,7 +21,7 @@ const AuthRoute = () => {
       <Route path='/company-signup' element={<CompanySignup />} />
       <Route path='/individual-signup' element={<IndividualSignUp />} />
       <Route path='/individual-add-vehicles' element={<IndividualAddVehicles />} />
-
+      <Route path="/verify-email" element={<VerifyEmail />} />
       
       <Route path='/add-driver' element={<AddDriver />} />
 

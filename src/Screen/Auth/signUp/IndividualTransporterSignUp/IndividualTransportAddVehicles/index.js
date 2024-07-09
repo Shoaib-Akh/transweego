@@ -266,7 +266,9 @@ const IndividualTransportAddVehicles = () => {
                 />
               </div>
 
-              <Button label="Send" className="yellow" type="submit" />
+              <Button label="Send" className="yellow" type="submit"
+                   loading={loading}
+              />
               <Button label="Reset" className="orange" type="reset" />
             </div>
           </form>

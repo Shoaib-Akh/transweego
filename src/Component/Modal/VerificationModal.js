@@ -6,10 +6,15 @@ import { Modal } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Button from '../Button';
-export default function VerificationModal({ open, handleOpen, handleClose }) {
+import AuthorizationCode from './AuthorizationCode';
+export default function VerificationModal({ open, handleOpen, handleClose,email }) {
+    const [verificationOpen, setVerificationOpen] = useState(false);
 
 
+    const handleVerificationOpen = () => setVerificationOpen(true);
+    const handleVerificationClose = () => setVerificationOpen(false);
     return (
+        <>
         <Modal
             aria-labelledby="custom-modal-title"
             aria-describedby="custom-modal-description"
@@ -42,13 +47,21 @@ export default function VerificationModal({ open, handleOpen, handleClose }) {
                     </div>
                     <div style={{width:"300px"}} className='my-4'>
                         
-                    <Button label={"Resend link"}  />
+                    <Button label={"Resend link"}   onClick={()=>{handleVerificationOpen() ;handleClose()}}/>
                     </div>
 
                 </Box>
 
             </Box>
-
+           
         </Modal>
+        <AuthorizationCode
+            email={email}
+            open={verificationOpen}
+            handleOpen={handleVerificationOpen}
+            handleClose={handleVerificationClose}
+            />
+            
+        </>
     );
 }

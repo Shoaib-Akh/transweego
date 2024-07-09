@@ -76,11 +76,11 @@ const Login = () => {
       handleOpen={EmailHandleOpen}
       handleClose={EmailHandleClose}
       />
-      <AuthorizationCode
+      {/* <AuthorizationCode
        open={Authorization}
        handleOpen={AuthorizationHandleOpen}
        handleClose={AuthorizationHandleClose}
-      />
+      /> */}
       <ForgetEmail
        open={Forget}
        handleOpen={ForgetEmailHandleOpen}
