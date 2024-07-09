@@ -26,8 +26,6 @@ const AuthRoute = () => {
 
       <Route path='/individual-transporter-signup' element={<IndividualTransporterSignUp />} />
       <Route path='/individual-transport-AddVehicles' element={<IndividualTransportAddVehicles />} />
-
-      {/* <Route path="*" element={<NoMatch />} /> */}
     </Routes>
   );
 };

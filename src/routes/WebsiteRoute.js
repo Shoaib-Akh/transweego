@@ -7,13 +7,10 @@ import NoMatch from "../Screen/NoMatch"
 export const WebsiteRoute = ( ) => {
     return(
         <>
-        {/* <LandingPage/> */}
         <Routes>
-        {/* <Route path="/" element={<LandingPage />} /> */}
             <Route  element={<WebsiteLayout/>}>
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/how-it-work" element={<HowItWork/>}/>
-                {/* <Route path="*" element={<NoMatch />} />  */}
                 <Route/>
             </Route>
         </Routes>

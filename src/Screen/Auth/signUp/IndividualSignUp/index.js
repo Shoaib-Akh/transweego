@@ -134,14 +134,9 @@ const IndividualSignUp = () => {
     if (!formData.phone) newErrors.phone = 'This field is required';
     if (!formData.gender) newErrors.gender = 'This field is required';
 
-    // if (!formData.birthDate || new Date(formData.birthDate) >= new Date()) {
-    //   newErrors.birthDate = 'Please enter a valid birth date';
-    // }
-
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted with values:', formData);
       navigate('/individual-transport-AddVehicles', { state: { formData } });
     }
   };
@@ -177,7 +172,7 @@ const IndividualSignUp = () => {
         <div className="bg-company">
           <div className="login-div">
             <div className="text-center mb-4 heading">
-              <h2>Individual Transporter</h2>
+              <h2>Individual</h2>
             </div>
             <div className="input-bg">
               <CustomDropDown

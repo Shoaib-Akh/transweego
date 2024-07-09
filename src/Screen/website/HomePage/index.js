@@ -7,10 +7,7 @@ import Fotter from "../WebsiteComponent/Footer";
 import { Images } from "../../../utils/images";
 import { Box, Button, Modal, Typography } from "@mui/material";
 const handleClick = (event) => {
-  // Remove active class from all buttons
   document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
-  
-  // Add active class to the clicked button
   event.target.classList.add('active');
 };
 
@@ -102,19 +99,6 @@ const HomePage = () => {
         </div>
       </div>
       <div>
-        {/* <Button onClick={handleOpen}>Open modal</Button> */}
-        {/* <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box className= "style">
-          
-          
-          </Box>
-          
-        </Modal> */}
       </div>
       <div className="lorem-section mt-6r">
         <div className="container-box">

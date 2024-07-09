@@ -31,17 +31,6 @@ const CompanySignup = () => {
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(false); // State for "Would you like to add your vehicles?"
   const [companyLogo, setCompanyLogo] = useState(null);
   const [companyDocuments, setCompanyDocuments] = useState(null);
-console.log("companyLogo",companyLogo);
-  // useEffect(() => {
-  //   dispatch(getServiceTypes());
-  // }, [dispatch]);
-
-  // const serviceTypes = useSelector((state) => state.serviceTypes.list);
-
-  // const options = serviceTypes.map((item) => ({
-  //   id: item.serviceTypeId,
-  //   label: item.serviceTypeName
-  // }));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,7 +67,6 @@ console.log("companyLogo",companyLogo);
     } else if (label === "Company Documents") {
       setCompanyDocuments(image);
     }
-    console.log(`${label} uploaded:`, image);
   };
 
   const handleImageRemove = (label) => {
@@ -98,7 +86,6 @@ console.log("companyLogo",companyLogo);
       companyDocuments,
       companyId
     };
-    // console.log('Form data to be sent to next screen:', data);
     navigate("/add-driver", { state: { CompanySignupData } });
   };
   const [data, setData] = useState(null);
@@ -213,20 +200,6 @@ console.log("companyLogo",companyLogo);
                     onImageRemove={() => handleImageRemove("Company Documents")}
                   />
                 </div>
-                {/* <hr />
-                <p className="label">Would you like to add your vehicles?</p>
-                <div className="checkbox_div">
-                  <CustomCheckbox
-                    checked={checkedAddVehicles}
-                    onChange={() => handleCheckboxChange('addVehicles')}
-                    label="Yes"
-                  />
-                  <CustomCheckbox
-                    checked={!checkedAddVehicles}
-                    onChange={() => handleCheckboxChange('addVehicles')}
-                    label="No"
-                  />
-                </div> */}
               </div>
               <Button
                 label="Next"

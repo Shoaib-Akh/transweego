@@ -1,4 +1,3 @@
-// src/Screen/NoMatch.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NoMatch.scss'; // Import the styles

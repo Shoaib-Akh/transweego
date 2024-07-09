@@ -112,7 +112,7 @@ const IndividualAddVehicles = () => {
 
 
   const handleSubmit = async (e) => {
-    setLoading(true); // Start loading
+    setLoading(true); 
     e.preventDefault();
     const data = new FormData();
     data.append("firstName", formData.firstName);

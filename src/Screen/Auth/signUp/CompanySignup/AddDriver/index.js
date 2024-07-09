@@ -25,8 +25,6 @@ const AddDriver = () => {
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
   const [selectVehicle, setSelectVehicle] = useState([]);
   const [selectTrailer, setSelectTrailer] = useState([]);
-  console.log("selectVehicle", selectVehicle);
-  console.log("selectTrailer", selectTrailer);
 
   const initialVehicleTrailer= {
     weight: "",
@@ -95,7 +93,6 @@ const AddDriver = () => {
   };
   
   const handleImageRemove = (index) => {
-    console.log(`Image removed for driver at index ${index}`);
     setFormData((prevState) => {
       const updatedDrivers = [...prevState.drivers];
       updatedDrivers[index].image = null;
@@ -123,8 +120,6 @@ const AddDriver = () => {
     updatedSelectTrailer[index] = selectedOptions;
     setSelectTrailer(updatedSelectTrailer);
     setTrailerTypeID(id)
-
-    console.log("id",id);
 
   };
 
@@ -188,7 +183,6 @@ const AddDriver = () => {
     setVehicles([...vehicles, initialVehicle]);
     setVehicleTrailer([...VehicleTrailer, initialVehicleTrailer]);
   };
-  console.log("dropdowns", dropdowns);
   const handleRemoveDropdown = (index) => {
     setDropdowns(dropdowns.filter((_, i) => i !== index));
     setSelectTrailer(selectTrailer.filter((_, i) => i !== index));
@@ -361,8 +355,6 @@ const handleSubmit = async (e) => {
     setLoading(false);
   }
 };
-
-  console.log("VehicleTrailer", VehicleTrailer);
   return (
     <AuthLayout>
       <div className="center-div">
