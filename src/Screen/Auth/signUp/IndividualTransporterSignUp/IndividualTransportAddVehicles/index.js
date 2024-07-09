@@ -2,21 +2,15 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 import "../../../AuthCommon.scss";
-import SimpleInput from "../../../../../Component/SimpleInput";
-import { Images } from "../../../../../utils/images";
 import AuthLayout from "../../../../../layout/AuthLayout";
-import UploadItem from "../../../../../Component/UploadItem";
-import CustomCheckbox from "../../../../../Component/CustomCheckbox";
 import Button from "../../../../../Component/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import VerificationModal from "../../../../../Component/Modal/VerificationModal";
-
 import AddVehicleSection from "../../../../../Component/AddVehicleSection";
 import { BASE_URL } from "../../../../../config/app";
-
 const IndividualTransportAddVehicles = () => {
   const navigate = useNavigate();
-  const initialVehicleDimensions = {
+  const initialVehicleTrailer = {
     weight: "",
     payload: "",
     netWeight: "",
@@ -49,61 +43,36 @@ const IndividualTransportAddVehicles = () => {
   const [verificationOpen, setVerificationOpen] = useState(false);
   const [checkedInsured, setCheckedInsured] = useState(false);
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
+  const [SelectVehicleID, setSelectVehicleID] = useState();
+  const [TrailerTypeID, setTrailerTypeID] = useState();
   const [selectVehicle, setSelectVehicle] = useState([]);
   const [selectTrailer, setSelectTrailer] = useState([]);
   const [vehicles, setVehicles] = useState([initialVehicle]);
-  const [vehicleDimensions, setVehicleDimensions] = useState([initialVehicleDimensions]);
+  const [VehicleTrailer, setVehicleTrailer] = useState([initialVehicleTrailer]);
   const [dropdowns, setDropdowns] = useState([{ id: 1 }]);
+  const [loading, setLoading] = useState(false);
+
   const location = useLocation();
   const { formData } = location?.state || {};
-
-  // if (!formData) {
-  //   navigate("/individual-transporter-signup");
-  //   return null;
-  // }
-  console.log("IndividualTransportAddVehiclesData", formData);
-
-
-
-
-
-
   const handleVerificationOpen = () => setVerificationOpen(true);
   const handleVerificationClose = () => setVerificationOpen(false);
-
-
-
-
   const handleVehicleTypeChange = (id, selectedOptions, index) => {
     const updatedSelectVehicle = [...selectVehicle];
     updatedSelectVehicle[index] = selectedOptions;
     setSelectVehicle(updatedSelectVehicle);
+    setSelectVehicleID(id)
+
   };
 
   const handleTrailerTypeChange = (id, selectedOptions, index) => {
     const updatedSelectTrailer = [...selectTrailer];
     updatedSelectTrailer[index] = selectedOptions;
     setSelectTrailer(updatedSelectTrailer);
+    setTrailerTypeID(id)
+
+  
+
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   handleVerificationOpen();
-  //   const data = {
-
-  //     checkedInsured,
-  //     checkedAddVehicles,
-  //   };
-  //   console.log("Form data to be sent:", data);
-  // };
-
-
-
-
-
-
-
-
 
   const handleVehicleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -115,21 +84,21 @@ const IndividualTransportAddVehicles = () => {
     setVehicles(newVehicles);
   };
 
-  const handleVehicleDimensionsInput = (e, index) => {
+  const handleVehicleTrailerInput = (e, index) => {
     const { name, value } = e.target;
-    const newVehicleDimensions = [...vehicleDimensions];
-    newVehicleDimensions[index] = {
-      ...newVehicleDimensions[index],
+    const newVehicleTrailer = [...VehicleTrailer];
+    newVehicleTrailer[index] = {
+      ...newVehicleTrailer[index],
       [name]: value,
     };
-    setVehicleDimensions(newVehicleDimensions);
+    setVehicleTrailer(newVehicleTrailer);
   };
 
 
   const handleAddDropdown = () => {
     setDropdowns([...dropdowns, { id: dropdowns.length + 1 }]);
     setVehicles([...vehicles, initialVehicle]);
-    setVehicleDimensions([...vehicleDimensions, initialVehicleDimensions]);
+    setVehicleTrailer([...VehicleTrailer, initialVehicleTrailer]);
   };
 
   const handleRemoveDropdown = (index) => {
@@ -137,31 +106,32 @@ const IndividualTransportAddVehicles = () => {
     setSelectTrailer(selectTrailer.filter((_, i) => i !== index));
     setSelectVehicle(selectVehicle.filter((_, i) => i !== index));
     setVehicles(vehicles.filter((_, i) => i !== index));
-    setVehicleDimensions(vehicleDimensions.filter((_, i) => i !== index));
+    setVehicleTrailer(VehicleTrailer.filter((_, i) => i !== index));
   };
 
 
 
   const handleSubmit = async (e) => {
+    setLoading(true); // Start loading
     e.preventDefault();
     const data = new FormData();
-    data.append("firstName", formData.companyName);
-    data.append("lastName", formData.contactPerson);
-    data.append("password", formData.email);
-    data.append("email", formData.phone);
-    data.append("phoneNumber", formData.vatNumber);
-    data.append("genderID", formData.password);
-    data.append('website', formData.checkedInsured);
-    data.append('street', formData.companyLogo);
-    data.append('zipCode', formData.companyDocuments);
-    data.append("dateOfBirth", formData.additionalInfo);
-    data.append("nationalityID", formData.checkedInsured);
-    data.append("languageID", formData.checkedInsured);
-    data.append("userTypeID", formData.checkedInsured);
-    data.append("image", formData.checkedInsured);
-    data.append("documentTypeID", formData.checkedInsured);
-    data.append("documentBack", formData.checkedInsured);
-    data.append("documentFront", formData.checkedInsured);
+    data.append("firstName", formData.firstName);
+    data.append("lastName", formData.lastName);
+    data.append("password", formData.password);
+    data.append("email", formData.email);
+    data.append("phoneNumber", formData.phone);
+    data.append("genderID", formData.gender);
+    data.append('website', formData.website);
+    data.append('street', formData.street);
+    data.append('zipCode', formData.postalCode);
+    data.append("dateOfBirth", formData.birthDate);
+    data.append("nationalityID", formData.nationality);
+    data.append("languageID", 1);
+    data.append("userTypeID", formData.IndividualTransportAddVehiclesId);
+    data.append("image", formData.profileImage);
+    data.append("documentTypeID", formData.documentsType);
+    data.append("documentBack", formData.backImage    );
+    data.append("documentFront", formData.frontImage);
 
     const requestOptions = {
       method: "POST",
@@ -175,90 +145,91 @@ const IndividualTransportAddVehicles = () => {
         throw new Error('Error creating user. Please try again.');
       }
       const result = await response.json();
-      // const userID = result.data.userID;
+      const userID = result.data.userID;
 
       // Add vehicles
-      // if (vehicles.length) {
-      //   for (let index = 0; index < vehicles.length; index++) {
-      //     const vehicle = vehicles[index];
+      if (vehicles.length) {
+        for (let index = 0; index < vehicles.length; index++) {
+          const vehicle = vehicles[index];
 
-      //     if (vehicle.numberPlate &&  vehicle.frontSeats ) {
-      //       const data = {
-      //         vehicleTypeID: SelectVehicleID,
-      //         numberPlate: vehicle.numberPlate,
-      //         vehicleType: vehicle.vehicleType,
-      //         brandAndType: vehicle.brandAndType,
-      //         chassisNumber: vehicle.chassisNo,
-      //         color: vehicle.color,
-      //         totalSeats: vehicle.totalSeats,
-      //         frontSeats: vehicle.frontSeats,
-      //         emptyWeight: 200,
-      //         inFront: vehicle.inFront,
-      //         serialNumber: vehicle.serialNumber,
-      //         saddleLoad: vehicle.saddleLoad,
-      //         typeApproval: vehicle.typeApproval,
-      //         totalWeight: vehicle.totalWeight,
-      //         emissionsCode: vehicle.emissionCode,
-      //         placingInTheMarket: vehicle.placingOnMarket,
-      //         userID:userID
-      //       }
+          if (vehicle.numberPlate &&  vehicle.frontSeats ) {
+            const data = {
+              vehicleTypeID: SelectVehicleID,
+              numberPlate: vehicle.numberPlate,
+              vehicleType: vehicle.vehicleType,
+              brandAndType: vehicle.brandAndType,
+              chassisNumber: vehicle.chassisNo,
+              color: vehicle.color,
+              totalSeats: vehicle.totalSeats,
+              frontSeats: vehicle.frontSeats,
+              emptyWeight: 200,
+              inFront: vehicle.inFront,
+              serialNumber: vehicle.serialNumber,
+              saddleLoad: vehicle.saddleLoad,
+              typeApproval: vehicle.typeApproval,
+              totalWeight: vehicle.totalWeight,
+              emissionsCode: vehicle.emissionCode,
+              placingInTheMarket: vehicle.placingOnMarket,
+              userID:userID
+            }
 
-      //       const vehicleRequestOptions = {
-      //         method: "POST",
-      //         body: JSON.stringify(data), // Convert data to JSON string
-      //         headers: {
-      //           'Content-Type': 'application/json', // Set Content-Type header
-      //         },
-      //         redirect: "follow",
-      //       };
+            const vehicleRequestOptions = {
+              method: "POST",
+              body: JSON.stringify(data), 
+              headers: {
+                'Content-Type': 'application/json', 
+              },
+              redirect: "follow",
+            };
 
-      //       const vehicleResponse = await fetch(`${BASE_URL}vehicle`, vehicleRequestOptions);
-      //       if (!vehicleResponse.ok) {
-      //         throw new Error('Error adding vehicle. Please try again.');
-      //       }
-      //     }
-      //   }
-      // }
+            const vehicleResponse = await fetch(`${BASE_URL}vehicle`, vehicleRequestOptions);
+            if (!vehicleResponse.ok) {
+              throw new Error('Error adding vehicle. Please try again.');
+            }
+          }
+        }
+      }
 
       // Add trailers
-      // if (VehicleTrailer.length ) {
-      //   for (let index = 0; index < VehicleTrailer.length; index++) {
-      //     const vehicleTrailer = VehicleTrailer[index];
+      if (VehicleTrailer.length ) {
+        for (let index = 0; index < VehicleTrailer.length; index++) {
+          const vehicleTrailer = VehicleTrailer[index];
 
-      //     if (vehicleTrailer.weight ) {
-      //       const data = {
-      //         trailerTypeID: TrailerTypeID,
-      //         userID: userID,
-      //         totalWeight: vehicleTrailer.weight,
-      //         payload: vehicleTrailer.payload,
-      //         netWeight: vehicleTrailer.netWeight,
-      //         curbWeight: vehicleTrailer.curbWeight,
-      //         overallLength: vehicleTrailer.totalLength,
-      //         totalWidth: vehicleTrailer.totalWidth,
-      //         totalHeight: vehicleTrailer.totalHeight,
-      //         loadingWeightLength: vehicleTrailer.insideLength,
-      //         loadingWeightWidth: vehicleTrailer.insideWidth,
-      //         loadingWeightHeight: vehicleTrailer.insideHeight,
-      //         loadingSillHeight: vehicleTrailer.sillHeight
-      //       }
+          if (vehicleTrailer.weight ) {
+            const data = {
+              trailerTypeID: TrailerTypeID,
+              userID: userID,
+              totalWeight: vehicleTrailer.weight,
+              payload: vehicleTrailer.payload,
+              netWeight: vehicleTrailer.netWeight,
+              curbWeight: vehicleTrailer.curbWeight,
+              overallLength: vehicleTrailer.totalLength,
+              totalWidth: vehicleTrailer.totalWidth,
+              totalHeight: vehicleTrailer.totalHeight,
+              loadingWeightLength: vehicleTrailer.insideLength,
+              loadingWeightWidth: vehicleTrailer.insideWidth,
+              loadingWeightHeight: vehicleTrailer.insideHeight,
+              loadingSillHeight: vehicleTrailer.sillHeight
+            }
 
-      //       const trailerRequestOptions = {
-      //         method: "POST",
-      //         body: JSON.stringify(data), // Convert data to JSON string
-      //         headers: {
-      //           'Content-Type': 'application/json', // Set Content-Type header
-      //         },
-      //         redirect: "follow",
-      //       };
+            const trailerRequestOptions = {
+              method: "POST",
+              body: JSON.stringify(data), 
+              headers: {
+                'Content-Type': 'application/json', 
+              },
+              redirect: "follow",
+            };
 
-      //       const trailerResponse = await fetch(`${BASE_URL}trailer`, trailerRequestOptions);
-      //       if (!trailerResponse.ok) {
-      //         throw new Error('Error adding trailer. Please try again.');
-      //       }
-      //     }
-      //   }
-      // }
-
+            const trailerResponse = await fetch(`${BASE_URL}trailer`, trailerRequestOptions);
+            if (!trailerResponse.ok) {
+              throw new Error('Error adding trailer. Please try again.');
+            }
+          }
+        }
+      }
+      setLoading(false);
+      navigate('/')
       toast.success('User registered successfully!');
     } catch (error) {
       toast.error(error.message);
@@ -284,12 +255,12 @@ const IndividualTransportAddVehicles = () => {
                   selectVehicle={selectVehicle}
                   selectTrailer={selectTrailer}
                   vehicles={vehicles}
-                  vehicleDimensions={vehicleDimensions}
+                  VehicleTrailer={VehicleTrailer}
                   handleRemoveDropdown={handleRemoveDropdown}
                   handleVehicleTypeChange={handleVehicleTypeChange}
                   handleTrailerTypeChange={handleTrailerTypeChange}
                   handleVehicleInputChange={handleVehicleInputChange}
-                  handleVehicleDimensionsInput={handleVehicleDimensionsInput}
+                  handleVehicleTrailerInput={handleVehicleTrailerInput}
 
                   handleAddDropdown={handleAddDropdown}
                 />

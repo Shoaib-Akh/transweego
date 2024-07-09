@@ -352,6 +352,7 @@ const handleSubmit = async (e) => {
         }
       }
     }
+    navigate('/')
 
     toast.success('Company registered successfully!');
   } catch (error) {

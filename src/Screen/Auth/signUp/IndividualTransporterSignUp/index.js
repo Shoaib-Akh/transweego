@@ -170,7 +170,6 @@ const IndividualTransporterSignUp = () => {
   // Nationalities options
   const nationalityOption = useFetchAndFormatOptions('nationalities', 'nationalityID', 'nationalityName');
 
-  console.log("birthDate", formData.birthDate);
 
   return (
     <AuthLayout>
