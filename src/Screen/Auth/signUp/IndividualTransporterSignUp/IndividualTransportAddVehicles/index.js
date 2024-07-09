@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+
 import "../../../AuthCommon.scss";
 import SimpleInput from "../../../../../Component/SimpleInput";
 import { Images } from "../../../../../utils/images";
@@ -53,14 +55,14 @@ const IndividualTransportAddVehicles = () => {
   const [vehicleDimensions, setVehicleDimensions] = useState([initialVehicleDimensions]);
   const [dropdowns, setDropdowns] = useState([{ id: 1 }]);
   const location = useLocation();
-  const { formData } = location?.state || {}; 
+  const { formData } = location?.state || {};
 
   // if (!formData) {
   //   navigate("/individual-transporter-signup");
   //   return null;
   // }
-  console.log("IndividualTransportAddVehiclesData",formData);
-  
+  console.log("IndividualTransportAddVehiclesData", formData);
+
 
 
 
@@ -137,36 +139,129 @@ const IndividualTransportAddVehicles = () => {
     setVehicles(vehicles.filter((_, i) => i !== index));
     setVehicleDimensions(vehicleDimensions.filter((_, i) => i !== index));
   };
-  
-  
-  
+
+
+
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
-    const formdata = new FormData()
-    formdata.append("firstName", formData.firstName);
-    formdata.append("lastName",  formData.lastName);
-    formdata.append("password",  formData.password);
-    formdata.append("email",  formData.email);
-    formdata.append("phoneNumber",  formData.phone);
-    formdata.append("genderID",  formData.gender);
-    formdata.append("userTypeID",  formData.IndividualTransportAddVehiclesId);
-  
-  
+    e.preventDefault();
+    const data = new FormData();
+    data.append("firstName", formData.companyName);
+    data.append("lastName", formData.contactPerson);
+    data.append("password", formData.email);
+    data.append("email", formData.phone);
+    data.append("phoneNumber", formData.vatNumber);
+    data.append("genderID", formData.password);
+    data.append('website', formData.checkedInsured);
+    data.append('street', formData.companyLogo);
+    data.append('zipCode', formData.companyDocuments);
+    data.append("dateOfBirth", formData.additionalInfo);
+    data.append("nationalityID", formData.checkedInsured);
+    data.append("languageID", formData.checkedInsured);
+    data.append("userTypeID", formData.checkedInsured);
+    data.append("image", formData.checkedInsured);
+    data.append("documentTypeID", formData.checkedInsured);
+    data.append("documentBack", formData.checkedInsured);
+    data.append("documentFront", formData.checkedInsured);
+
     const requestOptions = {
       method: "POST",
-      body: formdata,
+      body: data,
       redirect: "follow",
     };
+
     try {
       const response = await fetch(`${BASE_URL}user`, requestOptions);
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Error creating user. Please try again.');
       }
-      const result = await response.text();
-  
-      console.log(result);
+      const result = await response.json();
+      // const userID = result.data.userID;
+
+      // Add vehicles
+      // if (vehicles.length) {
+      //   for (let index = 0; index < vehicles.length; index++) {
+      //     const vehicle = vehicles[index];
+
+      //     if (vehicle.numberPlate &&  vehicle.frontSeats ) {
+      //       const data = {
+      //         vehicleTypeID: SelectVehicleID,
+      //         numberPlate: vehicle.numberPlate,
+      //         vehicleType: vehicle.vehicleType,
+      //         brandAndType: vehicle.brandAndType,
+      //         chassisNumber: vehicle.chassisNo,
+      //         color: vehicle.color,
+      //         totalSeats: vehicle.totalSeats,
+      //         frontSeats: vehicle.frontSeats,
+      //         emptyWeight: 200,
+      //         inFront: vehicle.inFront,
+      //         serialNumber: vehicle.serialNumber,
+      //         saddleLoad: vehicle.saddleLoad,
+      //         typeApproval: vehicle.typeApproval,
+      //         totalWeight: vehicle.totalWeight,
+      //         emissionsCode: vehicle.emissionCode,
+      //         placingInTheMarket: vehicle.placingOnMarket,
+      //         userID:userID
+      //       }
+
+      //       const vehicleRequestOptions = {
+      //         method: "POST",
+      //         body: JSON.stringify(data), // Convert data to JSON string
+      //         headers: {
+      //           'Content-Type': 'application/json', // Set Content-Type header
+      //         },
+      //         redirect: "follow",
+      //       };
+
+      //       const vehicleResponse = await fetch(`${BASE_URL}vehicle`, vehicleRequestOptions);
+      //       if (!vehicleResponse.ok) {
+      //         throw new Error('Error adding vehicle. Please try again.');
+      //       }
+      //     }
+      //   }
+      // }
+
+      // Add trailers
+      // if (VehicleTrailer.length ) {
+      //   for (let index = 0; index < VehicleTrailer.length; index++) {
+      //     const vehicleTrailer = VehicleTrailer[index];
+
+      //     if (vehicleTrailer.weight ) {
+      //       const data = {
+      //         trailerTypeID: TrailerTypeID,
+      //         userID: userID,
+      //         totalWeight: vehicleTrailer.weight,
+      //         payload: vehicleTrailer.payload,
+      //         netWeight: vehicleTrailer.netWeight,
+      //         curbWeight: vehicleTrailer.curbWeight,
+      //         overallLength: vehicleTrailer.totalLength,
+      //         totalWidth: vehicleTrailer.totalWidth,
+      //         totalHeight: vehicleTrailer.totalHeight,
+      //         loadingWeightLength: vehicleTrailer.insideLength,
+      //         loadingWeightWidth: vehicleTrailer.insideWidth,
+      //         loadingWeightHeight: vehicleTrailer.insideHeight,
+      //         loadingSillHeight: vehicleTrailer.sillHeight
+      //       }
+
+      //       const trailerRequestOptions = {
+      //         method: "POST",
+      //         body: JSON.stringify(data), // Convert data to JSON string
+      //         headers: {
+      //           'Content-Type': 'application/json', // Set Content-Type header
+      //         },
+      //         redirect: "follow",
+      //       };
+
+      //       const trailerResponse = await fetch(`${BASE_URL}trailer`, trailerRequestOptions);
+      //       if (!trailerResponse.ok) {
+      //         throw new Error('Error adding trailer. Please try again.');
+      //       }
+      //     }
+      //   }
+      // }
+
+      toast.success('User registered successfully!');
     } catch (error) {
-      console.error('Error fetching data:', error);
+      toast.error(error.message);
     }
   };
   return (
@@ -180,7 +275,7 @@ const IndividualTransportAddVehicles = () => {
             <div className="input-bg" >
               <div style={{
                 height: "399px",
-                 overflowY: "auto"
+                overflowY: "auto"
               }}>
 
                 <AddVehicleSection
