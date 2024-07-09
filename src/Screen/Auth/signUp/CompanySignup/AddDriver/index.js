@@ -14,6 +14,7 @@ import CompanySignup from '../index';
 import { CompanySignupApi } from "../../../../../store/slice/CompanySignUpSlice";
 import { useDispatch } from "react-redux";
 import { BASE_URL } from "../../../../../config/app";
+import { toast } from "react-toastify";
 
 const AddDriver = () => {
   const navigate = useNavigate();
@@ -161,7 +162,7 @@ const AddDriver = () => {
     setVehicles([...vehicles, initialVehicle]);
     setVehicleDimensions([...vehicleDimensions, initialVehicleDimensions]);
   };
-
+console.log("dropdowns",dropdowns);
   const handleRemoveDropdown = (index) => {
     setDropdowns(dropdowns.filter((_, i) => i !== index));
     setSelectTrailer(selectTrailer.filter((_, i) => i !== index));
@@ -205,7 +206,8 @@ const AddDriver = () => {
     try {
       const response = await fetch(`${BASE_URL}company`, requestOptions);
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        toast.error('Something went wrong. Please try again');
+
       }
       const result = await response.json();
 
@@ -235,6 +237,68 @@ const AddDriver = () => {
 
         }
       }
+
+      if (vehicles.length) {
+        for (let index = 0; index < vehicles.length; index++) {
+          const vehicle = vehicles[index];
+      
+          if (vehicle.firstName && vehicle.lastName) {
+            const formData = new FormData();
+            formData.append("companyID", result.companyID);
+            formData.append("numberPlate", vehicle.numberPlate || "");
+            formData.append("vehicleType", vehicle.vehicleType || "");
+            formData.append("brandAndType", vehicle.brandAndType || "");
+            formData.append("chassisNo", vehicle.chassisNo || "");
+            formData.append("color", vehicle.color || "");
+            formData.append("totalSeats", vehicle.totalSeats || "");
+            formData.append("inFront", vehicle.inFront || "");
+            formData.append("emptyWeight", vehicle.emptyWeight || "");
+            formData.append("serialNumber", vehicle.serialNumber || "");
+            formData.append("saddleLoad", vehicle.saddleLoad || "");
+            formData.append("typeApproval", vehicle.typeApproval || "");
+            formData.append("totalWeight", vehicle.totalWeight || "");
+            formData.append("emissionCode", vehicle.emissionCode || "");
+            formData.append("placingOnMarket", vehicle.placingOnMarket || "");
+            // get form compony sign up
+            formData.append("componyID",  CompanySignupData.companyId|| "");
+
+      
+            const requestOptions = {
+              method: "POST",
+              body: formData,
+              redirect: "follow",
+            };
+      
+            await fetch(`${BASE_URL}vehicles`, requestOptions);
+          }
+        }
+      }
+      if (vehicleDimensions.length) {
+        for (let index = 0; index < vehicleDimensions.length; index++) {
+            const dimension = vehicleDimensions[index];
+    
+            const formData = new FormData();
+            formData.append("companyID", result.companyID);
+            formData.append("weight", dimension.weight || "");
+            formData.append("payload", dimension.payload || "");
+            formData.append("netWeight", dimension.netWeight || "");
+            formData.append("totalLength", dimension.totalLength || "");
+            formData.append("internalLength", dimension.internalLength || "");
+            formData.append("internalLength", dimension.internalLength || "");
+            formData.append("insideLength", dimension.insideLength || "");
+            formData.append("insideWidth", dimension.insideWidth || "");
+            formData.append("insideHeight", dimension.insideHeight || "");
+    
+            const requestOptions = {
+                method: "POST",
+                body: formData,
+                redirect: "follow",
+            };
+    
+            await fetch(`${BASE_URL}vehicles`, requestOptions);
+        }
+    }
+    
       console.log(result);
     } catch (error) {
       console.error('Error fetching data:', error);
