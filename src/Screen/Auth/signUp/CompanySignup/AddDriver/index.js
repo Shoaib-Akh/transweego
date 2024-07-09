@@ -162,7 +162,7 @@ const AddDriver = () => {
     setVehicles([...vehicles, initialVehicle]);
     setVehicleDimensions([...vehicleDimensions, initialVehicleDimensions]);
   };
-console.log("dropdowns",dropdowns);
+  console.log("dropdowns", dropdowns);
   const handleRemoveDropdown = (index) => {
     setDropdowns(dropdowns.filter((_, i) => i !== index));
     setSelectTrailer(selectTrailer.filter((_, i) => i !== index));
@@ -241,11 +241,13 @@ console.log("dropdowns",dropdowns);
       if (vehicles.length) {
         for (let index = 0; index < vehicles.length; index++) {
           const vehicle = vehicles[index];
-      
-          if (vehicle.firstName && vehicle.lastName) {
+
+          // Add vehicleTypeID in the if check
+          if (vehicle.numberPlate) {
             const formData = new FormData();
             formData.append("companyID", result.companyID);
             formData.append("numberPlate", vehicle.numberPlate || "");
+            // Add vehicleTypeID in here
             formData.append("vehicleType", vehicle.vehicleType || "");
             formData.append("brandAndType", vehicle.brandAndType || "");
             formData.append("chassisNo", vehicle.chassisNo || "");
@@ -259,25 +261,46 @@ console.log("dropdowns",dropdowns);
             formData.append("totalWeight", vehicle.totalWeight || "");
             formData.append("emissionCode", vehicle.emissionCode || "");
             formData.append("placingOnMarket", vehicle.placingOnMarket || "");
-            // get form compony sign up
-            formData.append("componyID",  CompanySignupData.companyId|| "");
 
-      
+            // This the data you can append to formData to create vehicle
+            // {
+            //   "vehicleTypeID": 1,
+            //   "userID": 1,
+            //   "numberPlate": "mpx-124 numberPlate",
+            //   "vehicleType": "Transporter vehicleType",
+            //   "brandAndType": "brandAndType",
+            //   "chassisNumber": "chassisNumber",
+            //   "color": "color",
+            //   "totalSeats": 10,
+            //   "frontSeats": 6,
+            //   "emptyWeight": 200,
+            //   "inFront": "inFront",
+            //   "serialNumber": "serialNumber",
+            //   "saddleLoad": "saddleLoad",
+            //   "typeApproval": "typeApproval",
+            //   "totalWeight": 500,
+            //   "emissionsCode": "emissionsCode",
+            //   "placingInTheMarket": "placingInTheMarket"
+            // }
+
             const requestOptions = {
               method: "POST",
               body: formData,
               redirect: "follow",
             };
-      
-            await fetch(`${BASE_URL}vehicles`, requestOptions);
+
+            // Updated route to match vehicle api
+            await fetch(`${BASE_URL}vehicle`, requestOptions);
           }
         }
       }
       if (vehicleDimensions.length) {
         for (let index = 0; index < vehicleDimensions.length; index++) {
-            const dimension = vehicleDimensions[index];
-    
+          const dimension = vehicleDimensions[index];
+
+          if (dimension.weight) {
             const formData = new FormData();
+
             formData.append("companyID", result.companyID);
             formData.append("weight", dimension.weight || "");
             formData.append("payload", dimension.payload || "");
@@ -288,17 +311,37 @@ console.log("dropdowns",dropdowns);
             formData.append("insideLength", dimension.insideLength || "");
             formData.append("insideWidth", dimension.insideWidth || "");
             formData.append("insideHeight", dimension.insideHeight || "");
-    
+
+            // This the data you can append to formData to create trailer
+            // {
+            //   "trailerTypeID": 1,
+            //   "companyID": 1,
+            //   "totalWeight": 750,
+            //   "payload": 210,
+            //   "netWeight": 650,
+            //   "curbWeight": 200,
+            //   "overallLength": 1050,
+            //   "totalWidth": 1000,
+            //   "totalHeight": 600,
+            //   "loadingWeightLength": 2000,
+            //   "loadingWeightWidth": 3000,
+            //   "loadingWeightHeight": 550,
+            //   "loadingSillHeight": 300
+            // }
+
+
             const requestOptions = {
-                method: "POST",
-                body: formData,
-                redirect: "follow",
+              method: "POST",
+              body: formData,
+              redirect: "follow",
             };
-    
-            await fetch(`${BASE_URL}vehicles`, requestOptions);
+
+            // Updated route to match trailer api
+            await fetch(`${BASE_URL}trailer`, requestOptions);
+          }
         }
-    }
-    
+      }
+
       console.log(result);
     } catch (error) {
       console.error('Error fetching data:', error);
