@@ -14,17 +14,18 @@ import CompanySignup from '../index';
 import { CompanySignupApi } from "../../../../../store/slice/CompanySignUpSlice";
 import { useDispatch } from "react-redux";
 import { BASE_URL } from "../../../../../config/app";
+import { toast } from "react-toastify";
 
 const AddDriver = () => {
   const navigate = useNavigate();
-const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const [verificationOpen, setVerificationOpen] = useState(false);
   const [checkedInsured, setCheckedInsured] = useState(false);
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(true);
   const [selectVehicle, setSelectVehicle] = useState([]);
   const [selectTrailer, setSelectTrailer] = useState([]);
-console.log("checkedInsured",checkedInsured);
+  console.log("checkedInsured", checkedInsured);
   const initialVehicleDimensions = {
     weight: "",
     payload: "",
@@ -103,7 +104,7 @@ console.log("checkedInsured",checkedInsured);
     setSelectTrailer(updatedSelectTrailer);
   };
 
-  
+
 
   const addDriver = () => {
     setFormData((prevData) => ({
@@ -122,7 +123,7 @@ console.log("checkedInsured",checkedInsured);
     }));
   };
 
-  
+
 
   const handleInputChange = (e, index, key) => {
     const { name, value } = e.target;
@@ -161,7 +162,7 @@ console.log("checkedInsured",checkedInsured);
     setVehicles([...vehicles, initialVehicle]);
     setVehicleDimensions([...vehicleDimensions, initialVehicleDimensions]);
   };
-
+  console.log("dropdowns", dropdowns);
   const handleRemoveDropdown = (index) => {
     setDropdowns(dropdowns.filter((_, i) => i !== index));
     setSelectTrailer(selectTrailer.filter((_, i) => i !== index));
@@ -170,51 +171,151 @@ console.log("checkedInsured",checkedInsured);
     setVehicleDimensions(vehicleDimensions.filter((_, i) => i !== index));
   };
   const location = useLocation();
- 
-  
-  const { CompanySignupData } = location.state || {}; 
+
+
+  const { CompanySignupData } = location.state || {};
 
   if (!CompanySignupData) {
     navigate("/company-signup");
     return null;
   }
 
- 
-const handleSubmit = async (e) => {
-  e.preventDefault(); 
 
-  const formdata = new FormData();
-  formdata.append("companyName", CompanySignupData.companyName);
-  formdata.append("contactPerson", CompanySignupData.contactPerson);
-  formdata.append("email",CompanySignupData.email);
-  formdata.append("phoneNumber",CompanySignupData.phone);
-  formdata.append("VATNumber", CompanySignupData.vatNumber);
-  formdata.append("password", CompanySignupData.password);
-  formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
-  formdata.append('logo', CompanySignupData.companyLogo); 
-  formdata.append('officialDocument', CompanySignupData.companyDocuments); 
-  formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
-  formdata.append("additionalInformation", formData.additionalInfo);
-  formdata.append("checkedInsured", JSON.stringify(checkedInsured));
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const requestOptions = {
-    method: "POST",
-    body: formdata,
-    redirect: "follow",
-  };
-  try {
-    const response = await fetch(`${BASE_URL}company`, requestOptions);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+    const formdata = new FormData();
+    formdata.append("companyName", CompanySignupData.companyName);
+    formdata.append("contactPerson", CompanySignupData.contactPerson);
+    formdata.append("email", CompanySignupData.email);
+    formdata.append("phoneNumber", CompanySignupData.phone);
+    formdata.append("VATNumber", CompanySignupData.vatNumber);
+    formdata.append("password", CompanySignupData.password);
+    formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
+    formdata.append('logo', CompanySignupData.companyLogo);
+    formdata.append('officialDocument', CompanySignupData.companyDocuments);
+    formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
+    formdata.append("additionalInformation", formData.additionalInfo);
+    formdata.append("checkedInsured", checkedInsured);
+
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+    try {
+      const response = await fetch(`${BASE_URL}company`, requestOptions);
+      if (!response.ok) {
+        toast.error('Something went wrong. Please try again');
+
+      }
+      const result = await response.json();
+
+      const drivers = formData.drivers;
+      if (drivers.length) {
+        for (let index = 0; index < drivers.length; index++) {
+          const driver = drivers[index];
+
+          if (driver.firstName && driver.lastName) {
+            const formData = new FormData();
+
+            formData.append("companyID", result.companyID);
+            formData.append("firstName", driver.firstName);
+            formData.append("lastName", driver.lastName);
+            formData.append("email", driver.email);
+            formData.append("phoneNumber", driver.phone);
+            // formData.append("image", driver.image);
+
+            const requestOptions = {
+              method: "POST",
+              body: formData,
+              redirect: "follow",
+            };
+
+            await fetch(`${BASE_URL}driver`, requestOptions);
+          }
+
+        }
+      }
+
+      if (vehicles.length) {
+        for (let index = 0; index < vehicles.length; index++) {
+          const vehicle = vehicles[index];
+
+          // Add vehicleTypeID in the if check
+          if (vehicle.numberPlate) {
+            // This the data you can append to create vehicle
+            // const data = {
+            //   vehicleTypeID: 1,
+            //   numberPlate: "mpx-124 numberPlate",
+            //   vehicleType: "Transporter vehicleType",
+            //   brandAndType: "brandAndType",
+            //   chassisNumber: "chassisNumber",
+            //   color: "color",
+            //   totalSeats: 10,
+            //   frontSeats: 6,
+            //   emptyWeight: 200,
+            //   inFront: "inFront",
+            //   serialNumber: "serialNumber",
+            //   saddleLoad: "saddleLoad",
+            //   typeApproval: "typeApproval",
+            //   totalWeight: 500,
+            //   emissionsCode: "emissionsCode",
+            //   placingInTheMarket: "placingInTheMarket",
+            //   companyID: result.companyID
+            // }
+
+            // const requestOptions = {
+            //   method: "POST",
+            //   body: data,
+            //   redirect: "follow",
+            // };
+
+            // await fetch(`${BASE_URL}vehicle`, requestOptions);
+          }
+        }
+      }
+      if (vehicleDimensions.length) {
+        for (let index = 0; index < vehicleDimensions.length; index++) {
+          const dimension = vehicleDimensions[index];
+
+          if (dimension.weight) {
+            // This the data you can append to create trailer
+            // const data = {
+            //   trailerTypeID: 1,
+            //   companyID: result.companyID,
+            //   totalWeight: 750,
+            //   payload: 210,
+            //   netWeight: 650,
+            //   curbWeight: 200,
+            //   overallLength: 1050,
+            //   totalWidth: 1000,
+            //   totalHeight: 600,
+            //   loadingWeightLength: 2000,
+            //   loadingWeightWidth: 3000,
+            //   loadingWeightHeight: 550,
+            //   loadingSillHeight: 300
+            // }
+
+
+            // const requestOptions = {
+            //   method: "POST",
+            //   body: data,
+            //   redirect: "follow",
+            // };
+
+            // Updated route to match trailer api
+            // await fetch(`${BASE_URL}trailer`, requestOptions);
+          }
+        }
+      }
+
+      console.log(result);
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
-    const result = await response.text();
-
-    console.log(result);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
-console.log("formData.drivers",formData.drivers);
+  };
+  console.log("formData.drivers", formData.drivers);
   return (
     <AuthLayout>
       <div className="center-div">
@@ -302,7 +403,7 @@ console.log("formData.drivers",formData.drivers);
                 handleTrailerTypeChange={handleTrailerTypeChange}
                 handleVehicleInputChange={handleVehicleInputChange}
                 handleVehicleDimensionsInput={handleVehicleDimensionsInput}
-              
+
                 handleAddDropdown={handleAddDropdown}
               />
               <textarea
@@ -322,9 +423,9 @@ console.log("formData.drivers",formData.drivers);
                 onChange={() => setCheckedInsured(!checkedInsured)}
                 label="I agree to the terms and conditions."
               />
-              <Button 
-              disabled={!checkedInsured}
-              label="Send" className="yellow" type="submit" />
+              <Button
+                disabled={!checkedInsured}
+                label="Send" className="yellow" type="submit" />
               <Button label="Reset" className="orange" type="reset" />
             </div>
           </form>

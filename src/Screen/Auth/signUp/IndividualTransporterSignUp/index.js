@@ -37,7 +37,7 @@ const IndividualTransporterSignUp = () => {
     parcelsOption: '',
     password: "",
     IndividualTransportAddVehiclesId: id,
-    companyLogo:""
+    companyLogo: ""
   });
 
   const [companyLogo, setCompanyLogo] = useState(null);

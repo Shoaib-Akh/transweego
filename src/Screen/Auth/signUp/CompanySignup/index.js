@@ -58,7 +58,11 @@ console.log("companyLogo",companyLogo);
     });
   };
   const currentUrl = window.location.href;
-  const id = getUrlParameter(currentUrl, 'id');
+  const correctedUrl = currentUrl.replace('?/', '?'); // Correct the URL format
+  const url = new URL(correctedUrl);
+  const queryString = url.search;
+  const urlParams = new URLSearchParams(queryString);
+  const companyId = urlParams.get('id');
   const handleCheckboxChange = (name) => {
     if (name === 'insured') {
       setCheckedInsured(!checkedInsured);
@@ -93,7 +97,7 @@ console.log("companyLogo",companyLogo);
       checkedAddVehicles,
       companyLogo,
       companyDocuments,
-
+      companyId
     };
     // console.log('Form data to be sent to next screen:', data);
     navigate("/add-driver", { state: { CompanySignupData } });
