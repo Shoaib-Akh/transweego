@@ -37,7 +37,10 @@ const IndividualTransporterSignUp = () => {
     parcelsOption: '',
     password: "",
     IndividualTransportAddVehiclesId: id,
-    companyLogo: ""
+    profileImage: null,
+    frontImage: null,
+    backImage: null
+
   });
 
   const [companyLogo, setCompanyLogo] = useState(null);
@@ -77,28 +80,34 @@ const IndividualTransporterSignUp = () => {
   };
 
   const handleImageUpload = (label, image) => {
-    if (label === "Company Logo") {
-      setCompanyLogo(image);
-    } else if (label === "Company Documents") {
-      setCompanyDocuments([...companyDocuments, image]);
-    } else {
-      setFormData({
-        ...formData,
-        documents: [...formData.documents, image]
-      });
+    switch (label) {
+      case "Profile Image":
+        setFormData({ ...formData, profileImage: image });
+        break;
+      case "Front":
+        setFormData({ ...formData, frontImage: image });
+        break;
+      case "Back":
+        setFormData({ ...formData, backImage: image });
+        break;
+      default:
+        break;
     }
   };
-
-  const handleImageRemove = (label, image) => {
-    if (label === "Company Logo") {
-      setCompanyLogo(null);
-    } else if (label === "Company Documents") {
-      setCompanyDocuments(companyDocuments.filter(doc => doc !== image));
-    } else {
-      setFormData({
-        ...formData,
-        documents: formData.documents.filter(doc => doc !== image)
-      });
+  
+  const handleImageRemove = (label) => {
+    switch (label) {
+      case "Profile Image":
+        setFormData({ ...formData, profileImage: null });
+        break;
+      case "Front":
+        setFormData({ ...formData, frontImage: null });
+        break;
+      case "Back":
+        setFormData({ ...formData, backImage: null });
+        break;
+      default:
+        break;
     }
   };
 
@@ -281,18 +290,7 @@ const IndividualTransporterSignUp = () => {
                 onImageUpload={(image) => handleImageUpload("Profile Image", image)}
                 onImageRemove={(image) => handleImageRemove("Profile Image", image)}
               />
-              <UploadItem
-                frameImage={Images.frame}
-                label="Company Logo"
-                onImageUpload={(image) => handleImageUpload("Company Logo", image)}
-                onImageRemove={(image) => handleImageRemove("Company Logo", image)}
-              />
-              <UploadItem
-                frameImage={Images.frame}
-                label="Company Documents"
-                onImageUpload={(image) => handleImageUpload("Company Documents", image)}
-                onImageRemove={(image) => handleImageRemove("Company Documents", image)}
-              />
+              
               <CustomDropDown
                 options={documentTypesOption}
                 value={formData.documentsType}
