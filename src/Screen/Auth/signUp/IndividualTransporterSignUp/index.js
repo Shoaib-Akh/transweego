@@ -134,9 +134,9 @@ const IndividualTransporterSignUp = () => {
     if (!formData.phone) newErrors.phone = 'This field is required';
     if (!formData.gender) newErrors.gender = 'This field is required';
 
-    if (!formData.birthDate || new Date(formData.birthDate) >= new Date()) {
-      newErrors.birthDate = 'Please enter a valid birth date';
-    }
+    // if (!formData.birthDate || new Date(formData.birthDate) >= new Date()) {
+    //   newErrors.birthDate = 'Please enter a valid birth date';
+    // }
 
     setErrors(newErrors);
 

@@ -55,10 +55,10 @@ const IndividualTransportAddVehicles = () => {
   const location = useLocation();
   const { formData } = location?.state || {}; 
 
-  if (!formData) {
-    navigate("/individual-transporter-signup");
-    return null;
-  }
+  // if (!formData) {
+  //   navigate("/individual-transporter-signup");
+  //   return null;
+  // }
   console.log("IndividualTransportAddVehiclesData",formData);
   
 
