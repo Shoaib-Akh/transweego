@@ -12,6 +12,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DateOfBirthInput from "../../../../Component/DateOfBirthInput";
 import { FetchData, formatOptions } from "../../../../utils/commonFunction";
+import { BASE_URL } from "../../../../config/app";
+import { toast } from "react-toastify";
 
 const IndividualSignUp = () => {
   const navigate = useNavigate();
@@ -39,8 +41,8 @@ const IndividualSignUp = () => {
     IndividualTransportAddVehiclesId: id,
     profileImage: null,
     frontImage: null,
-    backImage: null
-
+    backImage: null,
+    documentsType: null
   });
 
   const [companyLogo, setCompanyLogo] = useState(null);
@@ -94,7 +96,7 @@ const IndividualSignUp = () => {
         break;
     }
   };
-  
+
   const handleImageRemove = (label) => {
     switch (label) {
       case "Profile Image":
@@ -124,7 +126,7 @@ const IndividualSignUp = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -137,7 +139,46 @@ const IndividualSignUp = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      navigate('/individual-transport-AddVehicles', { state: { formData } });
+      e.preventDefault();
+      const data = new FormData();
+      data.append("firstName", formData.firstName);
+      data.append("lastName", formData.lastName);
+      data.append("password", formData.password);
+      data.append("email", formData.email);
+      data.append("phoneNumber", formData.phone);
+      data.append("genderID", formData.gender);
+      data.append('website', formData.website);
+      data.append('street', formData.street);
+      data.append('zipCode', formData.postalCode);
+      data.append("dateOfBirth", formData.birthDate);
+      data.append("nationalityID", formData.nationality);
+      data.append("languageID", 1);
+      data.append("userTypeID", formData.IndividualTransportAddVehiclesId);
+      data.append("image", formData.profileImage);
+      data.append("documentTypeID", formData.documentsType);
+      data.append("documentBack", formData.backImage);
+      data.append("documentFront", formData.frontImage);
+
+      const requestOptions = {
+        method: "POST",
+        body: data,
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(`${BASE_URL}user`, requestOptions);
+        if (!response.ok) {
+          throw new Error('Error creating user. Please try again.');
+        }
+        await response.json();
+        // const result = await response.json();
+        // const userID = result.data.userID;
+
+        toast.success('User registered successfully!');
+        navigate('/')
+      } catch (error) {
+        toast.error(error.message);
+      }
     }
   };
 
@@ -284,7 +325,7 @@ const IndividualSignUp = () => {
                 onImageUpload={(image) => handleImageUpload("Profile Image", image)}
                 onImageRemove={(image) => handleImageRemove("Profile Image", image)}
               />
-              
+
               <CustomDropDown
                 options={documentTypesOption}
                 value={formData.documentsType}
@@ -316,7 +357,7 @@ const IndividualSignUp = () => {
                   label="I accept the terms and conditions"
                 />
               </div>
-              <Button onClick={handleSubmit} className="w-100" label={"Next"}></Button>
+              <Button onClick={handleSubmit} className="w-100" label={"Send"}></Button>
             </div>
           </div>
         </div>

@@ -70,7 +70,7 @@ const IndividualTransportAddVehicles = () => {
     setSelectTrailer(updatedSelectTrailer);
     setTrailerTypeID(id)
 
-  
+
 
   };
 
@@ -130,7 +130,7 @@ const IndividualTransportAddVehicles = () => {
     data.append("userTypeID", formData.IndividualTransportAddVehiclesId);
     data.append("image", formData.profileImage);
     data.append("documentTypeID", formData.documentsType);
-    data.append("documentBack", formData.backImage    );
+    data.append("documentBack", formData.backImage);
     data.append("documentFront", formData.frontImage);
 
     const requestOptions = {
@@ -152,7 +152,7 @@ const IndividualTransportAddVehicles = () => {
         for (let index = 0; index < vehicles.length; index++) {
           const vehicle = vehicles[index];
 
-          if (vehicle.numberPlate &&  vehicle.frontSeats ) {
+          if (vehicle.numberPlate && vehicle.frontSeats) {
             const data = {
               vehicleTypeID: SelectVehicleID,
               numberPlate: vehicle.numberPlate,
@@ -170,14 +170,14 @@ const IndividualTransportAddVehicles = () => {
               totalWeight: vehicle.totalWeight,
               emissionsCode: vehicle.emissionCode,
               placingInTheMarket: vehicle.placingOnMarket,
-              userID:userID
+              userID: userID
             }
 
             const vehicleRequestOptions = {
               method: "POST",
-              body: JSON.stringify(data), 
+              body: JSON.stringify(data),
               headers: {
-                'Content-Type': 'application/json', 
+                'Content-Type': 'application/json',
               },
               redirect: "follow",
             };
@@ -191,11 +191,11 @@ const IndividualTransportAddVehicles = () => {
       }
 
       // Add trailers
-      if (VehicleTrailer.length ) {
+      if (VehicleTrailer.length) {
         for (let index = 0; index < VehicleTrailer.length; index++) {
           const vehicleTrailer = VehicleTrailer[index];
 
-          if (vehicleTrailer.weight ) {
+          if (vehicleTrailer.weight) {
             const data = {
               trailerTypeID: TrailerTypeID,
               userID: userID,
@@ -214,9 +214,9 @@ const IndividualTransportAddVehicles = () => {
 
             const trailerRequestOptions = {
               method: "POST",
-              body: JSON.stringify(data), 
+              body: JSON.stringify(data),
               headers: {
-                'Content-Type': 'application/json', 
+                'Content-Type': 'application/json',
               },
               redirect: "follow",
             };
@@ -267,7 +267,7 @@ const IndividualTransportAddVehicles = () => {
               </div>
 
               <Button label="Send" className="yellow" type="submit"
-                   loading={loading}
+                loading={loading}
               />
               <Button label="Reset" className="orange" type="reset" />
             </div>
@@ -275,6 +275,7 @@ const IndividualTransportAddVehicles = () => {
         </div>
       </div>
       <VerificationModal
+        email={formData.email}
         open={verificationOpen}
         handleOpen={handleVerificationOpen}
         handleClose={handleVerificationClose}

@@ -16,13 +16,13 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  const status = useSelector((state) => state.user.status);
-  const error = useSelector((state) => state.user.error);
-
+  const message = useSelector((state) => state.message);
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password }));
+    setTimeout(() => {
+      AuthorizationHandleOpen(true)
+    }, 2000);
   };
   const [SendEmail, setSendEmail] = useState(false);
   const EmailHandleOpen = () => setSendEmail(true);
@@ -35,14 +35,14 @@ const Login = () => {
   const ForgetEmailHandleOpen = () => setForget(true);
   const ForgetEmailHandleClose = () => setForget(false);
 
-  
+
   return (
     <AuthLayout>
       <form onSubmit={handleSubmit} className="login-div">
-       
-      <div className="text-center mb-4">
-            <img src={Images.mainLogo} height={30} alt="logo" />
-          </div>
+
+        <div className="text-center mb-4">
+          <img src={Images.mainLogo} height={30} alt="logo" />
+        </div>
         <div className="sec-input">
           <InputField
             onChange={(e) => setEmail(e.target.value)}
@@ -64,25 +64,26 @@ const Login = () => {
 
         <div className="text-center">
           <h5 className="Forgotten" onClick={ForgetEmailHandleOpen}>Forgotten password?</h5>
-          <p className="new-user mt-4" onClick={AuthorizationHandleOpen}>Are you a new user? <Link to="/signup">
+          <p className="new-user mt-4">Are you a new user? <Link to="/signup">
             <b>Sign up</b>
           </Link></p>
         </div>
       </form>
       <SendEmailModal
-      open={SendEmail}
-      handleOpen={EmailHandleOpen}
-      handleClose={EmailHandleClose}
+        open={SendEmail}
+        handleOpen={EmailHandleOpen}
+        handleClose={EmailHandleClose}
       />
-      {/* <AuthorizationCode
-       open={Authorization}
-       handleOpen={AuthorizationHandleOpen}
-       handleClose={AuthorizationHandleClose}
-      /> */}
+      <AuthorizationCode
+        email={email}
+        open={Authorization}
+        handleOpen={AuthorizationHandleOpen}
+        handleClose={AuthorizationHandleClose}
+      />
       <ForgetEmail
-       open={Forget}
-       handleOpen={ForgetEmailHandleOpen}
-       handleClose={ForgetEmailHandleClose}
+        open={Forget}
+        handleOpen={ForgetEmailHandleOpen}
+        handleClose={ForgetEmailHandleClose}
       />
     </AuthLayout>
   );

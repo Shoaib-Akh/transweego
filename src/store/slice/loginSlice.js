@@ -2,9 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { xhrPost } from '../../utils/XHR';
 import { BASE_URL } from '../../config/app';
+import { toast } from 'react-toastify';
+
 export const login = createAsyncThunk('user/login', async (credentials, thunkAPI) => {
   const response = await xhrPost(`${BASE_URL}signin`, credentials);
-  return response.data;
+  if (response.data?.message) {
+    toast.success("Authorization code sent successfully")
+  }
+  return response.data?.message;
 });
 
 const userSlice = createSlice({
@@ -13,6 +18,7 @@ const userSlice = createSlice({
     user: null,
     status: 'idle',
     error: null,
+    message: null
   },
   reducers: {
     logout: (state) => {
