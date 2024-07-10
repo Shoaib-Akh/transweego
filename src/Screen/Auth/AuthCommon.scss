@@ -30,10 +30,11 @@
   }
 
   .login-div {
-    width: 400px;
+    max-width: 400px;
     background-color: #ffff;
     padding: 40px 15px 15px 15px;
     border-radius: 30px;
+overflow-x: hidden;
 
     @media (max-width:475px) {
       width: 100%;

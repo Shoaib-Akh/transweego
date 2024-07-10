@@ -50,7 +50,7 @@ const SignUp = () => {
   return (
     <AuthLayout>
       <div className="center-div">
-        <div className="login-div" >
+        <div className="login-div" style={{maxWidth:"unset",width:400}} >
           <div className="text-center mb-4">
             <img src={logo} height={30} alt="car" />
           </div>

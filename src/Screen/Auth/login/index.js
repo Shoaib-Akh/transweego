@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <form onSubmit={handleSubmit} className="login-div">
+      <form onSubmit={handleSubmit} className="login-div" style={{maxWidth:"unset",width:400}}>
 
         <div className="text-center mb-4">
           <img src={Images.mainLogo} height={30} alt="logo" />

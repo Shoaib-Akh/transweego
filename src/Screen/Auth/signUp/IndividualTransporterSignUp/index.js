@@ -227,7 +227,8 @@ const IndividualTransporterSignUp = () => {
                 required
               />
               <InputField
-                type="number"
+                                type="tel"
+
                 placeholder="Phone Number*"
                 name="phone"
                 value={formData.phone}
@@ -283,6 +284,7 @@ const IndividualTransporterSignUp = () => {
                 placeholder={"Select Nationality"}
               />
               <UploadItem
+              onlyImage
                 frameImage={Images.frame}
                 label="Profile Image"
                 onImageUpload={(image) => handleImageUpload("Profile Image", image)}
@@ -301,6 +303,7 @@ const IndividualTransporterSignUp = () => {
               <span className="Acceptable">Acceptable pdf, jpeg, png</span>
               <div className="d-flex align-items-center justify-content-between">
                 <UploadItem
+                
                   frameImage={Images.frame}
                   label="Front"
                   onImageUpload={(image) => handleImageUpload("Front", image)}
@@ -313,14 +316,18 @@ const IndividualTransporterSignUp = () => {
                   onImageRemove={(image) => handleImageRemove("Back", image)}
                 />
               </div>
-              <div className="form-check">
+              <div className="form-check mt-3">
                 <CustomCheckbox
+                
                   checked={checkedTerms}
                   onChange={handleCheckboxChange}
                   label="I accept the terms and conditions"
                 />
               </div>
-              <Button onClick={handleSubmit} className="w-100" label={"Next"}></Button>
+              <Button 
+                          disabled={!checkedTerms} 
+ 
+              onClick={handleSubmit} className="w-100" label={"Next"}></Button>
             </div>
           </div>
         </div>

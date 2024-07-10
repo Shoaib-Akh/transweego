@@ -50,12 +50,15 @@ const InputField = ({
     }
 
     if (type === 'tel') {
-      const phoneRegex = /^\d{10}$/; 
-      if (!phoneRegex.test(value)) {
-        setLocalError(validationMessages.phone || 'Invalid phone number');
+      // Swiss phone number regex: starts with +41 or 0041 followed by 9 digits
+      const swissPhoneRegex = /^(\+41|0041)\d{9}$/;
+    
+      if (!swissPhoneRegex.test(value)) {
+        setLocalError(validationMessages.phone || 'Invalid Swiss phone number');
         return;
       }
     }
+    
 
     setLocalError('');
   };

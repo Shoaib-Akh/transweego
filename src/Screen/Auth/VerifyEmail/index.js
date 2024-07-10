@@ -71,7 +71,7 @@ const VerifyEmail = () => {
 
   return (
     <AuthLayout>
-      <div className="login-div">
+      <div className="login-div" style={{maxWidth:"unset",width:400}}>
         <div className="text-center mb-4">
           <img src={Images.mainLogo} height={30} alt="logo" />
           <h1 className="mt-3">Email Verification</h1>
