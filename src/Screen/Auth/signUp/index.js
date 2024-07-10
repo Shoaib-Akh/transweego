@@ -5,15 +5,21 @@ import Button from "../../../Component/Button";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../../../layout/AuthLayout";
 import { FetchData, formatOptions } from "../../../utils/commonFunction";
+import { CircularProgress } from "@mui/material";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true); // State to track loading
 
   const useFetchData = (url) => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-      FetchData(url, setData);
+      setLoading(true); // Set loading state to true when fetching starts
+      FetchData(url, (responseData) => {
+        setData(responseData);
+        setLoading(false); // Set loading state to false when fetching completes
+      });
     }, [url]);
 
     return data;
@@ -44,18 +50,27 @@ const SignUp = () => {
   return (
     <AuthLayout>
       <div className="center-div">
-        <div className="login-div">
+        <div className="login-div" >
           <div className="text-center mb-4">
             <img src={logo} height={30} alt="car" />
           </div>
-          {userTypesOption && userTypesOption.map((option) => (
-            <Button
-              key={option.id}
-              onClick={() => navigate(`${navigationMapping[option.label]}?/id=${option.id}`)}
-              label={option.label}
-              className={`${colorMapping[option.label]} mb-1`}
-            />
-          ))}
+          
+          {/* Conditional rendering based on loading state */}
+          {loading ? (
+            <div className="d-flex align-items-center justify-content-center" style={{width:"400px", height:"230px"}}>
+             <CircularProgress size={24} style={{height:"50px", width:"50px"}} /> 
+             </div>
+          ) : (
+            userTypesOption && userTypesOption.map((option) => (
+              <Button
+                key={option.id}
+                onClick={() => navigate(`${navigationMapping[option.label]}?/id=${option.id}`)}
+                label={option.label}
+                className={`${colorMapping[option.label]} mb-1`}
+              />
+            ))
+          )}
+          
         </div>
       </div>
     </AuthLayout>

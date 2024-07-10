@@ -130,7 +130,8 @@ const CompanySignup = () => {
                 onChange={handleChange}
               />
               <InputField
-                label="password"
+                label="Password"
+                type="password"
                 placeholder="Enter contact password"
                 name="password"
                 value={formData.password}
