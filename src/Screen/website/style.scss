@@ -3,11 +3,11 @@
 .mt-6r {
   margin-top: 8rem !important;
 
-  @media (max-width:992px) {
+  @media (max-width: 992px) {
     margin-top: 4rem !important;
   }
 
-  @media (max-width:768px) {
+  @media (max-width: 768px) {
     margin-top: 2rem !important;
   }
 }
@@ -40,13 +40,11 @@
   background-color: rgba(0, 0, 0, 0.8);
 
   z-index: 1;
-
 }
 
-.mainbg>* {
+.mainbg > * {
   position: relative;
   z-index: 2;
-
 }
 
 .navbar {
@@ -66,11 +64,9 @@
   line-height: 14px;
   cursor: pointer;
   white-space: nowrap;
-  
 }
 @media (max-width: 768px) {
   .btn {
-    
     padding: 15px 30px;
   }
 }
@@ -82,7 +78,6 @@
 
 .orange {
   background-color: #ff8600;
-  
 }
 
 .yellow {
@@ -96,14 +91,11 @@
     background-color: #ff8600;
     color: white;
   }
-
 }
 .offwhite.active {
   background-color: #ff8600 !important;
   color: #ffffff !important;
 }
-
-
 
 .nav-link {
   color: white;
@@ -128,21 +120,20 @@
     font-weight: 700;
     line-height: 60px;
 
-    @media (max-width:991px) {
+    @media (max-width: 991px) {
       font-size: 40px;
       line-height: 40px;
     }
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       font-size: 30px;
       line-height: 35px;
     }
 
-    @media (max-width:458px) {
+    @media (max-width: 458px) {
       font-size: 26px;
       line-height: 35px;
     }
-
   }
 
   // .btn {
@@ -173,7 +164,6 @@
   @media (max-width: 786px) {
     p {
       font-size: 15px !important;
-
     }
 
     h2 {
@@ -218,7 +208,6 @@
       @media (max-width: 786px) {
         p {
           font-size: 15px !important;
-
         }
 
         h2 {
@@ -258,7 +247,7 @@
 }
 
 .work_text {
-  color: #0C3227;
+  color: #0c3227;
   font-size: 40px;
   font-style: normal;
   font-weight: 600;
@@ -268,10 +257,10 @@
 }
 
 .group-btn {
-width: 100%;
-text-align: center;
+  width: 100%;
+  text-align: center;
 
-  @media (max-width:458px) {
+  @media (max-width: 458px) {
     display: flex;
     align-items: center;
 
@@ -284,7 +273,7 @@ text-align: center;
     }
   }
 
-  @media (max-width:320px) {
+  @media (max-width: 320px) {
     display: flex;
     align-items: center;
 
@@ -305,18 +294,17 @@ text-align: center;
   background-size: cover;
   background-position: center;
 
-
   .heading-sec {
     h1 {
       color: #ffffff;
       font-size: 40px;
       font-weight: 600;
 
-      @media (max-width:991px) {
+      @media (max-width: 991px) {
         font-size: 32px;
       }
 
-      @media (max-width:768px) {
+      @media (max-width: 768px) {
         font-size: 28px;
       }
     }
@@ -337,7 +325,7 @@ text-align: center;
   .carimg {
     height: 500px;
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       height: 350px;
     }
   }
@@ -359,11 +347,11 @@ text-align: center;
       max-width: 69%;
       color: #0c3227;
 
-      @media (max-width:991px) {
+      @media (max-width: 991px) {
         font-size: 32px;
       }
 
-      @media (max-width:768px) {
+      @media (max-width: 768px) {
         font-size: 26px;
         line-height: 36px;
       }
@@ -375,7 +363,7 @@ text-align: center;
       line-height: 30px;
       max-width: 75%;
 
-      @media (max-width:991px) {
+      @media (max-width: 991px) {
         font-size: 16px;
       }
     }
@@ -388,7 +376,7 @@ text-align: center;
   background-size: cover;
   padding: 4rem 1rem;
 
-  @media (max-width:768px) {
+  @media (max-width: 768px) {
     padding: 2rem 1rem;
   }
 
@@ -399,7 +387,7 @@ text-align: center;
       line-height: 46px;
       color: #ffffff;
 
-      @media (max-width:768px) {
+      @media (max-width: 768px) {
         font-size: 30px;
       }
     }
@@ -410,7 +398,7 @@ text-align: center;
       line-height: 36px;
       color: #ffffff;
 
-      @media (max-width:768px) {
+      @media (max-width: 768px) {
         font-size: 18px;
       }
     }
@@ -420,7 +408,7 @@ text-align: center;
     width: 198px;
     height: 386px;
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       width: 198px;
       height: 286px;
       object-fit: contain;
@@ -432,79 +420,78 @@ text-align: center;
 // client sec
 .client-sec {
   .img-office {
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       height: 202px;
       width: 737px;
     }
 
-    @media (max-width:458px) {
+    @media (max-width: 458px) {
       height: 232px;
       width: 837px;
     }
-
   }
 
   .left-sec {
-    background-color: #0C3227;
+    background-color: #0c3227;
     padding: 40px 30px;
     border-radius: 33px;
     margin-left: -60px;
 
-    @media (max-width:992px) {
+    @media (max-width: 992px) {
       padding: 20px 20px;
       border-radius: 33px;
       margin-left: -60px;
     }
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       padding: 10px 20px;
       border-radius: 33px;
       margin-left: -30px;
     }
 
-    @media (max-width:458px) {
+    @media (max-width: 458px) {
       padding: 10px 20px;
       border-radius: 33px;
       margin-left: -20px;
     }
 
     .textlorem {
-      color: #F8F8F8;
+      color: #f8f8f8;
       font-size: 26px;
 
-      @media (max-width:992px) {
+      @media (max-width: 992px) {
         font-size: 14px;
       }
 
-      @media (max-width:458px) {
+      @media (max-width: 458px) {
         font-size: 12px;
       }
     }
 
     .john {
       font-size: 26px;
-      color: #F8F8F8;
+      color: #f8f8f8;
       margin-top: 10;
       margin-bottom: 10;
 
-      @media (max-width:992px) {
+      @media (max-width: 992px) {
         font-size: 16px;
       }
 
-      @media (max-width:458px) {
+      @media (max-width: 458px) {
         font-size: 12px;
       }
     }
 
     .founder {
       font-size: 26px;
-      color: #FF8600;
+      color: #ff8600;
 
-      @media (max-width:992px) {
+      @media (max-width: 992px) {
         font-size: 14px;
       }
 
-      @media (max-width:458px) {
+      @media (max-width: 458px) {
         font-size: 12px;
       }
     }
@@ -517,7 +504,7 @@ text-align: center;
       margin-top: 10px;
       margin-bottom: 8px;
 
-      @media (max-width:992px) {
+      @media (max-width: 992px) {
         width: 15px;
         height: 15px;
       }
@@ -527,28 +514,28 @@ text-align: center;
 
 .premium-sec {
   .text {
-    @media (max-width:458px) {
+    @media (max-width: 458px) {
       font-size: 16px;
     }
 
-    @media (max-width:320px) {
+    @media (max-width: 320px) {
       font-size: 14px;
     }
   }
 
   .lorem {
-    @media (max-width:458px) {
+    @media (max-width: 458px) {
       font-size: 20px;
     }
 
-    @media (max-width:320px) {
+    @media (max-width: 320px) {
       font-size: 16px;
     }
   }
 }
 
 .button-group {
-  @media (max-width:320px) {
+  @media (max-width: 320px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -557,7 +544,7 @@ text-align: center;
   }
 
   .btn {
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       color: #ffffff;
       border: none;
       border-radius: 43px;
@@ -566,7 +553,7 @@ text-align: center;
       font-size: 12px;
     }
 
-    @media (max-width:458px) {
+    @media (max-width: 458px) {
       color: #ffffff;
       border: none;
       border-radius: 43px;
@@ -575,7 +562,7 @@ text-align: center;
       font-size: 12px;
     }
 
-    @media (max-width:320px) {
+    @media (max-width: 320px) {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -601,33 +588,33 @@ text-align: center;
   .truck {
     max-width: 749px;
 
-    @media (max-width:992px) {
+    @media (max-width: 992px) {
       max-width: 400px;
     }
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       max-width: 300px;
     }
   }
 
   .text-heading-truck {
-    color: #FFF;
+    color: #fff;
     font-family: Montserrat;
     font-size: 56px;
     font-style: normal;
     font-weight: 600;
     line-height: 60px;
 
-    @media (max-width:992px) {
+    @media (max-width: 992px) {
       font-size: 40px;
     }
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       font-size: 30px;
       line-height: 40px;
     }
 
-    @media (max-width:657px) {
+    @media (max-width: 657px) {
       font-size: 25px;
       line-height: 40px;
     }
@@ -649,26 +636,23 @@ text-align: center;
 // how it works start
 // sec 2
 .section-heading {
-  color: #FFF;
-font-size: 40px;
-font-style: normal;
-font-weight: 600;
-line-height: 46px;
-
+  color: #fff;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 46px;
 }
 @media (max-width: 768px) {
   .section-heading {
-  font-size: 25px !important;
-  line-height: 26px;
-}
+    font-size: 25px !important;
+    line-height: 26px;
+  }
 }
 .section-2 {
   align-items: center;
 
-  
-
   .heading {
-    background-color: #EBEBEB;
+    background-color: #ebebeb;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -676,8 +660,8 @@ line-height: 46px;
     justify-content: center;
     display: flex;
   }
-   .bgColor {
-    background-color: #EBEBEB;
+  .bgColor {
+    background-color: #ebebeb;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -686,8 +670,7 @@ line-height: 46px;
     display: flex;
   }
 
- 
-  .active{
+  .active {
     background-color: #ff8600;
   }
 }
@@ -699,7 +682,7 @@ line-height: 46px;
   justify-content: center;
 
   h6 {
-    color: #FF8600;
+    color: #ff8600;
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -720,13 +703,13 @@ line-height: 46px;
   .custom-btn {
     max-width: 50%;
   }
-  @media (max-width:992px) {
+  @media (max-width: 992px) {
     .custom-btn {
       max-width: unset;
       margin-bottom: 10px;
     }
     h2 {
-    font-size: 20px;
+      font-size: 20px;
     }
   }
 }
@@ -735,19 +718,16 @@ line-height: 46px;
   background-color: "#0C3227";
   padding: 30px;
   height: 200;
-
 }
 
-
-
 .Sharing_para {
-  color: #FFF;
+  color: #fff;
 
   font-family: Montserrat;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
-  line-height: 150%
+  line-height: 150%;
 }
 
 // landing page start
@@ -758,19 +738,17 @@ line-height: 46px;
   background-size: 100% 100%;
   object-fit: cover;
   height: 100%;
-  background-color: #0C3227;
+  background-color: #0c3227;
 
   .btn {
     background-color: #f5851f;
     border: none;
-    color: #FFF;
-
+    color: #fff;
 
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
-
 
     &:hover {
       background-color: darken(#f5851f, 10%);
@@ -800,8 +778,6 @@ line-height: 46px;
       font-weight: 600;
       margin-top: 31px;
     }
-
-
   }
 
   .cardLanding {
@@ -816,11 +792,10 @@ line-height: 46px;
 
         .card-title {
           color: #0c3227;
-          font-family: 'Montserrat', sans-serif;
+          font-family: "Montserrat", sans-serif;
           font-size: 2rem;
           font-weight: 700;
           margin-bottom: 30px;
-
 
           @media (max-width: 768px) {
             white-space: wrap;
@@ -829,35 +804,28 @@ line-height: 46px;
 
         .card-text {
           color: #969696;
-          font-family: 'Montserrat', sans-serif;
+          font-family: "Montserrat", sans-serif;
           font-size: 1rem;
           font-weight: 600;
           margin-top: 32px;
         }
 
         .card-img {
-
           text-align: center;
 
           .truckyellow {
             width: 114px;
             height: 153px;
-
-
           }
 
           .mobilegroup {
             width: 221px;
             height: 183px;
-
-
           }
 
           .mobile2 {
             width: 117px;
             height: 200px;
-
-
           }
         }
       }
@@ -895,7 +863,6 @@ line-height: 46px;
   }
 
   .logo {
-
     h1 {
       font-size: 2.5rem;
     }
@@ -913,7 +880,6 @@ line-height: 46px;
 
       .card-title {
         font-size: 1.5rem;
-
       }
 
       .card-text {
@@ -959,7 +925,6 @@ line-height: 46px;
 
       .card-title {
         font-size: 1.25rem;
-
       }
 
       .card-text {
@@ -983,8 +948,6 @@ line-height: 46px;
 
 .carousel-indicators {
   bottom: -56px;
-
-
 }
 
 .carousel-indicators [data-bs-target] {
@@ -992,7 +955,7 @@ line-height: 46px;
 }
 
 .carousel-indicators .active {
-  background-color: #FF8600;
+  background-color: #ff8600;
 }
 
 .Reserved {
@@ -1012,57 +975,49 @@ line-height: 46px;
   justify-content: center;
   border: 1px solid white;
   border-radius: 30px;
-  
 
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
-  
+
   p {
-    color: #FFF;
+    color: #fff;
 
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
-   
   }
-  &:hover p{
-     
+  &:hover p {
     color: #000;
   }
-
 }
-.img_mobileGroup{
+.img_mobileGroup {
   max-width: 600px;
 }
 // modall
-.custom-dropdown
-{ position: absolute;
-   top: 10px;
-   right: 10px;
-   
-   @media (max-width: 768px) {
+.custom-dropdown {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  @media (max-width: 768px) {
     top: 50px !important;
     right: 20px;
   }
-   }
+}
 
-
- 
-
- 
-
-@media (max-width:992px) {
+@media (max-width: 992px) {
   .img_mobileGroup {
     max-width: -webkit-fill-available;
     margin-bottom: 10px;
-  }}
- .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='%23fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='%23fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-@media (max-width:987px){
-  .navbar-collapse{
+@media (max-width: 987px) {
+  .navbar-collapse {
     position: absolute;
     top: 50px;
     right: 0;
@@ -1073,7 +1028,8 @@ line-height: 46px;
 }
 
 .custom-dropdown {
-  .auth-dropdown-header {
+  .auth-dropdown-header,
+  .dropdown-header {
     cursor: pointer;
   }
 
@@ -1107,7 +1063,8 @@ line-height: 46px;
     flex-direction: column;
     margin-left: 40px;
 
-    .login-option, .signup-option {
+    .login-option,
+    .signup-option {
       padding: 8px 16px;
       cursor: pointer;
       transition: background-color 0.3s ease, color 0.3s ease;
@@ -1117,9 +1074,8 @@ line-height: 46px;
       font-weight: 600;
 
       &:hover {
-        background-color: #FF8600;
+        background-color: #ff8600;
         color: #fff;
-       
       }
     }
   }

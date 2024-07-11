@@ -264,16 +264,16 @@ const IndividualSignUp = () => {
                 required
               />
               <InputField
-                               type="tel"
+                type="tel"
 
                 placeholder="Phone Number*"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 label="Phone"
-                maxLength={10}
+                maxLength={13}
                 required
-                validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
+                validationMessages={{ phone: 'Please enter a valid swiss phone number' }}
                 error={errors.phone}
               />
               <InputField
@@ -321,7 +321,7 @@ const IndividualSignUp = () => {
                 placeholder={"Select Nationality"}
               />
               <UploadItem
-              onlyImage
+                onlyImage
                 frameImage={Images.frame}
                 label="Profile Image"
                 onImageUpload={(image) => handleImageUpload("Profile Image", image)}
@@ -360,8 +360,8 @@ const IndividualSignUp = () => {
                 />
               </div>
               <Button
-             disabled={!checkedTerms} 
-              onClick={handleSubmit} className="w-100" label={"Send"}></Button>
+                disabled={!checkedTerms}
+                onClick={handleSubmit} className="w-100" label={"Send"}></Button>
             </div>
           </div>
         </div>

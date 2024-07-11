@@ -16,8 +16,8 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-//   const status = useSelector((state) => state.user.status);
-//  console.log("status",status);
+  //   const status = useSelector((state) => state.user.status);
+  //  console.log("status",status);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,14 +63,14 @@ const Login = () => {
           type="password"
           value={password}
         />
-        <Button 
+        <Button
           label="Sign-in"
-          // loading={status }
+        // loading={status }
         />
 
         <div className="text-center">
           <h5 className="Forgotten" onClick={ForgetEmailHandleOpen}>Forgotten password?</h5>
-          <p className="new-user mt-4">Are you a new user? <Link to="/signup">
+          <p className="new-user mt-4">Are you a new user? <Link to="/signup" style={{ color: 'black' }}>
             <b>Sign up</b>
           </Link></p>
         </div>

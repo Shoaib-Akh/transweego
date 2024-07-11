@@ -50,16 +50,16 @@ const SignUp = () => {
   return (
     <AuthLayout>
       <div className="center-div">
-        <div className="login-div" style={{maxWidth:"unset",width:400}} >
+        <div className="login-div" style={{ maxWidth: "unset", width: 400 }} >
           <div className="text-center mb-4">
             <img src={logo} height={30} alt="car" />
           </div>
-          
+
           {/* Conditional rendering based on loading state */}
           {loading ? (
-            <div className="d-flex align-items-center justify-content-center" style={{width:"400px", height:"230px"}}>
-             <CircularProgress size={24} style={{height:"50px", width:"50px",color:"#0C3227"}} /> 
-             </div>
+            <div className="d-flex align-items-center justify-content-center" style={{ width: "370px", height: "240px" }}>
+              <CircularProgress size={24} style={{ height: "50px", width: "50px", color: "#0C3227", marginTop: "-40px" }} />
+            </div>
           ) : (
             userTypesOption && userTypesOption.map((option) => (
               <Button
@@ -70,7 +70,7 @@ const SignUp = () => {
               />
             ))
           )}
-          
+
         </div>
       </div>
     </AuthLayout>
