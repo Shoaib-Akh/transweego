@@ -11,11 +11,11 @@ const Button = ({ onClick, label, style, disabled, icon, className, loading }) =
       <button
         onClick={onClick}
         style={style}
-        disabled={disabled || loading} // Disable button when loading
+        disabled={disabled || loading} 
         className={combinedClassName} 
       >
         {loading ? (
-          <CircularProgress size={24} /> // Size of CircularProgress spinner
+          <CircularProgress size={24} color="#0C3227"/> // Size of CircularProgress spinner
         ) : (
           <>
             {icon && <ArrowBackIcon />} {label}

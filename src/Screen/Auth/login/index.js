@@ -16,14 +16,19 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const message = useSelector((state) => state.message);
+//   const status = useSelector((state) => state.user.status);
+//  console.log("status",status);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
-    setTimeout(() => {
-      AuthorizationHandleOpen(true)
-    }, 2000);
+    if (email && password) {
+      dispatch(login({ email, password }));
+      setTimeout(() => {
+        AuthorizationHandleOpen(true);
+      }, 2000);
+    }
   };
+
   const [SendEmail, setSendEmail] = useState(false);
   const EmailHandleOpen = () => setSendEmail(true);
   const EmailHandleClose = () => setSendEmail(false);
@@ -35,11 +40,9 @@ const Login = () => {
   const ForgetEmailHandleOpen = () => setForget(true);
   const ForgetEmailHandleClose = () => setForget(false);
 
-
   return (
     <AuthLayout>
-      <form onSubmit={handleSubmit} className="login-div" style={{maxWidth:"unset",width:400}}>
-
+      <form onSubmit={handleSubmit} className="login-div" style={{ maxWidth: "unset", width: 400 }}>
         <div className="text-center mb-4">
           <img src={Images.mainLogo} height={30} alt="logo" />
         </div>
@@ -60,7 +63,10 @@ const Login = () => {
           type="password"
           value={password}
         />
-        <Button label="Sign-in" />
+        <Button 
+          label="Sign-in"
+          // loading={status }
+        />
 
         <div className="text-center">
           <h5 className="Forgotten" onClick={ForgetEmailHandleOpen}>Forgotten password?</h5>
