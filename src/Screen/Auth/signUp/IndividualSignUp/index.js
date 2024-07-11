@@ -126,6 +126,32 @@ const IndividualSignUp = () => {
     }
   };
 
+
+  const useFetchData = (url) => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+      FetchData(url, setData);
+    }, [url]);
+
+    return data;
+  };
+
+  const useFetchAndFormatOptions = (url, idKey, nameKey) => {
+    const data = useFetchData(url);
+    return data ? formatOptions(data.data, idKey, nameKey) : null;
+  };
+
+  // Gender options
+  const genderOption = useFetchAndFormatOptions('genders', 'genderID', 'genderName');
+
+  // Document types options
+  const documentTypesOption = useFetchAndFormatOptions('document-types', 'documentTypeID', 'documentTypeName');
+
+  // Nationalities options
+  const nationalityOption = useFetchAndFormatOptions('nationalities', 'nationalityID', 'nationalityName');
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -135,7 +161,7 @@ const IndividualSignUp = () => {
     if (!formData.email) newErrors.email = 'This field is required';
     if (!formData.phone) newErrors.phone = 'This field is required';
     if (!formData.gender) newErrors.gender = 'This field is required';
-
+    if (!formData.birthDate) newErrors.birthDate = 'This field is required';
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
@@ -181,32 +207,6 @@ const IndividualSignUp = () => {
       }
     }
   };
-
-  const useFetchData = (url) => {
-    const [data, setData] = useState(null);
-
-    useEffect(() => {
-      FetchData(url, setData);
-    }, [url]);
-
-    return data;
-  };
-
-  const useFetchAndFormatOptions = (url, idKey, nameKey) => {
-    const data = useFetchData(url);
-    return data ? formatOptions(data.data, idKey, nameKey) : null;
-  };
-
-  // Gender options
-  const genderOption = useFetchAndFormatOptions('genders', 'genderID', 'genderName');
-
-  // Document types options
-  const documentTypesOption = useFetchAndFormatOptions('document-types', 'documentTypeID', 'documentTypeName');
-
-  // Nationalities options
-  const nationalityOption = useFetchAndFormatOptions('nationalities', 'nationalityID', 'nationalityName');
-
-
   return (
     <AuthLayout>
       <div className="center-div">
