@@ -26,7 +26,7 @@ const AddDriver = () => {
   const [selectVehicle, setSelectVehicle] = useState([]);
   const [selectTrailer, setSelectTrailer] = useState([]);
 
-  const initialVehicleTrailer= {
+  const initialVehicleTrailer = {
     weight: "",
     payload: "",
     netWeight: "",
@@ -55,7 +55,7 @@ const AddDriver = () => {
     totalWeight: "",
     emissionCode: "",
     placingOnMarket: "",
-    frontSeats:""
+    frontSeats: ""
   };
 
   const [vehicles, setVehicles] = useState([initialVehicle]);
@@ -65,7 +65,7 @@ const AddDriver = () => {
 
   const [VehicleTrailer, setVehicleTrailer] = useState([initialVehicleTrailer]);
 
-  
+
 
   const handleVerificationOpen = () => setVerificationOpen(true);
   const handleVerificationClose = () => setVerificationOpen(false);
@@ -83,7 +83,7 @@ const AddDriver = () => {
     vehicles: [],
     additionalInfo: "",
   });
-  
+
   const handleImageUpload = (image, index) => {
     setFormData((prevState) => {
       const updatedDrivers = [...prevState.drivers];
@@ -91,7 +91,7 @@ const AddDriver = () => {
       return { ...prevState, drivers: updatedDrivers };
     });
   };
-  
+
   const handleImageRemove = (index) => {
     setFormData((prevState) => {
       const updatedDrivers = [...prevState.drivers];
@@ -112,7 +112,7 @@ const AddDriver = () => {
     updatedSelectVehicle[index] = selectedOptions;
     setSelectVehicle(updatedSelectVehicle);
     setSelectVehicleID(id)
-   
+
   };
 
   const handleTrailerTypeChange = (id, selectedOptions, index) => {
@@ -202,159 +202,159 @@ const AddDriver = () => {
 
 
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  setLoading(true); // Start loading
+    setLoading(true); // Start loading
 
-  const formdata = new FormData();
-  formdata.append("companyName", CompanySignupData.companyName);
-  formdata.append("contactPerson", CompanySignupData.contactPerson);
-  formdata.append("email", CompanySignupData.email);
-  formdata.append("phoneNumber", CompanySignupData.phone);
-  formdata.append("VATNumber", CompanySignupData.vatNumber);
-  formdata.append("password", CompanySignupData.password);
-  formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
-  formdata.append('logo', CompanySignupData.companyLogo);
-  formdata.append('officialDocument', CompanySignupData.companyDocuments);
-  formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
-  formdata.append("additionalInformation", formData.additionalInfo);
-  formdata.append("checkedInsured", checkedInsured);
+    const formdata = new FormData();
+    formdata.append("companyName", CompanySignupData.companyName);
+    formdata.append("contactPerson", CompanySignupData.contactPerson);
+    formdata.append("email", CompanySignupData.email);
+    formdata.append("phoneNumber", CompanySignupData.phone);
+    formdata.append("VATNumber", CompanySignupData.vatNumber);
+    formdata.append("password", CompanySignupData.password);
+    formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
+    formdata.append('logo', CompanySignupData.companyLogo);
+    formdata.append('officialDocument', CompanySignupData.companyDocuments);
+    formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
+    formdata.append("additionalInformation", formData.additionalInfo);
+    formdata.append("checkedInsured", checkedInsured);
 
-  const requestOptions = {
-    method: "POST",
-    body: formdata,
-    redirect: "follow",
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL}company`, requestOptions);
+      if (!response.ok) {
+        throw new Error('Error creating company. Please try again.');
+      }
+      const result = await response.json();
+      const companyId = await result.data.companyID
+      if (!result.data.companyID) {
+        throw new Error('Company ID not found in response.');
+      }
+      const drivers = formData.drivers;
+
+      if (drivers.length) {
+        for (let index = 0; index < drivers.length; index++) {
+          const driver = drivers[index];
+
+          if (driver.firstName && driver.lastName) {
+            const driverFormData = new FormData();
+            driverFormData.append("companyID", companyId);
+            driverFormData.append("firstName", driver.firstName);
+            driverFormData.append("lastName", driver.lastName);
+            driverFormData.append("email", driver.email);
+            driverFormData.append("phoneNumber", driver.phone);
+            driverFormData.append("image", driver.image);
+
+            const driverRequestOptions = {
+              method: "POST",
+              body: driverFormData,
+              redirect: "follow",
+            };
+
+            const driverResponse = await fetch(`${BASE_URL}driver`, driverRequestOptions);
+            if (!driverResponse.ok) {
+              throw new Error('Error adding driver. Please try again.');
+            }
+          }
+        }
+      }
+      // Add vehicles
+      if (vehicles.length) {
+        for (let index = 0; index < vehicles.length; index++) {
+          const vehicle = vehicles[index];
+
+          if (vehicle.numberPlate && vehicle.frontSeats) {
+            const data = {
+              vehicleTypeID: SelectVehicleID,
+              numberPlate: vehicle.numberPlate,
+              vehicleType: vehicle.vehicleType,
+              brandAndType: vehicle.brandAndType,
+              chassisNumber: vehicle.chassisNo,
+              color: vehicle.color,
+              totalSeats: vehicle.totalSeats,
+              frontSeats: vehicle.frontSeats,
+              emptyWeight: 200,
+              inFront: vehicle.inFront,
+              serialNumber: vehicle.serialNumber,
+              saddleLoad: vehicle.saddleLoad,
+              typeApproval: vehicle.typeApproval,
+              totalWeight: vehicle.totalWeight,
+              emissionsCode: vehicle.emissionCode,
+              placingInTheMarket: vehicle.placingOnMarket,
+              companyID: companyId
+            }
+
+            const vehicleRequestOptions = {
+              method: "POST",
+              body: JSON.stringify(data), // Convert data to JSON string
+              headers: {
+                'Content-Type': 'application/json', // Set Content-Type header
+              },
+              redirect: "follow",
+            };
+
+            const vehicleResponse = await fetch(`${BASE_URL}vehicle`, vehicleRequestOptions);
+            if (!vehicleResponse.ok) {
+              throw new Error('Error adding vehicle. Please try again.');
+            }
+          }
+        }
+      }
+
+      // Add trailers
+      if (VehicleTrailer.length) {
+        for (let index = 0; index < VehicleTrailer.length; index++) {
+          const vehicleTrailer = VehicleTrailer[index];
+
+          if (vehicleTrailer.weight) {
+            const data = {
+              trailerTypeID: TrailerTypeID,
+              companyID: companyId,
+              totalWeight: vehicleTrailer.weight,
+              payload: vehicleTrailer.payload,
+              netWeight: vehicleTrailer.netWeight,
+              curbWeight: vehicleTrailer.curbWeight,
+              overallLength: vehicleTrailer.totalLength,
+              totalWidth: vehicleTrailer.totalWidth,
+              totalHeight: vehicleTrailer.totalHeight,
+              loadingWeightLength: vehicleTrailer.insideLength,
+              loadingWeightWidth: vehicleTrailer.insideWidth,
+              loadingWeightHeight: vehicleTrailer.insideHeight,
+              loadingSillHeight: vehicleTrailer.sillHeight
+            }
+
+            const trailerRequestOptions = {
+              method: "POST",
+              body: JSON.stringify(data), // Convert data to JSON string
+              headers: {
+                'Content-Type': 'application/json', // Set Content-Type header
+              },
+              redirect: "follow",
+            };
+
+            const trailerResponse = await fetch(`${BASE_URL}trailer`, trailerRequestOptions);
+            if (!trailerResponse.ok) {
+              throw new Error('Error adding trailer. Please try again.');
+            }
+          }
+        }
+      }
+      // navigate('/')
+      handleVerificationOpen()
+      toast.success('Company registered successfully!');
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
-
-  try {
-    const response = await fetch(`${BASE_URL}company`, requestOptions);
-    if (!response.ok) {
-      throw new Error('Error creating company. Please try again.');
-    }
-    const result = await response.json();
-    const companyId=await result.data.companyID
-    if (!result.data.companyID) {
-      throw new Error('Company ID not found in response.');
-    }
-    const drivers = formData.drivers;
-
-    if (drivers.length) {
-      for (let index = 0; index < drivers.length; index++) {
-        const driver = drivers[index];
-
-        if (driver.firstName && driver.lastName) {
-          const driverFormData = new FormData();
-          driverFormData.append("companyID", companyId);
-          driverFormData.append("firstName", driver.firstName);
-          driverFormData.append("lastName", driver.lastName);
-          driverFormData.append("email", driver.email);
-          driverFormData.append("phoneNumber", driver.phone);
-          driverFormData.append("image", driver.image);
-
-          const driverRequestOptions = {
-            method: "POST",
-            body: driverFormData,
-            redirect: "follow",
-          };
-
-          const driverResponse = await fetch(`${BASE_URL}driver`, driverRequestOptions);
-          if (!driverResponse.ok) {
-            throw new Error('Error adding driver. Please try again.');
-          }
-        }
-      }
-    }
-    // Add vehicles
-    if (vehicles.length) {
-      for (let index = 0; index < vehicles.length; index++) {
-        const vehicle = vehicles[index];
-
-        if (vehicle.numberPlate &&  vehicle.frontSeats ) {
-          const data = {
-            vehicleTypeID: SelectVehicleID,
-            numberPlate: vehicle.numberPlate,
-            vehicleType: vehicle.vehicleType,
-            brandAndType: vehicle.brandAndType,
-            chassisNumber: vehicle.chassisNo,
-            color: vehicle.color,
-            totalSeats: vehicle.totalSeats,
-            frontSeats: vehicle.frontSeats,
-            emptyWeight: 200,
-            inFront: vehicle.inFront,
-            serialNumber: vehicle.serialNumber,
-            saddleLoad: vehicle.saddleLoad,
-            typeApproval: vehicle.typeApproval,
-            totalWeight: vehicle.totalWeight,
-            emissionsCode: vehicle.emissionCode,
-            placingInTheMarket: vehicle.placingOnMarket,
-            companyID:companyId
-          }
-
-          const vehicleRequestOptions = {
-            method: "POST",
-            body: JSON.stringify(data), // Convert data to JSON string
-            headers: {
-              'Content-Type': 'application/json', // Set Content-Type header
-            },
-            redirect: "follow",
-          };
-
-          const vehicleResponse = await fetch(`${BASE_URL}vehicle`, vehicleRequestOptions);
-          if (!vehicleResponse.ok) {
-            throw new Error('Error adding vehicle. Please try again.');
-          }
-        }
-      }
-    }
-
-    // Add trailers
-    if (VehicleTrailer.length ) {
-      for (let index = 0; index < VehicleTrailer.length; index++) {
-        const vehicleTrailer = VehicleTrailer[index];
-
-        if (vehicleTrailer.weight ) {
-          const data = {
-            trailerTypeID: TrailerTypeID,
-            companyID: companyId,
-            totalWeight: vehicleTrailer.weight,
-            payload: vehicleTrailer.payload,
-            netWeight: vehicleTrailer.netWeight,
-            curbWeight: vehicleTrailer.curbWeight,
-            overallLength: vehicleTrailer.totalLength,
-            totalWidth: vehicleTrailer.totalWidth,
-            totalHeight: vehicleTrailer.totalHeight,
-            loadingWeightLength: vehicleTrailer.insideLength,
-            loadingWeightWidth: vehicleTrailer.insideWidth,
-            loadingWeightHeight: vehicleTrailer.insideHeight,
-            loadingSillHeight: vehicleTrailer.sillHeight
-          }
-
-          const trailerRequestOptions = {
-            method: "POST",
-            body: JSON.stringify(data), // Convert data to JSON string
-            headers: {
-              'Content-Type': 'application/json', // Set Content-Type header
-            },
-            redirect: "follow",
-          };
-
-          const trailerResponse = await fetch(`${BASE_URL}trailer`, trailerRequestOptions);
-          if (!trailerResponse.ok) {
-            throw new Error('Error adding trailer. Please try again.');
-          }
-        }
-      }
-    }
-    // navigate('/')
-    handleVerificationOpen()
-    toast.success('Company registered successfully!');
-  } catch (error) {
-    toast.error(error.message);
-  } finally {
-    setLoading(false);
-  }
-};
   return (
     <AuthLayout>
       <div className="center-div">
@@ -401,12 +401,12 @@ const handleSubmit = async (e) => {
                     onChange={(e) => handleInputChange(e, index, "drivers")}
                   />
                   <div className="d-flex justify-content-end">
-                  <UploadItem
-        frameImage={Images.frame}
-        label="Driver Documents"
-        onImageUpload={(image) => handleImageUpload(image, index)}
-        onImageRemove={() => handleImageRemove(index)}
-      />
+                    <UploadItem
+                      frameImage={Images.frame}
+                      label="Driver Documents"
+                      onImageUpload={(image) => handleImageUpload(image, index)}
+                      onImageRemove={() => handleImageRemove(index)}
+                    />
                   </div>
                 </div>
               ))}
@@ -463,18 +463,18 @@ const handleSubmit = async (e) => {
                 label="I agree to the terms and conditions."
               />
               <Button
-              loading={loading}
+                loading={loading}
                 disabled={!checkedInsured}
                 label="Send" className="yellow" type="submit" />
-              <Button label="Reset" className="orange"  
-              onClick={()=>handleVerificationOpen()}
+              <Button label="Reset" className="orange"
+                onClick={() => handleVerificationOpen()}
               />
             </div>
           </form>
         </div>
       </div>
       <VerificationModal
-      email={CompanySignupData.email}
+        email={CompanySignupData.email}
         open={verificationOpen}
         handleOpen={handleVerificationOpen}
         handleClose={handleVerificationClose}

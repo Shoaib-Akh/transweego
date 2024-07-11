@@ -57,7 +57,7 @@ const SignUp = () => {
           
           {/* Conditional rendering based on loading state */}
           {loading ? (
-            <div className="d-flex align-items-center justify-content-center" style={{width:"400px", height:"230px"}}>
+            <div className="d-flex align-items-center justify-content-center" style={{height:"230px"}}>
              <CircularProgress size={24} style={{height:"50px", width:"50px"}} /> 
              </div>
           ) : (

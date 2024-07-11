@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import "../../AuthCommon.scss";
 import InputField from "../../../../Component/InputField";
@@ -11,9 +12,9 @@ import CustomCheckbox from '../../../../Component/CustomCheckbox';
 import { Images } from "../../../../utils/images";
 import UploadItem from "../../../../Component/UploadItem";
 import fetchData, { FetchData, formatOptions, getUrlParameter } from "../../../../utils/commonFunction";
+import { toast } from "react-toastify";
 
 const CompanySignup = () => {
- 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,11 +25,11 @@ const CompanySignup = () => {
     phone: '',
     serviceTypeIds: [],
     vatNumber: '',
-    password:""
+    password: ''
   });
 
-  const [checkedInsured, setCheckedInsured] = useState(false); // State for "Are all my vehicles insured?"
-  const [checkedAddVehicles, setCheckedAddVehicles] = useState(false); // State for "Would you like to add your vehicles?"
+  const [checkedInsured, setCheckedInsured] = useState(false);
+  const [checkedAddVehicles, setCheckedAddVehicles] = useState(false);
   const [companyLogo, setCompanyLogo] = useState(null);
   const [companyDocuments, setCompanyDocuments] = useState(null);
 
@@ -46,12 +47,7 @@ const CompanySignup = () => {
       serviceTypeIds: selectedServiceTypes
     });
   };
-  const currentUrl = window.location.href;
-  const correctedUrl = currentUrl.replace('?/', '?'); // Correct the URL format
-  const url = new URL(correctedUrl);
-  const queryString = url.search;
-  const urlParams = new URLSearchParams(queryString);
-  const companyId = urlParams.get('id');
+
   const handleCheckboxChange = (name) => {
     if (name === 'insured') {
       setCheckedInsured(!checkedInsured);
@@ -61,7 +57,6 @@ const CompanySignup = () => {
   };
 
   const handleImageUpload = (label, image) => {
-   
     if (label === "Company Logo") {
       setCompanyLogo(image);
     } else if (label === "Company Documents") {
@@ -78,23 +73,46 @@ const CompanySignup = () => {
   };
 
   const handleNext = () => {
-    const CompanySignupData = {
-      ...formData,
-      checkedInsured,
-      checkedAddVehicles,
-      companyLogo,
-      companyDocuments,
-      companyId
-    };
+    // Check if all required fields are filled
+    if (
+      formData.companyName &&
+      formData.contactPerson &&
+      formData.email &&
+      formData.phone &&
+      formData.serviceTypeIds.length > 0 &&
+      formData.vatNumber &&
+      formData.password &&
+      companyLogo &&
+      companyDocuments
+    ) {
+      const CompanySignupData = {
+        ...formData,
+        checkedInsured,
+        checkedAddVehicles,
+        companyLogo,
+        companyDocuments
+      };
     navigate("/add-driver", { state: { CompanySignupData } });
+    } else {
+      // Handle case where not all fields are filled
+      toast.error("Please fill in all required fields.");
+    }
   };
+
+  const currentUrl = window.location.href;
+  const correctedUrl = currentUrl.replace('?/', '?');
+  const url = new URL(correctedUrl);
+  const queryString = url.search;
+  const urlParams = new URLSearchParams(queryString);
+  const companyId = urlParams.get('id');
+
+  // Fetch and format service types
   const [data, setData] = useState(null);
   const useFetchData = (url) => {
-  
     useEffect(() => {
       FetchData(url, setData);
     }, [url]);
-  
+
     return data;
   };
 
@@ -102,10 +120,9 @@ const CompanySignup = () => {
     const data = useFetchData(url);
     return data ? formatOptions(data.data, idKey, nameKey) : null;
   };
-  
-  //  options
+
   const serviceTypeOption = useFetchAndFormatOptions('company/service-types', 'serviceTypeID', 'serviceTypeName');
-  
+
   return (
     <AuthLayout>
       <div className="center-div">
@@ -121,6 +138,7 @@ const CompanySignup = () => {
                 name="companyName"
                 value={formData.companyName}
                 onChange={handleChange}
+                required
               />
               <InputField
                 label="Contact Person"
@@ -128,6 +146,7 @@ const CompanySignup = () => {
                 name="contactPerson"
                 value={formData.contactPerson}
                 onChange={handleChange}
+                required
               />
               <InputField
                 label="Password"
@@ -136,6 +155,7 @@ const CompanySignup = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
+                required
               />
               <InputField
                 type="email"
@@ -144,14 +164,16 @@ const CompanySignup = () => {
                 value={formData.email}
                 onChange={handleChange}
                 label="Email"
+                required
               />
-             { serviceTypeOption &&
-              <MultiSelectDropdown
-                label="Services"
-                placeholder="Select services"
-                options={serviceTypeOption}
-                onChange={handleServiceTypeChange}
-              />}
+              {serviceTypeOption &&
+                <MultiSelectDropdown
+                  label="Services"
+                  placeholder="Select services"
+                  options={serviceTypeOption}
+                  onChange={handleServiceTypeChange}
+                  required
+                />}
               <InputField
                 type="tel"
                 placeholder="Phone number"
@@ -160,6 +182,7 @@ const CompanySignup = () => {
                 onChange={handleChange}
                 maxLength={10}
                 label="Enter number"
+                required
               />
               <InputField
                 type="text"
@@ -168,6 +191,7 @@ const CompanySignup = () => {
                 value={formData.vatNumber}
                 onChange={handleChange}
                 label="VAT Number"
+                required
               />
               <div className="upload-file-div">
                 <p className="label">Are all my vehicles insured?</p>
@@ -215,3 +239,4 @@ const CompanySignup = () => {
 };
 
 export default CompanySignup;
+
