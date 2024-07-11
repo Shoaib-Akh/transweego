@@ -94,7 +94,7 @@ const IndividualTransporterSignUp = () => {
         break;
     }
   };
-  
+
   const handleImageRemove = (label) => {
     switch (label) {
       case "Profile Image":
@@ -227,15 +227,16 @@ const IndividualTransporterSignUp = () => {
                 required
               />
               <InputField
-                type="number"
+                type="tel"
+
                 placeholder="Phone Number*"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 label="Phone"
-                maxLength={10}
+                maxLength={13}
                 required
-                validationMessages={{ phone: 'Please enter a valid 10-digit phone number' }}
+                validationMessages={{ phone: 'Please enter a valid swiss phone number' }}
                 error={errors.phone}
               />
               <InputField
@@ -283,12 +284,13 @@ const IndividualTransporterSignUp = () => {
                 placeholder={"Select Nationality"}
               />
               <UploadItem
+                onlyImage
                 frameImage={Images.frame}
                 label="Profile Image"
                 onImageUpload={(image) => handleImageUpload("Profile Image", image)}
                 onImageRemove={(image) => handleImageRemove("Profile Image", image)}
               />
-              
+
               <CustomDropDown
                 options={documentTypesOption}
                 value={formData.documentsType}
@@ -301,6 +303,7 @@ const IndividualTransporterSignUp = () => {
               <span className="Acceptable">Acceptable pdf, jpeg, png</span>
               <div className="d-flex align-items-center justify-content-between">
                 <UploadItem
+
                   frameImage={Images.frame}
                   label="Front"
                   onImageUpload={(image) => handleImageUpload("Front", image)}
@@ -313,14 +316,18 @@ const IndividualTransporterSignUp = () => {
                   onImageRemove={(image) => handleImageRemove("Back", image)}
                 />
               </div>
-              <div className="form-check">
+              <div className="form-check mt-3">
                 <CustomCheckbox
+
                   checked={checkedTerms}
                   onChange={handleCheckboxChange}
                   label="I accept the terms and conditions"
                 />
               </div>
-              <Button onClick={handleSubmit} className="w-100" label={"Next"}></Button>
+              <Button
+                disabled={!checkedTerms}
+
+                onClick={handleSubmit} className="w-100" label={"Next"}></Button>
             </div>
           </div>
         </div>

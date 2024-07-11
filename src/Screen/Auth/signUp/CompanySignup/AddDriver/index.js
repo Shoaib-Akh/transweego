@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import VerificationModal from "../../../../../Component/Modal/VerificationModal";
 
 import AddVehicleSection from "../../../../../Component/AddVehicleSection";
-import CompanySignup from '../index';
+import CompanySignup from "../index";
 import { CompanySignupApi } from "../../../../../store/slice/CompanySignUpSlice";
 import { useDispatch } from "react-redux";
 import { BASE_URL } from "../../../../../config/app";
@@ -55,17 +55,14 @@ const AddDriver = () => {
     totalWeight: "",
     emissionCode: "",
     placingOnMarket: "",
-    frontSeats: ""
+    frontSeats: "",
   };
 
   const [vehicles, setVehicles] = useState([initialVehicle]);
   const [SelectVehicleID, setSelectVehicleID] = useState();
   const [TrailerTypeID, setTrailerTypeID] = useState();
 
-
   const [VehicleTrailer, setVehicleTrailer] = useState([initialVehicleTrailer]);
-
-
 
   const handleVerificationOpen = () => setVerificationOpen(true);
   const handleVerificationClose = () => setVerificationOpen(false);
@@ -77,7 +74,7 @@ const AddDriver = () => {
         lastName: "",
         email: "",
         phone: "",
-        image: null
+        image: null,
       },
     ],
     vehicles: [],
@@ -111,19 +108,15 @@ const AddDriver = () => {
     const updatedSelectVehicle = [...selectVehicle];
     updatedSelectVehicle[index] = selectedOptions;
     setSelectVehicle(updatedSelectVehicle);
-    setSelectVehicleID(id)
-
+    setSelectVehicleID(id);
   };
 
   const handleTrailerTypeChange = (id, selectedOptions, index) => {
     const updatedSelectTrailer = [...selectTrailer];
     updatedSelectTrailer[index] = selectedOptions;
     setSelectTrailer(updatedSelectTrailer);
-    setTrailerTypeID(id)
-
+    setTrailerTypeID(id);
   };
-
-
 
   const addDriver = () => {
     setFormData((prevData) => ({
@@ -141,8 +134,6 @@ const AddDriver = () => {
       drivers: prevData.drivers.filter((_, i) => i !== index),
     }));
   };
-
-
 
   const handleInputChange = (e, index, key) => {
     const { name, value } = e.target;
@@ -177,7 +168,6 @@ const AddDriver = () => {
   const [dropdowns, setDropdowns] = useState([{ id: 1 }]);
   const [loading, setLoading] = useState(false);
 
-
   const handleAddDropdown = () => {
     setDropdowns([...dropdowns, { id: dropdowns.length + 1 }]);
     setVehicles([...vehicles, initialVehicle]);
@@ -192,15 +182,12 @@ const AddDriver = () => {
   };
   const location = useLocation();
 
-
   const { CompanySignupData } = location.state || {};
 
   if (!CompanySignupData) {
     navigate("/company-signup");
     return null;
   }
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -214,10 +201,13 @@ const AddDriver = () => {
     formdata.append("phoneNumber", CompanySignupData.phone);
     formdata.append("VATNumber", CompanySignupData.vatNumber);
     formdata.append("password", CompanySignupData.password);
-    formdata.append('areAllVehiclesInsured', CompanySignupData.checkedInsured);
-    formdata.append('logo', CompanySignupData.companyLogo);
-    formdata.append('officialDocument', CompanySignupData.companyDocuments);
-    formdata.append("serviceTypeIDs", JSON.stringify(CompanySignupData.serviceTypeIds));
+    formdata.append("areAllVehiclesInsured", CompanySignupData.checkedInsured);
+    formdata.append("logo", CompanySignupData.companyLogo);
+    formdata.append("officialDocument", CompanySignupData.companyDocuments);
+    formdata.append(
+      "serviceTypeIDs",
+      JSON.stringify(CompanySignupData.serviceTypeIds)
+    );
     formdata.append("additionalInformation", formData.additionalInfo);
     formdata.append("checkedInsured", checkedInsured);
 
@@ -230,12 +220,12 @@ const AddDriver = () => {
     try {
       const response = await fetch(`${BASE_URL}company`, requestOptions);
       if (!response.ok) {
-        throw new Error('Error creating company. Please try again.');
+        throw new Error("Error creating company. Please try again.");
       }
       const result = await response.json();
-      const companyId = await result.data.companyID
+      const companyId = await result.data.companyID;
       if (!result.data.companyID) {
-        throw new Error('Company ID not found in response.');
+        throw new Error("Company ID not found in response.");
       }
       const drivers = formData.drivers;
 
@@ -258,9 +248,12 @@ const AddDriver = () => {
               redirect: "follow",
             };
 
-            const driverResponse = await fetch(`${BASE_URL}driver`, driverRequestOptions);
+            const driverResponse = await fetch(
+              `${BASE_URL}driver`,
+              driverRequestOptions
+            );
             if (!driverResponse.ok) {
-              throw new Error('Error adding driver. Please try again.');
+              throw new Error("Error adding driver. Please try again.");
             }
           }
         }
@@ -288,8 +281,8 @@ const AddDriver = () => {
               totalWeight: vehicle.totalWeight,
               emissionsCode: vehicle.emissionCode,
               placingInTheMarket: vehicle.placingOnMarket,
-              companyID: companyId
-            }
+              companyID: companyId,
+            };
 
             const vehicleRequestOptions = {
               method: "POST",
@@ -300,9 +293,12 @@ const AddDriver = () => {
               redirect: "follow",
             };
 
-            const vehicleResponse = await fetch(`${BASE_URL}vehicle`, vehicleRequestOptions);
+            const vehicleResponse = await fetch(
+              `${BASE_URL}vehicle`,
+              vehicleRequestOptions
+            );
             if (!vehicleResponse.ok) {
-              throw new Error('Error adding vehicle. Please try again.');
+              throw new Error("Error adding vehicle. Please try again.");
             }
           }
         }
@@ -327,28 +323,31 @@ const AddDriver = () => {
               loadingWeightLength: vehicleTrailer.insideLength,
               loadingWeightWidth: vehicleTrailer.insideWidth,
               loadingWeightHeight: vehicleTrailer.insideHeight,
-              loadingSillHeight: vehicleTrailer.sillHeight
-            }
+              loadingSillHeight: vehicleTrailer.sillHeight,
+            };
 
             const trailerRequestOptions = {
               method: "POST",
               body: JSON.stringify(data), // Convert data to JSON string
               headers: {
-                'Content-Type': 'application/json', // Set Content-Type header
+                "Content-Type": "application/json", // Set Content-Type header
               },
               redirect: "follow",
             };
 
-            const trailerResponse = await fetch(`${BASE_URL}trailer`, trailerRequestOptions);
+            const trailerResponse = await fetch(
+              `${BASE_URL}trailer`,
+              trailerRequestOptions
+            );
             if (!trailerResponse.ok) {
-              throw new Error('Error adding trailer. Please try again.');
+              throw new Error("Error adding trailer. Please try again.");
             }
           }
         }
       }
       // navigate('/')
-      handleVerificationOpen()
-      toast.success('Company registered successfully!');
+      handleVerificationOpen();
+      toast.success("Company registered successfully!");
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -367,7 +366,12 @@ const AddDriver = () => {
               {formData.drivers.map((driver, index) => (
                 <div key={index}>
                   <div className="d-flex align-items-center gap-2 mb-3 add-item">
-                    <div className="add-icon" onClick={() => removeDriver(index)}>-</div>
+                    <div
+                      className="add-icon"
+                      onClick={() => removeDriver(index)}
+                    >
+                      -
+                    </div>
                     <p className="add-text">Add Driver</p>
                   </div>
                   <div className="row">
@@ -395,6 +399,7 @@ const AddDriver = () => {
                     onChange={(e) => handleInputChange(e, index, "drivers")}
                   />
                   <SimpleInput
+                    type="tel"
                     placeholder="Phone Number"
                     name="phone"
                     value={driver.phone}
@@ -402,6 +407,7 @@ const AddDriver = () => {
                   />
                   <div className="d-flex justify-content-end">
                     <UploadItem
+                      onlyPDF
                       frameImage={Images.frame}
                       label="Driver Documents"
                       onImageUpload={(image) => handleImageUpload(image, index)}
@@ -411,7 +417,9 @@ const AddDriver = () => {
                 </div>
               ))}
               <div className="d-flex align-items-center gap-2 mb-3 add-item">
-                <div className="add-icon" onClick={addDriver}>+</div>
+                <div className="add-icon" onClick={addDriver}>
+                  +
+                </div>
                 <p className="add-text">
                   {formData.drivers.length ? "Add More Drivers" : "Add Drivers"}
                 </p>
@@ -442,7 +450,6 @@ const AddDriver = () => {
                 handleTrailerTypeChange={handleTrailerTypeChange}
                 handleVehicleInputChange={handleVehicleInputChange}
                 handleVehicleTrailerInput={handleVehicleTrailerInput}
-
                 handleAddDropdown={handleAddDropdown}
               />
               <textarea
@@ -450,7 +457,9 @@ const AddDriver = () => {
                 placeholder="Additional Information"
                 name="additionalInfo"
                 value={formData.additionalInfo}
-                onChange={(e) => setFormData({ ...formData, additionalInfo: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, additionalInfo: e.target.value })
+                }
               ></textarea>
               <p className="para">
                 I confirm that all the information provided above is correct and
@@ -465,9 +474,14 @@ const AddDriver = () => {
               <Button
                 loading={loading}
                 disabled={!checkedInsured}
-                label="Send" className="yellow" type="submit" />
-              <Button label="Reset" className="orange"
-                onClick={() => handleVerificationOpen()}
+                label="Send"
+                className="yellow"
+                type="submit"
+              />
+              <Button
+                label="Reset"
+                className="orange"
+                // onClick={() => handleVerificationOpen()}
               />
             </div>
           </form>

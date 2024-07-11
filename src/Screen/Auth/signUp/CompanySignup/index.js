@@ -32,13 +32,26 @@ const CompanySignup = () => {
   const [checkedAddVehicles, setCheckedAddVehicles] = useState(false);
   const [companyLogo, setCompanyLogo] = useState(null);
   const [companyDocuments, setCompanyDocuments] = useState(null);
-
+  const formatVATNumber = (value) => {
+    const cleanValue = value.replace(/\D/g, ''); // Remove all non-digit characters
+    const lengthLimitedValue = cleanValue.slice(0, 9); // Limit to 9 digits
+    const formattedValue = lengthLimitedValue.replace(/(\d{1,3})(\d{1,3})?(\d{1,3})?/, (match, p1, p2, p3) => {
+      let result = p1;
+      if (p2) result += '.' + p2;
+      if (p3) result += '.' + p3;
+      return result;
+    });
+    return formattedValue;
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+
+    let formattedValue = value;
+    if (name === 'vatNumber') {
+      formattedValue = formatVATNumber(value);
+    }
+    setFormData({ ...formData, [name]: formattedValue });
+    
   };
 
   const handleServiceTypeChange = (selectedServiceTypes) => {
@@ -213,12 +226,14 @@ const CompanySignup = () => {
                 </div>
                 <div className="upload-items">
                   <UploadItem
+                  onlyImage 
                     frameImage={Images.frame}
                     label="Company Logo"
                     onImageUpload={(image) => handleImageUpload("Company Logo", image)}
                     onImageRemove={() => handleImageRemove("Company Logo")}
                   />
                   <UploadItem
+                  onlyPDF
                     frameImage={Images.frame}
                     label="Company Documents"
                     onImageUpload={(image) => handleImageUpload("Company Documents", image)}
